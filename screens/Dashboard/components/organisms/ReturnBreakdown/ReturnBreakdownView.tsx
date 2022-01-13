@@ -1,11 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { View, Text } from 'react-native';
 import NowalaText from '../../../../../components/atoms/text';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import styles from './styles';
 import { DashboardContext } from '../../../DashboardContext';
 import ReturnDetail from '../../molecules/ReturnDetail';
-import ReturnBreakdownContainer from '.';
 
 const ReturnBreakdownView = () => {
   const { dashboardSummary } = useContext(DashboardContext);
@@ -14,7 +13,9 @@ const ReturnBreakdownView = () => {
   return (
     <>
       <NowalaText.Headline2Light style={styles.title}>
-        {asset.charAt(0).toUpperCase() + asset.substring(1).toLowerCase()}
+        {asset
+          ? asset.charAt(0).toUpperCase() + asset.substring(1).toLowerCase()
+          : ''}
       </NowalaText.Headline2Light>
       <View style={styles.breakdownContainer}>
         <View style={styles.columnContainer}>

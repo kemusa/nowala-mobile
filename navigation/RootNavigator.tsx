@@ -4,7 +4,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { StackParamList } from './types';
 import ProjectsScreen from '../screens/Projects';
 import ProjectDetailsScreen from '../screens/ProjectDetails';
-import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
 import { enableScreens } from 'react-native-screens';
 import SignUpScreen from '../screens/SignUp';
 import LoginScreen from '../screens/Login';
@@ -15,7 +14,6 @@ import { User } from '@firebase/auth';
 enableScreens(false);
 
 const Stack = createStackNavigator<StackParamList>();
-// const Stack = createSharedElementStackNavigator();
 const RootNavigator = () => {
   const { Navigator, Screen } = Stack;
   const { auth } = useContext(ServicesContext) as Services;
@@ -34,13 +32,14 @@ const RootNavigator = () => {
   // Event handler for use auth changes
   const handleAuthChange = async (user: User | null) => {
     user ? setUid(user.uid) : setUid(null);
-    console.log('AUTH', user?.uid);
   };
 
   return (
     <Navigator initialRouteName="Projects" detachInactiveScreens={false}>
       {uid ? (
-        <Screen name="Dashboard" component={DashboardScreen}></Screen>
+        <Screen name="Dashboard">
+          {props => <DashboardScreen {...props} userId={uid} />}
+        </Screen>
       ) : (
         <>
           <Screen

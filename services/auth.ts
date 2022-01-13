@@ -8,7 +8,7 @@ import {
   sendPasswordResetEmail,
   updateProfile,
 } from 'firebase/auth';
-import { statusInit } from '../screens/Dashboard/DashboardContent';
+import sponsorshipsInit from '../utils/consts/DATA';
 import DbService from './db';
 // import { LoginManager, AccessToken, Settings } from 'react-native-fbsdk-next';
 // import BackendService from '../services/backend';
@@ -60,12 +60,15 @@ export default class AuthService {
         password,
       );
       await updateProfile(user, { displayName: name });
-      const result = await this.dbService.writeDocument('users', {
+      // Create user document
+      await this.dbService.writeDocumentWithId('users', user.uid, {
         uid: user.uid,
         displayName: name,
-        status: statusInit,
       });
-      console.log(result);
+      // Init user sponsorship
+      await this.dbService.writeDocument(`users/${user.uid}/sponsorships`, {
+        ...sponsorshipsInit,
+      });
       return user;
     } catch (error) {
       console.error(error);

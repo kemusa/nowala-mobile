@@ -4,6 +4,7 @@ import firestore, {
   getDoc,
   getDocs,
   addDoc,
+  setDoc,
   Query,
   where,
   doc,
@@ -31,6 +32,15 @@ export default class DbService {
       const ref = collection(this.getFireStore, path);
       const data = await addDoc(ref, document);
       return { id: data.id };
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  public async writeDocumentWithId(path: string, id: string, document: any) {
+    try {
+      const ref = doc(this.getFireStore, path, id);
+      await setDoc(ref, document);
     } catch (error) {
       console.error(error);
     }

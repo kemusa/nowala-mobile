@@ -7,17 +7,15 @@ const statusInit = [
   { title: 'Payments started', complete: false },
 ];
 
-const projectsInit = [
-  {
-    asset: 'solar kits',
-    unitCost: 0,
-    units: 0,
-    interest: 0.1,
-    collected: 0,
-    currency: 'SLL',
-    projectId: 'ywpYsNv5F0Gv8YBtVQBX',
-    progress: statusInit,
-  },
-];
+const sponsorshipsInit = {
+  asset: 'solar kits',
+  unitCost: 0,
+  units: 0,
+  interest: 0.1,
+  collected: 0,
+  currency: 'SLL',
+  projectId: 'ywpYsNv5F0Gv8YBtVQBX',
+  progress: statusInit,
+};
 
-export { projectsInit };
+export default sponsorshipsInit;

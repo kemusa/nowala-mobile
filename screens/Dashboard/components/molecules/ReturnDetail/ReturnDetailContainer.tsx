@@ -6,16 +6,15 @@ const ReturnDetailContainer: React.FC<ReturnDetail> = ({
   number,
   description,
 }) => {
-  const [initNum, setInitNum] = useState(0);
-
+  const [num, setNum] = useState(0);
   useEffect(() => {
-    setTimeout(() => setInitNum(number), 300);
-  }, []);
+    setTimeout(() => setNum(number), 300);
+  }, [number]);
 
   return (
     <ReturnDetailView
       currency={currency}
-      number={initNum}
+      number={num}
       description={description}
     />
   );

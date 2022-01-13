@@ -78,6 +78,7 @@ type DashboardScreenNavigationProps = StackNavigationProp<
 type DashboardScreenProps = {
   route: DashboardRouteProps;
   navigation: DashboardScreenNavigationProps;
+  userId: string;
 };
 
 export type {

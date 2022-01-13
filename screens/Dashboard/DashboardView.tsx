@@ -1,15 +1,11 @@
-import React, { useContext } from 'react';
-import { Dimensions, SafeAreaView, ScrollView, Text, View } from 'react-native';
+import React from 'react';
+import { SafeAreaView, ScrollView, Text, View } from 'react-native';
 import styles from './styles';
-import { DashboardContext } from './DashboardContext';
-import CheckListItem from './components/molecules/CheckListItem';
 import NowalaText from '../../components/atoms/text';
 import ImpactCard from './components/molecules/ImpactCard';
 import ReturnBreakdown from './components/organisms/ReturnBreakdown';
 
-const HomeView: React.FC = () => {
-  const { checklist } = useContext(DashboardContext);
-
+const DashboardView: React.FC = () => {
   return (
     <SafeAreaView>
       <View style={styles.headingContainer}>
@@ -36,4 +32,4 @@ const HomeView: React.FC = () => {
   );
 };
 
-export default HomeView;
+export default DashboardView;

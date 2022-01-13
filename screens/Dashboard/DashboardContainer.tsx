@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { DashboardScreenProps } from '../../navigation/types';
 import { DashboardContext } from './DashboardContext';
 import NowalaText from '../../components/atoms/text';
@@ -6,28 +6,52 @@ import HomeView from './DashboardView';
 import ServicesContext, { Services } from '../../services';
 import NowalaIcon from '../../components/atoms/icons/NowalaIcon';
 import { TouchableOpacity } from 'react-native';
-import { statusInit, projectsInit } from './DashboardContent';
+import { projectsInit } from './DashboardContent';
 
-const HomeContainer: React.FC<DashboardScreenProps> = ({ navigation }) => {
-  const { asset, interest, collected, unitCost, units, currency } =
-    projectsInit[0];
-  const investment = unitCost * units;
-  const totalReturn = parseInt((investment * (1 + interest)).toFixed());
-  const returnPercent = Math.round((collected / totalReturn) * 100);
-  const dashboardSummary: DashboardSummary = {
-    investment,
-    collected,
-    totalReturn,
-    currency,
-    asset,
-    returnPercent,
-  };
-
+const HomeContainer: React.FC<DashboardScreenProps> = ({
+  navigation,
+  userId,
+}) => {
   // Get services
-  const { auth } = useContext(ServicesContext) as Services;
+  const { auth, db } = useContext(ServicesContext) as Services;
+  const [summary, setSummary] = useState({
+    investment: 0,
+    collected: 0,
+    totalReturn: 0,
+    currency: 'SLL',
+    asset: '',
+    returnPercent: 0,
+  } as DashboardSummary);
+
+  useEffect(() => {
+    getDashboardData();
+  }, []);
 
   const signOut = async () => {
     await auth.signOut();
+  };
+
+  const getDashboardData = async () => {
+    try {
+      const data = await db.findCollection(`users/${userId}/sponsorships`);
+      const sponsorship: SponsorshipData = data[0].data as SponsorshipData;
+      const { asset, interest, collected, unitCost, units, currency } =
+        sponsorship;
+      const investment = unitCost * units;
+      const totalReturn = parseInt((investment * (1 + interest)).toFixed());
+      const returnPercent = Math.round((collected / totalReturn) * 100);
+      setSummary({
+        investment,
+        collected,
+        totalReturn,
+        currency,
+        asset,
+        returnPercent,
+        units,
+      });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   // Place Moonsift logo in header on component init
@@ -52,9 +76,9 @@ const HomeContainer: React.FC<DashboardScreenProps> = ({ navigation }) => {
     });
   }, [navigation]);
 
-  const checklist: CheckListItemProps[] = statusInit;
+  // const checklist: CheckListItemProps[] = statusInit;
   return (
-    <DashboardContext.Provider value={{ checklist, dashboardSummary }}>
+    <DashboardContext.Provider value={{ dashboardSummary: summary }}>
       <HomeView />
     </DashboardContext.Provider>
   );
