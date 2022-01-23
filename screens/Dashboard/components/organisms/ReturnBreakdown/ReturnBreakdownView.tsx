@@ -58,10 +58,15 @@ const ReturnBreakdownView = () => {
                 fill={returnPercent}
                 // Math.roud on value (again) to handle infitite decimals issue
                 children={value => (
-                  <NowalaText.Headline4 style={{ color: '#5E8497' }}>
-                    {Math.round(value) || 0}
-                    {'%'}
-                  </NowalaText.Headline4>
+                  <>
+                    <NowalaText.Headline4 style={{ color: '#5E8497' }}>
+                      {Math.round(value) || 0}
+                      {'%'}
+                    </NowalaText.Headline4>
+                    <NowalaText.Body1 style={{ color: '#5E8497' }}>
+                      repaid
+                    </NowalaText.Body1>
+                  </>
                 )}
                 tintColor="#FFBF00"
                 rotation={0}

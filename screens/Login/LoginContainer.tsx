@@ -97,6 +97,7 @@ const LoginContainer: React.FC<LoginScreenProps> = ({ navigation }) => {
   // };
 
   const displayFormError = (error: string) => {
+    console.log(error);
     const message = _getLoginError(error);
     setLoginError({ message });
   };

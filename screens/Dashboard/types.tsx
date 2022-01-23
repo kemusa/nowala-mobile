@@ -1,10 +1,12 @@
 interface DashboardContext {
   dashboardSummary: DashboardSummary;
+  viewProgress: boolean;
+  closeProgressModal: () => void;
 }
 
 interface StatusItem {
   title: string;
-  completed: boolean;
+  complete: boolean;
 }
 
 interface SponsorshipData {
@@ -26,4 +28,6 @@ interface DashboardSummary {
   asset: string;
   currency: string;
   units: number;
+  progress: StatusItem[];
+  openProgressModal: () => void;
 }

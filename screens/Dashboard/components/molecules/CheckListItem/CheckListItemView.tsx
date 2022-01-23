@@ -13,6 +13,7 @@ const CheckListItemView: React.FC<CheckListItemProps> = ({
       <View style={styles.taskConfirm}>
         {complete && (
           <Checkbox
+            accessibilityLabel={title}
             value=""
             isChecked
             isReadOnly

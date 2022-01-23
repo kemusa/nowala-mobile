@@ -1,5 +1,6 @@
 interface Regex {
   readonly EMAIL_REGEX: RegExp;
+  readonly PASSWORD_REGEX: RegExp;
   readonly URL_REGEX: RegExp;
   readonly DOMAIN_REGEX: RegExp;
 }
@@ -8,6 +9,8 @@ interface Regex {
 const regex: Regex = {
   EMAIL_REGEX:
     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+  PASSWORD_REGEX: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
+
   URL_REGEX:
     /(?:(?:https?):\/\/|www\.|ftp\.)(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[-A-Z0-9+&@#\/%=~_|$?!:,.])*(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[A-Z0-9+&@#\/%=~_|$])/gim,
   DOMAIN_REGEX:

@@ -1,5 +1,4 @@
 import React from 'react';
-import { View } from 'react-native';
 import styles from './styles';
 import FormTextInputField from '../../molecules/FormTextInputField';
 import Text from '../../atoms/text';
@@ -10,7 +9,6 @@ import { Stack } from 'native-base';
 
 const InputForm: React.FC<InputFormConfig> = ({
   fields,
-  // lightLinkTextProps,
   buttonProps,
   renderOnSent,
   sent,
@@ -20,11 +18,13 @@ const InputForm: React.FC<InputFormConfig> = ({
   return (
     <>
       {error.message && (
+        // Show firebase/server errors
         <Text.ErrorMessage style={styles.errorText}>
           {error.message}
         </Text.ErrorMessage>
       )}
       {validationErrors &&
+        // Show field validation errors
         Object.keys(validationErrors).map((e: any, idx) => (
           <Text.ErrorMessage key={idx} style={styles.errorText}>
             {validationErrors[e].message}

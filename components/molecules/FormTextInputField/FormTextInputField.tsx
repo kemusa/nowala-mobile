@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Input } from 'native-base';
-import { useController } from 'react-hook-form';
+import { useController, useWatch } from 'react-hook-form';
 import NowalaText from '../../atoms/text';
 import styles from './styles';
 import { FormTextInputFieldProps } from './types';
@@ -15,11 +15,13 @@ const FormTextInputField: React.FC<FormTextInputFieldProps> = ({
   name,
   rules,
 }) => {
-  const { field } = useController({
+  const {
+    field: { value, onChange, ref },
+  } = useController({
     name,
     control,
     defaultValue: '',
-    rules: rules,
+    rules,
   });
 
   return (
@@ -28,12 +30,13 @@ const FormTextInputField: React.FC<FormTextInputFieldProps> = ({
       <Input
         style={styles.textInput}
         placeholder={placeholder}
-        value={field.value}
+        value={value}
         autoCompleteType={autoCompleteType}
-        onChangeText={field.onChange}
+        onChangeText={onChange}
         secureTextEntry={secureTextEntry}
         autoCapitalize="none"
         isDisabled={disabled}
+        ref={ref}
       />
     </>
   );

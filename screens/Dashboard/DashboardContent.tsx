@@ -2,7 +2,7 @@ const statusInit = [
   { title: 'Sign up for first project 😀', complete: true },
   { title: 'Money recieved', complete: true },
   { title: 'Money arrived Sierra Leone', complete: true },
-  { title: 'Solar Kit installed in home', complete: false },
+  { title: 'Solar Kit installation complete', complete: false },
   { title: 'Solar Kit in use', complete: false },
   { title: 'Payments started', complete: false },
 ];

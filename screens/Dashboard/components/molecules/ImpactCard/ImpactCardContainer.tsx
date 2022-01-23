@@ -4,8 +4,15 @@ import ImpactCardView from './ImpactCardView';
 
 const ImpactCardContainer = () => {
   const { dashboardSummary } = useContext(DashboardContext);
-  const { collected, units } = dashboardSummary;
-  return <ImpactCardView collected={collected} units={units} />;
+  const { collected, units, progress, openProgressModal } = dashboardSummary;
+  return (
+    <ImpactCardView
+      collected={collected}
+      units={units}
+      progress={progress}
+      openProgressModal={openProgressModal}
+    />
+  );
 };
 
 export default ImpactCardContainer;

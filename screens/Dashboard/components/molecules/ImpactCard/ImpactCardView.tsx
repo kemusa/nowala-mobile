@@ -3,7 +3,11 @@ import { View } from 'react-native';
 import NowalaText from '../../../../../components/atoms/text';
 import styles from './styles';
 
-const ImpactCardView: React.FC<ImpactCardProps> = ({ collected, units }) => {
+const ImpactCardView: React.FC<ImpactCardProps> = ({
+  collected,
+  units,
+  openProgressModal,
+}) => {
   return (
     <>
       <NowalaText.Headline2Light style={styles.title}>
@@ -25,6 +29,11 @@ const ImpactCardView: React.FC<ImpactCardProps> = ({ collected, units }) => {
               Soon, {units > 1 ? `${units} homes` : `${units} home`} will have
               affordable access to electricity.
             </NowalaText.Subtitle1>
+            <NowalaText.LinkText
+              onPress={openProgressModal}
+              style={{ textDecorationLine: 'underline', marginTop: 10 }}>
+              View progress
+            </NowalaText.LinkText>
           </View>
         )
       ) : (

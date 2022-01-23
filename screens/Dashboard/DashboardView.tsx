@@ -4,6 +4,7 @@ import styles from './styles';
 import NowalaText from '../../components/atoms/text';
 import ImpactCard from './components/molecules/ImpactCard';
 import ReturnBreakdown from './components/organisms/ReturnBreakdown';
+import ProgressModal from './components/organisms/ProgressModal';
 
 const DashboardView: React.FC = () => {
   return (
@@ -19,15 +20,8 @@ const DashboardView: React.FC = () => {
         }}>
         <ImpactCard />
         <ReturnBreakdown />
+        <ProgressModal />
       </ScrollView>
-      <View
-        style={{
-          backgroundColor: '#fff',
-          width: '100%',
-          height: 150,
-          position: 'absolute',
-          bottom: 0,
-        }}></View>
     </SafeAreaView>
   );
 };

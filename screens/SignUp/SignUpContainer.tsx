@@ -1,13 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
-// import NowalaLogo from 'src/components/atoms/icons/NowalaLogo';
 import ServicesContext, { Services } from '../../services';
 import { SignUpScreenProps } from '../../navigation/types';
 import { routes } from '../../navigation/types';
 import { _getSignUpError } from '../../utils/errors';
 import SignUpView from './SignUpView';
-// import { SignUpFormData, SignUpViewProps } from './types';
 import regex from '../../utils/consts/REGEX';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import SignUpContext from './SignUpContext';
 import { SignUpProps, SignUpFormData } from './types';
 import { InputFormConfig } from '../../components/organisms/InputForm/types';
@@ -27,14 +25,17 @@ const SignUpContainer: React.FC<SignUpScreenProps> = ({ navigation }) => {
   const { auth } = useContext(ServicesContext) as Services;
 
   // Initialize form
-  const { EMAIL_REGEX } = regex;
+  const { EMAIL_REGEX, PASSWORD_REGEX } = regex;
   const NO_LOGIN_ERROR = { message: null as any };
   const [signUpError, setSignUpError] = useState(NO_LOGIN_ERROR);
   const {
     control,
+    getValues,
     handleSubmit,
     formState: { errors },
-  } = useForm<SignUpFormData>();
+  } = useForm<SignUpFormData>({ mode: 'onChange' });
+
+  // const password = useWatch({ control, name: 'password' });
 
   const nameRules = {
     required: { value: true, message: 'Name is required' },
@@ -45,6 +46,21 @@ const SignUpContainer: React.FC<SignUpScreenProps> = ({ navigation }) => {
   };
   const passwordRules = {
     required: { value: true, message: 'Password is required' },
+    pattern: {
+      value: PASSWORD_REGEX,
+      message:
+        'Your password must have minimum eight characters, at least one uppercase letter, one lowercase letter and one number',
+    },
+  };
+
+  // todo: add confirmation rule
+  const confirmPasssRules = {
+    required: { value: true, message: 'Confirm password required' },
+    // Check if password field matches the passwordConfirm fielf
+    validate: () => {
+      const { password, passwordConfirm } = getValues();
+      return password === passwordConfirm || 'Passwords must match';
+    },
   };
 
   // Place Nowala logo in header on component init
@@ -132,12 +148,12 @@ const SignUpContainer: React.FC<SignUpScreenProps> = ({ navigation }) => {
         rules: passwordRules,
       },
       {
-        label: 'Confirm Password',
+        label: 'Confirm password',
         autoCompleteType: 'password',
         secureTextEntry: true,
         control,
-        name: 'password',
-        rules: passwordRules,
+        name: 'passwordConfirm',
+        rules: confirmPasssRules,
       },
     ],
     buttonProps: {

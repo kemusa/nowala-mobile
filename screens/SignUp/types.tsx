@@ -7,4 +7,9 @@ export interface SignUpProps {
   authConfirmTextProps: AuthConfirmTextProps;
 }
 
-export type SignUpFormData = { name: string; email: string; password: string };
+export type SignUpFormData = {
+  name: string;
+  email: string;
+  password: string;
+  passwordConfirm: string;
+};

@@ -6,7 +6,6 @@ import HomeView from './DashboardView';
 import ServicesContext, { Services } from '../../services';
 import NowalaIcon from '../../components/atoms/icons/NowalaIcon';
 import { TouchableOpacity } from 'react-native';
-import { projectsInit } from './DashboardContent';
 
 const HomeContainer: React.FC<DashboardScreenProps> = ({
   navigation,
@@ -23,6 +22,8 @@ const HomeContainer: React.FC<DashboardScreenProps> = ({
     returnPercent: 0,
   } as DashboardSummary);
 
+  const [viewProgress, setViewProgress] = useState(false);
+
   useEffect(() => {
     getDashboardData();
   }, []);
@@ -31,12 +32,22 @@ const HomeContainer: React.FC<DashboardScreenProps> = ({
     await auth.signOut();
   };
 
+  const openProgressModal = () => setViewProgress(true);
+  const closeProgressModal = () => setViewProgress(false);
+
   const getDashboardData = async () => {
     try {
       const data = await db.findCollection(`users/${userId}/sponsorships`);
       const sponsorship: SponsorshipData = data[0].data as SponsorshipData;
-      const { asset, interest, collected, unitCost, units, currency } =
-        sponsorship;
+      const {
+        asset,
+        interest,
+        collected,
+        unitCost,
+        units,
+        currency,
+        progress,
+      } = sponsorship;
       const investment = unitCost * units;
       const totalReturn = parseInt((investment * (1 + interest)).toFixed());
       const returnPercent = Math.round((collected / totalReturn) * 100);
@@ -48,6 +59,8 @@ const HomeContainer: React.FC<DashboardScreenProps> = ({
         asset,
         returnPercent,
         units,
+        progress,
+        openProgressModal,
       });
     } catch (error) {
       console.error(error);
@@ -78,7 +91,8 @@ const HomeContainer: React.FC<DashboardScreenProps> = ({
 
   // const checklist: CheckListItemProps[] = statusInit;
   return (
-    <DashboardContext.Provider value={{ dashboardSummary: summary }}>
+    <DashboardContext.Provider
+      value={{ dashboardSummary: summary, viewProgress, closeProgressModal }}>
       <HomeView />
     </DashboardContext.Provider>
   );

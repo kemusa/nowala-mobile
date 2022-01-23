@@ -4,6 +4,8 @@ const _getLoginError = (error: string) => {
       return 'This password is invalid';
     case 'auth/user-not-found':
       return 'No user with this email was found';
+    case 'auth/too-many-requests':
+      return "There's an issue with your account, please send a screenshot to support@nowala.io to resolve";
     default:
       return 'Something went wrong';
   }
