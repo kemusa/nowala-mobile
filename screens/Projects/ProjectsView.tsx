@@ -1,5 +1,11 @@
 import React, { useContext, useRef } from 'react';
-import { View, SafeAreaView, TouchableOpacity, Animated } from 'react-native';
+import {
+  View,
+  SafeAreaView,
+  TouchableOpacity,
+  Animated,
+  Image,
+} from 'react-native';
 import styles from './styles';
 import { spec } from './specs';
 import { ProjectContext } from './ProjectContext';
@@ -54,31 +60,23 @@ const ProjectsView: React.FC = () => {
                 item.clickable ? goToProjectDetails(item) : null
               }>
               <View
-                style={[
-                  styles.contentContainer,
-                  { backgroundColor: item.color },
-                ]}>
+                style={[styles.cardContainer, { backgroundColor: item.color }]}>
                 {item.image && (
-                  <Animated.Image
-                    style={[styles.image, { transform: [{ scale }] }]}
-                    source={{ uri: item.image }}
-                  />
+                  <Image style={styles.image} source={{ uri: item.image }} />
                 )}
                 {item.design && item.design}
                 {item.title && item.description && (
-                  <BlurView style={styles.blur} intensity={40} tint="dark">
-                    <View style={styles.infoContainer}>
-                      <Animated.Text
-                        style={[styles.title, { transform: [{ translateX }] }]}>
-                        {item.title}
-                      </Animated.Text>
-                      <NowalaText.Body1
-                        style={styles.description}
-                        numberOfLines={item.clickable ? 3 : undefined}>
-                        {item.description}
-                      </NowalaText.Body1>
-                    </View>
-                  </BlurView>
+                  <View style={styles.cardInfoContainer}>
+                    <Animated.Text
+                      style={[styles.title, { transform: [{ translateX }] }]}>
+                      {item.title}
+                    </Animated.Text>
+                    <NowalaText.Body1
+                      style={styles.description}
+                      numberOfLines={item.clickable ? 3 : undefined}>
+                      {item.description}
+                    </NowalaText.Body1>
+                  </View>
                 )}
               </View>
             </TouchableOpacity>

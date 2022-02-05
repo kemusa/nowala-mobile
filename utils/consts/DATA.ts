@@ -1,13 +1,25 @@
-const statusInit = [
-  { title: 'Sign up for first project 😀', complete: true },
-  { title: 'Money recieved', complete: true },
-  { title: 'Money arrived Sierra Leone', complete: true },
-  { title: 'Solar Kit installed in home', complete: false },
-  { title: 'Solar Kit in use', complete: false },
-  { title: 'Payments started', complete: false },
-];
+import { Timestamp } from 'firebase/firestore';
+import { SponsorshipData } from '../../screens/Dashboard/typesImport';
 
-const sponsorshipsInit = {
+const statusText: StatusText = {
+  registered: 'Sign up for first project 😀',
+  paid: 'Money recieved',
+  transferred: 'Money arrived Sierra Leone',
+  installed: 'Solar Kit installation complete',
+  collectionStarted: 'Payments started',
+};
+
+const statusInit = {
+  registered: true,
+  paid: true,
+  transferred: true,
+  installed: true,
+  collectionStarted: false,
+};
+
+const timestamp = Date.parse('12/31/2021');
+
+const projectsInit: SponsorshipData = {
   asset: 'solar kits',
   unitCost: 0,
   units: 0,
@@ -15,7 +27,8 @@ const sponsorshipsInit = {
   collected: 0,
   currency: 'SLL',
   projectId: 'ywpYsNv5F0Gv8YBtVQBX',
-  progress: statusInit,
+  status: statusInit,
+  orderDate: Timestamp.fromDate(new Date(timestamp)),
+  paid: { currency: '£', unitCost: 61 },
 };
-
-export default sponsorshipsInit;
+export { projectsInit, statusText };

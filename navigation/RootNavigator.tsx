@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { View, Text } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { StackParamList } from './types';
 import ProjectsScreen from '../screens/Projects';
@@ -8,10 +7,14 @@ import { enableScreens } from 'react-native-screens';
 import SignUpScreen from '../screens/SignUp';
 import LoginScreen from '../screens/Login';
 import DashboardScreen from '../screens/Dashboard';
+import YourOrdersScreen from '../screens/YourOrders';
 import ServicesContext, { Services } from '../services';
 import { User } from '@firebase/auth';
+import colors from '../theme/colors';
 
 enableScreens(false);
+
+const { BACKGROUND } = colors;
 
 const Stack = createStackNavigator<StackParamList>();
 const RootNavigator = () => {
@@ -37,9 +40,28 @@ const RootNavigator = () => {
   return (
     <Navigator initialRouteName="Projects" detachInactiveScreens={false}>
       {uid ? (
-        <Screen name="Dashboard">
-          {props => <DashboardScreen {...props} userId={uid} />}
-        </Screen>
+        <>
+          <Screen name="Dashboard">
+            {props => <DashboardScreen {...props} userId={uid} />}
+          </Screen>
+          <Screen
+            name="ProjectDetails"
+            options={() => ({
+              headerTitle: '',
+              headerShown: true,
+              headerTransparent: true,
+              headerTintColor: '#fff',
+            })}
+            component={ProjectDetailsScreen}></Screen>
+          <Screen
+            name="YourOrders"
+            options={{
+              headerTitle: '',
+              headerStyle: { backgroundColor: BACKGROUND },
+            }}>
+            {props => <YourOrdersScreen {...props} />}
+          </Screen>
+        </>
       ) : (
         <>
           <Screen
@@ -53,14 +75,6 @@ const RootNavigator = () => {
               headerShown: true,
               headerTransparent: true,
               headerTintColor: '#fff',
-              gestureEnabled: false,
-              transitionSpec: {
-                open: {
-                  animation: 'timing',
-                  config: { duration: 500, delay: 1 },
-                },
-                close: { animation: 'timing', config: { duration: 0 } },
-              },
             })}
             component={ProjectDetailsScreen}></Screen>
           <Screen name="SignUp" component={SignUpScreen}></Screen>

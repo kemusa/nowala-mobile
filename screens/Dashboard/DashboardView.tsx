@@ -5,6 +5,10 @@ import NowalaText from '../../components/atoms/text';
 import ImpactCard from './components/molecules/ImpactCard';
 import ReturnBreakdown from './components/organisms/ReturnBreakdown';
 import ProgressModal from './components/organisms/ProgressModal';
+import OptionsModal from './components/organisms/OptionsModal';
+import colors from '../../theme/colors';
+
+const { BACKGROUND } = colors;
 
 const DashboardView: React.FC = () => {
   return (
@@ -14,13 +18,14 @@ const DashboardView: React.FC = () => {
       </View>
       <ScrollView
         style={{
-          backgroundColor: '#F2F2F7',
+          backgroundColor: BACKGROUND,
           height: '100%',
           padding: 20,
         }}>
         <ImpactCard />
         <ReturnBreakdown />
         <ProgressModal />
+        <OptionsModal />
       </ScrollView>
     </SafeAreaView>
   );

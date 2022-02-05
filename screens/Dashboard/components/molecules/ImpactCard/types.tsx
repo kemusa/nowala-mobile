@@ -1,6 +1,5 @@
 interface ImpactCardProps {
-  collected: number;
   units: number;
-  progress: StatusItem[];
+  installed: boolean;
   openProgressModal: () => void;
 }

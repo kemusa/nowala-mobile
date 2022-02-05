@@ -8,6 +8,7 @@ type StackParamList = {
   Login: undefined;
   PasswordReset: undefined;
   Dashboard: undefined;
+  YourOrders: { orders: OrderData[] };
 };
 
 interface NowalaRoutes {
@@ -81,6 +82,17 @@ type DashboardScreenProps = {
   userId: string;
 };
 
+// Order Types
+type YourOrdersRouteProps = RouteProp<StackParamList, 'YourOrders'>;
+type YourOrdersScreenNavigationProps = StackNavigationProp<
+  StackParamList,
+  'YourOrders'
+>;
+type YourOrdersScreenProps = {
+  route: YourOrdersRouteProps;
+  navigation: YourOrdersScreenNavigationProps;
+};
+
 export type {
   StackParamList,
   ProjectsScreenProps,
@@ -88,6 +100,7 @@ export type {
   SignUpScreenProps,
   LoginScreenProps,
   DashboardScreenProps,
+  YourOrdersScreenProps,
 };
 
 export { routes };

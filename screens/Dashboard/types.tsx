@@ -1,23 +1,28 @@
 interface DashboardContext {
   dashboardSummary: DashboardSummary;
   viewProgress: boolean;
+  viewOptions: boolean;
+  viewOrders: boolean;
+  openProgressModal: () => void;
   closeProgressModal: () => void;
+  closeOptionsModal: () => void;
+  closeOrdersModal: () => void;
+  goToProject: () => void;
+  goToYourOrders: () => void;
 }
 
-interface StatusItem {
-  title: string;
-  complete: boolean;
+type FBtime = { seconds: number; nanoseconds: number };
+interface SponsorStatus {
+  registered: boolean;
+  paid: boolean;
+  transferred: boolean;
+  installed: boolean;
+  collectionStarted: boolean;
 }
 
-interface SponsorshipData {
-  asset: string;
+interface PaidData {
+  currency: '£';
   unitCost: number;
-  units: number;
-  interest: number;
-  collected: number;
-  currency: 'SLL';
-  projectId: string;
-  progress: StatusItem[];
 }
 
 interface DashboardSummary {
@@ -25,9 +30,26 @@ interface DashboardSummary {
   collected: number;
   totalReturn: number;
   returnPercent: number;
-  asset: string;
+  assetTitle: string;
   currency: string;
   units: number;
-  progress: StatusItem[];
-  openProgressModal: () => void;
+  progress: SponsorStatus;
+  openOptionsModal: () => void;
 }
+
+interface OrderData {
+  date: string;
+  units: number;
+  investment: string;
+  currency: string;
+  paid: PaidData;
+  assetTitle: string;
+}
+// interface OrderData {
+//   orderDate: FBtime;
+//   units: number;
+//   investment: string;
+//   currency: string;
+//   paid: PaidData;
+//   assetTitle: string;
+// }

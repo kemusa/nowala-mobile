@@ -5,12 +5,12 @@ import firestore, {
   getDocs,
   addDoc,
   setDoc,
+  onSnapshot,
   Query,
   where,
   doc,
   collection,
 } from 'firebase/firestore';
-import { FBCollectionConfig } from './types';
 export default class DbService {
   // private _db = firestore;
   private getFireStore = getFirestore();
@@ -25,6 +25,13 @@ export default class DbService {
     const ref = collection(this.getFireStore, collectionName);
     const data = await getDocs(ref);
     return data.docs.map(doc => ({ id: doc.id, data: doc.data() }));
+  }
+
+  public subscribe(collectionName: string, callback: (data: any) => any) {
+    const ref = collection(this.getFireStore, collectionName);
+    return onSnapshot(ref, snapshot => {
+      callback(snapshot?.docs.map(doc => ({ id: doc.id, data: doc.data() })));
+    });
   }
 
   public async writeDocument(path: string, document: any) {

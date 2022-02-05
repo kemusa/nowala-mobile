@@ -8,7 +8,7 @@ import {
   sendPasswordResetEmail,
   updateProfile,
 } from 'firebase/auth';
-import sponsorshipsInit from '../utils/consts/DATA';
+import { projectsInit } from '../utils/consts/DATA';
 import DbService from './db';
 // import { LoginManager, AccessToken, Settings } from 'react-native-fbsdk-next';
 // import BackendService from '../services/backend';
@@ -62,12 +62,11 @@ export default class AuthService {
       await updateProfile(user, { displayName: name });
       // Create user document
       await this.dbService.writeDocumentWithId('users', user.uid, {
-        uid: user.uid,
         displayName: name,
       });
       // Init user sponsorship
       await this.dbService.writeDocument(`users/${user.uid}/sponsorships`, {
-        ...sponsorshipsInit,
+        ...projectsInit,
       });
       return user;
     } catch (error) {
@@ -78,6 +77,23 @@ export default class AuthService {
   // Sign user in with email and password
   public async signInWithEmailAndPassword(email: string, password: string) {
     return await signInWithEmailAndPassword(this.getAuth, email, password);
+  }
+
+  // Sign user out
+  public async signOut() {
+    try {
+      await signOut(this.getAuth);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  public async passwordReset(email: string) {
+    try {
+      await sendPasswordResetEmail(this.getAuth, email);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   // public async signInWithFacebook() {
@@ -120,21 +136,4 @@ export default class AuthService {
   //   // Sign-in the user with the credential
   //   return auth().signInWithCredential(googleCredential);
   // }
-
-  // Sign user out
-  public async signOut() {
-    try {
-      await signOut(this.getAuth);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  public async passwordReset(email: string) {
-    try {
-      await sendPasswordResetEmail(this.getAuth, email);
-    } catch (error) {
-      console.error(error);
-    }
-  }
 }

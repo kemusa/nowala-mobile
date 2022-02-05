@@ -1,23 +1,33 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { View, Text } from 'react-native';
+import React, { useContext } from 'react';
+import { View } from 'react-native';
 import NowalaText from '../../../../../components/atoms/text';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import styles from './styles';
 import { DashboardContext } from '../../../DashboardContext';
 import ReturnDetail from '../../molecules/ReturnDetail';
+import MoreCardDetails from '../../../../../components/molecules/MoreCardDetails';
+import CardWrapper from '../../../../../components/templates/CardWrapper';
 
-const ReturnBreakdownView = () => {
+const ReturnBreakdownView: React.FC<ReturnBreakdownProps> = () => {
   const { dashboardSummary } = useContext(DashboardContext);
-  const { investment, collected, totalReturn, currency, returnPercent, asset } =
-    dashboardSummary;
+  const {
+    investment,
+    collected,
+    totalReturn,
+    currency,
+    returnPercent,
+    assetTitle,
+    openOptionsModal,
+  } = dashboardSummary;
   return (
     <>
       <NowalaText.Headline2Light style={styles.title}>
-        {asset
-          ? asset.charAt(0).toUpperCase() + asset.substring(1).toLowerCase()
-          : ''}
+        {assetTitle ? assetTitle : ''}
       </NowalaText.Headline2Light>
-      <View style={styles.breakdownContainer}>
+      <CardWrapper>
+        <View style={{ padding: 3, alignItems: 'flex-end' }}>
+          <MoreCardDetails onPress={openOptionsModal} />
+        </View>
         <View style={styles.columnContainer}>
           <View style={styles.col1}>
             <View style={styles.returnDetailContainer}>
@@ -76,7 +86,7 @@ const ReturnBreakdownView = () => {
             </View>
           </View>
         </View>
-      </View>
+      </CardWrapper>
     </>
   );
 };

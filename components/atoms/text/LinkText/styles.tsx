@@ -4,7 +4,7 @@ const { LINK_TEXT } = colors;
 const styles = StyleSheet.create({
   container: {},
   text: {
-    fontSize: 14,
+    fontSize: 16,
     fontFamily: 'Lato_400Regular',
     color: LINK_TEXT,
   },

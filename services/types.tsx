@@ -1,4 +1,4 @@
-import { WhereFilterOp } from 'firebase/firestore';
+import { DocumentData, WhereFilterOp } from 'firebase/firestore';
 import AuthService from '../services/auth';
 import DbService from '../services/db';
 // import BackendService from './backend';
@@ -22,6 +22,11 @@ interface FBCollectionFilter {
 interface FBCollectionConfig {
   order?: FBCollectionOrder;
   filter?: FBCollectionFilter;
+}
+
+interface SnapshotData {
+  id: string;
+  data: DocumentData;
 }
 
 // | AuthTokens
@@ -56,4 +61,5 @@ export type {
   FBCollectionConfig,
   KeychainAuthTokens,
   KeychainState,
+  SnapshotData,
 };

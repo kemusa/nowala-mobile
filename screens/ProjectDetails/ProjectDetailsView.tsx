@@ -2,6 +2,7 @@ import { BlurView } from 'expo-blur';
 import React, { useContext } from 'react';
 import { View, Text, SafeAreaView, Image, ScrollView } from 'react-native';
 import { ProjectDetailsContext } from './ProjectDetailsContext';
+import NowalaText from '../../components/atoms/text';
 import styles from './styles';
 
 const ProjectDetailsView = () => {
@@ -9,35 +10,37 @@ const ProjectDetailsView = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Image style={styles.image} source={{ uri: project.image }} />
+      <View style={styles.backgroundContainer}>
+        <Image style={styles.image} source={{ uri: project.image }} />
+        <View style={styles.titleContaier}>
+          <NowalaText.Headline1 style={styles.projectTitle}>
+            {project.title}
+          </NowalaText.Headline1>
+        </View>
+      </View>
       <View style={styles.contentContainer}>
         <ScrollView contentContainerStyle={styles.scrollView}>
           <View style={styles.mainInfo}>
-            <BlurView style={styles.blur} intensity={50} tint="dark">
-              <Text style={[styles.projectTitle, styles.text]}>
-                {project.title}
-              </Text>
-              <Text style={[styles.detailsText, styles.text]}>
-                {project.description}
-              </Text>
-            </BlurView>
+            <NowalaText.Body1 style={styles.detailsText}>
+              {project.description}
+            </NowalaText.Body1>
           </View>
           <View style={styles.statsInfo}>
             {project.stats &&
               Object.keys(project.stats).map((k: any, idx: number) => (
                 <View key={idx} style={styles.statContainer}>
-                  <BlurView style={styles.blur} intensity={50} tint="dark">
+                  <View style={styles.statRow1}>
                     {project.stats &&
                       getStatIcon(project.stats[k as keyof ProjectStats].icon)}
-                    <Text style={[styles.statTitle, styles.text]}>
+                    <Text style={styles.statTitle}>
                       {project.stats &&
                         project.stats[k as keyof ProjectStats].title}
                     </Text>
-                    <Text style={[styles.statValue, styles.text]}>
-                      {project.stats &&
-                        project.stats[k as keyof ProjectStats].value}
-                    </Text>
-                  </BlurView>
+                  </View>
+                  <Text style={styles.statValue}>
+                    {project.stats &&
+                      project.stats[k as keyof ProjectStats].value}
+                  </Text>
                 </View>
               ))}
           </View>

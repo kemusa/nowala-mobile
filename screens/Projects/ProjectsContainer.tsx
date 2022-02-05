@@ -6,6 +6,7 @@ import colors from '../../theme/colors';
 import NowalaLogoInverse from '../../components/atoms/icons/NowalaLogoInverse';
 import ProjectsView from './ProjectsView';
 import { View } from 'native-base';
+import { firstProject } from './Projects';
 
 const ProjectsContainer: React.FC<ProjectsScreenProps> = ({ navigation }) => {
   const { WHITE, PRIMARY } = colors;
@@ -19,36 +20,13 @@ const ProjectsContainer: React.FC<ProjectsScreenProps> = ({ navigation }) => {
   };
 
   const data: Project[] = [
-    {
-      key: '1',
-      title: 'Provide Affordable Solar Energy',
-      description:
-        "We've partnered with Ignite Power SL to help you provide affordable solar power to the rural power in Sierra Leone. When you join this project, you get to sponsor Solar Kits which are directly placed in a home without electricity. The residents pay an afforadable rate each month and the returns are paid to you.",
-      image:
-        'https://storage.googleapis.com/nowala-public/solar_kit_hero_3.jpg',
-      color: '#0C212D',
-      stats: {
-        price: {
-          title: 'Price',
-          value: '£60',
-          icon: 'price',
-        },
-        return: { title: 'Return', value: '5-10%', icon: 'return' },
-        time: { title: 'Time period', value: '2 years', icon: 'time' },
-        country: {
-          title: 'Country',
-          value: 'Sierra Leone',
-          icon: 'country',
-        },
-      },
-      clickable: true,
-    },
+    { ...firstProject },
     {
       key: '2',
       title: 'Our Mission',
       description:
         "We’re focused on helping you become a shareholder in the world's ongoing development by connecting you to social good projects that produce returns",
-      color: '#47717F',
+      color: '#20678A',
       image: 'https://storage.googleapis.com/nowala-public/road_image.png',
       design: (
         <View
@@ -57,6 +35,7 @@ const ProjectsContainer: React.FC<ProjectsScreenProps> = ({ navigation }) => {
             alignItems: 'center',
             padding: 10,
             margin: 'auto',
+            position: 'absolute',
             marginTop: 30,
             marginLeft: '5%',
             marginRight: '5%',

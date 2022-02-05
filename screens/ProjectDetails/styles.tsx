@@ -1,31 +1,35 @@
 import { Dimensions, StyleSheet } from 'react-native';
-import { spec } from '../Projects/specs';
+import colors from '../../theme/colors';
 
-const { ITEM_WIDTH, ITEM_HEIGHT, SPACING, RADIUS } = spec;
-const { width } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
+const { PRIMARY, WHITE } = colors;
 
 const styles = StyleSheet.create({
+  backgroundContainer: { height: '100%', width: '100%', position: 'absolute' },
   container: { ...StyleSheet.absoluteFillObject },
   contentContainer: {
-    paddingTop: '10%',
+    height: '65%',
+    position: 'absolute',
+    bottom: 0,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  image: { ...StyleSheet.absoluteFillObject, resizeMode: 'cover' },
-  detailsText: { lineHeight: 24 },
+  image: {
+    height: '45%',
+    resizeMode: 'cover',
+  },
+  detailsText: { lineHeight: 24, color: PRIMARY },
   projectTitle: {
     fontSize: 24,
     fontWeight: '800',
-    marginBottom: 20,
+    position: 'absolute',
+    bottom: 10,
+    padding: 20,
+    color: WHITE,
   },
-  sharedElement: { ...StyleSheet.absoluteFillObject },
   mainInfo: {
-    width: width * 0.9,
-    height: width * 0.8,
-    marginTop: 50,
-    overflow: 'scroll', // Helps enable border radius for BlurView component
+    padding: 15,
     borderRadius: 6,
-    backgroundColor: 'rgba(255, 255, 255, 0.6)',
   },
   scrollView: {
     alignItems: 'center',
@@ -36,22 +40,28 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
   },
   statContainer: {
-    height: 140,
+    height: 100,
     width: 150,
-    overflow: 'hidden', // Enables border radius for BlurView component
-    borderRadius: 6,
-    backgroundColor: 'rgba(255, 255, 255, 0.6)',
-    marginTop: 35,
-    marginBottom: 35,
-  },
-  statTitle: { fontWeight: 'bold', marginBottom: 15, marginTop: 5 },
-  statValue: { fontSize: 24, fontWeight: '200' },
-  blur: {
-    width: '100%',
-    height: '100%',
     padding: 10,
+    justifyContent: 'center',
+    // backgroundColor: 'pink',
+    // flexBasis: 'calc(100% - 50px)',
   },
-  text: { color: '#fff' },
+  statTitle: {
+    fontWeight: 'bold',
+    marginLeft: 5,
+    marginTop: 'auto',
+    color: PRIMARY,
+  },
+  statRow1: { flexDirection: 'row', alignItems: 'center' },
+  statValue: { fontSize: 20, fontWeight: '200', color: PRIMARY, marginTop: 5 },
+  titleContaier: {
+    height: '45%',
+    width: '100%',
+    position: 'absolute',
+    top: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0.35)',
+  },
 });
 
 export default styles;
