@@ -2,7 +2,7 @@ const firstProject: Project = {
   key: '1',
   title: 'Provide Affordable Solar Energy',
   description:
-    "We've partnered with Ignite Power SL to help you provide affordable solar power to the rural power in Sierra Leone. When you join this project, you get to sponsor Solar Kits which are directly placed in a home without electricity. The residents pay an afforadable rate each month and the returns are paid to you.",
+    "We've partnered with Ignite Power SL to help you provide affordable solar power to the rural poor in Sierra Leone. When you join this project, you get to sponsor Solar Kits which are directly placed in a home without electricity. The residents pay an afforadable rate each month and the returns are paid to you.",
   image: 'https://storage.googleapis.com/nowala-public/ignite-solar-image.png',
   color: '#20678A',
   stats: {

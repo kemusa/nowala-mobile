@@ -12,6 +12,7 @@ import moment from 'moment';
 import { SnapshotData } from '../../services/types';
 import colors from '../../theme/colors';
 import { SponsorshipData } from './typesImport';
+import { statusInit } from '../../utils/consts/DATA';
 
 const { BACKGROUND } = colors;
 
@@ -60,6 +61,8 @@ const DashboardContainer: React.FC<DashboardScreenProps> = ({
     currency: 'SLL',
     assetTitle: '',
     returnPercent: 0,
+    units: 0,
+    progress: statusInit,
   } as DashboardSummary);
 
   // Listener for dashboard data

@@ -45,6 +45,18 @@ interface OrderData {
   paid: PaidData;
   assetTitle: string;
 }
+interface StatusItem {
+  title: string;
+  complete: boolean;
+}
+interface StatusText {
+  registered: string;
+  paid: string;
+  transferred: string;
+  installed: string;
+  collectionStarted: string;
+}
+
 // interface OrderData {
 //   orderDate: FBtime;
 //   units: number;

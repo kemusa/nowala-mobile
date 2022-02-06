@@ -16,11 +16,18 @@ const ImpactCardView: React.FC<ImpactCardProps> = ({
       <CardWrapper>
         {units > 0 ? (
           installed ? (
-            <NowalaText.Subtitle1>
-              Thanks to you,{' '}
-              {units > 1 ? `${units} homes have` : `${units} home has`}{' '}
-              affordable access to electricity.
-            </NowalaText.Subtitle1>
+            <>
+              <NowalaText.Subtitle1>
+                Thanks to you,{' '}
+                {units > 1 ? `${units} homes have` : `${units} home has`}{' '}
+                affordable access to electricity.
+              </NowalaText.Subtitle1>
+              <NowalaText.LinkText2
+                onPress={openProgressModal}
+                style={{ marginTop: 10 }}>
+                View progress
+              </NowalaText.LinkText2>
+            </>
           ) : (
             <>
               <NowalaText.Subtitle1>

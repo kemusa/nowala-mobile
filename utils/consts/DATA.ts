@@ -9,11 +9,11 @@ const statusText: StatusText = {
   collectionStarted: 'Payments started',
 };
 
-const statusInit = {
-  registered: true,
-  paid: true,
-  transferred: true,
-  installed: true,
+const statusInit: SponsorStatus = {
+  registered: false,
+  paid: false,
+  transferred: false,
+  installed: false,
   collectionStarted: false,
 };
 
@@ -31,4 +31,4 @@ const projectsInit: SponsorshipData = {
   orderDate: Timestamp.fromDate(new Date(timestamp)),
   paid: { currency: '£', unitCost: 61 },
 };
-export { projectsInit, statusText };
+export { projectsInit, statusText, statusInit };
