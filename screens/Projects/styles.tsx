@@ -4,7 +4,7 @@ import colors from '../../theme/colors';
 import H3 from '../../components/atoms/text/Headline3/styles';
 const { WHITE } = colors;
 const { text } = H3;
-const { ITEM_WIDTH, ITEM_HEIGHT, SPACING, RADIUS } = spec;
+const { ITEM_WIDTH, ITEM_HEIGHT, SPACING, RADIUS, FULL_SIZE } = spec;
 const styles = StyleSheet.create({
   buttonContainer: {
     padding: 15,

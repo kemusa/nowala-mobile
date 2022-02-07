@@ -1,3 +1,0 @@
-interface MoreDetailProps {
-  onPress: () => void;
-}

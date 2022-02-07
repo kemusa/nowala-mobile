@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   returnDetailContainer: { marginBottom: 20 },
+  row1: { alignItems: 'flex-end' },
   title: { marginLeft: 5, marginBottom: 5 },
 });
 

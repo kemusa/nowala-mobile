@@ -6,18 +6,22 @@ const { PRIMARY, WHITE } = colors;
 
 const styles = StyleSheet.create({
   backgroundContainer: { height: '100%', width: '100%', position: 'absolute' },
-  container: { ...StyleSheet.absoluteFillObject },
+  container: { flex: 1, flexDirection: 'column' },
   contentContainer: {
-    height: '65%',
+    height: '55%',
+    // flex: 1,
+    // paddingTop: ,
     position: 'absolute',
     bottom: 0,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'red',
   },
   image: {
     height: '45%',
     resizeMode: 'cover',
   },
+  // test: { height: '100%', backgroundColor: 'blue' },
   detailsText: { lineHeight: 24, color: PRIMARY },
   projectTitle: {
     fontSize: 24,

@@ -28,7 +28,6 @@ const ProgressModalContainer: React.FC = () => {
   };
 
   useEffect(() => {
-    console.log('PROGRESS', progress);
     if (progress) {
       createProgressList();
     }

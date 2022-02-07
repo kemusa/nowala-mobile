@@ -1,7 +1,7 @@
 import React from 'react';
 import { Svg, Circle } from 'react-native-svg';
 
-const MoreDetailIcon: React.FC<IconProps> = ({ height, width }) => {
+const CardDetailsIcon: React.FC<IconProps> = ({ height, width }) => {
   return (
     <Svg width="20" height="5" viewBox="0 0 20 5" fill="none">
       <Circle cx={2.5} cy={2.5} r={2.5} fill="#ADABAB" />
@@ -11,4 +11,4 @@ const MoreDetailIcon: React.FC<IconProps> = ({ height, width }) => {
   );
 };
 
-export default MoreDetailIcon;
+export default CardDetailsIcon;

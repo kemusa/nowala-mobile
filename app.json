@@ -15,7 +15,7 @@
     },
     "assetBundlePatterns": ["**/*", "assets/images/*"],
     "ios": {
-      "buildNumber": "11",
+      "buildNumber": "13",
       "supportsTablet": true,
       "bundleIdentifier": "io.nowala.sponsors"
     },

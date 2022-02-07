@@ -17,8 +17,6 @@ const ProjectDetailsView = () => {
             {project.title}
           </NowalaText.Headline1>
         </View>
-      </View>
-      <View style={styles.contentContainer}>
         <ScrollView contentContainerStyle={styles.scrollView}>
           <View style={styles.mainInfo}>
             <NowalaText.Body1 style={styles.detailsText}>

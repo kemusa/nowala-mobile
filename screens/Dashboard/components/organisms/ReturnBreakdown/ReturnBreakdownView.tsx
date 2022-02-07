@@ -5,7 +5,7 @@ import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import styles from './styles';
 import { DashboardContext } from '../../../DashboardContext';
 import ReturnDetail from '../../molecules/ReturnDetail';
-import MoreCardDetails from '../../../../../components/molecules/MoreCardDetails';
+import CardDetailsButton from '../../../../../components/molecules/CardDetailsButton';
 import CardWrapper from '../../../../../components/templates/CardWrapper';
 
 const ReturnBreakdownView: React.FC<ReturnBreakdownProps> = () => {
@@ -24,10 +24,7 @@ const ReturnBreakdownView: React.FC<ReturnBreakdownProps> = () => {
       <NowalaText.Headline2Light style={styles.title}>
         {assetTitle ? assetTitle : ''}
       </NowalaText.Headline2Light>
-      <CardWrapper>
-        <View style={{ padding: 3, alignItems: 'flex-end' }}>
-          <MoreCardDetails onPress={openOptionsModal} />
-        </View>
+      <CardWrapper hasDetail={true} detailOnPress={openOptionsModal}>
         <View style={styles.columnContainer}>
           <View style={styles.col1}>
             <View style={styles.returnDetailContainer}>

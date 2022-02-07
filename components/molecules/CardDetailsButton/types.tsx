@@ -1,0 +1,3 @@
+interface CardDetailsButtonProps {
+  onPress: () => void;
+}
