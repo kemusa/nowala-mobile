@@ -19,7 +19,7 @@ const { BACKGROUND } = colors;
 const Stack = createStackNavigator<StackParamList>();
 const RootNavigator = () => {
   const { Navigator, Screen } = Stack;
-  const { auth } = useContext(ServicesContext) as Services;
+  const { auth, analytics } = useContext(ServicesContext) as Services;
   const [uid, setUid] = useState(null as any);
 
   // Initialize event handler for user auth changes
@@ -31,6 +31,15 @@ const RootNavigator = () => {
       console.error(error);
     }
   }, []);
+
+  // Initialize event handler for user auth changes
+  useEffect(() => {
+    try {
+      analytics.identify(uid);
+    } catch (error) {
+      console.error(error);
+    }
+  }, [uid]);
 
   // Event handler for use auth changes
   const handleAuthChange = async (user: User | null) => {

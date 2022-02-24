@@ -24,7 +24,7 @@ const LoginContainer: React.FC<LoginScreenProps> = ({ navigation }) => {
   // const [googleAuthLoading, setGoogleAuthLoading] = useState(false);
 
   // Get services
-  const { auth } = useContext(ServicesContext) as Services;
+  const { auth, analytics } = useContext(ServicesContext) as Services;
 
   // Initialize form
   const { EMAIL_REGEX } = regex;
@@ -48,6 +48,7 @@ const LoginContainer: React.FC<LoginScreenProps> = ({ navigation }) => {
   useEffect(() => {
     navigation.setOptions({
       headerTitle: () => <NowalaLogo />,
+      headerTitleAlign: 'center',
       headerStyle: {
         elevation: 0, // remove header border for android
         shadowOpacity: 0, // remove header border for ios
@@ -55,6 +56,11 @@ const LoginContainer: React.FC<LoginScreenProps> = ({ navigation }) => {
       },
     });
   }, [navigation]);
+
+  // track screen
+  useEffect(() => {
+    analytics.screen('Login');
+  });
 
   const goToSignUp = () => {
     navigation.navigate(SIGN_UP);

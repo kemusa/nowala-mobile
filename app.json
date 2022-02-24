@@ -15,8 +15,8 @@
     },
     "assetBundlePatterns": ["**/*", "assets/images/*"],
     "ios": {
-      "buildNumber": "13",
-      "supportsTablet": true,
+      "buildNumber": "14",
+      "supportsTablet": false,
       "bundleIdentifier": "io.nowala.sponsors"
     },
     "android": {
@@ -24,7 +24,8 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#475972"
       },
-      "package": "io.nowala.sponsors"
+      "package": "io.nowala.sponsors",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"

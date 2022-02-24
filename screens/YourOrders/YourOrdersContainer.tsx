@@ -1,11 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import NowalaIcon from '../../components/atoms/icons/NowalaIcon';
 import NowalaLogo from '../../components/atoms/icons/NowalaLogo';
 import { YourOrdersScreenProps } from '../../navigation/types';
+import ServicesContext, { Services } from '../../services';
 import { YourOrdersContext } from './YourOrdersContext';
 import YourOrdersModalView from './YourOrdersView';
 
-const YourOrdersModalContainer: React.FC<YourOrdersScreenProps> = ({
+const YourOrdersContainer: React.FC<YourOrdersScreenProps> = ({
   navigation,
   route,
 }) => {
@@ -14,6 +15,7 @@ const YourOrdersModalContainer: React.FC<YourOrdersScreenProps> = ({
   useEffect(() => {
     navigation.setOptions({
       headerTitle: () => <NowalaIcon />,
+      headerTitleAlign: 'center',
       headerStyle: {
         elevation: 0, // remove header border for android
         shadowOpacity: 0, // remove header border for ios
@@ -22,6 +24,13 @@ const YourOrdersModalContainer: React.FC<YourOrdersScreenProps> = ({
     });
   }, [navigation]);
 
+  const { analytics } = useContext(ServicesContext) as Services;
+
+  // track screen
+  useEffect(() => {
+    analytics.screen('Order Details');
+  });
+
   return (
     <YourOrdersContext.Provider value={{ orders }}>
       <YourOrdersModalView />
@@ -29,4 +38,4 @@ const YourOrdersModalContainer: React.FC<YourOrdersScreenProps> = ({
   );
 };
 
-export default YourOrdersModalContainer;
+export default YourOrdersContainer;

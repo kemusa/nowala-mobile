@@ -1,9 +1,11 @@
 import { DocumentData, WhereFilterOp } from 'firebase/firestore';
 import AuthService from '../services/auth';
 import DbService from '../services/db';
+import AnalyticsService from './analytics';
 // import BackendService from './backend';
 
 interface Services {
+  analytics: AnalyticsService;
   auth: AuthService;
   db: DbService;
 }

@@ -1,4 +1,4 @@
-import MoreDetailIcon from './CardDetailsIcon';
+import MoreDetailIcon from './CardDetailsButton';
 import NowalaIcon from './NowalaIcon';
 import NowalaLogo from './NowalaLogo';
 import NowalaLogoInverse from './NowalaLogoInverse';

@@ -53,7 +53,13 @@ const DashboardContainer: React.FC<DashboardScreenProps> = ({
   }, [navigation]);
 
   // Get services
-  const { auth, db } = useContext(ServicesContext) as Services;
+  const { auth, db, analytics } = useContext(ServicesContext) as Services;
+
+  // track screen
+  useEffect(() => {
+    analytics.screen('Dashboard');
+  });
+
   const [summary, setSummary] = useState({
     investment: 0,
     collected: 0,
@@ -82,7 +88,10 @@ const DashboardContainer: React.FC<DashboardScreenProps> = ({
 
   // Navigate to project details from modal then close modal
   const goToProject = () => {
-    navigation.navigate('ProjectDetails', { project: firstProject });
+    navigation.navigate('ProjectDetails', {
+      project: firstProject,
+      ref: 'Dashboard',
+    });
     closeOptionsModal();
   };
 

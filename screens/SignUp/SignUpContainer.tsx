@@ -22,7 +22,12 @@ const SignUpContainer: React.FC<SignUpScreenProps> = ({ navigation }) => {
   // const [googleAuthLoading, setGoogleAuthLoading] = useState(false);
 
   // Get services
-  const { auth } = useContext(ServicesContext) as Services;
+  const { auth, analytics } = useContext(ServicesContext) as Services;
+
+  // track screen
+  useEffect(() => {
+    analytics.screen('Sign Up');
+  });
 
   // Initialize form
   const { EMAIL_REGEX, PASSWORD_REGEX } = regex;
@@ -67,6 +72,7 @@ const SignUpContainer: React.FC<SignUpScreenProps> = ({ navigation }) => {
   useEffect(() => {
     navigation.setOptions({
       headerTitle: () => <NowalaLogo />,
+      headerTitleAlign: 'center',
       headerStyle: {
         elevation: 0, // remove header border for android
         shadowOpacity: 0, // remove header border for ios

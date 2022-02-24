@@ -1,6 +1,7 @@
 import ServicesContext from './context';
 import DbService from './db';
 import AuthService from './auth';
+import AnalyticsService from './analytics';
 import { Services } from './types';
 
 // This function runs on either app function after Firebase is loaded to ensure the
@@ -10,6 +11,7 @@ const loadServices = (): Services => {
   return {
     db: _db,
     auth: new AuthService(_db),
+    analytics: new AnalyticsService(),
   };
 };
 

@@ -3,7 +3,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 
 type StackParamList = {
   Projects: undefined;
-  ProjectDetails: { project: Project };
+  ProjectDetails: { project: Project; ref: 'Projects' | 'Dashboard' };
   SignUp: undefined;
   Login: undefined;
   PasswordReset: undefined;

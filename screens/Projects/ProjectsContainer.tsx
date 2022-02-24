@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { ProjectsScreenProps } from '../../navigation/types';
 import { ProjectContext } from './ProjectContext';
 import NowalaText from '../../components/atoms/text';
@@ -7,12 +7,19 @@ import NowalaLogoInverse from '../../components/atoms/icons/NowalaLogoInverse';
 import ProjectsView from './ProjectsView';
 import { View } from 'native-base';
 import { firstProject } from './Projects';
+import ServicesContext, { Services } from '../../services';
 
 const ProjectsContainer: React.FC<ProjectsScreenProps> = ({ navigation }) => {
   const { WHITE, PRIMARY } = colors;
+  const { analytics } = useContext(ServicesContext) as Services;
+
+  // track screen
+  useEffect(() => {
+    analytics.screen('Projects');
+  });
 
   const goToProjectDetails = (project: Project) => {
-    navigation.navigate('ProjectDetails', { project });
+    navigation.navigate('ProjectDetails', { project, ref: 'Projects' });
   };
 
   const goToSignUp = () => {
