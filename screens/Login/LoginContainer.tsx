@@ -60,7 +60,7 @@ const LoginContainer: React.FC<LoginScreenProps> = ({ navigation }) => {
   // track screen
   useEffect(() => {
     analytics.screen('Login');
-  });
+  }, []);
 
   const goToSignUp = () => {
     navigation.navigate(SIGN_UP);
@@ -72,6 +72,7 @@ const LoginContainer: React.FC<LoginScreenProps> = ({ navigation }) => {
       setLoginError(NO_LOGIN_ERROR);
       setEmailAuthLoading(true);
       await auth.signInWithEmailAndPassword(email, password);
+      analytics.track('Signed In');
     } catch (error: any) {
       setEmailAuthLoading(false);
       displayFormError(error.code);

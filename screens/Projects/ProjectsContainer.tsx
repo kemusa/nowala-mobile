@@ -16,7 +16,7 @@ const ProjectsContainer: React.FC<ProjectsScreenProps> = ({ navigation }) => {
   // track screen
   useEffect(() => {
     analytics.screen('Projects');
-  });
+  }, []);
 
   const goToProjectDetails = (project: Project) => {
     navigation.navigate('ProjectDetails', { project, ref: 'Projects' });
@@ -40,6 +40,7 @@ const ProjectsContainer: React.FC<ProjectsScreenProps> = ({ navigation }) => {
           style={{
             width: '90%',
             alignItems: 'center',
+            justifyContent: 'center',
             padding: 10,
             margin: 'auto',
             position: 'absolute',
@@ -49,18 +50,18 @@ const ProjectsContainer: React.FC<ProjectsScreenProps> = ({ navigation }) => {
             borderColor: WHITE,
             borderWidth: 2,
           }}>
-          <NowalaText.Headline1Light style={{ color: WHITE }}>
+          <NowalaText.Headline3Light style={{ color: WHITE, marginBottom: 5 }}>
             MORE
-          </NowalaText.Headline1Light>
-          <NowalaText.Headline1Light style={{ color: WHITE }}>
+          </NowalaText.Headline3Light>
+          <NowalaText.Headline3Light style={{ color: WHITE, marginBottom: 5 }}>
             PROJECTS
-          </NowalaText.Headline1Light>
-          <NowalaText.Headline1Light style={{ color: WHITE }}>
+          </NowalaText.Headline3Light>
+          <NowalaText.Headline3Light style={{ color: WHITE, marginBottom: 5 }}>
             COMING
-          </NowalaText.Headline1Light>
-          <NowalaText.Headline1Light style={{ color: WHITE }}>
+          </NowalaText.Headline3Light>
+          <NowalaText.Headline3Light style={{ color: WHITE, marginBottom: 5 }}>
             SOON
-          </NowalaText.Headline1Light>
+          </NowalaText.Headline3Light>
         </View>
       ),
       clickable: false,

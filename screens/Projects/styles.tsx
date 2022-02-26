@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import { spec } from './specs';
 import colors from '../../theme/colors';
 import H3 from '../../components/atoms/text/Headline3/styles';
@@ -30,13 +30,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#5E8497',
     padding: 20,
     height: ITEM_HEIGHT * 0.5,
-    // position: 'absolute',
-    // bottom: 0,
   },
   text: { color: WHITE },
   topBar: {
     padding: 15,
-    paddingTop: 20,
+    paddingTop: Platform.OS === 'ios' ? 20 : 40,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',

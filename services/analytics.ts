@@ -1,6 +1,8 @@
 import * as Segment from 'expo-analytics-segment';
+import environment from '../environments';
+const { segmentWriteKey } = environment();
 // todo: dynamically swap via env vars
-const writeKey = 'jNdxmY8AFCs2d7IBYCMD8ms6CoXYxEx9';
+const writeKey = segmentWriteKey;
 const analyticsInit = async () => {
   Segment.initialize({ iosWriteKey: writeKey, androidWriteKey: writeKey });
 };

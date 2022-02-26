@@ -10,13 +10,15 @@ import styles from './styles';
 import { spec } from './specs';
 import { ProjectContext } from './ProjectContext';
 import NowalaText from '../../components/atoms/text';
-import { BlurView } from 'expo-blur';
+import { BlurView } from 'expo-blur'; //todo: uninstall and remove
 import PrimaryButton from '../../components/atoms/buttons/PrimaryButton';
+import Constants from 'expo-constants';
 
 const ProjectsView: React.FC = () => {
   const { goToProjectDetails, goToSignUp, data } = useContext(ProjectContext);
   const { FULL_SIZE, ITEM_WIDTH } = spec;
   const scrollX = useRef(new Animated.Value(0)).current;
+  const env = Constants?.manifest?.releaseChannel;
 
   return (
     <SafeAreaView style={styles.container}>
@@ -59,12 +61,15 @@ const ProjectsView: React.FC = () => {
               onPress={() =>
                 item.clickable ? goToProjectDetails(item) : null
               }>
+              {/* Card wrapper */}
               <View
                 style={[styles.cardContainer, { backgroundColor: item.color }]}>
                 {item.image && (
                   <Image style={styles.image} source={{ uri: item.image }} />
                 )}
+                {/* If there's a a design, field render the design */}
                 {item.design && item.design}
+                {/* If there's a title and description dispalay description portion of card */}
                 {item.title && item.description && (
                   <View style={styles.cardInfoContainer}>
                     <Animated.Text

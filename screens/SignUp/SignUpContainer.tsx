@@ -5,9 +5,9 @@ import { routes } from '../../navigation/types';
 import { _getSignUpError } from '../../utils/errors';
 import SignUpView from './SignUpView';
 import regex from '../../utils/consts/REGEX';
-import { useForm, useWatch } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import SignUpContext from './SignUpContext';
-import { SignUpProps, SignUpFormData } from './types';
+import { SignUpFormData } from './types';
 import { InputFormConfig } from '../../components/organisms/InputForm/types';
 import NowalaLogo from '../../components/atoms/icons/NowalaLogo';
 
@@ -27,7 +27,7 @@ const SignUpContainer: React.FC<SignUpScreenProps> = ({ navigation }) => {
   // track screen
   useEffect(() => {
     analytics.screen('Sign Up');
-  });
+  }, []);
 
   // Initialize form
   const { EMAIL_REGEX, PASSWORD_REGEX } = regex;
@@ -54,7 +54,7 @@ const SignUpContainer: React.FC<SignUpScreenProps> = ({ navigation }) => {
     pattern: {
       value: PASSWORD_REGEX,
       message:
-        'Your password must have minimum eight characters, at least one uppercase letter, one lowercase letter and one number',
+        'Your password must have 6-16 characters, at least one number, and special character',
     },
   };
 
@@ -91,6 +91,7 @@ const SignUpContainer: React.FC<SignUpScreenProps> = ({ navigation }) => {
       setSignUpError(NO_LOGIN_ERROR);
       setEmailAuthLoading(true);
       await auth.signUpWithEmailAndPassword(name, email, password);
+      analytics.track('Signed Up');
     } catch (error: any) {
       console.error(error);
       setEmailAuthLoading(false);

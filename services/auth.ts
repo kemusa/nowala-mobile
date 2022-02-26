@@ -68,6 +68,7 @@ export default class AuthService {
       await this.dbService.writeDocument(`users/${user.uid}/sponsorships`, {
         ...projectsInit,
       });
+      
       return user;
     } catch (error) {
       console.error(error);

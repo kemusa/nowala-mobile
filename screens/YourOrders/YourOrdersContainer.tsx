@@ -29,7 +29,7 @@ const YourOrdersContainer: React.FC<YourOrdersScreenProps> = ({
   // track screen
   useEffect(() => {
     analytics.screen('Order Details');
-  });
+  }, []);
 
   return (
     <YourOrdersContext.Provider value={{ orders }}>

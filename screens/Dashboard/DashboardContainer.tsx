@@ -58,7 +58,7 @@ const DashboardContainer: React.FC<DashboardScreenProps> = ({
   // track screen
   useEffect(() => {
     analytics.screen('Dashboard');
-  });
+  }, []);
 
   const [summary, setSummary] = useState({
     investment: 0,
@@ -84,6 +84,7 @@ const DashboardContainer: React.FC<DashboardScreenProps> = ({
   const signOut = async () => {
     dashboardUnsub();
     await auth.signOut();
+    analytics.track('Signed Out');
   };
 
   // Navigate to project details from modal then close modal
@@ -100,7 +101,11 @@ const DashboardContainer: React.FC<DashboardScreenProps> = ({
     closeOptionsModal();
   };
 
-  const openProgressModal = () => setViewProgress(true);
+  const openProgressModal = () =>
+    setViewProgress(() => {
+      analytics.track('Viewed Progress');
+      return true;
+    });
   const closeProgressModal = () => setViewProgress(false);
 
   const openOptionsModal = () => setViewOptions(true);

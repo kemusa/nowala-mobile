@@ -17,7 +17,7 @@ const ProjectDetailsContainer: React.FC<ProjectDetailsScreenProps> = ({
   // track screen
   useEffect(() => {
     analytics.screenWithProperties('Project Details', { ref });
-  });
+  }, []);
 
   const getStatIcon = (stat: string) => {
     switch (stat) {
