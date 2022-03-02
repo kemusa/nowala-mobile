@@ -4,8 +4,9 @@ const styles = StyleSheet.create({
   container: { alignSelf: 'flex-end' },
   text: {
     fontFamily: 'Lato_300Light',
-    fontSize: 24,
-    letterSpacing: 5,
+    fontSize: 20,
+    lineHeight: 22,
+    letterSpacing: 2,
   },
 });
 

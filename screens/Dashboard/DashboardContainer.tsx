@@ -24,6 +24,12 @@ const DashboardContainer: React.FC<DashboardScreenProps> = ({
   const [viewOptions, setViewOptions] = useState(false);
   const [viewOrders, setViewOrders] = useState(false);
   const [unsubscribeList, setUnsubscribe] = useState([] as any);
+  const impactMetrics = {
+    carbonOffset: 10.2,
+    lightHours: 57.89,
+    kerosineReduced: 10.42,
+    peopleImpacted: 5,
+  };
   // variable to store unsubscription for dashboard data listener
   let dashboardUnsub = () => {};
 
@@ -151,6 +157,7 @@ const DashboardContainer: React.FC<DashboardScreenProps> = ({
           returnPercent,
           units,
           progress: status,
+          impactMetrics,
           openOptionsModal,
         });
       } catch (error) {

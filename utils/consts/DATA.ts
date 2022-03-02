@@ -3,7 +3,7 @@ import { SponsorshipData } from '../../screens/Dashboard/typesImport';
 
 const statusText: StatusText = {
   registered: 'Sign up for first project 😀',
-  paid: 'Money recieved',
+  paid: 'Money received',
   transferred: 'Money arrived Sierra Leone',
   installed: 'Solar Kit installation complete',
   collectionStarted: 'Payments started',

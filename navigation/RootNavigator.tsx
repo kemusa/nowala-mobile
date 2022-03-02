@@ -8,6 +8,7 @@ import SignUpScreen from '../screens/SignUp';
 import LoginScreen from '../screens/Login';
 import DashboardScreen from '../screens/Dashboard';
 import YourOrdersScreen from '../screens/YourOrders';
+import BottomNavigator from './BottomNavigator';
 import ServicesContext, { Services } from '../services';
 import { User } from '@firebase/auth';
 import colors from '../theme/colors';
@@ -17,6 +18,7 @@ enableScreens(false);
 const { BACKGROUND } = colors;
 
 const Stack = createStackNavigator<StackParamList>();
+
 const RootNavigator = () => {
   const { Navigator, Screen } = Stack;
   const { auth, analytics } = useContext(ServicesContext) as Services;
@@ -50,6 +52,10 @@ const RootNavigator = () => {
     <Navigator initialRouteName="Projects" detachInactiveScreens={false}>
       {uid ? (
         <>
+          {/* <Screen
+            name="Home"
+            component={BottomNavigator}
+            options={{ headerShown: false }}></Screen> */}
           <Screen name="Dashboard">
             {props => <DashboardScreen {...props} userId={uid} />}
           </Screen>

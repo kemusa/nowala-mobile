@@ -2,7 +2,7 @@ import React from 'react';
 import { SafeAreaView, ScrollView, Text, View } from 'react-native';
 import styles from './styles';
 import NowalaText from '../../components/atoms/text';
-import ImpactCard from './components/molecules/ImpactCard';
+import ImpactBreakdown from './components/organisms/ImpactBreakdown';
 import ReturnBreakdown from './components/organisms/ReturnBreakdown';
 import ProgressModal from './components/organisms/ProgressModal';
 import OptionsModal from './components/organisms/OptionsModal';
@@ -22,8 +22,8 @@ const DashboardView: React.FC = () => {
           height: '100%',
           padding: 20,
         }}>
-        <ImpactCard />
         <ReturnBreakdown />
+        <ImpactBreakdown />
         <ProgressModal />
         <OptionsModal />
       </ScrollView>

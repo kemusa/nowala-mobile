@@ -38,7 +38,7 @@ const ReturnBreakdownView: React.FC<ReturnBreakdownProps> = () => {
               <ReturnDetail
                 currency={currency}
                 number={collected}
-                description={'You collected'}
+                description={'Return collected'}
               />
             </View>
             <View>
@@ -46,7 +46,7 @@ const ReturnBreakdownView: React.FC<ReturnBreakdownProps> = () => {
                 <ReturnDetail
                   currency={currency}
                   number={totalReturn}
-                  description={'Expected Return'}
+                  description={'Expected payback'}
                 />
               </View>
             </View>

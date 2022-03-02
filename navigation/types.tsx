@@ -9,6 +9,7 @@ type StackParamList = {
   PasswordReset: undefined;
   Dashboard: undefined;
   YourOrders: { orders: OrderData[] };
+  Home: undefined;
 };
 
 interface NowalaRoutes {
@@ -18,6 +19,7 @@ interface NowalaRoutes {
   readonly SIGN_UP: keyof StackParamList;
   readonly PASSWORD_RESET: keyof StackParamList;
   readonly DASHBOARD: keyof StackParamList;
+  readonly HOME: keyof StackParamList;
 }
 
 const routes: NowalaRoutes = {
@@ -27,6 +29,7 @@ const routes: NowalaRoutes = {
   SIGN_UP: 'SignUp',
   PASSWORD_RESET: 'PasswordReset',
   DASHBOARD: 'Dashboard',
+  HOME: 'Home',
 };
 
 // Projects Types
@@ -93,6 +96,14 @@ type YourOrdersScreenProps = {
   navigation: YourOrdersScreenNavigationProps;
 };
 
+// Home Types
+type HomeRouteProps = RouteProp<StackParamList, 'Home'>;
+type HomeScreenNavigationProps = StackNavigationProp<StackParamList, 'Home'>;
+type HomeScreenProps = {
+  route: HomeRouteProps;
+  navigation: HomeScreenNavigationProps;
+};
+
 export type {
   StackParamList,
   ProjectsScreenProps,
@@ -101,6 +112,7 @@ export type {
   LoginScreenProps,
   DashboardScreenProps,
   YourOrdersScreenProps,
+  HomeScreenProps,
 };
 
 export { routes };

@@ -11,7 +11,7 @@ const ImpactCardView: React.FC<ImpactCardProps> = ({
   return (
     <>
       <NowalaText.Headline2Light style={styles.title}>
-        Your Impact
+        Your impact
       </NowalaText.Headline2Light>
       <CardWrapper>
         {units > 0 ? (
@@ -43,9 +43,8 @@ const ImpactCardView: React.FC<ImpactCardProps> = ({
           )
         ) : (
           <NowalaText.Subtitle1>
-            We are processing your order. Soon your investment will provide
-            affordable access to electricity for 1 or more homes in Sierra
-            Leone.
+            We are verifying your account. Your impact details will be updated
+            within 24 hours.
           </NowalaText.Subtitle1>
         )}
       </CardWrapper>

@@ -50,18 +50,18 @@ const ProjectsContainer: React.FC<ProjectsScreenProps> = ({ navigation }) => {
             borderColor: WHITE,
             borderWidth: 2,
           }}>
-          <NowalaText.Headline3Light style={{ color: WHITE, marginBottom: 5 }}>
+          <NowalaText.Headline2Light style={{ color: WHITE, marginBottom: 5 }}>
             MORE
-          </NowalaText.Headline3Light>
-          <NowalaText.Headline3Light style={{ color: WHITE, marginBottom: 5 }}>
+          </NowalaText.Headline2Light>
+          <NowalaText.Headline2Light style={{ color: WHITE, marginBottom: 5 }}>
             PROJECTS
-          </NowalaText.Headline3Light>
-          <NowalaText.Headline3Light style={{ color: WHITE, marginBottom: 5 }}>
+          </NowalaText.Headline2Light>
+          <NowalaText.Headline2Light style={{ color: WHITE, marginBottom: 5 }}>
             COMING
-          </NowalaText.Headline3Light>
-          <NowalaText.Headline3Light style={{ color: WHITE, marginBottom: 5 }}>
+          </NowalaText.Headline2Light>
+          <NowalaText.Headline2Light style={{ color: WHITE, marginBottom: 5 }}>
             SOON
-          </NowalaText.Headline3Light>
+          </NowalaText.Headline2Light>
         </View>
       ),
       clickable: false,
@@ -83,16 +83,16 @@ const ProjectsContainer: React.FC<ProjectsScreenProps> = ({ navigation }) => {
             marginRight: '5%',
           }}>
           <NowalaLogoInverse />
-          <NowalaText.Headline3Light
+          <NowalaText.Headline2Light
             style={{ color: WHITE, marginTop: 15, marginBottom: 15 }}>
             DISCOVER
-          </NowalaText.Headline3Light>
-          <NowalaText.Headline3Light style={{ color: WHITE, marginBottom: 15 }}>
+          </NowalaText.Headline2Light>
+          <NowalaText.Headline2Light style={{ color: WHITE, marginBottom: 15 }}>
             SUPPORT
-          </NowalaText.Headline3Light>
-          <NowalaText.Headline3Light style={{ color: WHITE, marginBottom: 15 }}>
+          </NowalaText.Headline2Light>
+          <NowalaText.Headline2Light style={{ color: WHITE, marginBottom: 15 }}>
             EARN
-          </NowalaText.Headline3Light>
+          </NowalaText.Headline2Light>
         </View>
       ),
       color:

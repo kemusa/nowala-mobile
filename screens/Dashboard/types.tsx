@@ -25,6 +25,12 @@ interface PaidData {
   unitCost: number;
 }
 
+interface ImpactMetrics {
+  carbonOffset: number;
+  lightHours: number;
+  kerosineReduced: number;
+  peopleImpacted: number;
+}
 interface DashboardSummary {
   investment: number;
   collected: number;
@@ -34,6 +40,7 @@ interface DashboardSummary {
   currency: string;
   units: number;
   progress: SponsorStatus;
+  impactMetrics: ImpactMetrics;
   openOptionsModal: () => void;
 }
 
