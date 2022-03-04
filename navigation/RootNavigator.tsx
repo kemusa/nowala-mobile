@@ -7,6 +7,7 @@ import { enableScreens } from 'react-native-screens';
 import SignUpScreen from '../screens/SignUp';
 import LoginScreen from '../screens/Login';
 import DashboardScreen from '../screens/Dashboard';
+import ImpactDetailScreen from '../screens/ImpactDetail';
 import YourOrdersScreen from '../screens/YourOrders';
 import BottomNavigator from './BottomNavigator';
 import ServicesContext, { Services } from '../services';
@@ -76,6 +77,15 @@ const RootNavigator = () => {
             }}>
             {props => <YourOrdersScreen {...props} />}
           </Screen>
+          <Screen
+            name="ImpactDetail"
+            options={() => ({
+              headerTitle: '',
+              headerShown: true,
+              headerTransparent: true,
+              headerTintColor: '#fff',
+            })}
+            component={ImpactDetailScreen}></Screen>
         </>
       ) : (
         <>

@@ -10,26 +10,29 @@ type StackParamList = {
   Dashboard: undefined;
   YourOrders: { orders: OrderData[] };
   Home: undefined;
+  ImpactDetail: { impactDetail: ImpactDetail };
 };
 
 interface NowalaRoutes {
-  readonly Projects: keyof StackParamList;
-  readonly ProjectDetails: keyof StackParamList;
+  readonly PROJECTS: keyof StackParamList;
+  readonly PROJECT_DETAILS: keyof StackParamList;
   readonly LOGIN: keyof StackParamList;
   readonly SIGN_UP: keyof StackParamList;
   readonly PASSWORD_RESET: keyof StackParamList;
   readonly DASHBOARD: keyof StackParamList;
   readonly HOME: keyof StackParamList;
+  readonly IMPACT_DETAIL: keyof StackParamList;
 }
 
 const routes: NowalaRoutes = {
-  Projects: 'Projects',
-  ProjectDetails: 'ProjectDetails',
+  PROJECTS: 'Projects',
+  PROJECT_DETAILS: 'ProjectDetails',
   LOGIN: 'Login',
   SIGN_UP: 'SignUp',
   PASSWORD_RESET: 'PasswordReset',
   DASHBOARD: 'Dashboard',
   HOME: 'Home',
+  IMPACT_DETAIL: 'ImpactDetail',
 };
 
 // Projects Types
@@ -104,6 +107,17 @@ type HomeScreenProps = {
   navigation: HomeScreenNavigationProps;
 };
 
+// Impact Detail Types
+type ImpactDetailRouteProps = RouteProp<StackParamList, 'ImpactDetail'>;
+type ImpactDetailScreenNavigationProps = StackNavigationProp<
+  StackParamList,
+  'ImpactDetail'
+>;
+type ImpactDetailScreenProps = {
+  route: ImpactDetailRouteProps;
+  navigation: ImpactDetailScreenNavigationProps;
+};
+
 export type {
   StackParamList,
   ProjectsScreenProps,
@@ -113,6 +127,7 @@ export type {
   DashboardScreenProps,
   YourOrdersScreenProps,
   HomeScreenProps,
+  ImpactDetailScreenProps,
 };
 
 export { routes };

@@ -24,12 +24,12 @@ const DashboardContainer: React.FC<DashboardScreenProps> = ({
   const [viewOptions, setViewOptions] = useState(false);
   const [viewOrders, setViewOrders] = useState(false);
   const [unsubscribeList, setUnsubscribe] = useState([] as any);
-  const impactMetrics = {
-    carbonOffset: 10.2,
-    lightHours: 57.89,
-    kerosineReduced: 10.42,
-    peopleImpacted: 5,
-  };
+  // const impactMetrics = {
+  //   carbonOffset: 10.2,
+  //   lightHours: 57.89,
+  //   kerosineReduced: 10.42,
+  //   peopleImpacted: 5,
+  // };
   // variable to store unsubscription for dashboard data listener
   let dashboardUnsub = () => {};
 
@@ -75,6 +75,7 @@ const DashboardContainer: React.FC<DashboardScreenProps> = ({
     returnPercent: 0,
     units: 0,
     progress: statusInit,
+    impactMetrics: undefined,
   } as DashboardSummary);
 
   // Listener for dashboard data
@@ -107,6 +108,10 @@ const DashboardContainer: React.FC<DashboardScreenProps> = ({
     closeOptionsModal();
   };
 
+  const goToImpactDetail = (impactDetail: ImpactDetail) => {
+    navigation.navigate('ImpactDetail', { impactDetail });
+  };
+
   const openProgressModal = () =>
     setViewProgress(() => {
       analytics.track('Viewed Progress');
@@ -133,6 +138,7 @@ const DashboardContainer: React.FC<DashboardScreenProps> = ({
           status,
           orderDate,
           paid,
+          impactMetrics,
         } = sponsorship;
         const investment = unitCost * units;
         const totalReturn = parseInt((investment * (1 + interest)).toFixed());
@@ -179,6 +185,7 @@ const DashboardContainer: React.FC<DashboardScreenProps> = ({
         closeOrdersModal,
         goToProject,
         goToYourOrders,
+        goToImpactDetail,
       }}>
       <HomeView />
     </DashboardContext.Provider>

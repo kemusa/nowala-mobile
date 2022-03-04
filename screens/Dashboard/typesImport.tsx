@@ -12,4 +12,5 @@ export interface SponsorshipData {
   status: SponsorStatus;
   orderDate: Timestamp;
   paid: PaidData;
+  impactMetrics?: ImpactMetrics;
 }

@@ -9,7 +9,10 @@ interface DashboardContext {
   closeOrdersModal: () => void;
   goToProject: () => void;
   goToYourOrders: () => void;
+  goToImpactDetail: ImpactDetailNavProp;
 }
+
+type ImpactDetailNavProp = (impactDetail: ImpactDetail) => void;
 
 type FBtime = { seconds: number; nanoseconds: number };
 interface SponsorStatus {
@@ -40,7 +43,7 @@ interface DashboardSummary {
   currency: string;
   units: number;
   progress: SponsorStatus;
-  impactMetrics: ImpactMetrics;
+  impactMetrics?: ImpactMetrics;
   openOptionsModal: () => void;
 }
 

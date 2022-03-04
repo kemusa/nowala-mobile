@@ -8,6 +8,7 @@ import Subtitle2 from './Subtitle2';
 import LinkText from './LinkText';
 import LinkText2 from './LinkText2';
 import Headline1 from './Headline1';
+import Headline2 from './Headline2';
 import Headline3 from './Headline3';
 import Headline4 from './Headline4';
 import Headline5 from './Headline5';
@@ -23,6 +24,7 @@ const NowalaText = {
   ButtonText,
   ErrorMessage,
   Headline1,
+  Headline2,
   Headline3,
   Headline4,
   Headline5,

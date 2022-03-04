@@ -1,6 +1,11 @@
 interface ImpactBreakdownProps {
-  units: number;
-  installed: boolean;
-  impactMetrics: ImpactMetrics;
+  impactMetrics?: ImpactMetrics;
   openProgressModal: () => void;
+  goToImpactDetail: ImpactDetailNavProp;
+}
+interface ImpactContent {
+  carbonOffset: ImpactDetail;
+  lightHours: ImpactDetail;
+  kerosineReduced: ImpactDetail;
+  peopleImpacted: ImpactDetail;
 }
