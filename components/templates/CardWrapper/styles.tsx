@@ -4,6 +4,7 @@ import colors from '../../../theme/colors';
 const { WHITE } = colors;
 const styles = StyleSheet.create({
   container: {
+    width: '100%',
     backgroundColor: WHITE,
     borderRadius: 6,
     // padding: 10,

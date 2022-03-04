@@ -6,6 +6,7 @@ import Icons from '../../../../../components/atoms/icons';
 import NowalaText from '../../../../../components/atoms/text';
 import CardWrapper from '../../../../../components/templates/CardWrapper';
 import colors from '../../../../../theme/colors';
+import ImpactComing from '../../molecules/ImpactComing';
 import { impactContent } from './ImpactContent';
 import ImpactMetricCard from './ImpactMetricCard';
 import styles from './styles';
@@ -28,7 +29,7 @@ const ImpactBreakdownView: React.FC<ImpactBreakdownProps> = ({
           justifyContent: 'space-between',
         }}>
         {/* Dynamically generate impact metric cards based on metrics data */}
-        {impactMetrics &&
+        {impactMetrics ? (
           Object.keys(impactMetrics).map((item, idx) => (
             <ImpactMetricCard
               key={idx}
@@ -36,7 +37,10 @@ const ImpactBreakdownView: React.FC<ImpactBreakdownProps> = ({
               detail={content[item as keyof ImpactMetrics]}
               goToImpactDetail={goToImpactDetail}
             />
-          ))}
+          ))
+        ) : (
+          <ImpactComing />
+        )}
       </View>
     </>
   );

@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 import { DashboardContext } from '../../../DashboardContext';
-import ImpactCardView from './ImpactCardView';
+import ImpactComingView from './ImpactComingView';
 
-const ImpactCardContainer = () => {
+const ImpactComingContainer = () => {
   const { dashboardSummary, openProgressModal } = useContext(DashboardContext);
   const { units, progress } = dashboardSummary;
   const { installed } = progress;
   return (
-    <ImpactCardView
+    <ImpactComingView
       units={units}
       installed={installed}
       openProgressModal={openProgressModal}
@@ -15,4 +15,4 @@ const ImpactCardContainer = () => {
   );
 };
 
-export default ImpactCardContainer;
+export default ImpactComingContainer;
