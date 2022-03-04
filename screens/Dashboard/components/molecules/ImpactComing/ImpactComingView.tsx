@@ -11,8 +11,8 @@ const ImpactComingView: React.FC<ImpactCardProps> = ({
     <>
       <CardWrapper>
         <NowalaText.Subtitle1>
-          Soon, {units > 1 ? `${units} homes` : `${units} home`} will have
-          affordable access to electricity, thanks to you.
+          Your impact metrics are on the way. Check the status of your latest
+          order below
         </NowalaText.Subtitle1>
         <NowalaText.LinkText2
           onPress={openProgressModal}
