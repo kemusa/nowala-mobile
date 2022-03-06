@@ -10,3 +10,10 @@ interface ImpactDetail {
   ctaText: string;
   projectId: string;
 }
+
+interface ImpactDetailContext {
+  impactDetail: ImpactDetail;
+  openNewOrderModal: () => void;
+  closeNewOrderModal: () => void;
+  viewNewOrder: boolean;
+}

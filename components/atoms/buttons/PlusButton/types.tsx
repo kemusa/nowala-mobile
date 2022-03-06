@@ -1,5 +1,4 @@
-interface PrimaryButtonProps {
-  text: string;
+interface PlusButtonProps {
   disabled?: boolean;
   loading?: boolean;
   onPress: any;

@@ -82,7 +82,7 @@ const RootNavigator = () => {
             options={() => ({
               headerTitle: '',
               headerShown: true,
-              headerTransparent: true,
+              // headerTransparent: true,
               headerTintColor: '#fff',
             })}
             component={ImpactDetailScreen}></Screen>

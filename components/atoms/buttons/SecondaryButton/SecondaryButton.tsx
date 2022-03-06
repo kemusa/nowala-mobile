@@ -3,7 +3,7 @@ import { Button } from 'native-base';
 import styles from './styles';
 import NowalaText from '../../text';
 
-const PrimaryButton: React.FC<PrimaryButtonProps> = ({
+const SecondaryButton: React.FC<SecondaryButtonProps> = ({
   text,
   disabled,
   loading,
@@ -21,9 +21,9 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
           color: '#596E8C',
         },
       }}>
-      <NowalaText.ButtonText>{text}</NowalaText.ButtonText>
+      <NowalaText.ButtonText style={styles.text}>{text}</NowalaText.ButtonText>
     </Button>
   );
 };
 
-export default PrimaryButton;
+export default SecondaryButton;

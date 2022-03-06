@@ -1,5 +1,5 @@
 import { View, Text } from 'react-native';
-import React, { useEffect, useLayoutEffect } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { ImpactDetailScreenProps } from '../../navigation/types';
 import { ImpactDetailContext } from './ImpactDetailContext';
 import ImpactDetailView from './ImpactDetailView';
@@ -11,19 +11,30 @@ const ImpactDetailContainer: React.FC<ImpactDetailScreenProps> = ({
   const { params } = route;
   const { impactDetail } = params;
   const { backgroundColor } = impactDetail;
-  useLayoutEffect(() => {
+  const [viewNewOrder, setViewNewOrder] = useState(false);
+
+  useEffect(() => {
     navigation.setOptions({
-      headerTitleAlign: 'left',
       headerStyle: {
         elevation: 0, // remove header border for android
         shadowOpacity: 0, // remove header border for ios
         borderBottomWidth: 0, //remove header border for ios
-        backgroundColor: backgroundColor,
+        backgroundColor,
       },
     });
   }, [navigation]);
+
+  const openNewOrderModal = () => setViewNewOrder(true);
+  const closeNewOrderModal = () => setViewNewOrder(false);
+
   return (
-    <ImpactDetailContext.Provider value={{ ...impactDetail }}>
+    <ImpactDetailContext.Provider
+      value={{
+        impactDetail,
+        openNewOrderModal,
+        closeNewOrderModal,
+        viewNewOrder,
+      }}>
       <ImpactDetailView />
     </ImpactDetailContext.Provider>
   );

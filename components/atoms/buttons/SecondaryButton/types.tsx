@@ -1,4 +1,4 @@
-interface PrimaryButtonProps {
+interface SecondaryButtonProps {
   text: string;
   disabled?: boolean;
   loading?: boolean;

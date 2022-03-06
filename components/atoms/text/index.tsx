@@ -16,6 +16,7 @@ import Headline1Light from './Headline1Light';
 import Headline2Light from './Headline2Light';
 import Headline3Light from './Headline3Light';
 import TertiaryButtonText from './TertiaryButtonText';
+import WarningText from './WarningText';
 
 const NowalaText = {
   BigDataText,
@@ -36,6 +37,7 @@ const NowalaText = {
   Subtitle1,
   Subtitle2,
   TertiaryButtonText,
+  WarningText,
 };
 
 export default NowalaText;

@@ -11,8 +11,8 @@ const ImpactComingView: React.FC<ImpactCardProps> = ({
     <>
       <CardWrapper>
         <NowalaText.Subtitle1>
-          Your impact metrics are on the way. Check the status of your latest
-          order below
+          Your impact metrics are on the way. Meanwhile, you can check the
+          status of your latest order below
         </NowalaText.Subtitle1>
         <NowalaText.LinkText2
           onPress={openProgressModal}

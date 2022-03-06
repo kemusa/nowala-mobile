@@ -1,9 +1,9 @@
 import React from 'react';
 import { Text } from 'react-native';
 import styles from './styles';
-import { Subtitle1Props } from './types';
+import { WarningTextProps } from './types';
 
-const Subtitle1: React.FC<Subtitle1Props> = ({
+const WarningText: React.FC<WarningTextProps> = ({
   children,
   style,
   numberOfLines,
@@ -15,4 +15,4 @@ const Subtitle1: React.FC<Subtitle1Props> = ({
   );
 };
 
-export default Subtitle1;
+export default WarningText;

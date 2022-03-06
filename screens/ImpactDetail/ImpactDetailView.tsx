@@ -1,11 +1,15 @@
-import { View, Text, Image, ScrollView } from 'react-native';
+import { View, Image, ScrollView } from 'react-native';
 import React, { useContext } from 'react';
 import { ImpactDetailContext } from './ImpactDetailContext';
 import NowalaText from '../../components/atoms/text';
 import { SafeAreaView } from 'react-native';
 import styles from './styles';
+import SecondaryButton from '../../components/atoms/buttons/SecondaryButton';
+import { buttonHeight } from '../../utils/consts/STYLES';
+import NewOrderModal from './organisms/NewOrdersModal';
 
 const ImpactDetailView = () => {
+  const { impactDetail, openNewOrderModal } = useContext(ImpactDetailContext);
   const {
     backgroundColor,
     title,
@@ -14,7 +18,8 @@ const ImpactDetailView = () => {
     impactExamples,
     imagePath,
     timePeriodText,
-  } = useContext(ImpactDetailContext);
+    ctaText,
+  } = impactDetail;
   return (
     <SafeAreaView style={[styles.safeAreaView, { backgroundColor }]}>
       <ScrollView>
@@ -28,17 +33,7 @@ const ImpactDetailView = () => {
           <NowalaText.Headline4 style={styles.headings}>
             {timePeriodText && timePeriodText}
           </NowalaText.Headline4>
-          <Image
-            source={{ uri: imagePath }}
-            style={{
-              height: 225,
-              width: '100%',
-              resizeMode: 'contain',
-              alignSelf: 'center',
-              marginTop: 30,
-              marginBottom: 30,
-            }}
-          />
+          <Image source={{ uri: imagePath }} style={styles.image} />
           <NowalaText.Headline2
             style={{ ...styles.headings, ...styles.impactExamplesHeading }}>
             {impactExamplesHeading}
@@ -50,6 +45,10 @@ const ImpactDetailView = () => {
           ))}
         </View>
       </ScrollView>
+      <NewOrderModal title={ctaText} />
+      <View style={styles.buttonContainer}>
+        <SecondaryButton text={ctaText} onPress={openNewOrderModal} />
+      </View>
     </SafeAreaView>
   );
 };
