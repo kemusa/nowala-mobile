@@ -13,6 +13,7 @@ const impactContent: ImpactContent = {
     ],
     ctaText: 'Reduce more kerosene ',
     projectId: '',
+    impact_metric: 'carbon_offset',
   },
   lightHours: {
     metricTitle: 'Additional light hours provided',
@@ -29,6 +30,7 @@ const impactContent: ImpactContent = {
     ],
     ctaText: 'Provide more light hours',
     projectId: '',
+    impact_metric: 'light_hours',
   },
   keroseneReduced: {
     metricTitle: '£ saved in kerosine fuel',
@@ -44,6 +46,7 @@ const impactContent: ImpactContent = {
     ],
     ctaText: 'Help more families save',
     projectId: '',
+    impact_metric: 'money_saved',
   },
   peopleImpacted: {
     metricTitle: 'Est. number of people impacted',
@@ -57,6 +60,7 @@ const impactContent: ImpactContent = {
     ],
     ctaText: 'Provide more electricity',
     projectId: '',
+    impact_metric: 'people_impacted',
   },
 };
 

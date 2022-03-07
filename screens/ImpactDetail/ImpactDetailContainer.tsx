@@ -3,6 +3,7 @@ import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { ImpactDetailScreenProps } from '../../navigation/types';
 import { ImpactDetailContext } from './ImpactDetailContext';
 import ImpactDetailView from './ImpactDetailView';
+import ServicesContext, { Services } from '../../services';
 
 const ImpactDetailContainer: React.FC<ImpactDetailScreenProps> = ({
   navigation,
