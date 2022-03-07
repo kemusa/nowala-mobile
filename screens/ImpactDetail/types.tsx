@@ -9,4 +9,5 @@ interface ImpactDetail {
   impactExamples: string[];
   ctaText: string;
   projectId: string;
+  impact_metric: string;
 }

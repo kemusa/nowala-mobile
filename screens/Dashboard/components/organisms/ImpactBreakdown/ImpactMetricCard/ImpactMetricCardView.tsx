@@ -11,7 +11,6 @@ const ImpactMetricCardView: React.FC<ImpactMetricCardProps> = ({
   detail,
   metric,
 }) => {
-  const { WHITE } = colors;
   return (
     <TouchableOpacity
       onPress={() => goToImpactDetail(detail)}

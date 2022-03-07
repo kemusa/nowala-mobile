@@ -18,6 +18,10 @@ export default class AnalyticsService {
     Segment.track(event);
   }
 
+  public trackWithProperties(event: string, properties: object) {
+    Segment.trackWithProperties(event, properties);
+  }
+
   public screen(screenName: string) {
     Segment.screen(screenName);
   }

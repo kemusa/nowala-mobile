@@ -91,7 +91,7 @@ const DashboardContainer: React.FC<DashboardScreenProps> = ({
   const signOut = async () => {
     dashboardUnsub();
     await auth.signOut();
-    analytics.track('Signed Out');
+    analytics.track('User Signed Out');
   };
 
   // Navigate to project details from modal then close modal

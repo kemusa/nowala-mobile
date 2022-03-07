@@ -38,7 +38,7 @@ const RootNavigator = () => {
   // Initialize event handler for user auth changes
   useEffect(() => {
     try {
-      analytics.identify(uid);
+      if (uid) analytics.identify(uid);
     } catch (error) {
       console.error(error);
     }

@@ -6,6 +6,11 @@ import { SafeAreaView } from 'react-native';
 import styles from './styles';
 
 const ImpactDetailView = () => {
+<<<<<<< Updated upstream
+=======
+  const { impactDetail, openNewOrderModal, projectAlias } =
+    useContext(ImpactDetailContext);
+>>>>>>> Stashed changes
   const {
     backgroundColor,
     title,
@@ -14,7 +19,13 @@ const ImpactDetailView = () => {
     impactExamples,
     imagePath,
     timePeriodText,
+<<<<<<< Updated upstream
   } = useContext(ImpactDetailContext);
+=======
+    ctaText,
+    impact_metric,
+  } = impactDetail;
+>>>>>>> Stashed changes
   return (
     <SafeAreaView style={[styles.safeAreaView, { backgroundColor }]}>
       <ScrollView>
@@ -50,6 +61,18 @@ const ImpactDetailView = () => {
           ))}
         </View>
       </ScrollView>
+<<<<<<< Updated upstream
+=======
+      <NewOrderModal
+        title={ctaText}
+        impact_metric={impact_metric}
+        projectAlias={projectAlias}
+      />
+
+      <View style={styles.buttonContainer}>
+        <SecondaryButton text={ctaText} onPress={openNewOrderModal} />
+      </View>
+>>>>>>> Stashed changes
     </SafeAreaView>
   );
 };

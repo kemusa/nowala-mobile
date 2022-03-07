@@ -31,7 +31,11 @@ interface PaidData {
 interface ImpactMetrics {
   carbonOffset: number;
   lightHours: number;
+<<<<<<< Updated upstream
   kerosineReduced: number;
+=======
+  moneySaved: number;
+>>>>>>> Stashed changes
   peopleImpacted: number;
 }
 interface DashboardSummary {
