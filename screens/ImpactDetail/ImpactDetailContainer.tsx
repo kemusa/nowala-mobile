@@ -9,7 +9,7 @@ const ImpactDetailContainer: React.FC<ImpactDetailScreenProps> = ({
   route,
 }) => {
   const { params } = route;
-  const { impactDetail, userId } = params;
+  const { impactDetail, userId, email } = params;
   const { backgroundColor } = impactDetail;
   const [viewNewOrder, setViewNewOrder] = useState(false);
 
@@ -45,6 +45,7 @@ const ImpactDetailContainer: React.FC<ImpactDetailScreenProps> = ({
         userId,
         projectAlias,
         projectId,
+        email,
       }}>
       <ImpactDetailView />
     </ImpactDetailContext.Provider>

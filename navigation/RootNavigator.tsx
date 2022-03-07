@@ -24,6 +24,7 @@ const RootNavigator = () => {
   const { Navigator, Screen } = Stack;
   const { auth, analytics } = useContext(ServicesContext) as Services;
   const [uid, setUid] = useState(null as any);
+  const [email, setEmail] = useState(null as any);
 
   // Initialize event handler for user auth changes
   useEffect(() => {
@@ -44,9 +45,14 @@ const RootNavigator = () => {
     }
   }, [uid]);
 
+  const setUser = (uid: string, email: string | null) => {
+    setUid(uid);
+    setEmail(email);
+  };
+
   // Event handler for use auth changes
   const handleAuthChange = async (user: User | null) => {
-    user ? setUid(user.uid) : setUid(null);
+    user ? setUser(user.uid, user.email) : setUid(null);
   };
 
   return (
@@ -58,7 +64,7 @@ const RootNavigator = () => {
             component={BottomNavigator}
             options={{ headerShown: false }}></Screen> */}
           <Screen name="Dashboard">
-            {props => <DashboardScreen {...props} userId={uid} />}
+            {props => <DashboardScreen {...props} userId={uid} email={email} />}
           </Screen>
           <Screen
             name="ProjectDetails"
@@ -82,7 +88,6 @@ const RootNavigator = () => {
             options={() => ({
               headerTitle: '',
               headerShown: true,
-              // headerTransparent: true,
               headerTintColor: '#fff',
             })}
             component={ImpactDetailScreen}></Screen>

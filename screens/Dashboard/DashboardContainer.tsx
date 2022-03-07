@@ -20,6 +20,7 @@ const { BACKGROUND } = colors;
 const DashboardContainer: React.FC<DashboardScreenProps> = ({
   navigation,
   userId,
+  email,
 }) => {
   const [viewProgress, setViewProgress] = useState(false);
   const [viewOptions, setViewOptions] = useState(false);
@@ -105,7 +106,7 @@ const DashboardContainer: React.FC<DashboardScreenProps> = ({
   };
 
   const goToImpactDetail = (impactDetail: ImpactDetail) => {
-    navigation.navigate('ImpactDetail', { impactDetail, userId });
+    navigation.navigate('ImpactDetail', { impactDetail, userId, email });
   };
 
   const openProgressModal = () =>

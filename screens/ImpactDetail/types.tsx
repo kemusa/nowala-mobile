@@ -20,4 +20,5 @@ interface ImpactDetailContext {
   userId: string;
   projectAlias: string;
   projectId: string;
+  email: string;
 }

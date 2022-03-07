@@ -15,6 +15,7 @@ const NewOrderModalContainer: React.FC<NewOrderModalContainerProps> = ({
     userId,
     projectAlias,
     projectId,
+    email,
   } = useContext(ImpactDetailContext);
   const [orderVolume, setOrderVolume] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -38,13 +39,14 @@ const NewOrderModalContainer: React.FC<NewOrderModalContainerProps> = ({
       closeNewOrderModal();
       goToDashboard();
     }, 4000);
-
-    await db.writeDocument('orders', {
+    const order: NewOrder = {
       uid: userId,
       units: orderVolume,
       projectId: projectId,
       alias: projectAlias,
-    });
+      email,
+    };
+    await db.writeDocument('orders', order);
   };
 
   const orderConfirmBtn = {
