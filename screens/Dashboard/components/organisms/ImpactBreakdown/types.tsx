@@ -7,6 +7,6 @@ interface ImpactBreakdownProps {
 interface ImpactContent {
   carbonOffset: ImpactDetail;
   lightHours: ImpactDetail;
-  keroseneReduced: ImpactDetail;
+  moneySaved: ImpactDetail;
   peopleImpacted: ImpactDetail;
 }

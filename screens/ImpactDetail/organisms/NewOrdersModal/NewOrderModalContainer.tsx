@@ -1,10 +1,11 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import ServicesContext, { Services } from '../../../../services';
 import { ImpactDetailContext } from '../../ImpactDetailContext';
 import NewOrdersModalView from './NewOrdersModalView';
 
 const NewOrderModalContainer: React.FC<NewOrderModalContainerProps> = ({
   title,
+  impact_metric,
 }) => {
   const orderLimit = 5;
   const { analytics, db } = useContext(ServicesContext) as Services;
@@ -17,6 +18,15 @@ const NewOrderModalContainer: React.FC<NewOrderModalContainerProps> = ({
     projectId,
     email,
   } = useContext(ImpactDetailContext);
+
+  // track screen
+  useEffect(() => {
+    analytics.trackWithProperties('User Viewed Order Form', {
+      impact_metric,
+      project_alias: projectAlias,
+    });
+  }, []);
+
   const [orderVolume, setOrderVolume] = useState(1);
   const [loading, setLoading] = useState(false);
   const [orderConfirmed, setOrderConfirmed] = useState(false);
@@ -33,20 +43,29 @@ const NewOrderModalContainer: React.FC<NewOrderModalContainerProps> = ({
   };
 
   const onOrder = async () => {
-    setLoading(true);
-    setTimeout(() => setOrderConfirmed(true), 1000);
-    setTimeout(() => {
-      closeNewOrderModal();
-      goToDashboard();
-    }, 4000);
-    const order: NewOrder = {
-      uid: userId,
-      units: orderVolume,
-      projectId: projectId,
-      alias: projectAlias,
-      email,
-    };
-    await db.writeDocument('orders', order);
+    try {
+      setLoading(true);
+      setTimeout(() => setOrderConfirmed(true), 1000);
+      setTimeout(() => {
+        closeNewOrderModal();
+        goToDashboard();
+      }, 4000);
+      const order: NewOrder = {
+        uid: userId,
+        units: orderVolume,
+        projectId: projectId,
+        alias: projectAlias,
+        email,
+      };
+      await db.writeDocument('orders', order);
+      analytics.trackWithProperties('User Placed Order', {
+        impact_metric,
+        project_alias: projectAlias,
+        order_volume: orderVolume,
+      });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const orderConfirmBtn = {

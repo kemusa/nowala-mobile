@@ -8,7 +8,8 @@ import SecondaryButton from '../../components/atoms/buttons/SecondaryButton';
 import NewOrderModal from './organisms/NewOrdersModal';
 
 const ImpactDetailView = () => {
-  const { impactDetail, openNewOrderModal } = useContext(ImpactDetailContext);
+  const { impactDetail, openNewOrderModal, projectAlias } =
+    useContext(ImpactDetailContext);
   const {
     backgroundColor,
     title,
@@ -18,6 +19,7 @@ const ImpactDetailView = () => {
     imagePath,
     timePeriodText,
     ctaText,
+    impact_metric,
   } = impactDetail;
   return (
     <SafeAreaView style={[styles.safeAreaView, { backgroundColor }]}>
@@ -44,7 +46,11 @@ const ImpactDetailView = () => {
           ))}
         </View>
       </ScrollView>
-      <NewOrderModal title={ctaText} />
+      <NewOrderModal
+        title={ctaText}
+        impact_metric={impact_metric}
+        projectAlias={projectAlias}
+      />
 
       <View style={styles.buttonContainer}>
         <SecondaryButton text={ctaText} onPress={openNewOrderModal} />

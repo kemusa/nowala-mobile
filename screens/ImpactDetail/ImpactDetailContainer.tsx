@@ -1,8 +1,9 @@
 import { View, Text } from 'react-native';
-import React, { useEffect, useLayoutEffect, useState } from 'react';
+import React, { useContext, useEffect, useLayoutEffect, useState } from 'react';
 import { ImpactDetailScreenProps } from '../../navigation/types';
 import { ImpactDetailContext } from './ImpactDetailContext';
 import ImpactDetailView from './ImpactDetailView';
+import ServicesContext, { Services } from '../../services';
 
 const ImpactDetailContainer: React.FC<ImpactDetailScreenProps> = ({
   navigation,
@@ -16,6 +17,8 @@ const ImpactDetailContainer: React.FC<ImpactDetailScreenProps> = ({
   const projectAlias = 'solar_kits_ignite_power_sl'; // todo: make dynamic
   const projectId = 'ywpYsNv5F0Gv8YBtVQBX'; // todo: make dynamic and environment based
 
+  const { analytics } = useContext(ServicesContext) as Services;
+
   useEffect(() => {
     navigation.setOptions({
       headerStyle: {
@@ -26,6 +29,11 @@ const ImpactDetailContainer: React.FC<ImpactDetailScreenProps> = ({
       },
     });
   }, [navigation]);
+
+  // track screen
+  useEffect(() => {
+    analytics.screen('Impact Detail');
+  }, []);
 
   const openNewOrderModal = () => setViewNewOrder(true);
   const closeNewOrderModal = () => setViewNewOrder(false);

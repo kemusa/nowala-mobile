@@ -31,7 +31,7 @@ interface PaidData {
 interface ImpactMetrics {
   carbonOffset: number;
   lightHours: number;
-  keroseneReduced: number;
+  moneySaved: number;
   peopleImpacted: number;
 }
 interface DashboardSummary {

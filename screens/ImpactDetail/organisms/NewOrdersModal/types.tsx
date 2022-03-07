@@ -1,5 +1,7 @@
 interface NewOrderModalContainerProps {
   title: string;
+  projectAlias: string;
+  impact_metric: string;
 }
 interface NewOrdersModalViewProps {
   title: string;
