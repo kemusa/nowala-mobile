@@ -10,7 +10,7 @@ type StackParamList = {
   Dashboard: undefined;
   YourOrders: { orders: OrderData[] };
   Home: undefined;
-  ImpactDetail: { impactDetail: ImpactDetail };
+  ImpactDetail: { impactDetail: ImpactDetail; userId: string };
 };
 
 interface NowalaRoutes {

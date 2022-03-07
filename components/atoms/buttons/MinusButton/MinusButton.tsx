@@ -2,7 +2,7 @@ import React from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import styles from './styles';
 
-const MinusButton: React.FC<MinusButtonProps> = ({ disabled, onPress }) => {
+const MinusButton: React.FC<MinusButtonProps> = ({ onPress }) => {
   return (
     <TouchableOpacity
       activeOpacity={0.5}

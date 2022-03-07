@@ -1,4 +1,5 @@
 import ChevronRight from './ChevronRight';
+import HamburgerMenu from './HamburgerMenu';
 import MoreDetailIcon from './CardDetailsButton';
 import NowalaIcon from './NowalaIcon';
 import NowalaLogo from './NowalaLogo';
@@ -12,6 +13,7 @@ import OrderIcon from './OrderIcon';
 
 const Icons = {
   ChevronRight,
+  HamburgerMenu,
   MoreDetailIcon,
   NowalaIcon,
   NowalaLogo,

@@ -15,6 +15,7 @@ const ImpactBreakdownView: React.FC<ImpactBreakdownProps> = ({
   impactMetrics,
   openProgressModal,
   goToImpactDetail,
+  collected,
 }) => {
   const content = impactContent;
   return (
@@ -29,7 +30,7 @@ const ImpactBreakdownView: React.FC<ImpactBreakdownProps> = ({
           justifyContent: 'space-between',
         }}>
         {/* Dynamically generate impact metric cards based on metrics data */}
-        {impactMetrics ? (
+        {impactMetrics && collected ? (
           Object.keys(impactMetrics).map((item, idx) => (
             <ImpactMetricCard
               key={idx}

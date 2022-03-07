@@ -66,5 +66,6 @@ interface ProjectStats {
 interface ProjectContext {
   goToProjectDetails: (projectData: Project) => void;
   goToSignUp: () => void;
+  goToLogin: () => void;
   data: Project[];
 }

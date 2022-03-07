@@ -26,6 +26,10 @@ const ProjectsContainer: React.FC<ProjectsScreenProps> = ({ navigation }) => {
     navigation.navigate('SignUp');
   };
 
+  const goToLogin = () => {
+    navigation.navigate('Login');
+  };
+
   const data: Project[] = [
     { ...firstProject },
     {
@@ -103,7 +107,8 @@ const ProjectsContainer: React.FC<ProjectsScreenProps> = ({ navigation }) => {
   ];
 
   return (
-    <ProjectContext.Provider value={{ goToProjectDetails, goToSignUp, data }}>
+    <ProjectContext.Provider
+      value={{ goToProjectDetails, goToSignUp, goToLogin, data }}>
       <ProjectsView />
     </ProjectContext.Provider>
   );

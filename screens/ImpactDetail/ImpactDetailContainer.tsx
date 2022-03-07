@@ -9,9 +9,12 @@ const ImpactDetailContainer: React.FC<ImpactDetailScreenProps> = ({
   route,
 }) => {
   const { params } = route;
-  const { impactDetail } = params;
+  const { impactDetail, userId } = params;
   const { backgroundColor } = impactDetail;
   const [viewNewOrder, setViewNewOrder] = useState(false);
+
+  const projectAlias = 'solar_kits_ignite_power_sl'; // todo: make dynamic
+  const projectId = 'ywpYsNv5F0Gv8YBtVQBX'; // todo: make dynamic and environment based
 
   useEffect(() => {
     navigation.setOptions({
@@ -27,13 +30,21 @@ const ImpactDetailContainer: React.FC<ImpactDetailScreenProps> = ({
   const openNewOrderModal = () => setViewNewOrder(true);
   const closeNewOrderModal = () => setViewNewOrder(false);
 
+  const goToDashboard = () => {
+    navigation.navigate('Dashboard');
+  };
+
   return (
     <ImpactDetailContext.Provider
       value={{
         impactDetail,
         openNewOrderModal,
         closeNewOrderModal,
+        goToDashboard,
         viewNewOrder,
+        userId,
+        projectAlias,
+        projectId,
       }}>
       <ImpactDetailView />
     </ImpactDetailContext.Provider>

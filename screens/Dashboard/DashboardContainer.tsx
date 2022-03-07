@@ -13,6 +13,7 @@ import { SnapshotData } from '../../services/types';
 import colors from '../../theme/colors';
 import { SponsorshipData } from './typesImport';
 import { statusInit } from '../../utils/consts/DATA';
+import MenuButton from '../../components/atoms/buttons/MenuButton';
 
 const { BACKGROUND } = colors;
 
@@ -39,6 +40,7 @@ const DashboardContainer: React.FC<DashboardScreenProps> = ({
       ),
       headerTitleAlign: 'left',
       headerRight: () => (
+        // <MenuButton onPress={() => {}} />
         <NowalaText.LinkText style={{ marginRight: 15 }} onPress={signOut}>
           Sign out
         </NowalaText.LinkText>
@@ -103,7 +105,7 @@ const DashboardContainer: React.FC<DashboardScreenProps> = ({
   };
 
   const goToImpactDetail = (impactDetail: ImpactDetail) => {
-    navigation.navigate('ImpactDetail', { impactDetail });
+    navigation.navigate('ImpactDetail', { impactDetail, userId });
   };
 
   const openProgressModal = () =>

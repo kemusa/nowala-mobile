@@ -16,9 +16,9 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
       isLoading={loading}
       onPress={onPress}
       _loading={{
-        bg: '#E8F3FE',
+        bg: '#548392',
         _text: {
-          color: '#596E8C',
+          color: '#fff',
         },
       }}>
       <NowalaText.ButtonText>{text}</NowalaText.ButtonText>

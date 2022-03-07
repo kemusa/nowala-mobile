@@ -3,15 +3,15 @@ import { TouchableOpacity, View } from 'react-native';
 import Icons from '../../icons';
 import styles from './styles';
 
-const MinusButton: React.FC<PlusButtonProps> = ({ onPress }) => {
+const MenuButton: React.FC<MenuButtonProps> = ({ onPress }) => {
   return (
     <TouchableOpacity
       activeOpacity={0.5}
       style={styles.button}
       onPress={onPress}>
-      <Icons.PlusIcon />
+      <Icons.HamburgerMenu />
     </TouchableOpacity>
   );
 };
 
-export default MinusButton;
+export default MenuButton;

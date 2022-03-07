@@ -7,12 +7,22 @@ import ReturnBreakdown from './components/organisms/ReturnBreakdown';
 import ProgressModal from './components/organisms/ProgressModal';
 import OptionsModal from './components/organisms/OptionsModal';
 import colors from '../../theme/colors';
+import { Drawer } from 'native-base';
+import { DrawerContentScrollView } from '@react-navigation/drawer';
 
 const { BACKGROUND } = colors;
 
 const DashboardView: React.FC = () => {
   return (
     <SafeAreaView>
+      {/* <Drawer isOpen={true}>
+        <DrawerContentScrollView
+          style={{ height: '100%', backgroundColor: '#fff' }}>
+          <View style={{}}>
+            <NowalaText.Headline1>Dashboard</NowalaText.Headline1>
+          </View>
+        </DrawerContentScrollView>
+      </Drawer> */}
       <View style={styles.headingContainer}>
         <NowalaText.Headline1>Dashboard</NowalaText.Headline1>
       </View>

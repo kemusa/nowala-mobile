@@ -15,5 +15,9 @@ interface ImpactDetailContext {
   impactDetail: ImpactDetail;
   openNewOrderModal: () => void;
   closeNewOrderModal: () => void;
+  goToDashboard: () => void;
   viewNewOrder: boolean;
+  userId: string;
+  projectAlias: string;
+  projectId: string;
 }

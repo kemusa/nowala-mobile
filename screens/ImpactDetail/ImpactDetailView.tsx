@@ -5,7 +5,6 @@ import NowalaText from '../../components/atoms/text';
 import { SafeAreaView } from 'react-native';
 import styles from './styles';
 import SecondaryButton from '../../components/atoms/buttons/SecondaryButton';
-import { buttonHeight } from '../../utils/consts/STYLES';
 import NewOrderModal from './organisms/NewOrdersModal';
 
 const ImpactDetailView = () => {
@@ -46,6 +45,7 @@ const ImpactDetailView = () => {
         </View>
       </ScrollView>
       <NewOrderModal title={ctaText} />
+
       <View style={styles.buttonContainer}>
         <SecondaryButton text={ctaText} onPress={openNewOrderModal} />
       </View>

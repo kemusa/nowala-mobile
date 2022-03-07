@@ -11,6 +11,7 @@ const cachedImages: ImagePaths = {
     'https://storage.googleapis.com/nowala-public/village_home.png',
     'https://storage.googleapis.com/nowala-public/bulb.png',
     'https://storage.googleapis.com/nowala-public/cash.png',
+    'https://storage.googleapis.com/nowala-public/confirm_check_mark.png',
   ],
 };
 

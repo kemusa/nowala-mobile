@@ -30,7 +30,7 @@ const impactContent: ImpactContent = {
     ctaText: 'Provide more light hours',
     projectId: '',
   },
-  kerosineReduced: {
+  keroseneReduced: {
     metricTitle: '£ saved in kerosine fuel',
     backgroundColor: '#BA61E4',
     contextText: 'Each solar kit in Sierra Leone provides an estimated',

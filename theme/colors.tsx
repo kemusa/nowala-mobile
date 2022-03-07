@@ -5,5 +5,6 @@ const colors = {
   ERROR_RED: '#960000',
   LINK_TEXT: '#0057FF',
   BACKGROUND: '#F9F9FE',
+  SUCCESS: '#1BB55C',
 };
 export default colors;

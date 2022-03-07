@@ -15,7 +15,8 @@ import PrimaryButton from '../../components/atoms/buttons/PrimaryButton';
 import Constants from 'expo-constants';
 
 const ProjectsView: React.FC = () => {
-  const { goToProjectDetails, goToSignUp, data } = useContext(ProjectContext);
+  const { goToProjectDetails, goToSignUp, goToLogin, data } =
+    useContext(ProjectContext);
   const { FULL_SIZE, ITEM_WIDTH } = spec;
   const scrollX = useRef(new Animated.Value(0)).current;
   const env = Constants?.manifest?.releaseChannel;
@@ -24,8 +25,8 @@ const ProjectsView: React.FC = () => {
     <SafeAreaView style={styles.container}>
       <View style={styles.topBar}>
         <NowalaText.Headline1>Projects</NowalaText.Headline1>
-        <NowalaText.LinkText style={{ padding: 10 }} onPress={goToSignUp}>
-          Sign up
+        <NowalaText.LinkText style={{ padding: 10 }} onPress={goToLogin}>
+          Login
         </NowalaText.LinkText>
       </View>
       <Animated.FlatList
