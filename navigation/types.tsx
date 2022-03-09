@@ -11,6 +11,8 @@ type StackParamList = {
   YourOrders: { orders: OrderData[] };
   Home: undefined;
   ImpactDetail: { impactDetail: ImpactDetail; userId: string; email: string };
+  Account: undefined;
+  Intro: undefined;
 };
 
 interface NowalaRoutes {
@@ -22,6 +24,8 @@ interface NowalaRoutes {
   readonly DASHBOARD: keyof StackParamList;
   readonly HOME: keyof StackParamList;
   readonly IMPACT_DETAIL: keyof StackParamList;
+  readonly ACCOUNT_PENDING: keyof StackParamList;
+  readonly INTRO: keyof StackParamList;
 }
 
 const routes: NowalaRoutes = {
@@ -33,6 +37,8 @@ const routes: NowalaRoutes = {
   DASHBOARD: 'Dashboard',
   HOME: 'Home',
   IMPACT_DETAIL: 'ImpactDetail',
+  ACCOUNT_PENDING: 'Account',
+  INTRO: 'Intro',
 };
 
 // Projects Types
@@ -44,6 +50,14 @@ type ProjectsScreenNavigationProps = StackNavigationProp<
 type ProjectsScreenProps = {
   route: ProjectsRouteProps;
   navigation: ProjectsScreenNavigationProps;
+};
+
+// Intro Types
+type IntroRouteProps = RouteProp<StackParamList, 'Intro'>;
+type IntroScreenNavigationProps = StackNavigationProp<StackParamList, 'Intro'>;
+type IntroScreenProps = {
+  route: IntroRouteProps;
+  navigation: IntroScreenNavigationProps;
 };
 
 // Project Details Types
@@ -119,6 +133,17 @@ type ImpactDetailScreenProps = {
   navigation: ImpactDetailScreenNavigationProps;
 };
 
+// Account Pending Types
+type AccountPendingRouteProps = RouteProp<StackParamList, 'Account'>;
+type AccountPendingScreenNavigationProps = StackNavigationProp<
+  StackParamList,
+  'Account'
+>;
+type AccountPendingScreenProps = {
+  route: AccountPendingRouteProps;
+  navigation: AccountPendingScreenNavigationProps;
+};
+
 export type {
   StackParamList,
   ProjectsScreenProps,
@@ -129,6 +154,8 @@ export type {
   YourOrdersScreenProps,
   HomeScreenProps,
   ImpactDetailScreenProps,
+  AccountPendingScreenProps,
+  IntroScreenProps,
 };
 
 export { routes };

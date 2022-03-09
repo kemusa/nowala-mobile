@@ -11,7 +11,7 @@ const ImpactDetailContainer: React.FC<ImpactDetailScreenProps> = ({
 }) => {
   const { params } = route;
   const { impactDetail, userId, email } = params;
-  const { backgroundColor } = impactDetail;
+  const { backgroundColor, impact_metric } = impactDetail;
   const [viewNewOrder, setViewNewOrder] = useState(false);
 
   const projectAlias = 'solar_kits_ignite_power_sl'; // todo: make dynamic
@@ -32,7 +32,10 @@ const ImpactDetailContainer: React.FC<ImpactDetailScreenProps> = ({
 
   // track screen
   useEffect(() => {
-    analytics.screen('Impact Detail');
+    analytics.screenWithProperties('Impact Detail', {
+      impact_metric,
+      project_alias: projectAlias,
+    });
   }, []);
 
   const openNewOrderModal = () => setViewNewOrder(true);

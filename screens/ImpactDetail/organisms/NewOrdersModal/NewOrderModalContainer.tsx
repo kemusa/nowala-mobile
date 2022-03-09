@@ -21,11 +21,15 @@ const NewOrderModalContainer: React.FC<NewOrderModalContainerProps> = ({
 
   // track screen
   useEffect(() => {
-    analytics.trackWithProperties('User Viewed Order Form', {
-      impact_metric,
-      project_alias: projectAlias,
-    });
-  }, []);
+    // NewOrderModal component is rendered whenever its parent component screen is rendered
+    // This checks to see if the modal is open before firing off the analytics event
+    if (viewNewOrder) {
+      analytics.trackWithProperties('User Viewed Order Form', {
+        impact_metric,
+        project_alias: projectAlias,
+      });
+    }
+  }, [viewNewOrder]);
 
   const [orderVolume, setOrderVolume] = useState(1);
   const [loading, setLoading] = useState(false);

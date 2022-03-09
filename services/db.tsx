@@ -18,7 +18,7 @@ export default class DbService {
   public async findById(path: string) {
     const ref = doc(this.getFireStore, path);
     const snapshot = await getDoc(ref);
-    return { id: snapshot.id, data: snapshot.data };
+    return { id: snapshot.id, data: snapshot.data() };
   }
 
   public async findCollection(collectionName: string) {

@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     padding: 15,
     width: '100%',
   },
-  container: { flex: 1, backgroundColor: WHITE },
+  container: { flex: 1 },
   cardContainer: {
     height: ITEM_HEIGHT,
     overflow: 'hidden',

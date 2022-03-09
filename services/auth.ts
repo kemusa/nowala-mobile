@@ -63,12 +63,13 @@ export default class AuthService {
       // Create user document
       await this.dbService.writeDocumentWithId('users', user.uid, {
         displayName: name,
+        onboarded: false,
       });
       // Init user sponsorship
       await this.dbService.writeDocument(`users/${user.uid}/sponsorships`, {
         ...projectsInit,
       });
-      
+
       return user;
     } catch (error) {
       console.error(error);

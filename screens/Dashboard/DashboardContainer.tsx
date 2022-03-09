@@ -105,6 +105,10 @@ const DashboardContainer: React.FC<DashboardScreenProps> = ({
     closeOptionsModal();
   };
 
+  const goToAccountPending = () => {
+    navigation.navigate('Account');
+  };
+
   const goToImpactDetail = (impactDetail: ImpactDetail) => {
     navigation.navigate('ImpactDetail', { impactDetail, userId, email });
   };
@@ -137,6 +141,7 @@ const DashboardContainer: React.FC<DashboardScreenProps> = ({
           paid,
           impactMetrics,
         } = sponsorship;
+        if (!status.paid) goToAccountPending();
         const investment = unitCost * units;
         const totalReturn = parseInt((investment * (1 + interest)).toFixed());
         const returnPercent = Math.round((collected / totalReturn) * 100);

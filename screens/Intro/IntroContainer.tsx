@@ -1,34 +1,17 @@
 import React, { useContext, useEffect } from 'react';
 import { ProjectsScreenProps } from '../../navigation/types';
-import { ProjectContext } from './ProjectContext';
+import { IntroCtx } from './IntroContext';
 import NowalaText from '../../components/atoms/text';
 import colors from '../../theme/colors';
 import NowalaLogoInverse from '../../components/atoms/icons/NowalaLogoInverse';
-import ProjectsView from './ProjectsView';
+import ProjectsView from './IntroView';
 import { View } from 'native-base';
 import { firstProject } from './Projects';
 import ServicesContext, { Services } from '../../services';
-import { TouchableOpacity } from 'react-native';
-import NowalaIcon from '../../components/atoms/icons/NowalaIcon';
-import NowalaLogo from '../../components/atoms/icons/NowalaLogo';
 
-const { BACKGROUND } = colors;
-
-const ProjectsContainer: React.FC<ProjectsScreenProps> = ({ navigation }) => {
+const IntroContainer: React.FC<ProjectsScreenProps> = ({ navigation }) => {
   const { WHITE, PRIMARY } = colors;
   const { analytics } = useContext(ServicesContext) as Services;
-  // Place Nowala logo in header on component init
-  useEffect(() => {
-    navigation.setOptions({
-      headerTitle: () => <NowalaLogo />,
-      headerTitleAlign: 'center',
-      headerStyle: {
-        elevation: 0, // remove header border for android
-        shadowOpacity: 0, // remove header border for ios
-        borderBottomWidth: 0, //remove header border for ios
-      },
-    });
-  }, [navigation]);
 
   // track screen
   useEffect(() => {
@@ -43,7 +26,9 @@ const ProjectsContainer: React.FC<ProjectsScreenProps> = ({ navigation }) => {
     navigation.navigate('SignUp');
   };
 
-  const signOut = () => {};
+  const goToLogin = () => {
+    navigation.navigate('Login');
+  };
 
   const data: Project[] = [
     { ...firstProject },
@@ -122,10 +107,11 @@ const ProjectsContainer: React.FC<ProjectsScreenProps> = ({ navigation }) => {
   ];
 
   return (
-    <ProjectContext.Provider value={{ goToProjectDetails, data }}>
+    <IntroCtx.Provider
+      value={{ goToProjectDetails, goToSignUp, goToLogin, data }}>
       <ProjectsView />
-    </ProjectContext.Provider>
+    </IntroCtx.Provider>
   );
 };
 
-export default ProjectsContainer;
+export default IntroContainer;

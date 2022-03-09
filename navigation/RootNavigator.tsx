@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { StackParamList } from './types';
 import ProjectsScreen from '../screens/Projects';
+import IntroScreen from '../screens/Intro';
 import ProjectDetailsScreen from '../screens/ProjectDetails';
 import { enableScreens } from 'react-native-screens';
 import SignUpScreen from '../screens/SignUp';
@@ -9,10 +10,13 @@ import LoginScreen from '../screens/Login';
 import DashboardScreen from '../screens/Dashboard';
 import ImpactDetailScreen from '../screens/ImpactDetail';
 import YourOrdersScreen from '../screens/YourOrders';
+import AccountPendingScreen from '../screens/AccountPending';
 import BottomNavigator from './BottomNavigator';
 import ServicesContext, { Services } from '../services';
 import { User } from '@firebase/auth';
 import colors from '../theme/colors';
+import UnauthenticatedScreens from './AuthenticatedScreens';
+import NotVerifiedScreens from './NotVerifiedScreens';
 
 enableScreens(false);
 
@@ -22,9 +26,10 @@ const Stack = createStackNavigator<StackParamList>();
 
 const RootNavigator = () => {
   const { Navigator, Screen } = Stack;
-  const { auth, analytics } = useContext(ServicesContext) as Services;
+  const { auth, analytics, db } = useContext(ServicesContext) as Services;
   const [uid, setUid] = useState(null as any);
   const [email, setEmail] = useState(null as any);
+  const [onboarded, setOnboarded] = useState(true);
 
   // Initialize event handler for user auth changes
   useEffect(() => {
@@ -45,7 +50,10 @@ const RootNavigator = () => {
     }
   }, [uid]);
 
-  const setUser = (uid: string, email: string | null) => {
+  const setUser = async (uid: string, email: string | null) => {
+    const doc = await db.findById(`users/${uid}`);
+    const profile = doc.data as NowalaUserProfile;
+    setOnboarded(profile.onboarded);
     setUid(uid);
     setEmail(email);
   };
@@ -56,47 +64,72 @@ const RootNavigator = () => {
   };
 
   return (
-    <Navigator initialRouteName="Projects" detachInactiveScreens={false}>
+    <Navigator initialRouteName="Dashboard" detachInactiveScreens={false}>
       {uid ? (
-        <>
-          {/* <Screen
+        onboarded ? (
+          <>
+            {/* <Screen
             name="Home"
             component={BottomNavigator}
             options={{ headerShown: false }}></Screen> */}
-          <Screen name="Dashboard">
-            {props => <DashboardScreen {...props} userId={uid} email={email} />}
-          </Screen>
-          <Screen
-            name="ProjectDetails"
-            options={() => ({
-              headerTitle: '',
-              headerShown: true,
-              headerTransparent: true,
-              headerTintColor: '#fff',
-            })}
-            component={ProjectDetailsScreen}></Screen>
-          <Screen
-            name="YourOrders"
-            options={{
-              headerTitle: '',
-              headerStyle: { backgroundColor: BACKGROUND },
-            }}>
-            {props => <YourOrdersScreen {...props} />}
-          </Screen>
-          <Screen
-            name="ImpactDetail"
-            options={() => ({
-              headerTitle: '',
-              headerShown: true,
-              headerTintColor: '#fff',
-            })}
-            component={ImpactDetailScreen}></Screen>
-        </>
+            <Screen name="Dashboard">
+              {props => (
+                <DashboardScreen {...props} userId={uid} email={email} />
+              )}
+            </Screen>
+            <Screen
+              name="ProjectDetails"
+              options={() => ({
+                headerTitle: '',
+                headerShown: true,
+                headerTransparent: true,
+                headerTintColor: '#fff',
+              })}
+              component={ProjectDetailsScreen}></Screen>
+            <Screen
+              name="YourOrders"
+              options={{
+                headerTitle: '',
+                headerStyle: { backgroundColor: BACKGROUND },
+              }}>
+              {props => <YourOrdersScreen {...props} />}
+            </Screen>
+            <Screen
+              name="ImpactDetail"
+              options={() => ({
+                headerTitle: '',
+                headerShown: true,
+                headerTintColor: '#fff',
+              })}
+              component={ImpactDetailScreen}></Screen>
+          </>
+        ) : (
+          <>
+            <Screen
+              name="Account"
+              options={() => ({
+                headerTitle: 'Home',
+                headerShown: true,
+                headerStyle: { backgroundColor: '#fff' },
+              })}
+              component={AccountPendingScreen}></Screen>
+            <Screen name="Projects" component={ProjectsScreen}></Screen>
+            <Screen
+              name="ProjectDetails"
+              options={() => ({
+                headerTitle: '',
+                headerShown: true,
+                headerTransparent: true,
+                headerTintColor: '#fff',
+              })}
+              component={ProjectDetailsScreen}></Screen>
+          </>
+        )
       ) : (
         <>
           <Screen
-            name="Projects"
-            component={ProjectsScreen}
+            name="Intro"
+            component={IntroScreen}
             options={{ headerShown: false }}></Screen>
           <Screen
             name="ProjectDetails"

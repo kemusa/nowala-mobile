@@ -31,29 +31,9 @@ interface SnapshotData {
   data: DocumentData;
 }
 
-// | AuthTokens
-// | { signOut: boolean }
-// | { complete: boolean }
-// | null;
-
-// export interface KeychainComplete {
-//   complete: boolean;
-// }
-
-// export interface KeychainSignOut {
-//   signOut: boolean;
-// }
-interface KeychainAuthTokens {
-  moonsiftToken: string;
-  customToken: string;
-}
-
-interface KeychainState {
-  complete?: boolean;
-  signedOut?: boolean;
-  moonsiftToken?: string;
-  customToken?: string;
-  shareAuthPending?: boolean;
+interface UserProfile {
+  displayName: string;
+  onboarded: boolean;
 }
 
 export type {
@@ -61,7 +41,6 @@ export type {
   FBCollectionOrder,
   FBCollectionFilter,
   FBCollectionConfig,
-  KeychainAuthTokens,
-  KeychainState,
   SnapshotData,
+  UserProfile,
 };
