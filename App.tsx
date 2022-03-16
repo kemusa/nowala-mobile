@@ -9,8 +9,23 @@ import { firbaseInit } from './services/firebase';
 import ServicesContext, { loadServices } from './services';
 import { _cacheResourcesAsync } from './utils/cache';
 import { analyticsInit } from './services/analytics';
+import * as Updates from 'expo-updates';
+import { Text } from 'react-native';
 
 export default function App() {
+  let x = null;
+  // useEffect(() => {
+  //   updateApp();
+  // }, []);
+  // const updateApp = async () => {
+  //   const update = await Updates.checkForUpdateAsync();
+  //   if (update.isAvailable) {
+  //     await Updates.fetchUpdateAsync();
+  //     // ... notify user of update ...
+  //     await Updates.reloadAsync();
+  //   }
+  // };
+
   const [loaded, setLoaded] = useState(false);
   const fontsLoaded = fonts();
 
@@ -22,6 +37,14 @@ export default function App() {
   useEffect(() => {
     _cacheResourcesAsync().then(() => setLoaded(true));
   }, []);
+
+  if (x) {
+    <Text>{x}</Text>;
+  }
+
+  if (!x) {
+    <Text>No update</Text>;
+  }
 
   if (!loaded) {
     return <AppLoading />;

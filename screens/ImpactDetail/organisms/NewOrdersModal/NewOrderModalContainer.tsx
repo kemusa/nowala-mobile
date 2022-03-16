@@ -1,7 +1,9 @@
+import { Timestamp } from 'firebase/firestore';
 import React, { useContext, useEffect, useState } from 'react';
 import ServicesContext, { Services } from '../../../../services';
 import { ImpactDetailContext } from '../../ImpactDetailContext';
 import NewOrdersModalView from './NewOrdersModalView';
+import { NewOrder } from './typesExport';
 
 const NewOrderModalContainer: React.FC<NewOrderModalContainerProps> = ({
   title,
@@ -60,6 +62,7 @@ const NewOrderModalContainer: React.FC<NewOrderModalContainerProps> = ({
         projectId: projectId,
         alias: projectAlias,
         email,
+        timestamp: Timestamp.now(),
       };
       await db.writeDocument('orders', order);
       analytics.trackWithProperties('User Placed Order', {
@@ -73,7 +76,7 @@ const NewOrderModalContainer: React.FC<NewOrderModalContainerProps> = ({
   };
 
   const orderConfirmBtn = {
-    text: 'Order items',
+    text: 'Request now',
     onPress: onOrder,
     disabled: orderVolume <= 0,
     loading,

@@ -14,6 +14,7 @@ import colors from '../../theme/colors';
 import { SponsorshipData } from './typesImport';
 import { statusInit } from '../../utils/consts/DATA';
 import MenuButton from '../../components/atoms/buttons/MenuButton';
+// import * as Updates from 'expo-updates';
 
 const { BACKGROUND } = colors;
 

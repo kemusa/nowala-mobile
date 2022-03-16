@@ -11,11 +11,11 @@
       "backgroundColor": "#7D69B7"
     },
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "fallbackToCacheTimeout": 60000
     },
     "assetBundlePatterns": ["**/*", "assets/images/*"],
     "ios": {
-      "buildNumber": "2",
+      "buildNumber": "5",
       "supportsTablet": false,
       "bundleIdentifier": "io.nowala.sponsors-staging"
     },

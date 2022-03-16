@@ -20,7 +20,7 @@ import NotVerifiedScreens from './NotVerifiedScreens';
 
 enableScreens(false);
 
-const { BACKGROUND } = colors;
+const { BACKGROUND, WHITE } = colors;
 
 const Stack = createStackNavigator<StackParamList>();
 
@@ -51,11 +51,16 @@ const RootNavigator = () => {
   }, [uid]);
 
   const setUser = async (uid: string, email: string | null) => {
-    const doc = await db.findById(`users/${uid}`);
-    const profile = doc.data as NowalaUserProfile;
-    setOnboarded(profile.onboarded);
-    setUid(uid);
-    setEmail(email);
+    try {
+      const doc = await db.findById(`users/${uid}`);
+      const profile = doc.data as NowalaUserProfile;
+      // If the profile hasn't been generated yet, set to false
+      profile ? setOnboarded(profile.onboarded) : setOnboarded(false);
+      setUid(uid);
+      setEmail(email);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   // Event handler for use auth changes
@@ -83,7 +88,7 @@ const RootNavigator = () => {
                 headerTitle: '',
                 headerShown: true,
                 headerTransparent: true,
-                headerTintColor: '#fff',
+                headerTintColor: WHITE,
               })}
               component={ProjectDetailsScreen}></Screen>
             <Screen
@@ -99,7 +104,7 @@ const RootNavigator = () => {
               options={() => ({
                 headerTitle: '',
                 headerShown: true,
-                headerTintColor: '#fff',
+                headerTintColor: WHITE,
               })}
               component={ImpactDetailScreen}></Screen>
           </>
@@ -110,7 +115,7 @@ const RootNavigator = () => {
               options={() => ({
                 headerTitle: 'Home',
                 headerShown: true,
-                headerStyle: { backgroundColor: '#fff' },
+                headerStyle: { backgroundColor: WHITE },
               })}
               component={AccountPendingScreen}></Screen>
             <Screen name="Projects" component={ProjectsScreen}></Screen>
@@ -120,7 +125,7 @@ const RootNavigator = () => {
                 headerTitle: '',
                 headerShown: true,
                 headerTransparent: true,
-                headerTintColor: '#fff',
+                headerTintColor: WHITE,
               })}
               component={ProjectDetailsScreen}></Screen>
           </>
@@ -137,7 +142,7 @@ const RootNavigator = () => {
               headerTitle: '',
               headerShown: true,
               headerTransparent: true,
-              headerTintColor: '#fff',
+              headerTintColor: WHITE,
             })}
             component={ProjectDetailsScreen}></Screen>
           <Screen name="SignUp" component={SignUpScreen}></Screen>

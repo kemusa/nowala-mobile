@@ -12,12 +12,4 @@ interface NewOrdersModalViewProps {
   orderConfirmed: boolean;
 }
 
-interface NewOrder {
-  uid: string;
-  units: number;
-  projectId: string;
-  alias: string;
-  email: string;
-}
-
 interface NewOrdersContext {}

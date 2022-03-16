@@ -117,6 +117,7 @@ const LoginContainer: React.FC<LoginScreenProps> = ({ navigation }) => {
         control,
         name: 'email',
         rules: emailRules,
+        type: 'input',
       },
       {
         label: 'Password',
@@ -125,6 +126,7 @@ const LoginContainer: React.FC<LoginScreenProps> = ({ navigation }) => {
         control,
         name: 'password',
         rules: passwordRules,
+        type: 'input',
       },
     ],
     buttonProps: {

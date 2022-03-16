@@ -12,7 +12,7 @@ const firstProject: Project = {
       icon: 'price',
     },
     return: { title: 'Return', value: '10%', icon: 'return' },
-    time: { title: 'Time period', value: '2 years', icon: 'time' },
+    time: { title: 'Payback period', value: '2 years', icon: 'time' },
     country: {
       title: 'Country',
       value: 'Sierra Leone',

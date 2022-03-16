@@ -52,6 +52,7 @@ export default class AuthService {
     name: string,
     email: string,
     password: string,
+    country: string,
   ) {
     try {
       const { user } = await createUserWithEmailAndPassword(
@@ -64,12 +65,12 @@ export default class AuthService {
       await this.dbService.writeDocumentWithId('users', user.uid, {
         displayName: name,
         onboarded: false,
+        country,
       });
       // Init user sponsorship
       await this.dbService.writeDocument(`users/${user.uid}/sponsorships`, {
         ...projectsInit,
       });
-
       return user;
     } catch (error) {
       console.error(error);

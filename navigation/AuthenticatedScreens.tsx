@@ -13,7 +13,6 @@ const Stack = createStackNavigator<StackParamList>();
 
 const UnauthenticatedScreens = () => {
   const { Navigator, Screen } = Stack;
-  console.log('NEW FORMAT');
   return (
     <Navigator initialRouteName="Projects" detachInactiveScreens={false}>
       <Screen
