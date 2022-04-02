@@ -1,22 +1,21 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { StackParamList } from './types';
+import { StackParamList } from './RootNavigatorTypes';
 import ProjectsScreen from '../screens/Projects';
-import IntroScreen from '../screens/Intro';
 import ProjectDetailsScreen from '../screens/ProjectDetails';
 import { enableScreens } from 'react-native-screens';
 import SignUpScreen from '../screens/SignUp';
 import LoginScreen from '../screens/Login';
-import DashboardScreen from '../screens/Dashboard';
 import ImpactDetailScreen from '../screens/ImpactDetail';
 import YourOrdersScreen from '../screens/YourOrders';
 import AccountPendingScreen from '../screens/AccountPending';
 import BottomNavigator from './BottomNavigator';
+import NewUserBottomNavigator from './NewUserBottomNavigator';
 import ServicesContext, { Services } from '../services';
 import { User } from '@firebase/auth';
 import colors from '../theme/colors';
-import UnauthenticatedScreens from './AuthenticatedScreens';
-import NotVerifiedScreens from './NotVerifiedScreens';
+import DrawerNavigator from './DrawerNavigator';
+import BankPayment from '../screens/BankPayment';
 
 enableScreens(false);
 
@@ -69,19 +68,18 @@ const RootNavigator = () => {
   };
 
   return (
-    <Navigator initialRouteName="Dashboard" detachInactiveScreens={false}>
+    <Navigator initialRouteName="Home" detachInactiveScreens={false}>
       {uid ? (
         onboarded ? (
           <>
-            {/* <Screen
-            name="Home"
-            component={BottomNavigator}
-            options={{ headerShown: false }}></Screen> */}
-            <Screen name="Dashboard">
+            <Screen name="Home" options={{ headerShown: false }}>
               {props => (
-                <DashboardScreen {...props} userId={uid} email={email} />
+                <BottomNavigator {...props} userId={uid} email={email} />
               )}
             </Screen>
+            {/* <Screen name="Drawer" options={{ headerShown: true }}>
+              {props => <DrawerNavigator {...props} />}
+            </Screen> */}
             <Screen
               name="ProjectDetails"
               options={() => ({
@@ -107,18 +105,25 @@ const RootNavigator = () => {
                 headerTintColor: WHITE,
               })}
               component={ImpactDetailScreen}></Screen>
+            <Screen
+              name="BankPayment"
+              options={() => ({
+                headerTitle: '',
+                headerShown: true,
+                headerTransparent: true,
+                headerTintColor: WHITE,
+              })}
+              component={BankPayment}></Screen>
           </>
         ) : (
           <>
             <Screen
-              name="Account"
-              options={() => ({
-                headerTitle: 'Home',
-                headerShown: true,
-                headerStyle: { backgroundColor: WHITE },
-              })}
-              component={AccountPendingScreen}></Screen>
-            <Screen name="Projects" component={ProjectsScreen}></Screen>
+              name="NewUserNav"
+              options={{ headerShown: false, title: 'Home' }}>
+              {props => (
+                <NewUserBottomNavigator {...props} userId={uid} email={email} />
+              )}
+            </Screen>
             <Screen
               name="ProjectDetails"
               options={() => ({
@@ -128,14 +133,22 @@ const RootNavigator = () => {
                 headerTintColor: WHITE,
               })}
               component={ProjectDetailsScreen}></Screen>
+            <Screen
+              name="BankPayment"
+              options={() => ({
+                headerTitle: '',
+                headerShown: true,
+                headerTransparent: true,
+                headerTintColor: WHITE,
+              })}
+              component={BankPayment}></Screen>
           </>
         )
       ) : (
         <>
-          <Screen
-            name="Intro"
-            component={IntroScreen}
-            options={{ headerShown: false }}></Screen>
+          <Screen name="Projects">
+            {props => <ProjectsScreen {...props} userId={uid} email={email} />}
+          </Screen>
           <Screen
             name="ProjectDetails"
             options={() => ({

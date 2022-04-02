@@ -5,11 +5,20 @@ import NowalaText from '../../components/atoms/text';
 import { SafeAreaView } from 'react-native';
 import styles from './styles';
 import SecondaryButton from '../../components/atoms/buttons/SecondaryButton';
-import NewOrderModal from './organisms/NewOrdersModal';
+import NewOrderModal from '../../components/organisms/NewOrdersModal';
 
-const ImpactDetailView = () => {
-  const { impactDetail, openNewOrderModal, projectAlias } =
-    useContext(ImpactDetailContext);
+const ImpactDetailView: React.FC = () => {
+  const {
+    impactDetail,
+    openNewOrderModal,
+    viewNewOrder,
+    closeNewOrderModal,
+    onOrderSent,
+    userId,
+    projectId,
+    email,
+  } = useContext(ImpactDetailContext);
+
   const {
     backgroundColor,
     title,
@@ -48,8 +57,13 @@ const ImpactDetailView = () => {
       </ScrollView>
       <NewOrderModal
         title={ctaText}
-        impact_metric={impact_metric}
-        projectAlias={projectAlias}
+        page_ref={impact_metric}
+        projectId={projectId}
+        isOpen={viewNewOrder}
+        userId={userId}
+        email={email}
+        onClose={closeNewOrderModal}
+        onOrderSent={onOrderSent}
       />
 
       <View style={styles.buttonContainer}>

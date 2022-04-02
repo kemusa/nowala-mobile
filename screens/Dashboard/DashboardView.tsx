@@ -42,9 +42,6 @@ const DashboardView: React.FC = () => {
           padding: 20,
           flex: 1,
         }}>
-        <View style={styles.headingContainer}>
-          <NowalaText.Headline1>Dashboard</NowalaText.Headline1>
-        </View>
         <ReturnBreakdown />
         <ImpactBreakdown />
         <ProgressModal />

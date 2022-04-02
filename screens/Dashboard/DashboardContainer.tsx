@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { DashboardScreenProps } from '../../navigation/types';
+import { DashboardScreenProps } from '../../navigation/RootNavigatorTypes';
 import { DashboardContext } from './DashboardContext';
 import NowalaText from '../../components/atoms/text';
 import HomeView from './DashboardView';
@@ -97,6 +97,8 @@ const DashboardContainer: React.FC<DashboardScreenProps> = ({
     navigation.navigate('ProjectDetails', {
       project: firstProject,
       ref: 'Dashboard',
+      userId,
+      email,
     });
     closeOptionsModal();
   };

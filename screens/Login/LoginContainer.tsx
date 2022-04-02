@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 // import NowalaLogo from 'src/components/atoms/icons/NowalaLogo';
 import ServicesContext, { Services } from '../../services';
-import { LoginScreenProps } from '../../navigation/types';
-import { routes } from '../../navigation/types';
+import { LoginScreenProps } from '../../navigation/RootNavigatorTypes';
+import { routes } from '../../navigation/RootNavigatorTypes';
 import { _getLoginError } from '../../utils/errors';
 import LoginView from './LoginView';
 // import { LoginFormData, LoginViewProps } from './types';

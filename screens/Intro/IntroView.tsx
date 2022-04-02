@@ -10,7 +10,6 @@ import styles from './styles';
 import { spec } from './specs';
 import { IntroCtx } from './IntroContext';
 import NowalaText from '../../components/atoms/text';
-import { BlurView } from 'expo-blur'; //todo: uninstall and remove
 import PrimaryButton from '../../components/atoms/buttons/PrimaryButton';
 
 const IntroView: React.FC = () => {

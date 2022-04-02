@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { ProjectsScreenProps } from '../../navigation/types';
+import { ProjectsScreenProps } from '../../navigation/RootNavigatorTypes';
 import { ProjectContext } from './ProjectContext';
 import NowalaText from '../../components/atoms/text';
 import colors from '../../theme/colors';
@@ -14,14 +14,29 @@ import NowalaLogo from '../../components/atoms/icons/NowalaLogo';
 
 const { BACKGROUND } = colors;
 
-const ProjectsContainer: React.FC<ProjectsScreenProps> = ({ navigation }) => {
+const ProjectsContainer: React.FC<ProjectsScreenProps> = ({
+  navigation,
+  userId,
+  email,
+}) => {
   const { WHITE, PRIMARY } = colors;
   const { analytics } = useContext(ServicesContext) as Services;
   // Place Nowala logo in header on component init
+  // Only shows if headerShown is set to true in navigator
+  // Will not display for tab navigation
   useEffect(() => {
     navigation.setOptions({
-      headerTitle: () => <NowalaLogo />,
-      headerTitleAlign: 'center',
+      headerTitle: () => (
+        <TouchableOpacity activeOpacity={0.5}>
+          <NowalaIcon />
+        </TouchableOpacity>
+      ),
+      headerTitleAlign: 'left',
+      headerRight: () => (
+        <NowalaText.LinkText style={{ padding: 10 }} onPress={goToLogin}>
+          Login
+        </NowalaText.LinkText>
+      ),
       headerStyle: {
         elevation: 0, // remove header border for android
         shadowOpacity: 0, // remove header border for ios
@@ -36,11 +51,20 @@ const ProjectsContainer: React.FC<ProjectsScreenProps> = ({ navigation }) => {
   }, []);
 
   const goToProjectDetails = (project: Project) => {
-    navigation.navigate('ProjectDetails', { project, ref: 'Projects' });
+    navigation.navigate('ProjectDetails', {
+      project,
+      ref: 'Projects',
+      userId,
+      email,
+    });
   };
 
   const goToSignUp = () => {
     navigation.navigate('SignUp');
+  };
+
+  const goToLogin = () => {
+    navigation.navigate('Login');
   };
 
   const signOut = () => {};
@@ -122,7 +146,8 @@ const ProjectsContainer: React.FC<ProjectsScreenProps> = ({ navigation }) => {
   ];
 
   return (
-    <ProjectContext.Provider value={{ goToProjectDetails, data }}>
+    <ProjectContext.Provider
+      value={{ goToProjectDetails, goToLogin, goToSignUp, userId, data }}>
       <ProjectsView />
     </ProjectContext.Provider>
   );

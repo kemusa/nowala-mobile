@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity } from 'react-native';
 import React, { useContext, useEffect } from 'react';
 import AccountPendingView from './AccountPendingView';
-import { AccountPendingScreenProps } from '../../navigation/types';
+import { AccountPendingScreenProps } from '../../navigation/RootNavigatorTypes';
 import NowalaText from '../../components/atoms/text';
 import NowalaIcon from '../../components/atoms/icons/NowalaIcon';
 import colors from '../../theme/colors';

@@ -17,6 +17,13 @@ interface Project {
   clickable: boolean;
 }
 
+interface ProjectData {
+  asset: string;
+  costToUser: number;
+  currency: string;
+  unitCost: number;
+}
+
 // interface ProjectStatsData {
 //   price: {
 //     title: string;
@@ -65,5 +72,8 @@ interface ProjectStats {
 
 interface ProjectContext {
   goToProjectDetails: (projectData: Project) => void;
+  goToSignUp: () => void;
+  goToLogin: () => void;
+  userId: string;
   data: Project[];
 }

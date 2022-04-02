@@ -25,15 +25,6 @@ const AccountPendingView = () => {
       <NowalaText.Body1 style={styles.bodyText}>
         In the meantime, have a look at the projects you can join.
       </NowalaText.Body1>
-      <View
-        style={{
-          width: '100%',
-          position: 'absolute',
-          bottom: 0,
-          marginBottom: 50,
-        }}>
-        <PrimaryButton text="View projects" onPress={goToProjects} />
-      </View>
     </View>
   );
 };

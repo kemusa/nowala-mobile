@@ -10,23 +10,16 @@ import styles from './styles';
 import { spec } from './specs';
 import { ProjectContext } from './ProjectContext';
 import NowalaText from '../../components/atoms/text';
-import { BlurView } from 'expo-blur'; //todo: uninstall and remove
 import PrimaryButton from '../../components/atoms/buttons/PrimaryButton';
-import Constants from 'expo-constants';
 
-const ProjectsView: React.FC = () => {
-  const { goToProjectDetails, data } = useContext(ProjectContext);
+const IntroView: React.FC = () => {
+  const { goToProjectDetails, goToSignUp, goToLogin, userId, data } =
+    useContext(ProjectContext);
   const { FULL_SIZE, ITEM_WIDTH } = spec;
   const scrollX = useRef(new Animated.Value(0)).current;
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* <View style={styles.topBar}>
-        <NowalaText.Headline1>Projects</NowalaText.Headline1>
-        <NowalaText.LinkText style={{ padding: 10 }} onPress={goToLogin}>
-          Login
-        </NowalaText.LinkText>
-      </View> */}
       <Animated.FlatList
         data={data}
         keyExtractor={item => item.key}
@@ -87,8 +80,13 @@ const ProjectsView: React.FC = () => {
           );
         }}
       />
+      {!userId && (
+        <View style={styles.buttonContainer}>
+          <PrimaryButton text={'Get started'} onPress={goToSignUp} />
+        </View>
+      )}
     </SafeAreaView>
   );
 };
 
-export default ProjectsView;
+export default IntroView;

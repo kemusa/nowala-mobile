@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { ProjectsScreenProps } from '../../navigation/types';
+import { ProjectsScreenProps } from '../../navigation/RootNavigatorTypes';
 import { IntroCtx } from './IntroContext';
 import NowalaText from '../../components/atoms/text';
 import colors from '../../theme/colors';
@@ -19,7 +19,10 @@ const IntroContainer: React.FC<ProjectsScreenProps> = ({ navigation }) => {
   }, []);
 
   const goToProjectDetails = (project: Project) => {
-    navigation.navigate('ProjectDetails', { project, ref: 'Projects' });
+    navigation.navigate('ProjectDetails', {
+      project,
+      ref: 'Projects',
+    });
   };
 
   const goToSignUp = () => {

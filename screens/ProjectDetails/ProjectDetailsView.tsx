@@ -1,12 +1,23 @@
-import { BlurView } from 'expo-blur';
 import React, { useContext } from 'react';
 import { View, Text, SafeAreaView, Image, ScrollView } from 'react-native';
 import { ProjectDetailsContext } from './ProjectDetailsContext';
 import NowalaText from '../../components/atoms/text';
 import styles from './styles';
+import PrimaryButton from '../../components/atoms/buttons/PrimaryButton';
+import NewOrderModal from '../../components/organisms/NewOrdersModal';
 
 const ProjectDetailsView = () => {
-  const { project, getStatIcon } = useContext(ProjectDetailsContext);
+  const {
+    project,
+    getStatIcon,
+    userId,
+    email,
+    projectId,
+    ctaOnPress,
+    closeNewOrderModal,
+    canViewOrderModal,
+    onOrderSent,
+  } = useContext(ProjectDetailsContext);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -42,7 +53,21 @@ const ProjectDetailsView = () => {
                 </View>
               ))}
           </View>
+          <View style={styles.spacer}></View>
         </ScrollView>
+        <NewOrderModal
+          title="Order solar kits"
+          page_ref="project_detail_page"
+          userId={userId || ''}
+          projectId={projectId}
+          email={email || ''}
+          isOpen={canViewOrderModal}
+          onOrderSent={onOrderSent}
+          onClose={closeNewOrderModal}
+        />
+        <View style={styles.buttonContainer}>
+          <PrimaryButton text="Order now" onPress={ctaOnPress} />
+        </View>
       </View>
     </SafeAreaView>
   );

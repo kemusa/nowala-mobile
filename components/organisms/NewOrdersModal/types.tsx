@@ -1,7 +1,13 @@
 interface NewOrderModalContainerProps {
   title: string;
-  projectAlias: string;
-  impact_metric: string;
+  page_ref: string;
+  isOpen: boolean;
+  onClose: () => void;
+  onOrderSent: () => void;
+  userId: string;
+  projectId: string;
+  email: string;
+  // userTotalPrice: number;
 }
 interface NewOrdersModalViewProps {
   title: string;
@@ -10,6 +16,9 @@ interface NewOrdersModalViewProps {
   orderCounter: NumberSelect;
   orderConfirmBtn: PrimaryButtonProps;
   orderConfirmed: boolean;
+  userTotalPrice: number;
+  projectUnitPrice: string;
+  projectCurrency: string;
 }
 
 interface NewOrdersContext {}

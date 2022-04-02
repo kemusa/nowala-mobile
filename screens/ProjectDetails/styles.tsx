@@ -1,11 +1,21 @@
 import { Dimensions, StyleSheet } from 'react-native';
 import colors from '../../theme/colors';
+import { buttonHeight } from '../../utils/consts/STYLES';
 
 const { width, height } = Dimensions.get('window');
 const { PRIMARY, WHITE } = colors;
 
 const styles = StyleSheet.create({
   backgroundContainer: { height: '100%', width: '100%', position: 'absolute' },
+  buttonContainer: {
+    height: buttonHeight,
+    position: 'absolute',
+    bottom: 0,
+    paddingLeft: 20,
+    paddingRight: 20,
+    // paddingBottom: 70,
+    width: '100%',
+  },
   container: { flex: 1, flexDirection: 'column' },
   contentContainer: {
     height: '55%',
@@ -38,6 +48,7 @@ const styles = StyleSheet.create({
   scrollView: {
     alignItems: 'center',
   },
+  spacer: { width: '100%', height: 100 },
   statsInfo: {
     flexDirection: 'row',
     flexWrap: 'wrap',

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import ServicesContext, { Services } from '../../services';
-import { SignUpScreenProps } from '../../navigation/types';
-import { routes } from '../../navigation/types';
+import { SignUpScreenProps } from '../../navigation/RootNavigatorTypes';
+import { routes } from '../../navigation/RootNavigatorTypes';
 import { _getSignUpError } from '../../utils/errors';
 import SignUpView from './SignUpView';
 import regex from '../../utils/consts/REGEX';
@@ -10,7 +10,6 @@ import SignUpContext from './SignUpContext';
 import { SignUpFormData } from './types';
 import { InputFormConfig } from '../../components/organisms/InputForm/types';
 import NowalaLogo from '../../components/atoms/icons/NowalaLogo';
-import { COUNTRIES } from '../../utils/consts/COUNTRIES';
 import { Country, CountryCode } from 'react-native-country-picker-modal';
 
 const SignUpContainer: React.FC<SignUpScreenProps> = ({ navigation }) => {

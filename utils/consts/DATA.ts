@@ -26,7 +26,7 @@ const projectsInit: SponsorshipData = {
   interest: 0.1,
   collected: 0,
   currency: 'SLL',
-  projectId: 'ywpYsNv5F0Gv8YBtVQBX',
+  projectId: 'solar_panel_kits_ignite_power_sl',
   status: statusInit,
   orderDate: Timestamp.fromDate(new Date(timestamp)),
   paid: { currency: '£', unitCost: 61 },

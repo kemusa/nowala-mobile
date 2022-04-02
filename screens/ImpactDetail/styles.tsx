@@ -1,17 +1,13 @@
 import { StyleSheet } from 'react-native';
 import colors from '../../theme/colors';
-import { buttonHeight, screenPadding } from '../../utils/consts/STYLES';
+import {
+  buttonHeight,
+  screenPadding,
+  buttonContainer,
+} from '../../utils/consts/STYLES';
 const { WHITE } = colors;
 const styles = StyleSheet.create({
-  buttonContainer: {
-    height: buttonHeight,
-    position: 'absolute',
-    bottom: 30,
-    paddingLeft: 20,
-    paddingRight: 20,
-    paddingBottom: 70,
-    width: '100%',
-  },
+  buttonContainer,
   container: { padding: screenPadding, marginBottom: 150 },
   safeAreaView: { flex: 1 },
   headings: { color: WHITE },

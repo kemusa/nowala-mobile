@@ -13,16 +13,17 @@ import * as Updates from 'expo-updates';
 import { Text } from 'react-native';
 
 export default function App() {
-  let x = null;
+  // let x = null;
   // useEffect(() => {
   //   updateApp();
   // }, []);
   // const updateApp = async () => {
   //   const update = await Updates.checkForUpdateAsync();
   //   if (update.isAvailable) {
-  //     await Updates.fetchUpdateAsync();
-  //     // ... notify user of update ...
-  //     await Updates.reloadAsync();
+  //     alert('Update available. Restart your app to see it');
+  //     // await Updates.fetchUpdateAsync();
+  //     // // ... notify user of update ...
+  //     // await Updates.reloadAsync();
   //   }
   // };
 
@@ -37,14 +38,6 @@ export default function App() {
   useEffect(() => {
     _cacheResourcesAsync().then(() => setLoaded(true));
   }, []);
-
-  if (x) {
-    <Text>{x}</Text>;
-  }
-
-  if (!x) {
-    <Text>No update</Text>;
-  }
 
   if (!loaded) {
     return <AppLoading />;

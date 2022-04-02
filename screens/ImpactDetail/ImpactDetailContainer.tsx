@@ -1,9 +1,10 @@
 import { View, Text } from 'react-native';
-import React, { useContext, useEffect, useLayoutEffect, useState } from 'react';
-import { ImpactDetailScreenProps } from '../../navigation/types';
+import React, { useContext, useEffect, useState } from 'react';
+import { ImpactDetailScreenProps } from '../../navigation/RootNavigatorTypes';
 import { ImpactDetailContext } from './ImpactDetailContext';
 import ImpactDetailView from './ImpactDetailView';
 import ServicesContext, { Services } from '../../services';
+import { PROJECT_ID } from '../../utils/consts/FIRST_PROJECT';
 
 const ImpactDetailContainer: React.FC<ImpactDetailScreenProps> = ({
   navigation,
@@ -14,8 +15,7 @@ const ImpactDetailContainer: React.FC<ImpactDetailScreenProps> = ({
   const { backgroundColor, impact_metric } = impactDetail;
   const [viewNewOrder, setViewNewOrder] = useState(false);
 
-  const projectAlias = 'solar_kits_ignite_power_sl'; // todo: make dynamic
-  const projectId = 'ywpYsNv5F0Gv8YBtVQBX'; // todo: make dynamic and environment based
+  const projectId = PROJECT_ID; // todo: make dynamic and environment based
 
   const { analytics } = useContext(ServicesContext) as Services;
 
@@ -34,15 +34,15 @@ const ImpactDetailContainer: React.FC<ImpactDetailScreenProps> = ({
   useEffect(() => {
     analytics.screenWithProperties('Impact Detail', {
       impact_metric,
-      project_alias: projectAlias,
+      project_alias: projectId,
     });
   }, []);
 
   const openNewOrderModal = () => setViewNewOrder(true);
   const closeNewOrderModal = () => setViewNewOrder(false);
 
-  const goToDashboard = () => {
-    navigation.navigate('Dashboard');
+  const onOrderSent = () => {
+    navigation.navigate('BankPayment', { redirectPage: 'Dashboard' });
   };
 
   return (
@@ -51,12 +51,11 @@ const ImpactDetailContainer: React.FC<ImpactDetailScreenProps> = ({
         impactDetail,
         openNewOrderModal,
         closeNewOrderModal,
-        goToDashboard,
+        onOrderSent,
         viewNewOrder,
-        userId,
-        projectAlias,
+        userId: userId || '',
         projectId,
-        email,
+        email: email || '',
       }}>
       <ImpactDetailView />
     </ImpactDetailContext.Provider>
