@@ -90,8 +90,8 @@ const ProjectsContainer: React.FC<ProjectsScreenProps> = ({
             marginTop: 30,
             marginLeft: '5%',
             marginRight: '5%',
-            borderColor: WHITE,
-            borderWidth: 2,
+            // borderColor: WHITE,
+            // borderWidth: 2,
           }}>
           <NowalaText.Headline2Light style={{ color: WHITE, marginBottom: 5 }}>
             MORE

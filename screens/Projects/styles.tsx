@@ -1,35 +1,47 @@
 import { Platform, StyleSheet } from 'react-native';
 import { spec } from './specs';
 import colors from '../../theme/colors';
-import H3 from '../../components/atoms/text/Headline3/styles';
-const { WHITE } = colors;
-const { text } = H3;
-const { ITEM_WIDTH, ITEM_HEIGHT, SPACING, RADIUS, FULL_SIZE } = spec;
+const { WHITE, PRIMARY, BACKGROUND } = colors;
+const { ITEM_WIDTH, ITEM_HEIGHT } = spec;
+
 const styles = StyleSheet.create({
   buttonContainer: {
     padding: 15,
     width: '100%',
   },
-  container: { flex: 1, backgroundColor: WHITE },
+  container: { flex: 1, backgroundColor: BACKGROUND, padding: 20 },
   cardContainer: {
     height: ITEM_HEIGHT,
     overflow: 'hidden',
-    borderRadius: RADIUS,
+    borderRadius: 6,
   },
-  itemContainer: { width: ITEM_WIDTH, height: ITEM_HEIGHT, margin: SPACING },
-  image: { height: ITEM_HEIGHT * 0.5, resizeMode: 'cover' },
+  itemContainer: {
+    width: '100%',
+    height: ITEM_HEIGHT,
+    padding: 10,
+    marginBottom: 10,
+    shadowColor: 'rgba(0, 0, 0, 0.25)',
+    shadowOffset: {
+      width: 0,
+      height: 3.32,
+    },
+    shadowOpacity: 1.0,
+    shadowRadius: 2,
+    elevation: 3,
+  },
+  image: { height: ITEM_HEIGHT * 0.6, resizeMode: 'cover' },
   title: {
-    ...text,
-    color: WHITE,
+    textAlign: 'center',
+    color: PRIMARY,
     width: ITEM_WIDTH * 0.8,
-    fontFamily: 'Lato_700Bold',
   },
-  description: { fontSize: 14, color: WHITE, marginTop: 10 },
+  description: { fontSize: 14, marginTop: 10, textAlign: 'center' },
   cardInfoContainer: {
     width: '100%',
-    backgroundColor: '#5E8497',
+    backgroundColor: WHITE,
     padding: 20,
-    height: ITEM_HEIGHT * 0.5,
+    height: ITEM_HEIGHT * 0.4,
+    alignItems: 'center',
   },
   text: { color: WHITE },
   topBar: {
