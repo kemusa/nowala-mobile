@@ -1,8 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 // import NowalaLogo from 'src/components/atoms/icons/NowalaLogo';
 import ServicesContext, { Services } from '../../services';
-import { LoginScreenProps } from '../../navigation/RootNavigatorTypes';
-import { routes } from '../../navigation/RootNavigatorTypes';
 import { _getLoginError } from '../../utils/errors';
 import LoginView from './LoginView';
 // import { LoginFormData, LoginViewProps } from './types';
@@ -12,9 +10,11 @@ import LoginContext from './LoginContext';
 import { LoginFormData } from './types';
 import { InputFormConfig } from '../../components/organisms/InputForm/types';
 import NowalaLogo from '../../components/atoms/icons/NowalaLogo';
+import { RootStackScreenProps } from '../../navigation/types';
 
-const LoginContainer: React.FC<LoginScreenProps> = ({ navigation }) => {
-  const { SIGN_UP } = routes;
+const LoginContainer: React.FC<RootStackScreenProps<'Login'>> = ({
+  navigation,
+}) => {
   // todo: make into readonly variable
   const isLogin = false;
 
@@ -63,7 +63,7 @@ const LoginContainer: React.FC<LoginScreenProps> = ({ navigation }) => {
   }, []);
 
   const goToSignUp = () => {
-    navigation.navigate(SIGN_UP);
+    navigation.navigate('SignUp');
   };
 
   const LoginWithEmailAndPassword = async (data: LoginFormData) => {

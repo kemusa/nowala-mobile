@@ -1,13 +1,14 @@
 import { Platform, StyleSheet } from 'react-native';
 import { spec } from './specs';
 import colors from '../../theme/colors';
-const { WHITE, PRIMARY, BACKGROUND } = colors;
+const { WHITE, PRIMARY, BACKGROUND, TRANSPARENT_BACKGROUND } = colors;
 const { ITEM_WIDTH, ITEM_HEIGHT } = spec;
 
 const styles = StyleSheet.create({
   buttonContainer: {
     padding: 15,
     width: '100%',
+    backgroundColor: TRANSPARENT_BACKGROUND,
   },
   container: { flex: 1, backgroundColor: BACKGROUND, padding: 20 },
   cardContainer: {

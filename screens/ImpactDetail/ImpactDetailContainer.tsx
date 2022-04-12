@@ -1,12 +1,11 @@
-import { View, Text } from 'react-native';
 import React, { useContext, useEffect, useState } from 'react';
-import { ImpactDetailScreenProps } from '../../navigation/RootNavigatorTypes';
 import { ImpactDetailContext } from './ImpactDetailContext';
 import ImpactDetailView from './ImpactDetailView';
 import ServicesContext, { Services } from '../../services';
 import { PROJECT_ID } from '../../utils/consts/FIRST_PROJECT';
+import { RootStackScreenProps } from '../../navigation/types';
 
-const ImpactDetailContainer: React.FC<ImpactDetailScreenProps> = ({
+const ImpactDetailContainer: React.FC<RootStackScreenProps<'ImpactDetail'>> = ({
   navigation,
   route,
 }) => {
@@ -41,9 +40,15 @@ const ImpactDetailContainer: React.FC<ImpactDetailScreenProps> = ({
   const openNewOrderModal = () => setViewNewOrder(true);
   const closeNewOrderModal = () => setViewNewOrder(false);
 
-  const onOrderSent = () => {
-    navigation.navigate('BankPayment', { redirectPage: 'Dashboard' });
+  const onOrderSent = (price: number, paymentRef: string) => {
+    navigation.navigate('BankPayment', {
+      redirectPage: 'Main',
+      paymentRef,
+      price,
+    });
   };
+
+  const totalPriceCalc = () => {};
 
   return (
     <ImpactDetailContext.Provider

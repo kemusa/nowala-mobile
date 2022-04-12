@@ -5,9 +5,14 @@ import {
   doubleButtonContainer,
 } from '../../utils/consts/STYLES';
 
-const { WHITE, TRETIARY } = colors;
+const { WHITE, TRETIARY, TRANSPARENT_BACKGROUND } = colors;
 const styles = StyleSheet.create({
   bankDetail: { flexDirection: 'row', alignItems: 'center' },
+  buttonContainerConfig: {
+    height: 170,
+    alignItems: 'center',
+    backgroundColor: TRANSPARENT_BACKGROUND,
+  },
   safeAreaView: { flex: 1, backgroundColor: WHITE },
   container: { padding: screenPadding, paddingTop: 40 },
   heading: { marginBottom: 12 },

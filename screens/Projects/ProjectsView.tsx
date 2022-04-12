@@ -31,6 +31,19 @@ const IntroView: React.FC = () => {
             {/* Card wrapper */}
             <View
               style={[styles.cardContainer, { backgroundColor: item.color }]}>
+              {/* {item.clickable && (
+                <View
+                  style={{
+                    position: 'absolute',
+                    zIndex: 10,
+                    top: 15,
+                    right: 10,
+                    height: 15,
+                    width: 50,
+                    backgroundColor: 'blue',
+                    borderRadius: 20,
+                  }}></View>
+              )} */}
               {item.image && (
                 <Image style={styles.image} source={{ uri: item.image }} />
               )}

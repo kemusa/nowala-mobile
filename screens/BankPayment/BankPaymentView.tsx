@@ -11,8 +11,10 @@ import { details } from './Details';
 const BankPaymentView: React.FC<BankPaymentViewProps> = ({
   onBankSelectClose,
   openBankSelect,
+  price,
   viewBankSelect,
   redirect,
+  paymentRef,
 }) => {
   return (
     <SafeAreaView style={styles.safeAreaView}>
@@ -21,10 +23,31 @@ const BankPaymentView: React.FC<BankPaymentViewProps> = ({
           <NowalaText.Headline1 style={styles.heading}>
             Pay by bank transfer
           </NowalaText.Headline1>
-          <NowalaText.Body1 style={styles.instructions}>
-            To complete your order please send a payment of £xx to the bank
-            details listed below within 24 hours.
-          </NowalaText.Body1>
+          <Text style={{ marginBottom: 15 }}>
+            <NowalaText.Body1 style={styles.instructions}>
+              To complete your order please send a payment of{' '}
+            </NowalaText.Body1>
+            <NowalaText.Headline4
+              style={{ ...styles.instructions, fontSize: 15 }}>
+              £{price}{' '}
+            </NowalaText.Headline4>
+            <NowalaText.Body1 style={styles.instructions}>
+              to the bank details listed below within{' '}
+            </NowalaText.Body1>
+            <NowalaText.Headline4
+              style={{ ...styles.instructions, fontSize: 15 }}>
+              24 hours.
+            </NowalaText.Headline4>
+          </Text>
+          <View style={styles.instructionItem}>
+            <NowalaText.Headline4 style={styles.instructionHeading}>
+              {'Please use this payment reference'}
+            </NowalaText.Headline4>
+            <View style={styles.bankDetail}>
+              <NowalaText.Body1>{paymentRef}</NowalaText.Body1>
+              <CopyButton copyText={paymentRef} />
+            </View>
+          </View>
           {details.map((d, idx) => (
             <View key={idx} style={styles.instructionItem}>
               <NowalaText.Headline4 style={styles.instructionHeading}>
@@ -50,13 +73,11 @@ const BankPaymentView: React.FC<BankPaymentViewProps> = ({
             </NowalaText.LinkText2>
           </Text>
         </View>
+        <View style={{ width: '100%', height: 250 }}></View>
       </ScrollView>
       <BanksModal isOpen={viewBankSelect} onClose={onBankSelectClose} />
       <View
-        style={[
-          styles.doubleButtonContainer,
-          { height: 170, alignItems: 'center' },
-        ]}>
+        style={[styles.doubleButtonContainer, styles.buttonContainerConfig]}>
         <PrimaryButton text="Transfer now" onPress={openBankSelect} />
         <SecondaryButton
           text="I made this transfer"

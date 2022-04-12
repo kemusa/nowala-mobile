@@ -9,7 +9,7 @@ interface ProjectDetailsContext {
   ctaOnPress: () => void;
   closeNewOrderModal: () => void;
   canViewOrderModal: boolean;
-  onOrderSent: () => void;
+  onOrderSent: OrderCallback;
   userId?: string; //todo :remove optional;
   email?: string; //todo :remove optional;
 }

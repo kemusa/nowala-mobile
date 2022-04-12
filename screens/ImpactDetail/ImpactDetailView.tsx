@@ -30,6 +30,7 @@ const ImpactDetailView: React.FC = () => {
     ctaText,
     impact_metric,
   } = impactDetail;
+
   return (
     <SafeAreaView style={[styles.safeAreaView, { backgroundColor }]}>
       <ScrollView>

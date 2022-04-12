@@ -1,16 +1,19 @@
 import { View, Text, TouchableOpacity } from 'react-native';
 import React, { useContext, useEffect } from 'react';
 import AccountPendingView from './AccountPendingView';
-import { AccountPendingScreenProps } from '../../navigation/RootNavigatorTypes';
 import NowalaText from '../../components/atoms/text';
 import NowalaIcon from '../../components/atoms/icons/NowalaIcon';
 import colors from '../../theme/colors';
 import { AccountPendingCxt } from './AccountPendingContext';
 import ServicesContext, { Services } from '../../services';
+import {
+  MainTabScreenProps,
+  RootStackScreenProps,
+} from '../../navigation/types';
 
 const { BACKGROUND } = colors;
 
-const AccountPendingContainer: React.FC<AccountPendingScreenProps> = ({
+const AccountPendingContainer: React.FC<MainTabScreenProps<'Account'>> = ({
   navigation,
 }) => {
   const { auth, analytics } = useContext(ServicesContext) as Services;

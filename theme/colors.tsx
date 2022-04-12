@@ -9,5 +9,6 @@ const colors = {
   NW_GREY_1: '#ABABAB',
   BACKGROUND: '#F9F9FE',
   SUCCESS: '#1BB55C',
+  TRANSPARENT_BACKGROUND: 'rgba(255, 255, 255, 0.7)',
 };
 export default colors;

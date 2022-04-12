@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { StackParamList } from './RootNavigatorTypes';
+import { RootStackParamList } from './types';
 import ProjectsScreen from '../screens/Projects';
 import ProjectDetailsScreen from '../screens/ProjectDetails';
 import { enableScreens } from 'react-native-screens';
@@ -8,20 +8,19 @@ import SignUpScreen from '../screens/SignUp';
 import LoginScreen from '../screens/Login';
 import ImpactDetailScreen from '../screens/ImpactDetail';
 import YourOrdersScreen from '../screens/YourOrders';
-import AccountPendingScreen from '../screens/AccountPending';
-import BottomNavigator from './BottomNavigator';
+import MainTabNavigator from './MainTabNavigator';
 import NewUserBottomNavigator from './NewUserBottomNavigator';
 import ServicesContext, { Services } from '../services';
 import { User } from '@firebase/auth';
 import colors from '../theme/colors';
-import DrawerNavigator from './DrawerNavigator';
 import BankPayment from '../screens/BankPayment';
+import { Text } from 'react-native';
 
 enableScreens(false);
 
 const { BACKGROUND, WHITE } = colors;
 
-const Stack = createStackNavigator<StackParamList>();
+const Stack = createStackNavigator<RootStackParamList>();
 
 const RootNavigator = () => {
   const { Navigator, Screen } = Stack;
@@ -68,27 +67,28 @@ const RootNavigator = () => {
   };
 
   return (
-    <Navigator initialRouteName="Home" detachInactiveScreens={false}>
+    <Navigator initialRouteName="Main" detachInactiveScreens={false}>
       {uid ? (
         onboarded ? (
           <>
-            <Screen name="Home" options={{ headerShown: false }}>
+            <Screen name="Main" options={{ headerShown: false }}>
               {props => (
-                <BottomNavigator {...props} userId={uid} email={email} />
+                <MainTabNavigator {...props} userId={uid} email={email} />
               )}
             </Screen>
-            {/* <Screen name="Drawer" options={{ headerShown: true }}>
-              {props => <DrawerNavigator {...props} />}
-            </Screen> */}
             <Screen
               name="ProjectDetails"
-              options={() => ({
+              options={{
                 headerTitle: '',
                 headerShown: true,
                 headerTransparent: true,
                 headerTintColor: WHITE,
-              })}
-              component={ProjectDetailsScreen}></Screen>
+                // headerLeft: () => <Text>Back</Text>,
+              }}>
+              {props => (
+                <ProjectDetailsScreen {...props} userId={uid} email={email} />
+              )}
+            </Screen>
             <Screen
               name="YourOrders"
               options={{
@@ -117,9 +117,7 @@ const RootNavigator = () => {
           </>
         ) : (
           <>
-            <Screen
-              name="NewUserNav"
-              options={{ headerShown: false, title: 'Home' }}>
+            <Screen name="Main" options={{ headerShown: false, title: 'Home' }}>
               {props => (
                 <NewUserBottomNavigator {...props} userId={uid} email={email} />
               )}
@@ -131,6 +129,8 @@ const RootNavigator = () => {
                 headerShown: true,
                 headerTransparent: true,
                 headerTintColor: WHITE,
+                headerBackTitle: 'Projects',
+                // headerLeft: () => <Text>Back</Text>,
               })}
               component={ProjectDetailsScreen}></Screen>
             <Screen
@@ -156,6 +156,7 @@ const RootNavigator = () => {
               headerShown: true,
               headerTransparent: true,
               headerTintColor: WHITE,
+              // headerLeft: () => <Text>Back</Text>,
             })}
             component={ProjectDetailsScreen}></Screen>
           <Screen name="SignUp" component={SignUpScreen}></Screen>

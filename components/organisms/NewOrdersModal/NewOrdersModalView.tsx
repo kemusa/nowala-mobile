@@ -15,7 +15,7 @@ const NewOrderModalView: React.FC<NewOrdersModalViewProps> = ({
   orderConfirmed,
   userTotalPrice,
   projectCurrency,
-  projectUnitPrice,
+  projectTotalPrice,
 }) => {
   return (
     <Actionsheet isOpen={isOpen} onClose={onClose}>
@@ -64,7 +64,7 @@ const NewOrderModalView: React.FC<NewOrdersModalViewProps> = ({
                 <NowalaText.Headline2Light>
                   {`£${userTotalPrice}`}
                 </NowalaText.Headline2Light>
-                <NowalaText.Subtitle1>{`${projectCurrency} ${projectUnitPrice}`}</NowalaText.Subtitle1>
+                <NowalaText.Subtitle1>{`${projectCurrency} ${projectTotalPrice}`}</NowalaText.Subtitle1>
               </View>
             </View>
             <View style={styles.orderContainer}>

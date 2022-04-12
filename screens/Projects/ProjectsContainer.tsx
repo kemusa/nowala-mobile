@@ -1,5 +1,4 @@
 import React, { useContext, useEffect } from 'react';
-import { ProjectsScreenProps } from '../../navigation/RootNavigatorTypes';
 import { ProjectContext } from './ProjectContext';
 import NowalaText from '../../components/atoms/text';
 import colors from '../../theme/colors';
@@ -10,11 +9,17 @@ import { firstProject } from './Projects';
 import ServicesContext, { Services } from '../../services';
 import { TouchableOpacity } from 'react-native';
 import NowalaIcon from '../../components/atoms/icons/NowalaIcon';
-import NowalaLogo from '../../components/atoms/icons/NowalaLogo';
+import { spec } from './specs';
+import { MainTabScreenProps } from '../../navigation/types';
 
-const { BACKGROUND } = colors;
+const { ITEM_HEIGHT } = spec;
 
-const ProjectsContainer: React.FC<ProjectsScreenProps> = ({
+interface ProjectProps extends MainTabScreenProps<'Projects'> {
+  email: string;
+  userId: string;
+}
+
+const ProjectsContainer: React.FC<ProjectProps> = ({
   navigation,
   userId,
   email,
@@ -53,9 +58,6 @@ const ProjectsContainer: React.FC<ProjectsScreenProps> = ({
   const goToProjectDetails = (project: Project) => {
     navigation.navigate('ProjectDetails', {
       project,
-      ref: 'Projects',
-      userId,
-      email,
     });
   };
 
@@ -66,8 +68,6 @@ const ProjectsContainer: React.FC<ProjectsScreenProps> = ({
   const goToLogin = () => {
     navigation.navigate('Login');
   };
-
-  const signOut = () => {};
 
   const data: Project[] = [
     { ...firstProject },
@@ -87,24 +87,25 @@ const ProjectsContainer: React.FC<ProjectsScreenProps> = ({
             padding: 10,
             margin: 'auto',
             position: 'absolute',
-            marginTop: 30,
+            top: ITEM_HEIGHT / 6,
+            // marginTop: 30,
             marginLeft: '5%',
             marginRight: '5%',
             // borderColor: WHITE,
             // borderWidth: 2,
           }}>
-          <NowalaText.Headline2Light style={{ color: WHITE, marginBottom: 5 }}>
+          <NowalaText.Headline3 style={{ color: WHITE, marginBottom: 5 }}>
             MORE
-          </NowalaText.Headline2Light>
-          <NowalaText.Headline2Light style={{ color: WHITE, marginBottom: 5 }}>
+          </NowalaText.Headline3>
+          <NowalaText.Headline3 style={{ color: WHITE, marginBottom: 5 }}>
             PROJECTS
-          </NowalaText.Headline2Light>
-          <NowalaText.Headline2Light style={{ color: WHITE, marginBottom: 5 }}>
+          </NowalaText.Headline3>
+          <NowalaText.Headline3 style={{ color: WHITE, marginBottom: 5 }}>
             COMING
-          </NowalaText.Headline2Light>
-          <NowalaText.Headline2Light style={{ color: WHITE, marginBottom: 5 }}>
+          </NowalaText.Headline3>
+          <NowalaText.Headline3 style={{ color: WHITE, marginBottom: 5 }}>
             SOON
-          </NowalaText.Headline2Light>
+          </NowalaText.Headline3>
         </View>
       ),
       clickable: false,

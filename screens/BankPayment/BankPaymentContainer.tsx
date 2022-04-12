@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { BankPaymentScreenProps } from '../../navigation/RootNavigatorTypes';
+import { RootStackScreenProps } from '../../navigation/types';
 import BankPaymentView from './BankPaymentView';
 
-const BankPaymentContainer: React.FC<BankPaymentScreenProps> = ({
+const BankPaymentContainer: React.FC<RootStackScreenProps<'BankPayment'>> = ({
   navigation,
   route,
 }) => {
-  const { redirectPage } = route.params;
+  const { redirectPage, paymentRef, price } = route.params;
 
   const [viewBankSelect, setViewBankSelect] = useState(false);
 
@@ -28,6 +28,8 @@ const BankPaymentContainer: React.FC<BankPaymentScreenProps> = ({
       openBankSelect={openBankSelect}
       viewBankSelect={viewBankSelect}
       redirect={redirect}
+      paymentRef={paymentRef}
+      price={price}
     />
   );
 };

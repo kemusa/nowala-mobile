@@ -1,5 +1,5 @@
 import { Timestamp } from 'firebase/firestore';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import ServicesContext, { Services } from '../../../services';
 import { ImpactDetailContext } from '../../../screens/ImpactDetail/ImpactDetailContext';
 import NewOrdersModalView from './NewOrdersModalView';
@@ -17,7 +17,7 @@ const NewOrderModalContainer: React.FC<NewOrderModalContainerProps> = ({
   email,
   // userTotalPrice
 }) => {
-  const orderLimit = 5;
+  const orderLimit = 10;
   const { analytics, db } = useContext(ServicesContext) as Services;
 
   const [orderVolume, setOrderVolume] = useState(1);
@@ -25,9 +25,12 @@ const NewOrderModalContainer: React.FC<NewOrderModalContainerProps> = ({
   const [orderConfirmed, setOrderConfirmed] = useState(false);
 
   const [userUnitPrice, setUserUnitPrice] = useState(0);
-  const [projectUnitPrice, setProjectUnitPrice] = useState('');
+  // const [projectUnitPrice, setProjectUnitPrice] = useState(0);
+  const projectUnitPrice = useRef<number>(0);
   const [projectCurrency, setProjectCurrency] = useState('');
   const [userTotalPrice, setUserTotalPrice] = useState(0);
+  const [projectTotalPrice, setProjectTotalPrice] = useState('');
+  const [paymentRef, setPaymentRef] = useState('');
 
   // track screen
   useEffect(() => {
@@ -41,6 +44,12 @@ const NewOrderModalContainer: React.FC<NewOrderModalContainerProps> = ({
     }
   }, [isOpen]);
 
+  useEffect(() => {
+    const userSub = email.substring(0, 3);
+    const randNum = Math.floor(1000 + Math.random() * 9000);
+    setPaymentRef(`${userSub}-${randNum}`);
+  }, []);
+
   // get latest price
   useEffect(() => {
     fetchUnitPrice();
@@ -48,9 +57,12 @@ const NewOrderModalContainer: React.FC<NewOrderModalContainerProps> = ({
 
   // updateTotalPrice
   useEffect(() => {
-    console.log('BAR', userUnitPrice, orderVolume);
-
     setUserTotalPrice(orderVolume * userUnitPrice);
+    setProjectTotalPrice(
+      numberWithCommas(projectUnitPrice.current * orderVolume),
+    );
+
+    // if (userTotalPrice === 0 && userUnitPrice !== 0) useForceUpdate();
   }, [userUnitPrice, orderVolume]);
 
   const increaseNumber = () => {
@@ -70,7 +82,7 @@ const NewOrderModalContainer: React.FC<NewOrderModalContainerProps> = ({
       setTimeout(() => setOrderConfirmed(true), 1000);
       setTimeout(() => {
         onClose();
-        onOrderSent();
+        onOrderSent(userTotalPrice, paymentRef);
       }, 4000);
       const order: NewOrder = {
         uid: userId,
@@ -95,10 +107,11 @@ const NewOrderModalContainer: React.FC<NewOrderModalContainerProps> = ({
     const query = await db.findById(`projects/${projectId}`);
     const project = query.data as ProjectData;
     setUserUnitPrice(project.costToUser);
-    setProjectUnitPrice(numberWithCommas(project.unitCost));
+    projectUnitPrice.current = project.unitCost;
+    setProjectTotalPrice(numberWithCommas(project.unitCost * orderVolume));
     setProjectCurrency(project.currency);
-    console.log('FOO', orderVolume, userUnitPrice);
-    setUserTotalPrice(orderVolume * userUnitPrice);
+    setUserTotalPrice(orderVolume * project.costToUser);
+    console.log('Order volume', orderVolume);
   };
 
   const orderConfirmBtn = {
@@ -117,7 +130,7 @@ const NewOrderModalContainer: React.FC<NewOrderModalContainerProps> = ({
       orderConfirmBtn={orderConfirmBtn}
       orderConfirmed={orderConfirmed}
       userTotalPrice={userTotalPrice}
-      projectUnitPrice={projectUnitPrice}
+      projectTotalPrice={projectTotalPrice}
       projectCurrency={projectCurrency}
     />
   );

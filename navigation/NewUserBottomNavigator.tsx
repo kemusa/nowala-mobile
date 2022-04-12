@@ -3,17 +3,18 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import AccountPending from '../screens/AccountPending';
 import ProjectsScreen from '../screens/Projects';
-import { HomeScreenProps, NewUserNavScreenProps } from './RootNavigatorTypes';
-import { StackParamList } from './RootNavigatorTypes';
 import colors from '../theme/colors';
+import { MainTabParamList, RootStackScreenProps } from './types';
 
-const Tab = createBottomTabNavigator<StackParamList>();
+const Tab = createBottomTabNavigator<MainTabParamList>();
 const { TRETIARY } = colors;
 
-const NewUserNavigator: React.FC<NewUserNavScreenProps> = ({
-  userId,
-  email,
-}) => {
+interface MainTabProps extends RootStackScreenProps<'Main'> {
+  email: string;
+  userId: string;
+}
+
+const NewUserNavigator: React.FC<MainTabProps> = ({ userId, email }) => {
   const { Navigator, Screen } = Tab;
   return (
     <Navigator

@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { DashboardScreenProps } from '../../navigation/RootNavigatorTypes';
 import { DashboardContext } from './DashboardContext';
 import NowalaText from '../../components/atoms/text';
 import HomeView from './DashboardView';
@@ -13,12 +12,15 @@ import { SnapshotData } from '../../services/types';
 import colors from '../../theme/colors';
 import { SponsorshipData } from './typesImport';
 import { statusInit } from '../../utils/consts/DATA';
-import MenuButton from '../../components/atoms/buttons/MenuButton';
-// import * as Updates from 'expo-updates';
+import { MainTabScreenProps } from '../../navigation/types';
 
 const { BACKGROUND } = colors;
+interface DashboardProps extends MainTabScreenProps<'Dashboard'> {
+  email: string;
+  userId: string;
+}
 
-const DashboardContainer: React.FC<DashboardScreenProps> = ({
+const DashboardContainer: React.FC<DashboardProps> = ({
   navigation,
   userId,
   email,
@@ -96,9 +98,6 @@ const DashboardContainer: React.FC<DashboardScreenProps> = ({
   const goToProject = () => {
     navigation.navigate('ProjectDetails', {
       project: firstProject,
-      ref: 'Dashboard',
-      userId,
-      email,
     });
     closeOptionsModal();
   };
@@ -108,9 +107,9 @@ const DashboardContainer: React.FC<DashboardScreenProps> = ({
     closeOptionsModal();
   };
 
-  const goToAccountPending = () => {
-    navigation.navigate('Account');
-  };
+  // const goToAccountPending = () => {
+  //   navigation.navigate('Home');
+  // };
 
   const goToImpactDetail = (impactDetail: ImpactDetail) => {
     navigation.navigate('ImpactDetail', { impactDetail, userId, email });
@@ -144,7 +143,7 @@ const DashboardContainer: React.FC<DashboardScreenProps> = ({
           paid,
           impactMetrics,
         } = sponsorship;
-        if (!status.paid) goToAccountPending();
+        // if (!status.paid) goToAccountPending();
         const investment = unitCost * units;
         const totalReturn = parseInt((investment * (1 + interest)).toFixed());
         const returnPercent = Math.round((collected / totalReturn) * 100);

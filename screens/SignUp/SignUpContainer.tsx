@@ -1,7 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
 import ServicesContext, { Services } from '../../services';
-import { SignUpScreenProps } from '../../navigation/RootNavigatorTypes';
-import { routes } from '../../navigation/RootNavigatorTypes';
 import { _getSignUpError } from '../../utils/errors';
 import SignUpView from './SignUpView';
 import regex from '../../utils/consts/REGEX';
@@ -11,9 +9,11 @@ import { SignUpFormData } from './types';
 import { InputFormConfig } from '../../components/organisms/InputForm/types';
 import NowalaLogo from '../../components/atoms/icons/NowalaLogo';
 import { Country, CountryCode } from 'react-native-country-picker-modal';
+import { RootStackScreenProps } from '../../navigation/types';
 
-const SignUpContainer: React.FC<SignUpScreenProps> = ({ navigation }) => {
-  const { LOGIN } = routes;
+const SignUpContainer: React.FC<RootStackScreenProps<'SignUp'>> = ({
+  navigation,
+}) => {
   // todo: make into readonly variable
   const isLogin = false;
   // LoadingStates
@@ -89,7 +89,7 @@ const SignUpContainer: React.FC<SignUpScreenProps> = ({ navigation }) => {
   }, [navigation]);
 
   const goToLogin = () => {
-    navigation.navigate(LOGIN);
+    navigation.navigate('Login');
   };
 
   const onCountrySelect = (country: Country) => {

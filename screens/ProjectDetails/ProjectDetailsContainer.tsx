@@ -1,28 +1,54 @@
+import { ChevronLeftIcon } from 'native-base';
 import React, { useContext, useEffect, useState } from 'react';
+import { TouchableOpacity } from 'react-native';
 import AfricaIcon from '../../components/atoms/icons/AfricanIcon';
 import PriceIcon from '../../components/atoms/icons/PriceIcon';
 import ProfitIcon from '../../components/atoms/icons/ProfitIcon';
 import TimeIcon from '../../components/atoms/icons/TimeIcon';
-import { ProjectDetailsScreenProps } from '../../navigation/RootNavigatorTypes';
+import { RootStackScreenProps } from '../../navigation/types';
 import ServicesContext, { Services } from '../../services';
 import { PROJECT_ID } from '../../utils/consts/FIRST_PROJECT';
 import { ProjectDetailsContext } from './ProjectDetailsContext';
 import ProjectDetailsView from './ProjectDetailsView';
 
-const ProjectDetailsContainer: React.FC<ProjectDetailsScreenProps> = ({
+interface ProjectDetailsProps extends RootStackScreenProps<'ProjectDetails'> {
+  email: string;
+  userId: string;
+}
+
+const ProjectDetailsContainer: React.FC<ProjectDetailsProps> = ({
   navigation,
   route,
+  userId,
+  email,
 }) => {
-  const { project, ref, email, userId } = route.params;
+  const { project } = route.params;
   const { analytics } = useContext(ServicesContext) as Services;
 
   const [canViewOrderModal, setCanViewOrderModal] = useState(false);
 
   const projectId = PROJECT_ID; // todo: make dynamic and environment based
 
+  // Place Nowala logo in header on component init
+  // useEffect(() => {
+  //   navigation.setOptions({
+  //     headerLeft: () => (
+  //       <TouchableOpacity activeOpacity={0.5} onPress={goToProjects}>
+  //         <ChevronLeftIcon color={'#fff'} />
+  //       </TouchableOpacity>
+  //     ),
+  //     // headerStyle: {
+  //     //   elevation: 0, // remove header border for android
+  //     //   shadowOpacity: 0, // remove header border for ios
+  //     //   borderBottomWidth: 0, //remove header border for ios
+  //     //   backgroundColor: BACKGROUND,
+  //     // },
+  //   });
+  // }, [navigation]);
+
   // track screen
   useEffect(() => {
-    analytics.screenWithProperties('Project Details', { ref });
+    analytics.screen('Project Details');
   }, []);
 
   const getStatIcon = (stat: string) => {
@@ -43,12 +69,20 @@ const ProjectDetailsContainer: React.FC<ProjectDetailsScreenProps> = ({
   const openNewOrderModal = () => setCanViewOrderModal(true);
   const closeNewOrderModal = () => setCanViewOrderModal(false);
 
-  const onOrderSent = () => {
-    navigation.navigate('BankPayment', { redirectPage: 'Account' });
+  const onOrderSent: OrderCallback = (price: number, paymentRef: string) => {
+    navigation.navigate('BankPayment', {
+      redirectPage: 'Main',
+      paymentRef,
+      price,
+    });
   };
 
   const goToLogin = () => {
     navigation.navigate('Login');
+  };
+
+  const goToProjects = () => {
+    navigation.navigate('Main', { screen: 'Projects' });
   };
 
   const ctaOnPress = () => {
