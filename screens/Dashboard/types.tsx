@@ -3,6 +3,9 @@ interface DashboardContext {
   viewProgress: boolean;
   viewOptions: boolean;
   viewOrders: boolean;
+  menuModalOpen: boolean;
+  openMenuModal: () => void;
+  closeMenuModal: () => void;
   openProgressModal: () => void;
   closeProgressModal: () => void;
   closeOptionsModal: () => void;
@@ -10,6 +13,7 @@ interface DashboardContext {
   goToProject: () => void;
   goToYourOrders: () => void;
   goToImpactDetail: ImpactDetailNavProp;
+  signOut: () => void;
 }
 
 type ImpactDetailNavProp = (impactDetail: ImpactDetail) => void;

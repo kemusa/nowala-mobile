@@ -24,11 +24,11 @@ const MainTabNavigator: React.FC<MainTabProps> = ({
   const { Navigator, Screen } = Tab;
   return (
     <Navigator
-      screenOptions={{
+      screenOptions={({ navigation }) => ({
         headerShown: true,
         tabBarActiveTintColor: TRETIARY,
         tabBarInactiveTintColor: '#ABABAB',
-      }}>
+      })}>
       {onboarded ? (
         <Screen
           name="Dashboard"

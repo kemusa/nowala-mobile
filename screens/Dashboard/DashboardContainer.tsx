@@ -13,6 +13,7 @@ import colors from '../../theme/colors';
 import { SponsorshipData } from './typesImport';
 import { statusInit } from '../../utils/consts/DATA';
 import { MainTabScreenProps } from '../../navigation/types';
+import MenuButton from '../../components/atoms/buttons/MenuButton';
 
 const { BACKGROUND } = colors;
 interface DashboardProps extends MainTabScreenProps<'Dashboard'> {
@@ -28,6 +29,8 @@ const DashboardContainer: React.FC<DashboardProps> = ({
   const [viewProgress, setViewProgress] = useState(false);
   const [viewOptions, setViewOptions] = useState(false);
   const [viewOrders, setViewOrders] = useState(false);
+  const [menuModalOpen, setMenuModalOpen] = useState(false);
+
   const [unsubscribeList, setUnsubscribe] = useState([] as any);
   // variable to store unsubscription for dashboard data listener
   let dashboardUnsub = () => {};
@@ -44,10 +47,10 @@ const DashboardContainer: React.FC<DashboardProps> = ({
       ),
       headerTitleAlign: 'left',
       headerRight: () => (
-        // <MenuButton onPress={() => {}} />
-        <NowalaText.LinkText style={{ marginRight: 15 }} onPress={signOut}>
-          Sign out
-        </NowalaText.LinkText>
+        <MenuButton onPress={openMenuModal} />
+        // <NowalaText.LinkText style={{ marginRight: 15 }} onPress={signOut}>
+        //   Sign out
+        // </NowalaText.LinkText>
       ),
       headerStyle: {
         elevation: 0, // remove header border for android
@@ -57,6 +60,8 @@ const DashboardContainer: React.FC<DashboardProps> = ({
       },
     });
   }, [navigation]);
+
+  const x = () => {};
 
   // Get services
   const { auth, db, analytics } = useContext(ServicesContext) as Services;
@@ -130,7 +135,8 @@ const DashboardContainer: React.FC<DashboardProps> = ({
 
   const openOptionsModal = () => setViewOptions(true);
   const closeOptionsModal = () => setViewOptions(false);
-
+  const openMenuModal = () => setMenuModalOpen(true);
+  const closeMenuModal = () => setMenuModalOpen(false);
   const closeOrdersModal = () => setViewOrders(false);
 
   const handleDashboardData = (data: SnapshotData[]) => {
@@ -189,6 +195,9 @@ const DashboardContainer: React.FC<DashboardProps> = ({
         viewProgress,
         viewOptions,
         viewOrders,
+        menuModalOpen,
+        openMenuModal,
+        closeMenuModal,
         openProgressModal,
         closeProgressModal,
         closeOptionsModal,
@@ -196,6 +205,7 @@ const DashboardContainer: React.FC<DashboardProps> = ({
         goToProject,
         goToYourOrders,
         goToImpactDetail,
+        signOut,
       }}>
       <HomeView />
     </DashboardContext.Provider>

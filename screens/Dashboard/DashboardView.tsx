@@ -9,6 +9,7 @@ import OptionsModal from './components/organisms/OptionsModal';
 import colors from '../../theme/colors';
 import { Drawer } from 'native-base';
 import { DrawerContentScrollView } from '@react-navigation/drawer';
+import MenuModal from './components/organisms/MenuModal';
 // import * as Updates from 'expo-updates';
 
 const { BACKGROUND } = colors;
@@ -46,6 +47,7 @@ const DashboardView: React.FC = () => {
         <ImpactBreakdown />
         <ProgressModal />
         <OptionsModal />
+        <MenuModal />
         <View style={{ width: '100%', height: 100 }}></View>
       </ScrollView>
     </SafeAreaView>

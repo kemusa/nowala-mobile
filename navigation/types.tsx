@@ -6,11 +6,11 @@ import type {
 } from '@react-navigation/native';
 import type { StackScreenProps } from '@react-navigation/stack';
 import type { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
+import { DrawerScreenProps } from '@react-navigation/drawer';
 
 export type RootStackParamList = {
   AuthStack: NavigatorScreenParams<AuthStackParamList>;
   NoAuthStack: NavigatorScreenParams<NoAuthStackParamList>;
-  OnboardingStack: { userId: string; email: string };
   Main: NavigatorScreenParams<MainTabParamList>;
   ProjectDetails: {
     project: Project;
@@ -19,7 +19,7 @@ export type RootStackParamList = {
 
 export type AuthStackParamList = {
   Main: NavigatorScreenParams<MainTabParamList>;
-  Drawer: undefined;
+  Drawer: NavigatorScreenParams<DrawerParamList>;
   YourOrders: { orders: OrderData[] };
   ImpactDetail: { impactDetail: ImpactDetail; userId?: string; email?: string };
   BankPayment: {
@@ -39,6 +39,10 @@ export type NoAuthStackParamList = {
   Projects: undefined;
   SignUp: undefined;
   Login: undefined;
+};
+
+export type DrawerParamList = {
+  YourOrders: { orders: OrderData[] };
 };
 
 // export type OnboardingStackParamList = {
@@ -63,6 +67,12 @@ export type RootStackScreenProps<T extends keyof RootStackParamList> =
 export type MainTabScreenProps<T extends keyof MainTabParamList> =
   CompositeScreenProps<
     BottomTabScreenProps<MainTabParamList, T>,
+    RootStackScreenProps<keyof RootStackParamList>
+  >;
+
+export type DrawerStackScreenProps<T extends keyof DrawerParamList> =
+  CompositeScreenProps<
+    DrawerScreenProps<DrawerParamList, T>,
     RootStackScreenProps<keyof RootStackParamList>
   >;
 

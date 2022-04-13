@@ -4,6 +4,10 @@ import Icons from '../../icons';
 import styles from './styles';
 
 const MenuButton: React.FC<MenuButtonProps> = ({ onPress }) => {
+  const toggleDrawer = () => {
+    //Props to open/close the drawer
+    // props.navigationProps.toggleDrawer();
+  };
   return (
     <TouchableOpacity
       activeOpacity={0.5}

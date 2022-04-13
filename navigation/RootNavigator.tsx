@@ -11,7 +11,7 @@ import ProjectDetailsScreen from '../screens/ProjectDetails';
 
 enableScreens(false);
 
-const { BACKGROUND, WHITE } = colors;
+const { WHITE } = colors;
 
 const Stack = createStackNavigator<RootStackParamList>();
 

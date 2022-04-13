@@ -24,7 +24,7 @@ const ProjectsContainer: React.FC<ProjectProps> = ({
   userId,
   email,
 }) => {
-  const { WHITE, PRIMARY } = colors;
+  const { WHITE, BACKGROUND } = colors;
   const { analytics } = useContext(ServicesContext) as Services;
   // Place Nowala logo in header on component init
   // Only shows if headerShown is set to true in navigator
@@ -46,6 +46,7 @@ const ProjectsContainer: React.FC<ProjectProps> = ({
         elevation: 0, // remove header border for android
         shadowOpacity: 0, // remove header border for ios
         borderBottomWidth: 0, //remove header border for ios
+        backgroundColor: BACKGROUND,
       },
     });
   }, [navigation]);

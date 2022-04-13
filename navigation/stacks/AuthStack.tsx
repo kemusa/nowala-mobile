@@ -7,6 +7,7 @@ import colors from '../../theme/colors';
 import YourOrdersScreen from '../../screens/YourOrders';
 import ImpactDetailScreen from '../../screens/ImpactDetail';
 import BankPaymentScreen from '../../screens/BankPayment';
+import DrawerNavigator from '../DrawerNavigator';
 
 const Stack = createStackNavigator<AuthStackParamList>();
 const { WHITE, BACKGROUND } = colors;
@@ -30,6 +31,9 @@ const AuthStack: React.FC<AuthStackProps> = ({ email, userId, onboarded }) => {
             onboarded={onboarded}
           />
         )}
+      </Screen>
+      <Screen name="Drawer" options={{ headerShown: false, title: '' }}>
+        {props => <DrawerNavigator {...props} userId={userId} email={email} />}
       </Screen>
       <Screen
         name="YourOrders"
