@@ -62,11 +62,11 @@ const ProjectsContainer: React.FC<ProjectProps> = ({
   };
 
   const goToSignUp = () => {
-    navigation.navigate('SignUp');
+    navigation.navigate('NoAuthStack', { screen: 'SignUp' });
   };
 
   const goToLogin = () => {
-    navigation.navigate('Login');
+    navigation.navigate('NoAuthStack', { screen: 'Login' });
   };
 
   const data: Project[] = [

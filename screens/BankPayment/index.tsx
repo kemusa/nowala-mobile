@@ -1,3 +1,3 @@
-import BankPayment from './BankPaymentContainer';
+import BankPaymentScreen from './BankPaymentContainer';
 
-export default BankPayment;
+export default BankPaymentScreen;

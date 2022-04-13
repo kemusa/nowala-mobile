@@ -1,11 +1,14 @@
 import React, { useContext, useEffect } from 'react';
 import NowalaIcon from '../../components/atoms/icons/NowalaIcon';
-import { RootStackScreenProps } from '../../navigation/types';
+import {
+  AuthStackScreenProps,
+  RootStackScreenProps,
+} from '../../navigation/types';
 import ServicesContext, { Services } from '../../services';
 import { YourOrdersContext } from './YourOrdersContext';
 import YourOrdersModalView from './YourOrdersView';
 
-const YourOrdersContainer: React.FC<RootStackScreenProps<'YourOrders'>> = ({
+const YourOrdersContainer: React.FC<AuthStackScreenProps<'YourOrders'>> = ({
   navigation,
   route,
 }) => {

@@ -9,9 +9,9 @@ import { SignUpFormData } from './types';
 import { InputFormConfig } from '../../components/organisms/InputForm/types';
 import NowalaLogo from '../../components/atoms/icons/NowalaLogo';
 import { Country, CountryCode } from 'react-native-country-picker-modal';
-import { RootStackScreenProps } from '../../navigation/types';
+import { NoAuthStackScreenProps } from '../../navigation/types';
 
-const SignUpContainer: React.FC<RootStackScreenProps<'SignUp'>> = ({
+const SignUpContainer: React.FC<NoAuthStackScreenProps<'SignUp'>> = ({
   navigation,
 }) => {
   // todo: make into readonly variable

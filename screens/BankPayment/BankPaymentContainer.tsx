@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { RootStackScreenProps } from '../../navigation/types';
+import { AuthStackScreenProps } from '../../navigation/types';
 import BankPaymentView from './BankPaymentView';
 
-const BankPaymentContainer: React.FC<RootStackScreenProps<'BankPayment'>> = ({
+const BankPaymentContainer: React.FC<AuthStackScreenProps<'BankPayment'>> = ({
   navigation,
   route,
 }) => {

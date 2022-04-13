@@ -70,20 +70,21 @@ const ProjectDetailsContainer: React.FC<ProjectDetailsProps> = ({
   const closeNewOrderModal = () => setCanViewOrderModal(false);
 
   const onOrderSent: OrderCallback = (price: number, paymentRef: string) => {
-    navigation.navigate('BankPayment', {
-      redirectPage: 'Main',
-      paymentRef,
-      price,
+    navigation.navigate('AuthStack', {
+      screen: 'BankPayment',
+      params: { redirectPage: 'Main', paymentRef, price },
     });
   };
 
   const goToLogin = () => {
-    navigation.navigate('Login');
+    navigation.navigate('NoAuthStack', {
+      screen: 'Login',
+    });
   };
 
-  const goToProjects = () => {
-    navigation.navigate('Main', { screen: 'Projects' });
-  };
+  // const goToProjects = () => {
+  //   navigation.navigate('Main', { screen: 'Projects' });
+  // };
 
   const ctaOnPress = () => {
     // If the user is logged in open the order modal. If not, prompt them to login

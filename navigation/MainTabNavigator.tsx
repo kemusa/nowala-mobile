@@ -5,6 +5,7 @@ import DashboardScreen from '../screens/Dashboard';
 import ProjectsScreen from '../screens/Projects';
 import { MainTabParamList, RootStackScreenProps } from './types';
 import colors from '../theme/colors';
+import AccountPendingScreen from '../screens/AccountPending';
 
 const Tab = createBottomTabNavigator<MainTabParamList>();
 const { TRETIARY } = colors;
@@ -12,9 +13,14 @@ const { TRETIARY } = colors;
 interface MainTabProps extends RootStackScreenProps<'Main'> {
   email: string;
   userId: string;
+  onboarded: boolean;
 }
 
-const MainTabNavigator: React.FC<MainTabProps> = ({ email, userId }) => {
+const MainTabNavigator: React.FC<MainTabProps> = ({
+  email,
+  userId,
+  onboarded,
+}) => {
   const { Navigator, Screen } = Tab;
   return (
     <Navigator
@@ -23,15 +29,29 @@ const MainTabNavigator: React.FC<MainTabProps> = ({ email, userId }) => {
         tabBarActiveTintColor: TRETIARY,
         tabBarInactiveTintColor: '#ABABAB',
       }}>
-      <Screen
-        name="Dashboard"
-        options={{
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="home" size={size} color={color} />
-          ),
-        }}>
-        {props => <DashboardScreen {...props} email={email} userId={userId} />}
-      </Screen>
+      {onboarded ? (
+        <Screen
+          name="Dashboard"
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="home" size={size} color={color} />
+            ),
+          }}>
+          {props => (
+            <DashboardScreen {...props} email={email} userId={userId} />
+          )}
+        </Screen>
+      ) : (
+        <Screen
+          name="Account"
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="home" size={size} color={color} />
+            ),
+          }}>
+          {props => <AccountPendingScreen {...props} />}
+        </Screen>
+      )}
       <Screen
         name="Projects"
         options={{

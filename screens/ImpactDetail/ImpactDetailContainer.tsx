@@ -3,9 +3,12 @@ import { ImpactDetailContext } from './ImpactDetailContext';
 import ImpactDetailView from './ImpactDetailView';
 import ServicesContext, { Services } from '../../services';
 import { PROJECT_ID } from '../../utils/consts/FIRST_PROJECT';
-import { RootStackScreenProps } from '../../navigation/types';
+import {
+  AuthStackScreenProps,
+  RootStackScreenProps,
+} from '../../navigation/types';
 
-const ImpactDetailContainer: React.FC<RootStackScreenProps<'ImpactDetail'>> = ({
+const ImpactDetailContainer: React.FC<AuthStackScreenProps<'ImpactDetail'>> = ({
   navigation,
   route,
 }) => {
@@ -41,10 +44,9 @@ const ImpactDetailContainer: React.FC<RootStackScreenProps<'ImpactDetail'>> = ({
   const closeNewOrderModal = () => setViewNewOrder(false);
 
   const onOrderSent = (price: number, paymentRef: string) => {
-    navigation.navigate('BankPayment', {
-      redirectPage: 'Main',
-      paymentRef,
-      price,
+    navigation.navigate('AuthStack', {
+      screen: 'BankPayment',
+      params: { redirectPage: 'Main', paymentRef, price },
     });
   };
 

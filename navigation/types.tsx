@@ -8,21 +8,22 @@ import type { StackScreenProps } from '@react-navigation/stack';
 import type { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 
 export type RootStackParamList = {
+  AuthStack: NavigatorScreenParams<AuthStackParamList>;
+  NoAuthStack: NavigatorScreenParams<NoAuthStackParamList>;
+  OnboardingStack: { userId: string; email: string };
   Main: NavigatorScreenParams<MainTabParamList>;
-  Projects: undefined;
   ProjectDetails: {
     project: Project;
   };
-  SignUp: undefined;
-  Login: undefined;
-  PasswordReset: undefined;
-  YourOrders: { orders: OrderData[] };
-  BottomNav: undefined;
+};
+
+export type AuthStackParamList = {
+  Main: NavigatorScreenParams<MainTabParamList>;
   Drawer: undefined;
+  YourOrders: { orders: OrderData[] };
   ImpactDetail: { impactDetail: ImpactDetail; userId?: string; email?: string };
-  Intro: undefined;
   BankPayment: {
-    redirectPage: keyof RootStackParamList;
+    redirectPage: keyof RootStackParamList | keyof AuthStackParamList;
     paymentRef: string;
     price: number;
   };
@@ -30,9 +31,31 @@ export type RootStackParamList = {
 
 export type MainTabParamList = {
   Dashboard: undefined;
-  Account: undefined;
   Projects: undefined;
+  Account: undefined;
 };
+
+export type NoAuthStackParamList = {
+  Projects: undefined;
+  SignUp: undefined;
+  Login: undefined;
+};
+
+// export type OnboardingStackParamList = {
+//   Main: NavigatorScreenParams<OnboardingTabParamList>;
+//   YourOrders: { orders: OrderData[] };
+//   ImpactDetail: { impactDetail: ImpactDetail; userId?: string; email?: string };
+//   BankPayment: {
+//     redirectPage: keyof RootStackParamList;
+//     paymentRef: string;
+//     price: number;
+//   };
+// };
+
+// export type OnboardingTabParamList = {
+//   Projects: undefined;
+//   Account: undefined;
+// };
 
 export type RootStackScreenProps<T extends keyof RootStackParamList> =
   StackScreenProps<RootStackParamList, T>;
@@ -42,6 +65,24 @@ export type MainTabScreenProps<T extends keyof MainTabParamList> =
     BottomTabScreenProps<MainTabParamList, T>,
     RootStackScreenProps<keyof RootStackParamList>
   >;
+
+export type NoAuthStackScreenProps<T extends keyof NoAuthStackParamList> =
+  CompositeScreenProps<
+    StackScreenProps<NoAuthStackParamList, T>,
+    RootStackScreenProps<keyof RootStackParamList>
+  >;
+
+export type AuthStackScreenProps<T extends keyof AuthStackParamList> =
+  CompositeScreenProps<
+    StackScreenProps<AuthStackParamList, T>,
+    RootStackScreenProps<keyof RootStackParamList>
+  >;
+
+// export type OnboardingStackScreenProps<T extends keyof OnboardingTabParamList> =
+//   CompositeScreenProps<
+//     BottomTabScreenProps<OnboardingTabParamList, T>,
+//     RootStackScreenProps<keyof RootStackParamList>
+//   >;
 
 declare global {
   namespace ReactNavigation {

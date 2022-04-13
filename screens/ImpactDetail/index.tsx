@@ -1,3 +1,3 @@
-import ImpactDetailContainer from './ImpactDetailContainer';
+import ImpactDetailScreen from './ImpactDetailContainer';
 
-export default ImpactDetailContainer;
+export default ImpactDetailScreen;

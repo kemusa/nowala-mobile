@@ -10,9 +10,9 @@ import LoginContext from './LoginContext';
 import { LoginFormData } from './types';
 import { InputFormConfig } from '../../components/organisms/InputForm/types';
 import NowalaLogo from '../../components/atoms/icons/NowalaLogo';
-import { RootStackScreenProps } from '../../navigation/types';
+import { NoAuthStackScreenProps } from '../../navigation/types';
 
-const LoginContainer: React.FC<RootStackScreenProps<'Login'>> = ({
+const LoginContainer: React.FC<NoAuthStackScreenProps<'Login'>> = ({
   navigation,
 }) => {
   // todo: make into readonly variable

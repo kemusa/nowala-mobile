@@ -1,3 +1,3 @@
-import AccountPending from './AccountPendingContainer';
+import AccountPendingScreen from './AccountPendingContainer';
 
-export default AccountPending;
+export default AccountPendingScreen;

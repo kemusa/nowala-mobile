@@ -103,7 +103,10 @@ const DashboardContainer: React.FC<DashboardProps> = ({
   };
 
   const goToYourOrders = () => {
-    navigation.navigate('YourOrders', { orders });
+    navigation.navigate('AuthStack', {
+      screen: 'YourOrders',
+      params: { orders },
+    });
     closeOptionsModal();
   };
 
@@ -112,7 +115,10 @@ const DashboardContainer: React.FC<DashboardProps> = ({
   // };
 
   const goToImpactDetail = (impactDetail: ImpactDetail) => {
-    navigation.navigate('ImpactDetail', { impactDetail, userId, email });
+    navigation.navigate('AuthStack', {
+      screen: 'ImpactDetail',
+      params: { impactDetail, userId, email },
+    });
   };
 
   const openProgressModal = () =>
