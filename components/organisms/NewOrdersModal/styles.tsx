@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
   orderContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 70,
+    marginBottom: 20,
   },
   confirmedContainer: {
     width: '100%',

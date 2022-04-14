@@ -3,14 +3,14 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import DashboardScreen from '../screens/Dashboard';
 import ProjectsScreen from '../screens/Projects';
-import { MainTabParamList, RootStackScreenProps } from './types';
+import { AuthStackScreenProps, MainTabParamList } from './types';
 import colors from '../theme/colors';
 import AccountPendingScreen from '../screens/AccountPending';
 
 const Tab = createBottomTabNavigator<MainTabParamList>();
 const { TRETIARY } = colors;
 
-interface MainTabProps extends RootStackScreenProps<'Main'> {
+interface MainTabProps extends AuthStackScreenProps<'Main'> {
   email: string;
   userId: string;
   onboarded: boolean;

@@ -76,8 +76,7 @@ const BankPaymentView: React.FC<BankPaymentViewProps> = ({
         <View style={{ width: '100%', height: 250 }}></View>
       </ScrollView>
       <BanksModal isOpen={viewBankSelect} onClose={onBankSelectClose} />
-      <View
-        style={[styles.doubleButtonContainer, styles.buttonContainerConfig]}>
+      <View style={styles.buttonContainer}>
         <PrimaryButton text="Transfer now" onPress={openBankSelect} />
         <SecondaryButton
           text="I made this transfer"
@@ -85,6 +84,7 @@ const BankPaymentView: React.FC<BankPaymentViewProps> = ({
         <NowalaText.LinkText style={{ marginTop: 15 }} onPress={redirect}>
           I will pay within 24 hours
         </NowalaText.LinkText>
+        <View style={styles.spacer}></View>
       </View>
     </SafeAreaView>
   );

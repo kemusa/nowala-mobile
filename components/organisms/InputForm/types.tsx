@@ -27,6 +27,7 @@ export interface InputFieldProps {
   type: 'input' | 'select' | 'country';
   onCountrySelect?: (country: Country) => void;
   countryCode?: CountryCode;
+  after?: JSX.Element;
 }
 
 export interface SelectListItem {

@@ -1,14 +1,25 @@
 import { Platform, StyleSheet } from 'react-native';
 import { spec } from './specs';
 import colors from '../../theme/colors';
+import {
+  buttonHeight,
+  screenPadding,
+  buttonContainer,
+} from '../../utils/consts/STYLES';
 const { WHITE, PRIMARY, BACKGROUND, TRANSPARENT_BACKGROUND } = colors;
 const { ITEM_WIDTH, ITEM_HEIGHT } = spec;
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    padding: 15,
+    // padding: 15,
     width: '100%',
-    backgroundColor: TRANSPARENT_BACKGROUND,
+    backgroundColor: WHITE,
+    height: buttonHeight,
+    position: 'absolute',
+    bottom: 0,
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingBottom: 85,
   },
   container: { flex: 1, backgroundColor: BACKGROUND, padding: 20 },
   cardContainer: {
@@ -52,6 +63,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
+  spacer: { height: 150 },
 });
 
 export default styles;

@@ -2,7 +2,7 @@ const firstProject: Project = {
   key: '1',
   title: 'Provide Affordable Solar Energy',
   description:
-    "We've partnered with Ignite Power SL to help you provide affordable solar power to the rural poor in Sierra Leone. When you join this project, you get to sponsor Solar Kits which are directly placed in a home without electricity. The residents pay an afforadable rate each month and the returns are paid to you.",
+    "We've partnered with Ignite Power SL to help you provide affordable solar power to the rural poor in Sierra Leone. When you join this project, you get to sponsor Solar Panel Kits which are directly placed in a home without electricity. The residents pay an afforadable rate each month and the returns are collected for you.",
   image: 'https://storage.googleapis.com/nowala-public/ignite-solar-image.png',
   color: '#20678A',
   stats: {
@@ -11,7 +11,7 @@ const firstProject: Project = {
       value: '~£60',
       icon: 'price',
     },
-    return: { title: 'Return', value: '10%', icon: 'return' },
+    return: { title: 'Return', value: 'up to 10%', icon: 'return' },
     time: { title: 'Payback period', value: '2 years', icon: 'time' },
     country: {
       title: 'Country',

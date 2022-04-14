@@ -54,27 +54,23 @@ export default class AuthService {
     password: string,
     country: string,
   ) {
-    try {
-      const { user } = await createUserWithEmailAndPassword(
-        this.getAuth,
-        email,
-        password,
-      );
-      await updateProfile(user, { displayName: name });
-      // Create user document
-      await this.dbService.writeDocumentWithId('users', user.uid, {
-        displayName: name,
-        onboarded: false,
-        country,
-      });
-      // Init user sponsorship
-      await this.dbService.writeDocument(`users/${user.uid}/sponsorships`, {
-        ...projectsInit,
-      });
-      return user;
-    } catch (error) {
-      console.error(error);
-    }
+    const { user } = await createUserWithEmailAndPassword(
+      this.getAuth,
+      email,
+      password,
+    );
+    await updateProfile(user, { displayName: name });
+    // Create user document
+    await this.dbService.writeDocumentWithId('users', user.uid, {
+      displayName: name,
+      onboarded: false,
+      country,
+    });
+    // Init user sponsorship
+    await this.dbService.writeDocument(`users/${user.uid}/sponsorships`, {
+      ...projectsInit,
+    });
+    return user;
   }
 
   // Sign user in with email and password
@@ -92,11 +88,7 @@ export default class AuthService {
   }
 
   public async passwordReset(email: string) {
-    try {
-      await sendPasswordResetEmail(this.getAuth, email);
-    } catch (error) {
-      console.error(error);
-    }
+    await sendPasswordResetEmail(this.getAuth, email);
   }
 
   // public async signInWithFacebook() {

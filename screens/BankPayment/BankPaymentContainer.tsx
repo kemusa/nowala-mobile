@@ -19,7 +19,7 @@ const BankPaymentContainer: React.FC<AuthStackScreenProps<'BankPayment'>> = ({
   };
 
   const redirect = () => {
-    navigation.navigate(redirectPage);
+    navigation.navigate('Main', { screen: redirectPage });
   };
 
   return (

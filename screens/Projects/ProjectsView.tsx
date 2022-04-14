@@ -31,19 +31,6 @@ const IntroView: React.FC = () => {
             {/* Card wrapper */}
             <View
               style={[styles.cardContainer, { backgroundColor: item.color }]}>
-              {/* {item.clickable && (
-                <View
-                  style={{
-                    position: 'absolute',
-                    zIndex: 10,
-                    top: 15,
-                    right: 10,
-                    height: 15,
-                    width: 50,
-                    backgroundColor: 'blue',
-                    borderRadius: 20,
-                  }}></View>
-              )} */}
               {item.image && (
                 <Image style={styles.image} source={{ uri: item.image }} />
               )}
@@ -52,15 +39,15 @@ const IntroView: React.FC = () => {
               {/* If there's a title and description dispalay description portion of card */}
               {item.title && item.description && (
                 <View style={styles.cardInfoContainer}>
-                  <NowalaText.Headline2Light style={styles.title}>
+                  <NowalaText.Headline3Light style={styles.title}>
                     {item.title}
-                  </NowalaText.Headline2Light>
+                  </NowalaText.Headline3Light>
                   <NowalaText.Body1
                     style={styles.description}
                     numberOfLines={item.clickable ? 3 : undefined}>
                     {item.description}
                   </NowalaText.Body1>
-                  {item.clickable && (
+                  {/* {item.clickable && (
                     <View style={{ width: '100%', marginTop: 3 }}>
                       <NowalaText.LinkText2
                         style={{ textAlign: 'left' }}
@@ -68,12 +55,13 @@ const IntroView: React.FC = () => {
                         See more...
                       </NowalaText.LinkText2>
                     </View>
-                  )}
+                  )} */}
                 </View>
               )}
             </View>
           </TouchableOpacity>
         ))}
+        <View style={styles.spacer}></View>
       </ScrollView>
       {!userId && (
         <View style={styles.buttonContainer}>

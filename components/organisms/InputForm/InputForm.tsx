@@ -19,6 +19,7 @@ const InputForm: React.FC<InputFormConfig> = ({
   validationErrors,
   error,
 }) => {
+  console.log('ERROR', error);
   return (
     <>
       {error.message && (
@@ -73,6 +74,7 @@ const InputForm: React.FC<InputFormConfig> = ({
                   countryCode={field.countryCode}
                 />
               )}
+              {field.after && field.after}
             </View>
           ))}
           <PrimaryButton

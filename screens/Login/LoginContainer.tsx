@@ -11,6 +11,7 @@ import { LoginFormData } from './types';
 import { InputFormConfig } from '../../components/organisms/InputForm/types';
 import NowalaLogo from '../../components/atoms/icons/NowalaLogo';
 import { NoAuthStackScreenProps } from '../../navigation/types';
+import NowalaText from '../../components/atoms/text';
 
 const LoginContainer: React.FC<NoAuthStackScreenProps<'Login'>> = ({
   navigation,
@@ -64,6 +65,10 @@ const LoginContainer: React.FC<NoAuthStackScreenProps<'Login'>> = ({
 
   const goToSignUp = () => {
     navigation.navigate('SignUp');
+  };
+
+  const goToForgotPassword = () => {
+    navigation.navigate('ForgotPassword');
   };
 
   const LoginWithEmailAndPassword = async (data: LoginFormData) => {
@@ -127,6 +132,13 @@ const LoginContainer: React.FC<NoAuthStackScreenProps<'Login'>> = ({
         name: 'password',
         rules: passwordRules,
         type: 'input',
+        after: (
+          <NowalaText.LinkText
+            style={{ marginTop: 10 }}
+            onPress={goToForgotPassword}>
+            Forgot password?
+          </NowalaText.LinkText>
+        ),
       },
     ],
     buttonProps: {
@@ -144,7 +156,8 @@ const LoginContainer: React.FC<NoAuthStackScreenProps<'Login'>> = ({
   };
 
   return (
-    <LoginContext.Provider value={{ inputFormConfig, authConfirmTextProps }}>
+    <LoginContext.Provider
+      value={{ inputFormConfig, authConfirmTextProps, goToForgotPassword }}>
       <LoginView />
     </LoginContext.Provider>
   );

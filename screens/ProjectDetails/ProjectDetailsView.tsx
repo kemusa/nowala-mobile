@@ -56,7 +56,7 @@ const ProjectDetailsView = () => {
           <View style={styles.spacer}></View>
         </ScrollView>
         <NewOrderModal
-          title="Order solar kits"
+          title="Provide affordable solar power"
           page_ref="project_detail_page"
           userId={userId || ''}
           projectId={projectId}
@@ -65,9 +65,9 @@ const ProjectDetailsView = () => {
           onOrderSent={onOrderSent}
           onClose={closeNewOrderModal}
         />
-        <View style={styles.buttonContainer}>
-          <PrimaryButton text="Order now" onPress={ctaOnPress} />
-        </View>
+      </View>
+      <View style={styles.buttonContainer}>
+        <PrimaryButton text="Order now" onPress={ctaOnPress} />
       </View>
     </SafeAreaView>
   );

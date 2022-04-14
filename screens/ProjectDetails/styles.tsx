@@ -6,15 +6,20 @@ const { width, height } = Dimensions.get('window');
 const { PRIMARY, WHITE } = colors;
 
 const styles = StyleSheet.create({
-  backgroundContainer: { height: '100%', width: '100%', position: 'absolute' },
+  backgroundContainer: {
+    flex: 1,
+    height: '100%',
+    width: '100%',
+    position: 'absolute',
+  },
   buttonContainer: {
-    height: buttonHeight,
     position: 'absolute',
     bottom: 0,
     paddingLeft: 20,
     paddingRight: 20,
-    // paddingBottom: 70,
+    paddingBottom: 30,
     width: '100%',
+    backgroundColor: 'rgba(0, 0, 0, 0)',
   },
   container: { flex: 1, flexDirection: 'column' },
   contentContainer: {
@@ -25,7 +30,6 @@ const styles = StyleSheet.create({
     bottom: 0,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'red',
   },
   image: {
     height: '45%',

@@ -46,7 +46,7 @@ const ImpactDetailContainer: React.FC<AuthStackScreenProps<'ImpactDetail'>> = ({
   const onOrderSent = (price: number, paymentRef: string) => {
     navigation.navigate('AuthStack', {
       screen: 'BankPayment',
-      params: { redirectPage: 'Main', paymentRef, price },
+      params: { redirectPage: 'Dashboard', paymentRef, price },
     });
   };
 

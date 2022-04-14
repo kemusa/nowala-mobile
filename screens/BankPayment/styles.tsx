@@ -8,10 +8,15 @@ import {
 const { WHITE, TRETIARY, TRANSPARENT_BACKGROUND } = colors;
 const styles = StyleSheet.create({
   bankDetail: { flexDirection: 'row', alignItems: 'center' },
-  buttonContainerConfig: {
-    height: 170,
+  buttonContainer: {
+    // height: 170,
     alignItems: 'center',
     backgroundColor: TRANSPARENT_BACKGROUND,
+    position: 'absolute',
+    bottom: 0,
+    paddingLeft: 20,
+    paddingRight: 20,
+    width: '100%',
   },
   safeAreaView: { flex: 1, backgroundColor: WHITE },
   container: { padding: screenPadding, paddingTop: 40 },
@@ -20,6 +25,7 @@ const styles = StyleSheet.create({
   instructionItem: { marginBottom: 20 },
   doubleButtonContainer,
   instructionHeading: { color: TRETIARY },
+  spacer: { height: 30, width: '100%' },
 });
 
 export default styles;

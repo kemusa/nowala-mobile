@@ -72,7 +72,7 @@ const ProjectDetailsContainer: React.FC<ProjectDetailsProps> = ({
   const onOrderSent: OrderCallback = (price: number, paymentRef: string) => {
     navigation.navigate('AuthStack', {
       screen: 'BankPayment',
-      params: { redirectPage: 'Main', paymentRef, price },
+      params: { redirectPage: 'Projects', paymentRef, price },
     });
   };
 

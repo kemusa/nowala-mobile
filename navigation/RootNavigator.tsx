@@ -60,7 +60,7 @@ const RootNavigator = () => {
   };
 
   return (
-    <Navigator initialRouteName="Main" detachInactiveScreens={false}>
+    <Navigator initialRouteName="AuthStack" detachInactiveScreens={false}>
       {uid ? (
         <>
           <Screen name="AuthStack" options={{ headerShown: false, title: '' }}>
@@ -79,7 +79,6 @@ const RootNavigator = () => {
               headerShown: true,
               headerTransparent: true,
               headerTintColor: WHITE,
-              // headerLeft: () => <Text>Back</Text>,
             }}>
             {props => (
               <ProjectDetailsScreen {...props} userId={uid} email={email} />

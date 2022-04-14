@@ -6,10 +6,10 @@ import NowalaText from '../../components/atoms/text';
 import LoginContext from './LoginContext';
 import styles from './styles';
 import { ScrollView } from 'react-native-gesture-handler';
-// import { LoginViewProps } from './types';
 
 const LoginView: React.FC = () => {
-  const { inputFormConfig, authConfirmTextProps } = useContext(LoginContext);
+  const { inputFormConfig, authConfirmTextProps, goToForgotPassword } =
+    useContext(LoginContext);
   return (
     <SafeAreaView style={styles.safeAreaView}>
       <ScrollView style={styles.container}>
@@ -17,6 +17,7 @@ const LoginView: React.FC = () => {
           Log in
         </NowalaText.Headline1>
         <InputForm {...inputFormConfig} />
+        <View style={{ width: '100%', alignItems: 'center' }}></View>
         <AuthConfirmText {...authConfirmTextProps} />
       </ScrollView>
     </SafeAreaView>

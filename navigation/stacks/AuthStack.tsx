@@ -1,13 +1,11 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import ProjectDetailsScreen from '../../screens/ProjectDetails';
 import { AuthStackParamList, RootStackScreenProps } from '../types';
 import MainTabNavigator from '../MainTabNavigator';
 import colors from '../../theme/colors';
 import YourOrdersScreen from '../../screens/YourOrders';
 import ImpactDetailScreen from '../../screens/ImpactDetail';
 import BankPaymentScreen from '../../screens/BankPayment';
-import DrawerNavigator from '../DrawerNavigator';
 
 const Stack = createStackNavigator<AuthStackParamList>();
 const { WHITE, BACKGROUND } = colors;
@@ -31,9 +29,6 @@ const AuthStack: React.FC<AuthStackProps> = ({ email, userId, onboarded }) => {
             onboarded={onboarded}
           />
         )}
-      </Screen>
-      <Screen name="Drawer" options={{ headerShown: false, title: '' }}>
-        {props => <DrawerNavigator {...props} userId={userId} email={email} />}
       </Screen>
       <Screen
         name="YourOrders"
