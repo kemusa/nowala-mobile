@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { SafeAreaView, ScrollView, Text, View } from 'react-native';
 import styles from './styles';
-import NowalaText from '../../components/atoms/text';
 import ImpactBreakdown from './components/organisms/ImpactBreakdown';
 import ReturnBreakdown from './components/organisms/ReturnBreakdown';
 import ProgressModal from './components/organisms/ProgressModal';
@@ -26,14 +25,6 @@ const { BACKGROUND } = colors;
 const DashboardView: React.FC = () => {
   return (
     <SafeAreaView style={styles.container}>
-      {/* <Drawer isOpen={true}>
-        <DrawerContentScrollView
-          style={{ height: '100%', backgroundColor: '#fff' }}>
-          <View style={{}}>
-            <NowalaText.Headline1>Dashboard</NowalaText.Headline1>
-          </View>
-        </DrawerContentScrollView>
-      </Drawer> */}
       <ScrollView
         style={{
           backgroundColor: BACKGROUND,

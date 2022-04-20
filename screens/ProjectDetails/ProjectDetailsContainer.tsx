@@ -1,12 +1,11 @@
-import { ChevronLeftIcon } from 'native-base';
 import React, { useContext, useEffect, useState } from 'react';
-import { TouchableOpacity } from 'react-native';
 import AfricaIcon from '../../components/atoms/icons/AfricanIcon';
 import PriceIcon from '../../components/atoms/icons/PriceIcon';
 import ProfitIcon from '../../components/atoms/icons/ProfitIcon';
 import TimeIcon from '../../components/atoms/icons/TimeIcon';
 import { RootStackScreenProps } from '../../navigation/types';
 import ServicesContext, { Services } from '../../services';
+import { analyticsScreens } from '../../utils/consts/ANALYTICS';
 import { PROJECT_ID } from '../../utils/consts/FIRST_PROJECT';
 import { ProjectDetailsContext } from './ProjectDetailsContext';
 import ProjectDetailsView from './ProjectDetailsView';
@@ -14,6 +13,7 @@ import ProjectDetailsView from './ProjectDetailsView';
 interface ProjectDetailsProps extends RootStackScreenProps<'ProjectDetails'> {
   email: string;
   userId: string;
+  firstName: string;
 }
 
 const ProjectDetailsContainer: React.FC<ProjectDetailsProps> = ({
@@ -21,6 +21,7 @@ const ProjectDetailsContainer: React.FC<ProjectDetailsProps> = ({
   route,
   userId,
   email,
+  firstName,
 }) => {
   const { project } = route.params;
   const { analytics } = useContext(ServicesContext) as Services;
@@ -48,7 +49,7 @@ const ProjectDetailsContainer: React.FC<ProjectDetailsProps> = ({
 
   // track screen
   useEffect(() => {
-    analytics.screen('Project Details');
+    analytics.screen(analyticsScreens.PROJECT_DETAILS);
   }, []);
 
   const getStatIcon = (stat: string) => {
@@ -103,6 +104,7 @@ const ProjectDetailsContainer: React.FC<ProjectDetailsProps> = ({
         ctaOnPress,
         closeNewOrderModal,
         onOrderSent,
+        firstName,
       }}>
       <ProjectDetailsView />
     </ProjectDetailsContext.Provider>

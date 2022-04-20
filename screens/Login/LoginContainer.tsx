@@ -12,6 +12,10 @@ import { InputFormConfig } from '../../components/organisms/InputForm/types';
 import NowalaLogo from '../../components/atoms/icons/NowalaLogo';
 import { NoAuthStackScreenProps } from '../../navigation/types';
 import NowalaText from '../../components/atoms/text';
+import {
+  analyticsEvents,
+  analyticsScreens,
+} from '../../utils/consts/ANALYTICS';
 
 const LoginContainer: React.FC<NoAuthStackScreenProps<'Login'>> = ({
   navigation,
@@ -60,7 +64,7 @@ const LoginContainer: React.FC<NoAuthStackScreenProps<'Login'>> = ({
 
   // track screen
   useEffect(() => {
-    analytics.screen('Login');
+    analytics.screen(analyticsScreens.LOGIN);
   }, []);
 
   const goToSignUp = () => {
@@ -77,7 +81,7 @@ const LoginContainer: React.FC<NoAuthStackScreenProps<'Login'>> = ({
       setLoginError(NO_LOGIN_ERROR);
       setEmailAuthLoading(true);
       await auth.signInWithEmailAndPassword(email, password);
-      analytics.track('Signed In');
+      analytics.track(analyticsEvents.SIGNED_IN);
     } catch (error: any) {
       setEmailAuthLoading(false);
       displayFormError(error.code);

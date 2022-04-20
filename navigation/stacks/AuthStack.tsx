@@ -13,10 +13,16 @@ const { WHITE, BACKGROUND } = colors;
 interface AuthStackProps extends RootStackScreenProps<'AuthStack'> {
   email: string;
   userId: string;
+  firstName: string;
   onboarded: boolean;
 }
 
-const AuthStack: React.FC<AuthStackProps> = ({ email, userId, onboarded }) => {
+const AuthStack: React.FC<AuthStackProps> = ({
+  email,
+  userId,
+  firstName,
+  onboarded,
+}) => {
   const { Navigator, Screen } = Stack;
   return (
     <Navigator initialRouteName="Main">
@@ -26,6 +32,7 @@ const AuthStack: React.FC<AuthStackProps> = ({ email, userId, onboarded }) => {
             {...props}
             userId={userId}
             email={email}
+            firstName={firstName}
             onboarded={onboarded}
           />
         )}

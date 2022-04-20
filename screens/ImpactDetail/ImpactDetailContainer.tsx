@@ -7,13 +7,14 @@ import {
   AuthStackScreenProps,
   RootStackScreenProps,
 } from '../../navigation/types';
+import { analyticsScreens } from '../../utils/consts/ANALYTICS';
 
 const ImpactDetailContainer: React.FC<AuthStackScreenProps<'ImpactDetail'>> = ({
   navigation,
   route,
 }) => {
   const { params } = route;
-  const { impactDetail, userId, email } = params;
+  const { impactDetail, userId, email, firstName } = params;
   const { backgroundColor, impact_metric } = impactDetail;
   const [viewNewOrder, setViewNewOrder] = useState(false);
 
@@ -34,7 +35,7 @@ const ImpactDetailContainer: React.FC<AuthStackScreenProps<'ImpactDetail'>> = ({
 
   // track screen
   useEffect(() => {
-    analytics.screenWithProperties('Impact Detail', {
+    analytics.screenWithProperties(analyticsScreens.IMPACT_DETAIL, {
       impact_metric,
       project_alias: projectId,
     });
@@ -50,8 +51,6 @@ const ImpactDetailContainer: React.FC<AuthStackScreenProps<'ImpactDetail'>> = ({
     });
   };
 
-  const totalPriceCalc = () => {};
-
   return (
     <ImpactDetailContext.Provider
       value={{
@@ -60,9 +59,10 @@ const ImpactDetailContainer: React.FC<AuthStackScreenProps<'ImpactDetail'>> = ({
         closeNewOrderModal,
         onOrderSent,
         viewNewOrder,
-        userId: userId || '',
+        userId: userId,
         projectId,
-        email: email || '',
+        email: email,
+        firstName,
       }}>
       <ImpactDetailView />
     </ImpactDetailContext.Provider>

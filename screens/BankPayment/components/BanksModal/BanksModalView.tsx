@@ -15,9 +15,14 @@ const BankModalView: React.FC<BankModalViewProps> = ({ isOpen, onClose }) => {
           <View style={styles.header}>
             <NowalaText.Headline1>Select your bank</NowalaText.Headline1>
           </View>
+          <NowalaText.Body1 style={{ textAlign: 'center' }}>
+            Connect to one of the banks below or open your bank's app to make a
+            transfer
+          </NowalaText.Body1>
           <View
             style={{
               alignItems: 'center',
+              marginTop: 25,
             }}>
             {banks.map((b, idx) => (
               <BankButton

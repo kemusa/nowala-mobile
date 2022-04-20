@@ -5,7 +5,7 @@ const statusText: StatusText = {
   registered: 'Sign up for first project 😀',
   paid: 'Money received',
   transferred: 'Money arrived Sierra Leone',
-  installed: 'Solar Kit installation complete',
+  installed: 'Solar Panel Kit installation complete',
   collectionStarted: 'Payments started',
 };
 
@@ -20,7 +20,7 @@ const statusInit: SponsorStatus = {
 const timestamp = Date.parse('12/31/2021');
 
 const projectsInit: SponsorshipData = {
-  asset: 'solar kits',
+  asset: 'solar panel kits',
   unitCost: 0,
   units: 0,
   interest: 0.1,

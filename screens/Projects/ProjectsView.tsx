@@ -13,6 +13,7 @@ import { spec } from './specs';
 import { ProjectContext } from './ProjectContext';
 import NowalaText from '../../components/atoms/text';
 import PrimaryButton from '../../components/atoms/buttons/PrimaryButton';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 const IntroView: React.FC = () => {
   const { goToProjectDetails, goToSignUp, goToLogin, userId, data } =
@@ -31,10 +32,45 @@ const IntroView: React.FC = () => {
             {/* Card wrapper */}
             <View
               style={[styles.cardContainer, { backgroundColor: item.color }]}>
+              {/* {item.clickable && (
+                <View
+                  style={{
+                    width: '100%',
+                    height: 20,
+                    // position: 'absolute',
+                    // top: 0,
+                    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                  }}>
+                  <NowalaText.LinkText2
+                    style={{ textAlign: 'left' }}
+                    onPress={() => goToProjectDetails(item)}>
+                    See more...
+                  </NowalaText.LinkText2>
+                </View>
+              )} */}
               {item.image && (
                 <Image style={styles.image} source={{ uri: item.image }} />
               )}
-              {/* If there's a a design, field render the design */}
+              {item.clickable && (
+                <View style={{ position: 'absolute', top: 20, right: 20 }}>
+                  {/* todo: refactor or remove this component */}
+                  <View
+                    style={{
+                      height: 50,
+                      width: 50,
+                      borderRadius: 50,
+                      backgroundColor: 'rgba(0, 0, 0, 0.15)',
+                    }}>
+                    <Ionicons
+                      name="chevron-forward"
+                      size={36}
+                      color={'rgba(255, 255, 255, 0.6)'}
+                      style={{ position: 'absolute', left: 7, top: 7 }}
+                    />
+                  </View>
+                </View>
+              )}
+              {/* If there's a a design field, render the design */}
               {item.design && item.design}
               {/* If there's a title and description dispalay description portion of card */}
               {item.title && item.description && (
@@ -47,15 +83,6 @@ const IntroView: React.FC = () => {
                     numberOfLines={item.clickable ? 3 : undefined}>
                     {item.description}
                   </NowalaText.Body1>
-                  {/* {item.clickable && (
-                    <View style={{ width: '100%', marginTop: 3 }}>
-                      <NowalaText.LinkText2
-                        style={{ textAlign: 'left' }}
-                        onPress={() => goToProjectDetails(item)}>
-                        See more...
-                      </NowalaText.LinkText2>
-                    </View>
-                  )} */}
                 </View>
               )}
             </View>

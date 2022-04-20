@@ -1,5 +1,3 @@
-import { RouteProp } from '@react-navigation/core';
-import { StackNavigationProp } from '@react-navigation/stack';
 import type {
   CompositeScreenProps,
   NavigatorScreenParams,
@@ -18,7 +16,12 @@ export type RootStackParamList = {
 export type AuthStackParamList = {
   Main: NavigatorScreenParams<MainTabParamList>;
   YourOrders: { orders: OrderData[] };
-  ImpactDetail: { impactDetail: ImpactDetail; userId?: string; email?: string };
+  ImpactDetail: {
+    impactDetail: ImpactDetail;
+    userId: string;
+    email: string;
+    firstName: string;
+  };
   BankPayment: {
     redirectPage: keyof MainTabParamList;
     paymentRef: string;

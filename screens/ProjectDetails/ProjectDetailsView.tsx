@@ -17,6 +17,7 @@ const ProjectDetailsView = () => {
     closeNewOrderModal,
     canViewOrderModal,
     onOrderSent,
+    firstName,
   } = useContext(ProjectDetailsContext);
 
   return (
@@ -57,13 +58,14 @@ const ProjectDetailsView = () => {
         </ScrollView>
         <NewOrderModal
           title="Provide affordable solar power"
-          page_ref="project_detail_page"
+          pageRef="project_detail_page"
           userId={userId || ''}
           projectId={projectId}
           email={email || ''}
           isOpen={canViewOrderModal}
           onOrderSent={onOrderSent}
           onClose={closeNewOrderModal}
+          firstName={firstName || ''}
         />
       </View>
       <View style={styles.buttonContainer}>

@@ -4,7 +4,7 @@ interface BankPaymentViewProps {
   price: number;
   openBankSelect: () => void;
   onBankSelectClose: () => void;
-  redirect: () => void;
+  redirect: (hasPaid: boolean) => void;
 }
 
 interface BankDetail {

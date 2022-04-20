@@ -49,7 +49,8 @@ export default class AuthService {
 
   // Register new user with email and password
   public async signUpWithEmailAndPassword(
-    name: string,
+    firstName: string,
+    lastName: string,
     email: string,
     password: string,
     country: string,
@@ -59,10 +60,11 @@ export default class AuthService {
       email,
       password,
     );
-    await updateProfile(user, { displayName: name });
+    await updateProfile(user, { displayName: firstName });
     // Create user document
     await this.dbService.writeDocumentWithId('users', user.uid, {
-      displayName: name,
+      firstName,
+      lastName,
       onboarded: false,
       country,
     });

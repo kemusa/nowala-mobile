@@ -20,6 +20,7 @@ const RootNavigator = () => {
   const { auth, analytics, db } = useContext(ServicesContext) as Services;
   const [uid, setUid] = useState(null as any);
   const [email, setEmail] = useState(null as any);
+  const [firstName, setFirstName] = useState(null as any);
   const [onboarded, setOnboarded] = useState(true);
 
   // Initialize event handler for user auth changes
@@ -49,6 +50,7 @@ const RootNavigator = () => {
       profile ? setOnboarded(profile.onboarded) : setOnboarded(false);
       setUid(uid);
       setEmail(email);
+      setFirstName(profile.firstName);
     } catch (error) {
       console.error(error);
     }
@@ -69,6 +71,7 @@ const RootNavigator = () => {
                 {...props}
                 userId={uid}
                 email={email}
+                firstName={firstName}
                 onboarded={onboarded}></AuthStack>
             )}
           </Screen>
@@ -81,7 +84,12 @@ const RootNavigator = () => {
               headerTintColor: WHITE,
             }}>
             {props => (
-              <ProjectDetailsScreen {...props} userId={uid} email={email} />
+              <ProjectDetailsScreen
+                {...props}
+                userId={uid}
+                email={email}
+                firstName={firstName}
+              />
             )}
           </Screen>
         </>

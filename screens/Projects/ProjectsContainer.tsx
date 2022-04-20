@@ -11,6 +11,7 @@ import { TouchableOpacity } from 'react-native';
 import NowalaIcon from '../../components/atoms/icons/NowalaIcon';
 import { spec } from './specs';
 import { MainTabScreenProps } from '../../navigation/types';
+import { analyticsScreens } from '../../utils/consts/ANALYTICS';
 
 const { ITEM_HEIGHT } = spec;
 
@@ -53,7 +54,7 @@ const ProjectsContainer: React.FC<ProjectProps> = ({
 
   // track screen
   useEffect(() => {
-    analytics.screen('Projects');
+    analytics.screen(analyticsScreens.PROJECTS);
   }, []);
 
   const goToProjectDetails = (project: Project) => {

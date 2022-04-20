@@ -1,4 +1,5 @@
 interface NowalaUserProfile {
-  displayName: string;
+  firstName: string;
+  lastName: string;
   onboarded: boolean;
 }

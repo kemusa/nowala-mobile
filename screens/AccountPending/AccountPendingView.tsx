@@ -10,11 +10,10 @@ const AccountPendingView = () => {
   return (
     <View style={styles.container}>
       <NowalaText.Headline1 style={{ marginBottom: 30 }}>
-        Account created!
+        Welcome to Nowala!
       </NowalaText.Headline1>
       <NowalaText.Body1 style={styles.bodyText}>
-        We are verfiying your account. Our team will be in touch with you via
-        email within 24 hours.
+        After your first order is confirmed we'll load your dashboard
       </NowalaText.Body1>
       <Image
         style={styles.image}
@@ -22,9 +21,18 @@ const AccountPendingView = () => {
           uri: 'https://storage.googleapis.com/nowala-public/account_hero.png',
         }}
       />
-      <NowalaText.Body1 style={styles.bodyText}>
-        In the meantime, have a look at the projects you can join.
-      </NowalaText.Body1>
+      <Text>
+        <NowalaText.Body1 style={styles.bodyText}>
+          If you haven't made an order yet, have a look at the{' '}
+        </NowalaText.Body1>
+        <NowalaText.LinkText onPress={goToProjects} style={styles.bodyText}>
+          projects
+        </NowalaText.LinkText>
+        <NowalaText.Body1 style={styles.bodyText}>
+          {' '}
+          you can join.
+        </NowalaText.Body1>
+      </Text>
     </View>
   );
 };

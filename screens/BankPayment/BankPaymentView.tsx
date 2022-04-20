@@ -80,8 +80,10 @@ const BankPaymentView: React.FC<BankPaymentViewProps> = ({
         <PrimaryButton text="Transfer now" onPress={openBankSelect} />
         <SecondaryButton
           text="I made this transfer"
-          onPress={redirect}></SecondaryButton>
-        <NowalaText.LinkText style={{ marginTop: 15 }} onPress={redirect}>
+          onPress={() => redirect(true)}></SecondaryButton>
+        <NowalaText.LinkText
+          style={{ marginTop: 15 }}
+          onPress={() => redirect(false)}>
           I will pay within 24 hours
         </NowalaText.LinkText>
         <View style={styles.spacer}></View>

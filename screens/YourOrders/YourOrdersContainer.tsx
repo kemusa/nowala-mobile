@@ -1,10 +1,8 @@
 import React, { useContext, useEffect } from 'react';
 import NowalaIcon from '../../components/atoms/icons/NowalaIcon';
-import {
-  AuthStackScreenProps,
-  RootStackScreenProps,
-} from '../../navigation/types';
+import { AuthStackScreenProps } from '../../navigation/types';
 import ServicesContext, { Services } from '../../services';
+import { analyticsScreens } from '../../utils/consts/ANALYTICS';
 import { YourOrdersContext } from './YourOrdersContext';
 import YourOrdersModalView from './YourOrdersView';
 
@@ -30,7 +28,7 @@ const YourOrdersContainer: React.FC<AuthStackScreenProps<'YourOrders'>> = ({
 
   // track screen
   useEffect(() => {
-    analytics.screen('Order Details');
+    analytics.screen(analyticsScreens.ORDER_DETAILS);
   }, []);
 
   return (

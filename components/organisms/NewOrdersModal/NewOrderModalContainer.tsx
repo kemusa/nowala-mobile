@@ -8,14 +8,14 @@ import { numberWithCommas } from '../../../utils/helpers';
 
 const NewOrderModalContainer: React.FC<NewOrderModalContainerProps> = ({
   title,
-  page_ref,
+  pageRef,
   isOpen,
   onClose,
   onOrderSent,
   userId,
   projectId,
   email,
-  // userTotalPrice
+  firstName,
 }) => {
   const orderLimit = 10;
   const { analytics, db } = useContext(ServicesContext) as Services;
@@ -25,12 +25,11 @@ const NewOrderModalContainer: React.FC<NewOrderModalContainerProps> = ({
   const [orderConfirmed, setOrderConfirmed] = useState(false);
 
   const [userUnitPrice, setUserUnitPrice] = useState(0);
-  // const [projectUnitPrice, setProjectUnitPrice] = useState(0);
   const projectUnitPrice = useRef<number>(0);
   const [projectCurrency, setProjectCurrency] = useState('');
   const [userTotalPrice, setUserTotalPrice] = useState(0);
   const [projectTotalPrice, setProjectTotalPrice] = useState('');
-  const [paymentRef, setPaymentRef] = useState('');
+  const [orderRef, setOrderRef] = useState('');
 
   // track screen
   useEffect(() => {
@@ -38,7 +37,7 @@ const NewOrderModalContainer: React.FC<NewOrderModalContainerProps> = ({
     // This checks to see if the modal is open before firing off the analytics event
     if (isOpen) {
       analytics.trackWithProperties('User Viewed Order Form', {
-        ref: page_ref,
+        ref: pageRef,
         project_alias: projectId,
       });
     }
@@ -47,7 +46,7 @@ const NewOrderModalContainer: React.FC<NewOrderModalContainerProps> = ({
   useEffect(() => {
     const userSub = email.substring(0, 3);
     const randNum = Math.floor(1000 + Math.random() * 9000);
-    setPaymentRef(`${userSub}-${randNum}`);
+    setOrderRef(`${userSub}-${randNum}`);
   }, []);
 
   // get latest price
@@ -82,18 +81,23 @@ const NewOrderModalContainer: React.FC<NewOrderModalContainerProps> = ({
       setTimeout(() => setOrderConfirmed(true), 1000);
       setTimeout(() => {
         onClose();
-        onOrderSent(userTotalPrice, paymentRef);
+        onOrderSent(userTotalPrice, orderRef);
       }, 4000);
       const order: NewOrder = {
         uid: userId,
+        unitPrice: userUnitPrice,
+        total: userTotalPrice,
         units: orderVolume,
+        currency: '£',
         projectId: projectId,
         email,
+        orderRef,
+        firstName,
         timestamp: Timestamp.now(),
       };
       await db.writeDocument('orders', order);
       analytics.trackWithProperties('User Placed Order', {
-        ref: page_ref,
+        ref: pageRef,
         project_alias: projectId,
         order_volume: orderVolume,
       });
@@ -104,14 +108,17 @@ const NewOrderModalContainer: React.FC<NewOrderModalContainerProps> = ({
 
   // Get unit price for the project
   const fetchUnitPrice = async () => {
-    const query = await db.findById(`projects/${projectId}`);
-    const project = query.data as ProjectData;
-    setUserUnitPrice(project.costToUser);
-    projectUnitPrice.current = project.unitCost;
-    setProjectTotalPrice(numberWithCommas(project.unitCost * orderVolume));
-    setProjectCurrency(project.currency);
-    setUserTotalPrice(orderVolume * project.costToUser);
-    console.log('Order volume', orderVolume);
+    try {
+      const query = await db.findById(`projects/${projectId}`);
+      const project = query.data as ProjectData;
+      setUserUnitPrice(project.costToUser);
+      projectUnitPrice.current = project.unitCost;
+      setProjectTotalPrice(numberWithCommas(project.unitCost * orderVolume));
+      setProjectCurrency(project.currency);
+      setUserTotalPrice(orderVolume * project.costToUser);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const orderConfirmBtn = {

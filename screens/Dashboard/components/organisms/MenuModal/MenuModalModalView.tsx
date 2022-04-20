@@ -15,15 +15,15 @@ const ProgressModalView: React.FC<MenuModalViewProps> = ({
   return (
     <Actionsheet isOpen={isOpen} onClose={onClose}>
       <Actionsheet.Content style={styles.container}>
-        <Actionsheet.Item onPress={openOrdersModal}>
+        {/* <Actionsheet.Item onPress={openOrdersModal}>
           <View style={styles.itemContainer}>
-            <Ionicons name="receipt-outline" size={25} />
-            {/* <Icons.OrderIcon></Icons.OrderIcon> */}
-            <NowalaText.Body1 style={styles.itemText}>
+            <Ionicons name="receipt-outline" size={25} /> */}
+        {/* <Icons.OrderIcon></Icons.OrderIcon> */}
+        {/* <NowalaText.Body1 style={styles.itemText}>
               Your Orders
             </NowalaText.Body1>
           </View>
-        </Actionsheet.Item>
+        </Actionsheet.Item> */}
         <Actionsheet.Item onPress={signOut}>
           <View style={styles.itemContainer}>
             <Ionicons name="power" size={25} />

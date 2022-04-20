@@ -14,23 +14,28 @@ import { SponsorshipData } from './typesImport';
 import { statusInit } from '../../utils/consts/DATA';
 import { MainTabScreenProps } from '../../navigation/types';
 import MenuButton from '../../components/atoms/buttons/MenuButton';
+import {
+  analyticsEvents,
+  analyticsScreens,
+} from '../../utils/consts/ANALYTICS';
 
 const { BACKGROUND } = colors;
 interface DashboardProps extends MainTabScreenProps<'Dashboard'> {
   email: string;
   userId: string;
+  firstName: string;
 }
 
 const DashboardContainer: React.FC<DashboardProps> = ({
   navigation,
   userId,
   email,
+  firstName,
 }) => {
   const [viewProgress, setViewProgress] = useState(false);
   const [viewOptions, setViewOptions] = useState(false);
   const [viewOrders, setViewOrders] = useState(false);
   const [menuModalOpen, setMenuModalOpen] = useState(false);
-
   const [unsubscribeList, setUnsubscribe] = useState([] as any);
   // variable to store unsubscription for dashboard data listener
   let dashboardUnsub = () => {};
@@ -46,12 +51,7 @@ const DashboardContainer: React.FC<DashboardProps> = ({
         </TouchableOpacity>
       ),
       headerTitleAlign: 'left',
-      headerRight: () => (
-        <MenuButton onPress={openMenuModal} />
-        // <NowalaText.LinkText style={{ marginRight: 15 }} onPress={signOut}>
-        //   Sign out
-        // </NowalaText.LinkText>
-      ),
+      headerRight: () => <MenuButton onPress={openMenuModal} />,
       headerStyle: {
         elevation: 0, // remove header border for android
         shadowOpacity: 0, // remove header border for ios
@@ -68,7 +68,7 @@ const DashboardContainer: React.FC<DashboardProps> = ({
 
   // track screen
   useEffect(() => {
-    analytics.screen('Dashboard');
+    analytics.screen(analyticsScreens.DASHBOARD);
   }, []);
 
   const [summary, setSummary] = useState({
@@ -96,7 +96,7 @@ const DashboardContainer: React.FC<DashboardProps> = ({
   const signOut = async () => {
     dashboardUnsub();
     await auth.signOut();
-    analytics.track('User Signed Out');
+    analytics.track(analyticsEvents.SIGNED_OUT);
   };
 
   // Navigate to project details from modal then close modal
@@ -122,13 +122,13 @@ const DashboardContainer: React.FC<DashboardProps> = ({
   const goToImpactDetail = (impactDetail: ImpactDetail) => {
     navigation.navigate('AuthStack', {
       screen: 'ImpactDetail',
-      params: { impactDetail, userId, email },
+      params: { impactDetail, userId, email, firstName },
     });
   };
 
   const openProgressModal = () =>
     setViewProgress(() => {
-      analytics.track('Viewed Progress');
+      analytics.track(analyticsEvents.VIEWED_PROGRESS);
       return true;
     });
   const closeProgressModal = () => setViewProgress(false);

@@ -1,12 +1,13 @@
 interface NewOrderModalContainerProps {
   title: string;
-  page_ref: string;
+  pageRef: string;
   isOpen: boolean;
   onClose: () => void;
   onOrderSent: OrderCallback;
   userId: string;
   projectId: string;
   email: string;
+  firstName: string;
 }
 interface NewOrdersModalViewProps {
   title: string;
@@ -20,6 +21,6 @@ interface NewOrdersModalViewProps {
   projectCurrency: string;
 }
 
-type OrderCallback = (price: number, paymentRef: string) => void;
+type OrderCallback = (price: number, orderRef: string) => void;
 
 interface NewOrdersContext {}

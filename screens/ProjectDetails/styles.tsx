@@ -63,8 +63,6 @@ const styles = StyleSheet.create({
     width: 150,
     padding: 10,
     justifyContent: 'center',
-    // backgroundColor: 'pink',
-    // flexBasis: 'calc(100% - 50px)',
   },
   statTitle: {
     fontWeight: 'bold',

@@ -10,6 +10,10 @@ import {
   MainTabScreenProps,
   RootStackScreenProps,
 } from '../../navigation/types';
+import {
+  analyticsEvents,
+  analyticsScreens,
+} from '../../utils/consts/ANALYTICS';
 
 const { BACKGROUND } = colors;
 
@@ -43,7 +47,7 @@ const AccountPendingContainer: React.FC<MainTabScreenProps<'Account'>> = ({
 
   // track screen
   useEffect(() => {
-    analytics.screen('Account Pending');
+    analytics.screen(analyticsScreens.ACCOUNT_PENDING);
   }, []);
 
   const goToProjects = () => {
@@ -53,7 +57,7 @@ const AccountPendingContainer: React.FC<MainTabScreenProps<'Account'>> = ({
   // Sign out
   const signOut = async () => {
     await auth.signOut();
-    analytics.track('User Signed Out');
+    analytics.track(analyticsEvents.SIGNED_OUT);
   };
 
   return (

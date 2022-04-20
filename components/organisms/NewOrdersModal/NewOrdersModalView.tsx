@@ -36,45 +36,43 @@ const NewOrderModalView: React.FC<NewOrdersModalViewProps> = ({
         </Actionsheet.Content>
       ) : (
         <Actionsheet.Content style={styles.startContainer}>
-          <ScrollView>
-            <Box style={styles.contentContainer}>
-              <View style={styles.header}>
-                <Image
-                  source={{
-                    uri: 'https://storage.googleapis.com/nowala-public/solar_panel_kit.png',
-                  }}
-                  style={styles.headerImage}
-                />
-                <NowalaText.Headline1>Solar panel kits</NowalaText.Headline1>
+          <Box style={styles.contentContainer}>
+            <View style={styles.header}>
+              <Image
+                source={{
+                  uri: 'https://storage.googleapis.com/nowala-public/solar_panel_kit.png',
+                }}
+                style={styles.headerImage}
+              />
+              <NowalaText.Headline1>Solar panel kits</NowalaText.Headline1>
+            </View>
+            <NowalaText.Headline2Light style={styles.title}>
+              {title}
+            </NowalaText.Headline2Light>
+            <NowalaText.Headline4 style={styles.infoText}>
+              Order below and we'll be in touch.
+            </NowalaText.Headline4>
+            <NowalaText.WarningText style={styles.warning}>
+              Available in limited quantities
+            </NowalaText.WarningText>
+            <View style={styles.pricingContainer}>
+              <View>
+                <NowalaText.Headline2>Total</NowalaText.Headline2>
               </View>
-              <NowalaText.Headline2Light style={styles.title}>
-                {title}
-              </NowalaText.Headline2Light>
-              <NowalaText.Headline4 style={styles.infoText}>
-                Order below and we'll be in touch.
-              </NowalaText.Headline4>
-              <NowalaText.WarningText style={styles.warning}>
-                Available in limited quantities
-              </NowalaText.WarningText>
-              <View style={styles.pricingContainer}>
-                <View>
-                  <NowalaText.Headline2>Total</NowalaText.Headline2>
-                </View>
-                <View style={styles.pricingDivider}></View>
-                <View>
-                  <NowalaText.Headline2Light>
-                    {`£${userTotalPrice}`}
-                  </NowalaText.Headline2Light>
-                  <NowalaText.Subtitle1>{`${projectCurrency} ${projectTotalPrice}`}</NowalaText.Subtitle1>
-                </View>
+              <View style={styles.pricingDivider}></View>
+              <View>
+                <NowalaText.Headline2Light>
+                  {`£${userTotalPrice}`}
+                </NowalaText.Headline2Light>
+                <NowalaText.Subtitle1>{`${projectCurrency} ${projectTotalPrice}`}</NowalaText.Subtitle1>
               </View>
-              <View style={styles.orderContainer}>
-                <NumberSelect {...orderCounter} />
-              </View>
-              <PrimaryButton {...orderConfirmBtn} />
-              <View style={{ height: 50 }}></View>
-            </Box>
-          </ScrollView>
+            </View>
+            <View style={styles.orderContainer}>
+              <NumberSelect {...orderCounter} />
+            </View>
+            <PrimaryButton {...orderConfirmBtn} />
+            <View style={{ height: 50 }}></View>
+          </Box>
         </Actionsheet.Content>
       )}
     </Actionsheet>

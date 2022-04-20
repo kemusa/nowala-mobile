@@ -10,6 +10,10 @@ import { NoAuthStackScreenProps } from '../../navigation/types';
 import { ForgotPasswordFormData } from './types';
 import ForgotPasswordContext from './ForgotPasswordContext';
 import { cos } from 'react-native-reanimated';
+import {
+  analyticsEvents,
+  analyticsScreens,
+} from '../../utils/consts/ANALYTICS';
 
 const ForgotPasswordContainer: React.FC<
   NoAuthStackScreenProps<'ForgotPassword'>
@@ -51,7 +55,7 @@ const ForgotPasswordContainer: React.FC<
 
   // track screen
   useEffect(() => {
-    analytics.screen('Forgot Password');
+    analytics.screen(analyticsScreens.FORGOT_PASSWORD);
   }, []);
 
   const sendPasswordResetEmail = async (data: ForgotPasswordFormData) => {
@@ -60,13 +64,12 @@ const ForgotPasswordContainer: React.FC<
       setLoginError(NO_LOGIN_ERROR);
       setLoading(true);
       await auth.passwordReset(email);
-      analytics.track('User Reset Password');
+      analytics.track(analyticsEvents.RESET_PASSWORD);
       setRequestSent(true);
       setTimeout(() => {
         navigation.navigate('Login');
       }, 2000);
     } catch (error: any) {
-      console.log('BAR');
       setLoading(false);
       displayFormError(error.code);
     }

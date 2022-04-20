@@ -13,18 +13,20 @@ const { TRETIARY } = colors;
 interface MainTabProps extends AuthStackScreenProps<'Main'> {
   email: string;
   userId: string;
+  firstName: string;
   onboarded: boolean;
 }
 
 const MainTabNavigator: React.FC<MainTabProps> = ({
   email,
   userId,
+  firstName,
   onboarded,
 }) => {
   const { Navigator, Screen } = Tab;
   return (
     <Navigator
-      screenOptions={({ navigation }) => ({
+      screenOptions={() => ({
         headerShown: true,
         tabBarActiveTintColor: TRETIARY,
         tabBarInactiveTintColor: '#ABABAB',
@@ -38,7 +40,12 @@ const MainTabNavigator: React.FC<MainTabProps> = ({
             ),
           }}>
           {props => (
-            <DashboardScreen {...props} email={email} userId={userId} />
+            <DashboardScreen
+              {...props}
+              email={email}
+              userId={userId}
+              firstName={firstName}
+            />
           )}
         </Screen>
       ) : (

@@ -10,6 +10,10 @@ import { InputFormConfig } from '../../components/organisms/InputForm/types';
 import NowalaLogo from '../../components/atoms/icons/NowalaLogo';
 import { Country, CountryCode } from 'react-native-country-picker-modal';
 import { NoAuthStackScreenProps } from '../../navigation/types';
+import {
+  analyticsEvents,
+  analyticsScreens,
+} from '../../utils/consts/ANALYTICS';
 
 const SignUpContainer: React.FC<NoAuthStackScreenProps<'SignUp'>> = ({
   navigation,
@@ -26,7 +30,7 @@ const SignUpContainer: React.FC<NoAuthStackScreenProps<'SignUp'>> = ({
 
   // track screen
   useEffect(() => {
-    analytics.screen('Sign Up');
+    analytics.screen(analyticsScreens.SIGN_UP);
   }, []);
 
   // Initialize form
@@ -100,11 +104,17 @@ const SignUpContainer: React.FC<NoAuthStackScreenProps<'SignUp'>> = ({
 
   const signUpWithEmailAndPassword = async (data: SignUpFormData) => {
     try {
-      const { name, email, password } = data;
+      const { firstName, lastName, email, password } = data;
       setSignUpError(NO_LOGIN_ERROR);
       setEmailAuthLoading(true);
-      await auth.signUpWithEmailAndPassword(name, email, password, country);
-      analytics.track('Signed Up');
+      await auth.signUpWithEmailAndPassword(
+        firstName,
+        lastName,
+        email,
+        password,
+        country,
+      );
+      analytics.track(analyticsEvents.SIGNED_UP);
     } catch (error: any) {
       console.error(error);
       setEmailAuthLoading(false);
@@ -145,10 +155,19 @@ const SignUpContainer: React.FC<NoAuthStackScreenProps<'SignUp'>> = ({
     fields: [
       {
         placeholder: 'e.g. Jane Doe',
-        label: 'Name',
+        label: 'First Name',
         autoCompleteType: 'name',
         control,
-        name: 'name',
+        name: 'firstName',
+        rules: nameRules,
+        type: 'input',
+      },
+      {
+        placeholder: 'e.g. Jane Doe',
+        label: 'Last Name',
+        autoCompleteType: 'name',
+        control,
+        name: 'lastName',
         rules: nameRules,
         type: 'input',
       },

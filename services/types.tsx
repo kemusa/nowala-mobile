@@ -32,7 +32,8 @@ interface SnapshotData {
 }
 
 interface UserProfile {
-  displayName: string;
+  firstName: string;
+  lastName: string;
   onboarded: boolean;
 }
 

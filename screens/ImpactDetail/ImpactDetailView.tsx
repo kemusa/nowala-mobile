@@ -17,6 +17,7 @@ const ImpactDetailView: React.FC = () => {
     userId,
     projectId,
     email,
+    firstName,
   } = useContext(ImpactDetailContext);
 
   const {
@@ -58,13 +59,14 @@ const ImpactDetailView: React.FC = () => {
       </ScrollView>
       <NewOrderModal
         title={ctaText}
-        page_ref={impact_metric}
+        pageRef={impact_metric}
         projectId={projectId}
         isOpen={viewNewOrder}
         userId={userId}
         email={email}
         onClose={closeNewOrderModal}
         onOrderSent={onOrderSent}
+        firstName={firstName}
       />
 
       <View style={styles.buttonContainer}>
