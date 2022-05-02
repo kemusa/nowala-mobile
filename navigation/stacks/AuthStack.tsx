@@ -11,31 +11,15 @@ const Stack = createStackNavigator<AuthStackParamList>();
 const { WHITE, BACKGROUND } = colors;
 
 interface AuthStackProps extends RootStackScreenProps<'AuthStack'> {
-  email: string;
-  userId: string;
-  firstName: string;
-  onboarded: boolean;
+  user: NowalaUserData;
 }
 
-const AuthStack: React.FC<AuthStackProps> = ({
-  email,
-  userId,
-  firstName,
-  onboarded,
-}) => {
+const AuthStack: React.FC<AuthStackProps> = ({ user }) => {
   const { Navigator, Screen } = Stack;
   return (
     <Navigator initialRouteName="Main">
       <Screen name="Main" options={{ headerShown: false, title: '' }}>
-        {props => (
-          <MainTabNavigator
-            {...props}
-            userId={userId}
-            email={email}
-            firstName={firstName}
-            onboarded={onboarded}
-          />
-        )}
+        {props => <MainTabNavigator {...props} user={user} />}
       </Screen>
       <Screen
         name="YourOrders"

@@ -6,23 +6,17 @@ import ProjectsScreen from '../screens/Projects';
 import { AuthStackScreenProps, MainTabParamList } from './types';
 import colors from '../theme/colors';
 import AccountPendingScreen from '../screens/AccountPending';
+import WaitListScreen from '../screens/WaitList';
 
 const Tab = createBottomTabNavigator<MainTabParamList>();
 const { TRETIARY } = colors;
 
 interface MainTabProps extends AuthStackScreenProps<'Main'> {
-  email: string;
-  userId: string;
-  firstName: string;
-  onboarded: boolean;
+  user: NowalaUserData;
 }
 
-const MainTabNavigator: React.FC<MainTabProps> = ({
-  email,
-  userId,
-  firstName,
-  onboarded,
-}) => {
+const MainTabNavigator: React.FC<MainTabProps> = ({ user }) => {
+  const { onboarded, hasOrdered, email, userId, firstName } = user;
   const { Navigator, Screen } = Tab;
   return (
     <Navigator
@@ -48,6 +42,17 @@ const MainTabNavigator: React.FC<MainTabProps> = ({
             />
           )}
         </Screen>
+      ) : hasOrdered && !onboarded ? (
+        <Screen
+          name="WaitList"
+          options={{
+            headerShown: false,
+            title: 'Orders',
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="hourglass-outline" size={size} color={color} />
+            ),
+          }}
+          component={WaitListScreen}></Screen>
       ) : (
         <Screen
           name="Account"
@@ -67,7 +72,7 @@ const MainTabNavigator: React.FC<MainTabProps> = ({
             <Ionicons name="apps" size={size} color={color} />
           ),
         }}>
-        {props => <ProjectsScreen {...props} email={email} userId={userId} />}
+        {props => <ProjectsScreen {...props} user={user} />}
       </Screen>
     </Navigator>
   );

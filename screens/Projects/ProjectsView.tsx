@@ -14,83 +14,44 @@ import { ProjectContext } from './ProjectContext';
 import NowalaText from '../../components/atoms/text';
 import PrimaryButton from '../../components/atoms/buttons/PrimaryButton';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { Shadow } from 'react-native-shadow-2';
+import NowalaBrandingCard from './components/NowalaBrandingCard';
+import MoreProjectsCard from './components/MoreProjectsCard';
+import ProjectCard from './components/ProjectCard';
 
-const IntroView: React.FC = () => {
-  const { goToProjectDetails, goToSignUp, goToLogin, userId, data } =
+const ProjectsCardView: React.FC = () => {
+  const { goToProjectDetails, goToSignUp, goToLogin, user, data } =
     useContext(ProjectContext);
-  const { FULL_SIZE, ITEM_WIDTH } = spec;
+  const project = data[0];
 
+  const cards = [
+    <ProjectCard
+      project={project}
+      onPress={() => {
+        goToProjectDetails(project);
+      }}
+    />,
+    <MoreProjectsCard />,
+    <NowalaBrandingCard />,
+  ];
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView>
-        {data.map((item, idx) => (
-          <TouchableOpacity
-            key={idx}
-            style={styles.itemContainer}
-            activeOpacity={0.5}
-            onPress={() => (item.clickable ? goToProjectDetails(item) : null)}>
-            {/* Card wrapper */}
-            <View
-              style={[styles.cardContainer, { backgroundColor: item.color }]}>
-              {/* {item.clickable && (
-                <View
-                  style={{
-                    width: '100%',
-                    height: 20,
-                    // position: 'absolute',
-                    // top: 0,
-                    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                  }}>
-                  <NowalaText.LinkText2
-                    style={{ textAlign: 'left' }}
-                    onPress={() => goToProjectDetails(item)}>
-                    See more...
-                  </NowalaText.LinkText2>
-                </View>
-              )} */}
-              {item.image && (
-                <Image style={styles.image} source={{ uri: item.image }} />
-              )}
-              {item.clickable && (
-                <View style={{ position: 'absolute', top: 20, right: 20 }}>
-                  {/* todo: refactor or remove this component */}
-                  <View
-                    style={{
-                      height: 50,
-                      width: 50,
-                      borderRadius: 50,
-                      backgroundColor: 'rgba(0, 0, 0, 0.15)',
-                    }}>
-                    <Ionicons
-                      name="chevron-forward"
-                      size={36}
-                      color={'rgba(255, 255, 255, 0.6)'}
-                      style={{ position: 'absolute', left: 7, top: 7 }}
-                    />
-                  </View>
-                </View>
-              )}
-              {/* If there's a a design field, render the design */}
-              {item.design && item.design}
-              {/* If there's a title and description dispalay description portion of card */}
-              {item.title && item.description && (
-                <View style={styles.cardInfoContainer}>
-                  <NowalaText.Headline3Light style={styles.title}>
-                    {item.title}
-                  </NowalaText.Headline3Light>
-                  <NowalaText.Body1
-                    style={styles.description}
-                    numberOfLines={item.clickable ? 3 : undefined}>
-                    {item.description}
-                  </NowalaText.Body1>
-                </View>
-              )}
-            </View>
-          </TouchableOpacity>
+      <ScrollView style={styles.contentContainer}>
+        {cards.map((card, idx) => (
+          <View
+            style={{
+              marginLeft: '3%',
+              marginRight: '3%',
+              marginTop: 15,
+              marginBottom: 15,
+            }}
+            key={idx}>
+            {card}
+          </View>
         ))}
         <View style={styles.spacer}></View>
       </ScrollView>
-      {!userId && (
+      {!user && (
         <View style={styles.buttonContainer}>
           <PrimaryButton text={'Get started'} onPress={goToSignUp} />
         </View>
@@ -99,4 +60,4 @@ const IntroView: React.FC = () => {
   );
 };
 
-export default IntroView;
+export default ProjectsCardView;

@@ -13,4 +13,5 @@ interface ProjectDetailsContext {
   userId?: string; //todo :remove optional;
   email?: string; //todo :remove optional;
   firstName?: string; //todo :remove optional;
+  hasOrdered: boolean;
 }

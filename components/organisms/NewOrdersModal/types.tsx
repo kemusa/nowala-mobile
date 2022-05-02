@@ -2,12 +2,12 @@ interface NewOrderModalContainerProps {
   title: string;
   pageRef: string;
   isOpen: boolean;
-  onClose: () => void;
-  onOrderSent: OrderCallback;
   userId: string;
   projectId: string;
   email: string;
   firstName: string;
+  onClose: () => void;
+  onOrderSent: OrderCallback;
 }
 interface NewOrdersModalViewProps {
   title: string;

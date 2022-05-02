@@ -22,6 +22,7 @@ const RootNavigator = () => {
   const [email, setEmail] = useState(null as any);
   const [firstName, setFirstName] = useState(null as any);
   const [onboarded, setOnboarded] = useState(true);
+  const [user, setUser] = useState({} as NowalaUserData);
 
   // Initialize event handler for user auth changes
   useEffect(() => {
@@ -33,6 +34,19 @@ const RootNavigator = () => {
     }
   }, []);
 
+  // // Listener for dashboard data
+  // useEffect(() => {
+  //   const unsubscribe = db.subscribeToDoc(
+  //     `users/${user.userId}`,
+  //     handleUserData,
+  //   );
+  //   unsubscribe();
+  // }, []);
+
+  // const handleUserData = (data: any) => {
+  //   console.log('DATA', data);
+  // };
+
   // Initialize event handler for user auth changes
   useEffect(() => {
     try {
@@ -42,23 +56,44 @@ const RootNavigator = () => {
     }
   }, [uid]);
 
-  const setUser = async (uid: string, email: string | null) => {
+  const setUserData = async (uid: string, email: string | null) => {
     try {
       const doc = await db.findById(`users/${uid}`);
       const profile = doc.data as NowalaUserProfile;
+      const { hasOrdered, onboarded, firstName } = profile;
       // If the profile hasn't been generated yet, set to false
-      profile ? setOnboarded(profile.onboarded) : setOnboarded(false);
+      profile ? setOnboarded(onboarded) : setOnboarded(false);
       setUid(uid);
       setEmail(email);
-      setFirstName(profile.firstName);
+      setFirstName(firstName);
+      setUser({
+        userId: uid,
+        email: email || '',
+        firstName,
+        onboarded,
+        hasOrdered,
+        updateHasOrdered,
+      });
     } catch (error) {
       console.error(error);
     }
   };
 
+  const updateHasOrdered = () => {
+    setUser({
+      ...user,
+      userId: user.userId,
+      email: user.email,
+      firstName: user.firstName,
+      onboarded: user.onboarded,
+      hasOrdered: true,
+      updateHasOrdered,
+    });
+  };
+
   // Event handler for use auth changes
   const handleAuthChange = async (user: User | null) => {
-    user ? setUser(user.uid, user.email) : setUid(null);
+    user ? setUserData(user.uid, user.email) : setUid(null);
   };
 
   return (
@@ -66,14 +101,7 @@ const RootNavigator = () => {
       {uid ? (
         <>
           <Screen name="AuthStack" options={{ headerShown: false, title: '' }}>
-            {props => (
-              <AuthStack
-                {...props}
-                userId={uid}
-                email={email}
-                firstName={firstName}
-                onboarded={onboarded}></AuthStack>
-            )}
+            {props => <AuthStack {...props} user={user}></AuthStack>}
           </Screen>
           <Screen
             name="ProjectDetails"
@@ -83,14 +111,7 @@ const RootNavigator = () => {
               headerTransparent: true,
               headerTintColor: WHITE,
             }}>
-            {props => (
-              <ProjectDetailsScreen
-                {...props}
-                userId={uid}
-                email={email}
-                firstName={firstName}
-              />
-            )}
+            {props => <ProjectDetailsScreen {...props} user={user} />}
           </Screen>
         </>
       ) : (
@@ -104,14 +125,15 @@ const RootNavigator = () => {
             component={NoAuthStack}></Screen>
           <Screen
             name="ProjectDetails"
-            component={ProjectDetailsScreen}
             options={{
               headerTitle: '',
               headerShown: true,
               headerTransparent: true,
               headerTintColor: WHITE,
               // headerLeft: () => <Text>Back</Text>,
-            }}></Screen>
+            }}>
+            {props => <ProjectDetailsScreen {...props} user={user} />}
+          </Screen>
         </>
       )}
     </Navigator>

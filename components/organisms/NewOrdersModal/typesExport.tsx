@@ -11,5 +11,6 @@ export interface NewOrder {
   orderRef: string;
   timestamp: Timestamp;
   firstName: string;
+  waitlist: boolean;
   // orderRef: string;
 }

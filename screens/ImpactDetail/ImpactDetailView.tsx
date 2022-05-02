@@ -69,9 +69,9 @@ const ImpactDetailView: React.FC = () => {
         firstName={firstName}
       />
 
-      <View style={styles.buttonContainer}>
+      {/* <View style={styles.buttonContainer}>
         <SecondaryButton text={ctaText} onPress={openNewOrderModal} />
-      </View>
+      </View> */}
     </SafeAreaView>
   );
 };

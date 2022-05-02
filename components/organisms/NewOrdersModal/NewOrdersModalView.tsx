@@ -30,9 +30,9 @@ const NewOrderModalView: React.FC<NewOrdersModalViewProps> = ({
           <NowalaText.Headline4 style={styles.title}>
             Thank you for your order!
           </NowalaText.Headline4>
-          <NowalaText.Subtitle1 style={{ marginBottom: 50 }}>
+          {/* <NowalaText.Subtitle1 style={{ marginBottom: 50 }}>
             Just one more step...
-          </NowalaText.Subtitle1>
+          </NowalaText.Subtitle1> */}
         </Actionsheet.Content>
       ) : (
         <Actionsheet.Content style={styles.startContainer}>
@@ -50,11 +50,11 @@ const NewOrderModalView: React.FC<NewOrdersModalViewProps> = ({
               {title}
             </NowalaText.Headline2Light>
             <NowalaText.Headline4 style={styles.infoText}>
-              Order below and we'll be in touch.
+              Order below to join the waitlist
             </NowalaText.Headline4>
-            <NowalaText.WarningText style={styles.warning}>
+            {/* <NowalaText.WarningText style={styles.warning}>
               Available in limited quantities
-            </NowalaText.WarningText>
+            </NowalaText.WarningText> */}
             <View style={styles.pricingContainer}>
               <View>
                 <NowalaText.Headline2>Total</NowalaText.Headline2>

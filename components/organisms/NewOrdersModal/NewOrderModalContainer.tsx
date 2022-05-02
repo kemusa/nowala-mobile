@@ -17,7 +17,7 @@ const NewOrderModalContainer: React.FC<NewOrderModalContainerProps> = ({
   email,
   firstName,
 }) => {
-  const orderLimit = 10;
+  // const orderLimit = 10;
   const { analytics, db } = useContext(ServicesContext) as Services;
 
   const [orderVolume, setOrderVolume] = useState(1);
@@ -65,9 +65,9 @@ const NewOrderModalContainer: React.FC<NewOrderModalContainerProps> = ({
   }, [userUnitPrice, orderVolume]);
 
   const increaseNumber = () => {
-    if (orderVolume < orderLimit) {
-      setOrderVolume(num => num + 1);
-    }
+    // if (orderVolume < orderLimit) {
+    setOrderVolume(num => num + 1);
+    // }
   };
   const decreaseNumber = () => {
     if (orderVolume > 0) {
@@ -94,8 +94,10 @@ const NewOrderModalContainer: React.FC<NewOrderModalContainerProps> = ({
         orderRef,
         firstName,
         timestamp: Timestamp.now(),
+        waitlist: true,
       };
       await db.writeDocument('orders', order);
+      await db.updateDocument('users', userId, { hasOrdered: true });
       analytics.trackWithProperties('User Placed Order', {
         ref: pageRef,
         project_alias: projectId,
@@ -122,7 +124,7 @@ const NewOrderModalContainer: React.FC<NewOrderModalContainerProps> = ({
   };
 
   const orderConfirmBtn = {
-    text: 'Request now',
+    text: 'Join waitlist',
     onPress: onOrder,
     disabled: orderVolume <= 0,
     loading,

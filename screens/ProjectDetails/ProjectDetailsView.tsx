@@ -18,6 +18,7 @@ const ProjectDetailsView = () => {
     canViewOrderModal,
     onOrderSent,
     firstName,
+    hasOrdered,
   } = useContext(ProjectDetailsContext);
 
   return (
@@ -68,9 +69,11 @@ const ProjectDetailsView = () => {
           firstName={firstName || ''}
         />
       </View>
-      <View style={styles.buttonContainer}>
-        <PrimaryButton text="Order now" onPress={ctaOnPress} />
-      </View>
+      {!hasOrdered && (
+        <View style={styles.buttonContainer}>
+          <PrimaryButton text="Order now" onPress={ctaOnPress} />
+        </View>
+      )}
     </SafeAreaView>
   );
 };

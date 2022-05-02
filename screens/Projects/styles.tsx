@@ -1,11 +1,7 @@
-import { Platform, StyleSheet } from 'react-native';
+import { Platform, StyleSheet, StatusBar } from 'react-native';
 import { spec } from './specs';
 import colors from '../../theme/colors';
-import {
-  buttonHeight,
-  screenPadding,
-  buttonContainer,
-} from '../../utils/consts/STYLES';
+import { buttonHeight } from '../../utils/consts/STYLES';
 const { WHITE, PRIMARY, BACKGROUND, TRANSPARENT_BACKGROUND } = colors;
 const { ITEM_WIDTH, ITEM_HEIGHT } = spec;
 
@@ -13,7 +9,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     // padding: 15,
     width: '100%',
-    backgroundColor: WHITE,
+    backgroundColor: TRANSPARENT_BACKGROUND,
     height: buttonHeight,
     position: 'absolute',
     bottom: 0,
@@ -21,25 +17,17 @@ const styles = StyleSheet.create({
     paddingRight: 20,
     paddingBottom: 85,
   },
-  container: { flex: 1, backgroundColor: BACKGROUND, padding: 20 },
-  cardContainer: {
-    height: ITEM_HEIGHT,
-    overflow: 'hidden',
-    borderRadius: 6,
+  container: {
+    flex: 1,
+    backgroundColor: BACKGROUND,
+    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
+  contentContainer: {},
   itemContainer: {
     width: '100%',
     height: ITEM_HEIGHT,
     padding: 10,
     marginBottom: 10,
-    shadowColor: 'rgba(0, 0, 0, 0.25)',
-    shadowOffset: {
-      width: 0,
-      height: 3.32,
-    },
-    shadowOpacity: 1.0,
-    shadowRadius: 2,
-    elevation: 3,
   },
   image: { height: ITEM_HEIGHT * 0.6, resizeMode: 'cover' },
   title: {

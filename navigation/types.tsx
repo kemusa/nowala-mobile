@@ -30,6 +30,7 @@ export type AuthStackParamList = {
 };
 
 export type MainTabParamList = {
+  WaitList: undefined;
   Dashboard: undefined;
   Projects: undefined;
   Account: undefined;

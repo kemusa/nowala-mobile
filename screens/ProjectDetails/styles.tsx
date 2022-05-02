@@ -3,7 +3,7 @@ import colors from '../../theme/colors';
 import { buttonHeight } from '../../utils/consts/STYLES';
 
 const { width, height } = Dimensions.get('window');
-const { PRIMARY, WHITE } = colors;
+const { PRIMARY, WHITE, TRANSPARENT_BACKGROUND } = colors;
 
 const styles = StyleSheet.create({
   backgroundContainer: {
@@ -19,9 +19,12 @@ const styles = StyleSheet.create({
     paddingRight: 20,
     paddingBottom: 30,
     width: '100%',
-    backgroundColor: 'rgba(0, 0, 0, 0)',
+    backgroundColor: TRANSPARENT_BACKGROUND,
   },
-  container: { flex: 1, flexDirection: 'column' },
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+  },
   contentContainer: {
     height: '55%',
     // flex: 1,

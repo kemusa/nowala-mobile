@@ -8,10 +8,9 @@
 
 interface Project {
   key: string;
-  title?: string;
-  description?: string;
-  image?: string;
-  design?: JSX.Element;
+  title: string;
+  description: string;
+  image: string;
   color: string;
   stats: ProjectStats | null;
   clickable: boolean;
@@ -74,6 +73,6 @@ interface ProjectContext {
   goToProjectDetails: (projectData: Project) => void;
   goToSignUp: () => void;
   goToLogin: () => void;
-  userId: string;
+  user: NowalaUserData;
   data: Project[];
 }
