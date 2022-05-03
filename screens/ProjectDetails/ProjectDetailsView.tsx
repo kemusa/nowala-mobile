@@ -5,6 +5,7 @@ import NowalaText from '../../components/atoms/text';
 import styles from './styles';
 import PrimaryButton from '../../components/atoms/buttons/PrimaryButton';
 import NewOrderModal from '../../components/organisms/NewOrdersModal';
+import { Alert } from 'native-base';
 
 const ProjectDetailsView = () => {
   const {

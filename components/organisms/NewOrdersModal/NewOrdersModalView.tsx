@@ -1,4 +1,4 @@
-import { Actionsheet, Box, ScrollView } from 'native-base';
+import { Actionsheet, Alert, Box } from 'native-base';
 import React from 'react';
 import { Image, View } from 'react-native';
 import PrimaryButton from '../../atoms/buttons/PrimaryButton';
