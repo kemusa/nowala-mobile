@@ -4,8 +4,12 @@ import FormTextInputField from '../../molecules/FormTextInputField';
 import Text from '../../atoms/text';
 import PrimaryButton from '../../atoms/buttons/PrimaryButton';
 import { InputFormConfig } from './types';
-import { FormTextInputFieldProps } from '../../molecules/FormTextInputField/types';
-import { Stack } from 'native-base';
+import { InputFieldProps } from './types';
+import { Select, Stack } from 'native-base';
+import { COUNTRIES } from '../../../utils/consts/COUNTRIES';
+import SelectInputField from '../../molecules/SelectField/SelectField';
+import { View } from 'react-native';
+import CountrySelect from '../../molecules/CountrySelect';
 
 const InputForm: React.FC<InputFormConfig> = ({
   fields,
@@ -15,6 +19,7 @@ const InputForm: React.FC<InputFormConfig> = ({
   validationErrors,
   error,
 }) => {
+  console.log('ERROR', error);
   return (
     <>
       {error.message && (
@@ -36,17 +41,41 @@ const InputForm: React.FC<InputFormConfig> = ({
       ) : (
         // render the form
         <Stack space={3}>
-          {fields.map((field: FormTextInputFieldProps, idx: number) => (
-            <FormTextInputField
-              key={idx}
-              label={field.label}
-              placeholder={field.placeholder}
-              autoCompleteType={field.autoCompleteType}
-              secureTextEntry={field.secureTextEntry || false}
-              control={field.control}
-              name={field.name}
-              rules={field.rules}
-            />
+          {fields.map((field: InputFieldProps, idx: number) => (
+            <View key={idx}>
+              {field.type === 'select' && (
+                <SelectInputField
+                  label={field.label}
+                  control={field.control}
+                  name={field.name}
+                  list={field.list}
+                  type={field.type}
+                />
+              )}
+              {field.type === 'input' && (
+                <FormTextInputField
+                  label={field.label}
+                  placeholder={field.placeholder}
+                  autoCompleteType={field.autoCompleteType}
+                  secureTextEntry={field.secureTextEntry || false}
+                  control={field.control}
+                  name={field.name}
+                  rules={field.rules}
+                  type={field.type}
+                />
+              )}
+              {field.type === 'country' && (
+                <CountrySelect
+                  label={field.label}
+                  control={field.control}
+                  name={field.name}
+                  type={field.type} // todo: remove by fixing the type requirements as this is not needed
+                  onCountrySelect={field.onCountrySelect}
+                  countryCode={field.countryCode}
+                />
+              )}
+              {field.after && field.after}
+            </View>
           ))}
           <PrimaryButton
             disabled={buttonProps.disabled}

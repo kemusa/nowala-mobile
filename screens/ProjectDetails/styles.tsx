@@ -1,12 +1,30 @@
 import { Dimensions, StyleSheet } from 'react-native';
 import colors from '../../theme/colors';
+import { buttonHeight } from '../../utils/consts/STYLES';
 
 const { width, height } = Dimensions.get('window');
-const { PRIMARY, WHITE } = colors;
+const { PRIMARY, WHITE, TRANSPARENT_BACKGROUND } = colors;
 
 const styles = StyleSheet.create({
-  backgroundContainer: { height: '100%', width: '100%', position: 'absolute' },
-  container: { flex: 1, flexDirection: 'column' },
+  backgroundContainer: {
+    flex: 1,
+    height: '100%',
+    width: '100%',
+    position: 'absolute',
+  },
+  buttonContainer: {
+    position: 'absolute',
+    bottom: 0,
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingBottom: 30,
+    width: '100%',
+    backgroundColor: TRANSPARENT_BACKGROUND,
+  },
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+  },
   contentContainer: {
     height: '55%',
     // flex: 1,
@@ -15,7 +33,6 @@ const styles = StyleSheet.create({
     bottom: 0,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'red',
   },
   image: {
     height: '45%',
@@ -38,6 +55,7 @@ const styles = StyleSheet.create({
   scrollView: {
     alignItems: 'center',
   },
+  spacer: { width: '100%', height: 100 },
   statsInfo: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -48,8 +66,6 @@ const styles = StyleSheet.create({
     width: 150,
     padding: 10,
     justifyContent: 'center',
-    // backgroundColor: 'pink',
-    // flexBasis: 'calc(100% - 50px)',
   },
   statTitle: {
     fontWeight: 'bold',

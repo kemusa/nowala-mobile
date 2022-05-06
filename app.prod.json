@@ -1,0 +1,34 @@
+{
+  "expo": {
+    "name": "Nowala",
+    "slug": "NowalaApp",
+    "version": "1.0.4",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": ["**/*", "assets/images/*"],
+    "ios": {
+      "buildNumber": "19",
+      "supportsTablet": false,
+      "bundleIdentifier": "io.nowala.sponsors"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#475972"
+      },
+      "package": "io.nowala.sponsors",
+      "versionCode": 5
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
+}

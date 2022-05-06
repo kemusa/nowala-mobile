@@ -8,8 +8,10 @@ export interface SignUpProps {
 }
 
 export type SignUpFormData = {
-  name: string;
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
   passwordConfirm: string;
+  country: string;
 };

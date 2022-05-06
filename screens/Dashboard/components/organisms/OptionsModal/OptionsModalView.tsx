@@ -3,6 +3,7 @@ import React from 'react';
 import { View } from 'react-native';
 import Icons from '../../../../../components/atoms/icons';
 import NowalaText from '../../../../../components/atoms/text';
+import styles from './styles';
 
 const ProgressModalView: React.FC<OptionsModalViewProps> = ({
   isOpen,
@@ -12,36 +13,12 @@ const ProgressModalView: React.FC<OptionsModalViewProps> = ({
 }) => {
   return (
     <Actionsheet isOpen={isOpen} onClose={onClose}>
-      <Actionsheet.Content
-        style={{
-          width: '100%',
-          alignItems: 'flex-start',
-        }}>
+      <Actionsheet.Content style={styles.container}>
         <Actionsheet.Item onPress={goToProject}>
-          <View style={{ flexDirection: 'row' }}>
+          <View style={styles.itemContainer}>
             <Icons.ProjectIcon></Icons.ProjectIcon>
-            <NowalaText.Body1
-              style={{
-                marginLeft: 5,
-                marginTop: 'auto',
-                marginBottom: 'auto',
-                color: '#585858',
-              }}>
+            <NowalaText.Body1 style={styles.itemText}>
               Project details
-            </NowalaText.Body1>
-          </View>
-        </Actionsheet.Item>
-        <Actionsheet.Item onPress={openOrdersModal}>
-          <View style={{ flexDirection: 'row' }}>
-            <Icons.OrderIcon></Icons.OrderIcon>
-            <NowalaText.Body1
-              style={{
-                marginLeft: 5,
-                marginTop: 'auto',
-                marginBottom: 'auto',
-                color: '#585858',
-              }}>
-              Order details
             </NowalaText.Body1>
           </View>
         </Actionsheet.Item>

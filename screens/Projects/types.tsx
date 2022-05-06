@@ -8,13 +8,19 @@
 
 interface Project {
   key: string;
-  title?: string;
-  description?: string;
-  image?: string;
-  design?: JSX.Element;
+  title: string;
+  description: string;
+  image: string;
   color: string;
   stats: ProjectStats | null;
   clickable: boolean;
+}
+
+interface ProjectData {
+  asset: string;
+  costToUser: number;
+  currency: string;
+  unitCost: number;
 }
 
 // interface ProjectStatsData {
@@ -66,5 +72,7 @@ interface ProjectStats {
 interface ProjectContext {
   goToProjectDetails: (projectData: Project) => void;
   goToSignUp: () => void;
+  goToLogin: () => void;
+  user: NowalaUserData;
   data: Project[];
 }

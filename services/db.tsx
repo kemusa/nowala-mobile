@@ -4,6 +4,7 @@ import firestore, {
   getDoc,
   getDocs,
   addDoc,
+  updateDoc,
   setDoc,
   onSnapshot,
   Query,
@@ -18,7 +19,7 @@ export default class DbService {
   public async findById(path: string) {
     const ref = doc(this.getFireStore, path);
     const snapshot = await getDoc(ref);
-    return { id: snapshot.id, data: snapshot.data };
+    return { id: snapshot.id, data: snapshot.data() };
   }
 
   public async findCollection(collectionName: string) {
@@ -34,24 +35,32 @@ export default class DbService {
     });
   }
 
+  public subscribeToDoc(path: string, callback: (data: any) => any) {
+    const ref = doc(this.getFireStore, path);
+    return onSnapshot(ref, snapshot => {
+      callback({ id: snapshot.id, data: snapshot.data() });
+    });
+  }
+
   public async writeDocument(path: string, document: any) {
-    try {
-      const ref = collection(this.getFireStore, path);
-      const data = await addDoc(ref, document);
-      return { id: data.id };
-    } catch (error) {
-      console.error(error);
-    }
+    const ref = collection(this.getFireStore, path);
+    const data = await addDoc(ref, document);
+    return { id: data.id };
   }
 
   public async writeDocumentWithId(path: string, id: string, document: any) {
-    try {
-      const ref = doc(this.getFireStore, path, id);
-      await setDoc(ref, document);
-    } catch (error) {
-      console.error(error);
-    }
+    const ref = doc(this.getFireStore, path, id);
+    await setDoc(ref, document);
   }
+
+  public async updateDocument(path: string, id: string, data: object) {
+    const ref = doc(this.getFireStore, path, id);
+    await updateDoc(ref, data);
+  }
+
+  // public get serverTimestamp() {
+  //   return firebase.firestore.Timestamp;
+  // }
 
   // public async getCollection(
   //   collectionName: string,
@@ -64,20 +73,6 @@ export default class DbService {
   //   return data.docs.map(doc => ({ id: doc.id, data: doc.data() }));
   // }
 
-  // public subscribeWithState(
-  //   collectionName: string,
-  //   setStateFunc: React.Dispatch<React.SetStateAction<never[]>>,
-  // ) {
-  //   return this._db.collection(collectionName).onSnapshot(snapshot =>
-  //     setStateFunc(
-  //       snapshot?.docs.map(doc => ({
-  //         id: doc.id,
-  //         data: doc.data(),
-  //       })) as any,
-  //     ),
-  //   );
-  // }
-
   // public subscribe(
   //   collectionName: string,
   //   callback: (data: any) => any,
@@ -88,30 +83,6 @@ export default class DbService {
   //   return query.onSnapshot(snapshot =>
   //     callback(snapshot?.docs.map(doc => ({ id: doc.id, data: doc.data() }))),
   //   );
-  // }
-
-  // public async writeDocument(
-  //   collectionName: string,
-  //   data: object,
-  //   id?: string,
-  // ) {
-  //   const collection = await this._db.collection(collectionName);
-  //   const success = id
-  //     ? await collection.doc(id).set(data)
-  //     : await collection.add(data);
-  //   return success;
-  // }
-
-  // public async updateDocument(path: string, id: string, data: object) {
-  //   const success = await this._db
-  //     .collection(path)
-  //     .doc(id)
-  //     .set(data, { merge: true });
-  //   return success;
-  // }
-
-  // public get serverTimestamp() {
-  //   return firebase.firestore.Timestamp;
   // }
 
   // private _collectionConfig(

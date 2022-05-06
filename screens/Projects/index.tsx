@@ -1,3 +1,3 @@
-import ProjectsContainer from './ProjectsContainer';
+import ProjectsScreen from './ProjectsContainer';
 
-export default ProjectsContainer
+export default ProjectsScreen;

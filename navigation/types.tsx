@@ -1,106 +1,71 @@
-import { RouteProp } from '@react-navigation/core';
-import { StackNavigationProp } from '@react-navigation/stack';
+import type {
+  CompositeScreenProps,
+  NavigatorScreenParams,
+} from '@react-navigation/native';
+import type { StackScreenProps } from '@react-navigation/stack';
+import type { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 
-type StackParamList = {
+export type RootStackParamList = {
+  AuthStack: NavigatorScreenParams<AuthStackParamList>;
+  NoAuthStack: NavigatorScreenParams<NoAuthStackParamList>;
+  ProjectDetails: {
+    project: Project;
+  };
+};
+
+export type AuthStackParamList = {
+  Main: NavigatorScreenParams<MainTabParamList>;
+  YourOrders: { orders: OrderData[] };
+  ImpactDetail: {
+    impactDetail: ImpactDetail;
+    userId: string;
+    email: string;
+    firstName: string;
+  };
+  BankPayment: {
+    redirectPage: keyof MainTabParamList;
+    paymentRef: string;
+    price: number;
+  };
+};
+
+export type MainTabParamList = {
+  WaitList: undefined;
+  Dashboard: undefined;
   Projects: undefined;
-  ProjectDetails: { project: Project };
+  Account: undefined;
+};
+
+export type NoAuthStackParamList = {
+  Projects: undefined;
   SignUp: undefined;
   Login: undefined;
-  PasswordReset: undefined;
-  Dashboard: undefined;
-  YourOrders: { orders: OrderData[] };
+  ForgotPassword: undefined;
 };
 
-interface NowalaRoutes {
-  readonly Projects: keyof StackParamList;
-  readonly ProjectDetails: keyof StackParamList;
-  readonly LOGIN: keyof StackParamList;
-  readonly SIGN_UP: keyof StackParamList;
-  readonly PASSWORD_RESET: keyof StackParamList;
-  readonly DASHBOARD: keyof StackParamList;
+export type RootStackScreenProps<T extends keyof RootStackParamList> =
+  StackScreenProps<RootStackParamList, T>;
+
+export type MainTabScreenProps<T extends keyof MainTabParamList> =
+  CompositeScreenProps<
+    BottomTabScreenProps<MainTabParamList, T>,
+    RootStackScreenProps<keyof RootStackParamList>
+  >;
+
+export type NoAuthStackScreenProps<T extends keyof NoAuthStackParamList> =
+  CompositeScreenProps<
+    StackScreenProps<NoAuthStackParamList, T>,
+    RootStackScreenProps<keyof RootStackParamList>
+  >;
+
+export type AuthStackScreenProps<T extends keyof AuthStackParamList> =
+  CompositeScreenProps<
+    StackScreenProps<AuthStackParamList, T>,
+    RootStackScreenProps<keyof RootStackParamList>
+  >;
+
+declare global {
+  namespace ReactNavigation {
+    interface RootParamList extends RootStackParamList {}
+  }
 }
-
-const routes: NowalaRoutes = {
-  Projects: 'Projects',
-  ProjectDetails: 'ProjectDetails',
-  LOGIN: 'Login',
-  SIGN_UP: 'SignUp',
-  PASSWORD_RESET: 'PasswordReset',
-  DASHBOARD: 'Dashboard',
-};
-
-// Projects Types
-type ProjectsRouteProps = RouteProp<StackParamList, 'Projects'>;
-type ProjectsScreenNavigationProps = StackNavigationProp<
-  StackParamList,
-  'Projects'
->;
-type ProjectsScreenProps = {
-  route: ProjectsRouteProps;
-  navigation: ProjectsScreenNavigationProps;
-};
-
-// Project Details Types
-type ProjectDetailsRouteProps = RouteProp<StackParamList, 'ProjectDetails'>;
-type ProjectDetailsScreenNavigationProps = StackNavigationProp<
-  StackParamList,
-  'ProjectDetails'
->;
-type ProjectDetailsScreenProps = {
-  route: ProjectDetailsRouteProps;
-  navigation: ProjectDetailsScreenNavigationProps;
-};
-
-// Login Types
-type SignUpRouteProps = RouteProp<StackParamList, 'SignUp'>;
-type SignUpScreenNavigationProps = StackNavigationProp<
-  StackParamList,
-  'SignUp'
->;
-type SignUpScreenProps = {
-  route: SignUpRouteProps;
-  navigation: SignUpScreenNavigationProps;
-};
-
-// Login Types
-type LoginRouteProps = RouteProp<StackParamList, 'Login'>;
-type LoginScreenNavigationProps = StackNavigationProp<StackParamList, 'Login'>;
-type LoginScreenProps = {
-  route: LoginRouteProps;
-  navigation: LoginScreenNavigationProps;
-};
-
-// Dashboard Types
-type DashboardRouteProps = RouteProp<StackParamList, 'Dashboard'>;
-type DashboardScreenNavigationProps = StackNavigationProp<
-  StackParamList,
-  'Dashboard'
->;
-type DashboardScreenProps = {
-  route: DashboardRouteProps;
-  navigation: DashboardScreenNavigationProps;
-  userId: string;
-};
-
-// Order Types
-type YourOrdersRouteProps = RouteProp<StackParamList, 'YourOrders'>;
-type YourOrdersScreenNavigationProps = StackNavigationProp<
-  StackParamList,
-  'YourOrders'
->;
-type YourOrdersScreenProps = {
-  route: YourOrdersRouteProps;
-  navigation: YourOrdersScreenNavigationProps;
-};
-
-export type {
-  StackParamList,
-  ProjectsScreenProps,
-  ProjectDetailsScreenProps,
-  SignUpScreenProps,
-  LoginScreenProps,
-  DashboardScreenProps,
-  YourOrdersScreenProps,
-};
-
-export { routes };

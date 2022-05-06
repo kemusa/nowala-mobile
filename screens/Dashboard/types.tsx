@@ -3,13 +3,20 @@ interface DashboardContext {
   viewProgress: boolean;
   viewOptions: boolean;
   viewOrders: boolean;
+  menuModalOpen: boolean;
+  openMenuModal: () => void;
+  closeMenuModal: () => void;
   openProgressModal: () => void;
   closeProgressModal: () => void;
   closeOptionsModal: () => void;
   closeOrdersModal: () => void;
   goToProject: () => void;
   goToYourOrders: () => void;
+  goToImpactDetail: ImpactDetailNavProp;
+  signOut: () => void;
 }
+
+type ImpactDetailNavProp = (impactDetail: ImpactDetail) => void;
 
 type FBtime = { seconds: number; nanoseconds: number };
 interface SponsorStatus {
@@ -25,6 +32,12 @@ interface PaidData {
   unitCost: number;
 }
 
+interface ImpactMetrics {
+  carbonOffset: number;
+  lightHours: number;
+  moneySaved: number;
+  peopleImpacted: number;
+}
 interface DashboardSummary {
   investment: number;
   collected: number;
@@ -34,6 +47,7 @@ interface DashboardSummary {
   currency: string;
   units: number;
   progress: SponsorStatus;
+  impactMetrics?: ImpactMetrics;
   openOptionsModal: () => void;
 }
 

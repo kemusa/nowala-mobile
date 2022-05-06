@@ -1,33 +1,44 @@
 import React, { useContext, useEffect, useState } from 'react';
 import ServicesContext, { Services } from '../../services';
-import { SignUpScreenProps } from '../../navigation/types';
-import { routes } from '../../navigation/types';
 import { _getSignUpError } from '../../utils/errors';
 import SignUpView from './SignUpView';
 import regex from '../../utils/consts/REGEX';
-import { useForm, useWatch } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import SignUpContext from './SignUpContext';
-import { SignUpProps, SignUpFormData } from './types';
+import { SignUpFormData } from './types';
 import { InputFormConfig } from '../../components/organisms/InputForm/types';
 import NowalaLogo from '../../components/atoms/icons/NowalaLogo';
+import { Country, CountryCode } from 'react-native-country-picker-modal';
+import { NoAuthStackScreenProps } from '../../navigation/types';
+import {
+  analyticsEvents,
+  analyticsScreens,
+} from '../../utils/consts/ANALYTICS';
 
-const SignUpContainer: React.FC<SignUpScreenProps> = ({ navigation }) => {
-  const { LOGIN } = routes;
+const SignUpContainer: React.FC<NoAuthStackScreenProps<'SignUp'>> = ({
+  navigation,
+}) => {
   // todo: make into readonly variable
   const isLogin = false;
-
   // LoadingStates
   const [emailAuthLoading, setEmailAuthLoading] = useState(false);
   // const [facebookAuthLoading, setFacebookAuthLoading] = useState(false);
   // const [googleAuthLoading, setGoogleAuthLoading] = useState(false);
 
   // Get services
-  const { auth } = useContext(ServicesContext) as Services;
+  const { auth, analytics } = useContext(ServicesContext) as Services;
+
+  // track screen
+  useEffect(() => {
+    analytics.screen(analyticsScreens.SIGN_UP);
+  }, []);
 
   // Initialize form
   const { EMAIL_REGEX, PASSWORD_REGEX } = regex;
   const NO_LOGIN_ERROR = { message: null as any };
   const [signUpError, setSignUpError] = useState(NO_LOGIN_ERROR);
+  const [country, setCountry] = useState('United Kingdom');
+  const [countryCode, setCountryCode] = useState('GB' as CountryCode);
   const {
     control,
     getValues,
@@ -40,6 +51,11 @@ const SignUpContainer: React.FC<SignUpScreenProps> = ({ navigation }) => {
   const nameRules = {
     required: { value: true, message: 'Name is required' },
   };
+
+  const countryRules = {
+    required: { value: true, message: 'Country is required' },
+  };
+
   const emailRules = {
     required: { value: true, message: 'Email is required' },
     pattern: { value: EMAIL_REGEX, message: 'Not a valid email' },
@@ -49,7 +65,7 @@ const SignUpContainer: React.FC<SignUpScreenProps> = ({ navigation }) => {
     pattern: {
       value: PASSWORD_REGEX,
       message:
-        'Your password must have minimum eight characters, at least one uppercase letter, one lowercase letter and one number',
+        'Your password must have 6-16 characters, at least one number, and special character',
     },
   };
 
@@ -67,6 +83,7 @@ const SignUpContainer: React.FC<SignUpScreenProps> = ({ navigation }) => {
   useEffect(() => {
     navigation.setOptions({
       headerTitle: () => <NowalaLogo />,
+      headerTitleAlign: 'center',
       headerStyle: {
         elevation: 0, // remove header border for android
         shadowOpacity: 0, // remove header border for ios
@@ -76,15 +93,28 @@ const SignUpContainer: React.FC<SignUpScreenProps> = ({ navigation }) => {
   }, [navigation]);
 
   const goToLogin = () => {
-    navigation.navigate(LOGIN);
+    navigation.navigate('Login');
+  };
+
+  const onCountrySelect = (country: Country) => {
+    console.log(country);
+    setCountry(country.name as string);
+    setCountryCode(country.cca2);
   };
 
   const signUpWithEmailAndPassword = async (data: SignUpFormData) => {
     try {
-      const { name, email, password } = data;
+      const { firstName, lastName, email, password } = data;
       setSignUpError(NO_LOGIN_ERROR);
       setEmailAuthLoading(true);
-      await auth.signUpWithEmailAndPassword(name, email, password);
+      await auth.signUpWithEmailAndPassword(
+        firstName,
+        lastName,
+        email,
+        password,
+        country,
+      );
+      analytics.track(analyticsEvents.SIGNED_UP);
     } catch (error: any) {
       console.error(error);
       setEmailAuthLoading(false);
@@ -125,11 +155,21 @@ const SignUpContainer: React.FC<SignUpScreenProps> = ({ navigation }) => {
     fields: [
       {
         placeholder: 'e.g. Jane Doe',
-        label: 'Name',
+        label: 'First Name',
         autoCompleteType: 'name',
         control,
-        name: 'name',
+        name: 'firstName',
         rules: nameRules,
+        type: 'input',
+      },
+      {
+        placeholder: 'e.g. Jane Doe',
+        label: 'Last Name',
+        autoCompleteType: 'name',
+        control,
+        name: 'lastName',
+        rules: nameRules,
+        type: 'input',
       },
       {
         placeholder: 'e.g. jane.doe@gmail.com',
@@ -138,6 +178,17 @@ const SignUpContainer: React.FC<SignUpScreenProps> = ({ navigation }) => {
         control,
         name: 'email',
         rules: emailRules,
+        type: 'input',
+      },
+      {
+        label: 'Country of residence',
+        control,
+        country: true,
+        name: 'country',
+        rules: countryRules,
+        type: 'country',
+        onCountrySelect,
+        countryCode,
       },
       {
         label: 'Password',
@@ -146,6 +197,7 @@ const SignUpContainer: React.FC<SignUpScreenProps> = ({ navigation }) => {
         control,
         name: 'password',
         rules: passwordRules,
+        type: 'input',
       },
       {
         label: 'Confirm password',
@@ -154,6 +206,7 @@ const SignUpContainer: React.FC<SignUpScreenProps> = ({ navigation }) => {
         control,
         name: 'passwordConfirm',
         rules: confirmPasssRules,
+        type: 'input',
       },
     ],
     buttonProps: {

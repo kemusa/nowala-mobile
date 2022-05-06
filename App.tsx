@@ -8,11 +8,17 @@ import { fonts, theme } from './theme/theme';
 import { firbaseInit } from './services/firebase';
 import ServicesContext, { loadServices } from './services';
 import { _cacheResourcesAsync } from './utils/cache';
+import { analyticsInit } from './services/analytics';
 
 export default function App() {
   const [loaded, setLoaded] = useState(false);
   const fontsLoaded = fonts();
+
+  // Firebase Init
   firbaseInit();
+  //Analytics Init
+  analyticsInit();
+  // Enable asset caching
   useEffect(() => {
     _cacheResourcesAsync().then(() => setLoaded(true));
   }, []);
@@ -20,6 +26,7 @@ export default function App() {
   if (!loaded) {
     return <AppLoading />;
   }
+
   return (
     <NativeBaseProvider theme={theme}>
       <ServicesContext.Provider value={{ ...loadServices() }}>

@@ -3,6 +3,7 @@ import React from 'react';
 import { View, ScrollView } from 'react-native';
 import NowalaText from '../../../../../components/atoms/text';
 import CheckListItem from '../../molecules/CheckListItem';
+import styles from './styles';
 
 const ProgressModalView: React.FC<ProgressModalViewProps> = ({
   progress,
@@ -11,22 +12,14 @@ const ProgressModalView: React.FC<ProgressModalViewProps> = ({
 }) => {
   return (
     <Actionsheet isOpen={isOpen} onClose={onClose}>
-      <Actionsheet.Content
-        style={{
-          width: '100%',
-          alignItems: 'flex-start',
-          backgroundColor: 'white',
-        }}>
-        <View style={{ padding: 20 }}>
+      <Actionsheet.Content style={styles.container}>
+        <View style={styles.titleContainer}>
           <NowalaText.Headline3>Progress</NowalaText.Headline3>
         </View>
-        <ScrollView style={{ width: '100%', paddingTop: 10 }}>
+        <ScrollView style={styles.listContainer}>
           {progress &&
             progress.map((item, idx) => (
-              <Actionsheet.Item
-                key={idx}
-                h={60}
-                style={{ backgroundColor: 'white' }}>
+              <Actionsheet.Item key={idx} h={60} style={styles.item}>
                 <CheckListItem title={item.title} complete={item.complete} />
               </Actionsheet.Item>
             ))}

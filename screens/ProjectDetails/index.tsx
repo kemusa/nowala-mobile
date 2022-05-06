@@ -1,3 +1,3 @@
-import ProjectsDetailsContainer from './ProjectDetailsContainer';
+import ProjectDetailsScreen from './ProjectDetailsContainer';
 
-export default ProjectsDetailsContainer;
+export default ProjectDetailsScreen;

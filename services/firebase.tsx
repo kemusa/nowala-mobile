@@ -1,15 +1,7 @@
 import { initializeApp } from 'firebase/app';
-import { FirestoreSettings, initializeFirestore } from 'firebase/firestore';
-
-const firebaseConfig = {
-  apiKey: 'AIzaSyCVdyN39f08FOvTfT5Zcn3GvPJu2dXKU8Q',
-  authDomain: 'nowala.firebaseapp.com',
-  databaseURL: 'https://nowala.firebaseio.com',
-  projectId: 'nowala',
-  storageBucket: 'nowala.appspot.com',
-  messagingSenderId: '351027834464',
-  appId: '1:351027834464:web:9984f7fd00a23a02675d05',
-};
+import { initializeFirestore } from 'firebase/firestore';
+import environment from '../environments';
+const { firebaseConfig } = environment();
 
 const firbaseInit = () => {
   // Initialize Firebase

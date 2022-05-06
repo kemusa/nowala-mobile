@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Input } from 'native-base';
-import { useController, useWatch } from 'react-hook-form';
+import { useController } from 'react-hook-form';
 import NowalaText from '../../atoms/text';
 import styles from './styles';
-import { FormTextInputFieldProps } from './types';
+import { InputFieldProps } from '../../organisms/InputForm/types';
 
-const FormTextInputField: React.FC<FormTextInputFieldProps> = ({
+const FormTextInputField: React.FC<InputFieldProps> = ({
   disabled,
   placeholder,
   label,

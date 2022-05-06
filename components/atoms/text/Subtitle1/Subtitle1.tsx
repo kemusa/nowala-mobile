@@ -3,7 +3,7 @@ import { Text } from 'react-native';
 import styles from './styles';
 import { Subtitle1Props } from './types';
 
-const Subtitle2: React.FC<Subtitle1Props> = ({
+const Subtitle1: React.FC<Subtitle1Props> = ({
   children,
   style,
   numberOfLines,
@@ -15,4 +15,4 @@ const Subtitle2: React.FC<Subtitle1Props> = ({
   );
 };
 
-export default Subtitle2;
+export default Subtitle1;

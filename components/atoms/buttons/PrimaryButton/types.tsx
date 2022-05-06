@@ -1,4 +1,4 @@
-interface PrimaryRoundButtonProps {
+interface PrimaryButtonProps {
   text: string;
   disabled?: boolean;
   loading?: boolean;

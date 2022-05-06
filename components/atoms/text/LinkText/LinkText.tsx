@@ -10,10 +10,7 @@ const LinkText: React.FC<LinkTextProps> = ({
   onPress,
 }) => {
   return (
-    <TouchableOpacity
-      style={styles.container}
-      onPress={onPress}
-      activeOpacity={0.5}>
+    <TouchableOpacity onPress={onPress} activeOpacity={0.5}>
       <Text style={[styles.text, { ...style }]} numberOfLines={numberOfLines}>
         {children}
       </Text>

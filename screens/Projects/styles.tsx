@@ -1,45 +1,57 @@
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet, StatusBar } from 'react-native';
 import { spec } from './specs';
 import colors from '../../theme/colors';
-import H3 from '../../components/atoms/text/Headline3/styles';
-const { WHITE } = colors;
-const { text } = H3;
-const { ITEM_WIDTH, ITEM_HEIGHT, SPACING, RADIUS, FULL_SIZE } = spec;
+import { buttonHeight } from '../../utils/consts/STYLES';
+const { WHITE, PRIMARY, BACKGROUND, TRANSPARENT_BACKGROUND } = colors;
+const { ITEM_WIDTH, ITEM_HEIGHT } = spec;
+
 const styles = StyleSheet.create({
   buttonContainer: {
-    padding: 15,
+    // padding: 15,
     width: '100%',
+    backgroundColor: TRANSPARENT_BACKGROUND,
+    height: buttonHeight,
+    position: 'absolute',
+    bottom: 0,
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingBottom: 85,
   },
-  container: { flex: 1 },
-  cardContainer: {
+  container: {
+    flex: 1,
+    backgroundColor: BACKGROUND,
+    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+  },
+  contentContainer: {},
+  itemContainer: {
+    width: '100%',
     height: ITEM_HEIGHT,
-    overflow: 'hidden',
-    borderRadius: RADIUS,
+    padding: 10,
+    marginBottom: 10,
   },
-  itemContainer: { width: ITEM_WIDTH, height: ITEM_HEIGHT, margin: SPACING },
-  image: { height: ITEM_HEIGHT * 0.5, resizeMode: 'cover' },
+  image: { height: ITEM_HEIGHT * 0.6, resizeMode: 'cover' },
   title: {
-    ...text,
-    color: WHITE,
+    textAlign: 'center',
+    color: PRIMARY,
     width: ITEM_WIDTH * 0.8,
-    fontFamily: 'Lato_700Bold',
   },
-  description: { fontSize: 14, color: WHITE, marginTop: 10 },
+  description: { fontSize: 14, marginTop: 10, textAlign: 'center' },
   cardInfoContainer: {
     width: '100%',
-    backgroundColor: '#5E8497',
+    backgroundColor: WHITE,
     padding: 20,
-    height: ITEM_HEIGHT * 0.5,
-    // position: 'absolute',
-    // bottom: 0,
+    height: ITEM_HEIGHT * 0.4,
+    alignItems: 'center',
   },
   text: { color: WHITE },
   topBar: {
     padding: 15,
+    paddingTop: Platform.OS === 'ios' ? 20 : 40,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
   },
+  spacer: { height: 150 },
 });
 
 export default styles;

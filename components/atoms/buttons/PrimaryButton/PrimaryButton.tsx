@@ -3,7 +3,7 @@ import { Button } from 'native-base';
 import styles from './styles';
 import NowalaText from '../../text';
 
-const PrimaryRoundButton: React.FC<PrimaryRoundButtonProps> = ({
+const PrimaryButton: React.FC<PrimaryButtonProps> = ({
   text,
   disabled,
   loading,
@@ -16,9 +16,9 @@ const PrimaryRoundButton: React.FC<PrimaryRoundButtonProps> = ({
       isLoading={loading}
       onPress={onPress}
       _loading={{
-        bg: '#E8F3FE',
+        bg: '#548392',
         _text: {
-          color: '#596E8C',
+          color: '#fff',
         },
       }}>
       <NowalaText.ButtonText>{text}</NowalaText.ButtonText>
@@ -26,4 +26,4 @@ const PrimaryRoundButton: React.FC<PrimaryRoundButtonProps> = ({
   );
 };
 
-export default PrimaryRoundButton;
+export default PrimaryButton;

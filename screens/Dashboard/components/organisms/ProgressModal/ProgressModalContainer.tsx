@@ -19,7 +19,7 @@ const ProgressModalContainer: React.FC = () => {
     let progressList = [];
     progressList.push(getStatusObject('registered', progress.registered));
     progressList.push(getStatusObject('paid', progress.paid));
-    progressList.push(getStatusObject('transferred', progress.transferred));
+    // progressList.push(getStatusObject('transferred', progress.transferred));
     progressList.push(getStatusObject('installed', progress.installed));
     progressList.push(
       getStatusObject('collectionStarted', progress.collectionStarted),

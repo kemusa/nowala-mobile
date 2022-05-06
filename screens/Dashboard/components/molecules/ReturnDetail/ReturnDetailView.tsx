@@ -19,7 +19,7 @@ const ReturnDetailView: React.FC<ReturnDetail> = ({
         </NowalaText.Headline4>
         <AnimatedNumber
           includeComma
-          animateToNumber={number}
+          animateToNumber={Math.round(number)}
           animationDuration={2000}
           fontStyle={Headline4Styles.text}
         />

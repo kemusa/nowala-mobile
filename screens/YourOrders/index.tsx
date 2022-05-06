@@ -1,3 +1,3 @@
-import OptionsModalContainer from './YourOrdersContainer';
+import YourOrdersScreen from './YourOrdersContainer';
 
-export default OptionsModalContainer;
+export default YourOrdersScreen;
