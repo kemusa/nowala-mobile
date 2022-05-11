@@ -60,7 +60,7 @@ const RootNavigator = () => {
     try {
       const doc = await db.findById(`users/${uid}`);
       const profile = doc.data as NowalaUserProfile;
-      const { hasOrdered, onboarded, firstName } = profile;
+      const { hasOrdered, onboarded, firstName, country } = profile;
       // If the profile hasn't been generated yet, set to false
       profile ? setOnboarded(onboarded) : setOnboarded(false);
       setUid(uid);
@@ -72,6 +72,7 @@ const RootNavigator = () => {
         firstName,
         onboarded,
         hasOrdered,
+        country,
         updateHasOrdered,
       });
     } catch (error) {
@@ -97,7 +98,10 @@ const RootNavigator = () => {
   };
 
   return (
-    <Navigator initialRouteName="AuthStack" detachInactiveScreens={false}>
+    <Navigator
+      initialRouteName="AuthStack"
+      detachInactiveScreens={false}
+      screenOptions={{}}>
       {uid ? (
         <>
           <Screen name="AuthStack" options={{ headerShown: false, title: '' }}>

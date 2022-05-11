@@ -38,6 +38,7 @@ const ENV = {
   },
 };
 
+// The below comments are DEPRECATED:
 // Commands to build with the right env vars:
 // Staging - expo build:ios --release-channel staging
 // Production - expo build:ios --release-channel prod
@@ -51,11 +52,11 @@ const ENV = {
 // Promote staging code to production
 // expo publish:set --publish-id <publicationId> --release-channel prod
 
-const environment = (env = Constants?.manifest?.releaseChannel) => {
-  console.log('env', env);
+const environment = (env = process.env.APP_ENV) => {
   // What is __DEV__ ?
   // This variable is set to true when react-native is running in Dev mode.
   // __DEV__ is true when run locally, but false when published.
+  console.log('ENVIRONMENT', env);
   if (__DEV__) {
     return ENV.dev;
   } else if (env === 'staging') {
@@ -63,7 +64,7 @@ const environment = (env = Constants?.manifest?.releaseChannel) => {
   } else if (env === 'prod') {
     return ENV.prod;
   }
-  return ENV.staging;
+  return ENV.dev;
 };
 
 export default environment;

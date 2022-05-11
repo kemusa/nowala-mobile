@@ -14,4 +14,5 @@ interface ProjectDetailsContext {
   email?: string; //todo :remove optional;
   firstName?: string; //todo :remove optional;
   hasOrdered: boolean;
+  isUK: boolean;
 }

@@ -11,13 +11,10 @@ const NowalaBrandingCardView = () => {
     <View style={styles.container}>
       <NowalaLogoInverse />
       <NowalaText.Headline2Light style={styles.topTextWrapper}>
-        DISCOVER
+        Make an impact,
       </NowalaText.Headline2Light>
       <NowalaText.Headline2Light style={styles.textWrapper}>
-        SUPPORT
-      </NowalaText.Headline2Light>
-      <NowalaText.Headline2Light style={styles.textWrapper}>
-        EARN
+        Earn money
       </NowalaText.Headline2Light>
     </View>
   );

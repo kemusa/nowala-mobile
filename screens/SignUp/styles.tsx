@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
   safeAreaView: { flex: 1, backgroundColor: WHITE },
   container: { padding: screenPadding },
   heading: { marginBottom: 12 },
-  description: { marginBottom: 20 },
+  description: { marginBottom: 5 },
   textInput: { height: 40, width: 320 },
 });
 

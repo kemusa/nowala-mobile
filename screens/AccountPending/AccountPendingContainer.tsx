@@ -6,10 +6,7 @@ import NowalaIcon from '../../components/atoms/icons/NowalaIcon';
 import colors from '../../theme/colors';
 import { AccountPendingCxt } from './AccountPendingContext';
 import ServicesContext, { Services } from '../../services';
-import {
-  MainTabScreenProps,
-  RootStackScreenProps,
-} from '../../navigation/types';
+import { MainTabScreenProps } from '../../navigation/types';
 import {
   analyticsEvents,
   analyticsScreens,
@@ -17,8 +14,13 @@ import {
 
 const { BACKGROUND } = colors;
 
-const AccountPendingContainer: React.FC<MainTabScreenProps<'Account'>> = ({
+interface AccountPendingProps extends MainTabScreenProps<'Account'> {
+  user: NowalaUserData;
+}
+
+const AccountPendingContainer: React.FC<AccountPendingProps> = ({
   navigation,
+  user,
 }) => {
   const { auth, analytics } = useContext(ServicesContext) as Services;
 
@@ -61,7 +63,7 @@ const AccountPendingContainer: React.FC<MainTabScreenProps<'Account'>> = ({
   };
 
   return (
-    <AccountPendingCxt.Provider value={{ goToProjects }}>
+    <AccountPendingCxt.Provider value={{ goToProjects, user }}>
       <AccountPendingView />
     </AccountPendingCxt.Provider>
   );

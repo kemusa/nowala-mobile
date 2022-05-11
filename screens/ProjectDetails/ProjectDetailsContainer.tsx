@@ -6,6 +6,7 @@ import TimeIcon from '../../components/atoms/icons/TimeIcon';
 import { RootStackScreenProps } from '../../navigation/types';
 import ServicesContext, { Services } from '../../services';
 import { analyticsScreens } from '../../utils/consts/ANALYTICS';
+import { UNITED_KINGDOM } from '../../utils/consts/COUNTRIES';
 import { PROJECT_ID } from '../../utils/consts/FIRST_PROJECT';
 import { ProjectDetailsContext } from './ProjectDetailsContext';
 import ProjectDetailsView from './ProjectDetailsView';
@@ -22,9 +23,9 @@ const ProjectDetailsContainer: React.FC<ProjectDetailsProps> = ({
   const { project } = route.params;
   const { analytics } = useContext(ServicesContext) as Services;
 
-  console.log('USER', user);
-
   const { userId, email, firstName, updateHasOrdered, hasOrdered } = user;
+
+  const isUK = user.country === UNITED_KINGDOM;
 
   const [canViewOrderModal, setCanViewOrderModal] = useState(false);
 
@@ -112,6 +113,7 @@ const ProjectDetailsContainer: React.FC<ProjectDetailsProps> = ({
         onOrderSent,
         firstName,
         hasOrdered,
+        isUK,
       }}>
       <ProjectDetailsView />
     </ProjectDetailsContext.Provider>

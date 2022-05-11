@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { SafeAreaView, ScrollView, View } from 'react-native';
+import { SafeAreaView, ScrollView, View, Text } from 'react-native';
 import styles from './styles';
 import ImpactBreakdown from './components/organisms/ImpactBreakdown';
 import ReturnBreakdown from './components/organisms/ReturnBreakdown';
@@ -7,20 +7,9 @@ import ProgressModal from './components/organisms/ProgressModal';
 import OptionsModal from './components/organisms/OptionsModal';
 import colors from '../../theme/colors';
 import MenuModal from './components/organisms/MenuModal';
-// import * as Updates from 'expo-updates';
+import SecondaryButton from '../../components/atoms/buttons/SecondaryButton';
 
 const { BACKGROUND } = colors;
-// useEffect(() => {
-//   updateApp();
-// }, []);
-// const updateApp = async () => {
-//   const update = await Updates.checkForUpdateAsync();
-//   if (update.isAvailable) {
-//     await Updates.fetchUpdateAsync();
-//     // ... notify user of update ...
-//     await Updates.reloadAsync();
-//   }
-// };
 
 const DashboardView: React.FC = () => {
   return (

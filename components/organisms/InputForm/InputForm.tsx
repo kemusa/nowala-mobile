@@ -5,11 +5,12 @@ import Text from '../../atoms/text';
 import PrimaryButton from '../../atoms/buttons/PrimaryButton';
 import { InputFormConfig } from './types';
 import { InputFieldProps } from './types';
-import { Select, Stack } from 'native-base';
-import { COUNTRIES } from '../../../utils/consts/COUNTRIES';
+import { Stack } from 'native-base';
 import SelectInputField from '../../molecules/SelectField/SelectField';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 import CountrySelect from '../../molecules/CountrySelect';
+import DateTimePicker from '@react-native-community/datetimepicker';
+import DateSelect from '../../molecules/DateSelect';
 
 const InputForm: React.FC<InputFormConfig> = ({
   fields,
@@ -72,6 +73,13 @@ const InputForm: React.FC<InputFormConfig> = ({
                   type={field.type} // todo: remove by fixing the type requirements as this is not needed
                   onCountrySelect={field.onCountrySelect}
                   countryCode={field.countryCode}
+                />
+              )}
+              {field.type === 'datepicker' && (
+                <DateSelect
+                  label={field.label}
+                  date={field.date}
+                  setDate={field.setDate || (() => {})}
                 />
               )}
               {field.after && field.after}

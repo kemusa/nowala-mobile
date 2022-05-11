@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { Input, Select } from 'native-base';
-import { useController, useWatch } from 'react-hook-form';
+import React, { useState } from 'react';
+import { Select } from 'native-base';
+import { useController } from 'react-hook-form';
 import NowalaText from '../../atoms/text';
 import styles from './styles';
-import { COUNTRIES } from '../../../utils/consts/COUNTRIES';
 import { InputFieldProps } from '../../organisms/InputForm/types';
 import { ActivityIndicator, TouchableOpacity, View } from 'react-native';
 
@@ -30,7 +29,6 @@ const SelectInputField: React.FC<InputFieldProps> = ({
       <NowalaText.Body2 style={styles.label}>{label}</NowalaText.Body2>
       <TouchableOpacity
         onPress={() => {
-          console.log('FOO');
           setLoading(true);
         }}>
         <ActivityIndicator

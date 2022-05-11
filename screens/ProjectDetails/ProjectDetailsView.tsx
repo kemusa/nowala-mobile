@@ -20,6 +20,7 @@ const ProjectDetailsView = () => {
     onOrderSent,
     firstName,
     hasOrdered,
+    isUK,
   } = useContext(ProjectDetailsContext);
 
   return (
@@ -70,7 +71,7 @@ const ProjectDetailsView = () => {
           firstName={firstName || ''}
         />
       </View>
-      {!hasOrdered && (
+      {!hasOrdered && isUK && (
         <View style={styles.buttonContainer}>
           <PrimaryButton text="Order now" onPress={ctaOnPress} />
         </View>

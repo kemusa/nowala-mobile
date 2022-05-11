@@ -4,11 +4,10 @@ import { screenPadding } from '../../utils/consts/STYLES';
 
 const { WHITE } = colors;
 const styles = StyleSheet.create({
-  safeAreaView: { flex: 1 },
+  safeAreaView: { flex: 1, backgroundColor: WHITE },
   container: {
     flex: 1,
     padding: screenPadding,
-    backgroundColor: WHITE,
     alignItems: 'center',
   },
   image: {

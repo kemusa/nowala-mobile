@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     height: ITEM_HEIGHT,
-    backgroundColor: '#20678A',
+    // backgroundColor: '#20678A',
     alignItems: 'center',
     justifyContent: 'center',
     margin: 'auto',
@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
     height: '100%',
     width: '100%',
     borderRadius: 6,
+    resizeMode: 'stretch',
   },
 });
 

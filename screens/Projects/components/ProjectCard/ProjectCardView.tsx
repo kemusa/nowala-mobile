@@ -9,10 +9,14 @@ import styles from './styles';
 
 const ProjectCardView: React.FC<ProjectCardProps> = ({ project, onPress }) => {
   return (
-    <TouchableOpacity style={{}} activeOpacity={0.5} onPress={onPress}>
+    <TouchableOpacity
+      style={{ width: '100%' }}
+      activeOpacity={0.5}
+      onPress={onPress}>
       <Shadow
         distance={5}
         startColor={'#00000020'}
+        viewStyle={{ width: '100%' }}
         // containerViewStyle={{ marginVertical: 20 }}
         radius={8}>
         <View style={styles.container}>

@@ -54,6 +54,7 @@ export default class AuthService {
     email: string,
     password: string,
     country: string,
+    dob: string,
   ) {
     const { user } = await createUserWithEmailAndPassword(
       this.getAuth,
@@ -67,6 +68,7 @@ export default class AuthService {
       lastName,
       onboarded: false,
       country,
+      dob,
     });
     // Init user sponsorship
     await this.dbService.writeDocument(`users/${user.uid}/sponsorships`, {

@@ -1,7 +1,7 @@
 import { Platform, StyleSheet } from 'react-native';
 import colors from '../../../../theme/colors';
 import { spec } from '../../specs';
-const { WHITE } = colors;
+const { WHITE, PRIMARY } = colors;
 const { ITEM_HEIGHT } = spec;
 
 const styles = StyleSheet.create({
@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 10,
-    backgroundColor: '#20678A',
+    backgroundColor: PRIMARY,
     borderRadius: 6,
   },
   topTextWrapper: { color: WHITE, marginTop: 15, marginBottom: 15 },

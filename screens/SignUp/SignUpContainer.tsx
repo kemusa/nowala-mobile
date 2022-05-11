@@ -14,6 +14,7 @@ import {
   analyticsEvents,
   analyticsScreens,
 } from '../../utils/consts/ANALYTICS';
+import moment from 'moment';
 
 const SignUpContainer: React.FC<NoAuthStackScreenProps<'SignUp'>> = ({
   navigation,
@@ -39,6 +40,8 @@ const SignUpContainer: React.FC<NoAuthStackScreenProps<'SignUp'>> = ({
   const [signUpError, setSignUpError] = useState(NO_LOGIN_ERROR);
   const [country, setCountry] = useState('United Kingdom');
   const [countryCode, setCountryCode] = useState('GB' as CountryCode);
+  const [date, setDate] = useState(null as any as Date);
+
   const {
     control,
     getValues,
@@ -54,6 +57,10 @@ const SignUpContainer: React.FC<NoAuthStackScreenProps<'SignUp'>> = ({
 
   const countryRules = {
     required: { value: true, message: 'Country is required' },
+  };
+
+  const dateRules = {
+    required: { value: true, message: 'Date of birth is required' },
   };
 
   const emailRules = {
@@ -97,22 +104,27 @@ const SignUpContainer: React.FC<NoAuthStackScreenProps<'SignUp'>> = ({
   };
 
   const onCountrySelect = (country: Country) => {
-    console.log(country);
     setCountry(country.name as string);
     setCountryCode(country.cca2);
   };
+
+  // const onDateSelect = (event: Event, value: Date) => {
+  //   setDate(value);
+  // };
 
   const signUpWithEmailAndPassword = async (data: SignUpFormData) => {
     try {
       const { firstName, lastName, email, password } = data;
       setSignUpError(NO_LOGIN_ERROR);
       setEmailAuthLoading(true);
+      const dob = moment(date).format('YYYY-MM-DD');
       await auth.signUpWithEmailAndPassword(
         firstName,
         lastName,
         email,
         password,
         country,
+        dob,
       );
       analytics.track(analyticsEvents.SIGNED_UP);
     } catch (error: any) {
@@ -172,6 +184,26 @@ const SignUpContainer: React.FC<NoAuthStackScreenProps<'SignUp'>> = ({
         type: 'input',
       },
       {
+        label: 'Country of residence',
+        control,
+        // country: true,
+        name: 'country',
+        rules: countryRules,
+        type: 'country',
+        onCountrySelect,
+        countryCode,
+      },
+      {
+        label: 'Date of birth',
+        control,
+        name: 'country',
+        rules: dateRules,
+        type: 'datepicker',
+        date,
+        setDate,
+        countryCode,
+      },
+      {
         placeholder: 'e.g. jane.doe@gmail.com',
         label: 'Email',
         autoCompleteType: 'email',
@@ -179,16 +211,6 @@ const SignUpContainer: React.FC<NoAuthStackScreenProps<'SignUp'>> = ({
         name: 'email',
         rules: emailRules,
         type: 'input',
-      },
-      {
-        label: 'Country of residence',
-        control,
-        country: true,
-        name: 'country',
-        rules: countryRules,
-        type: 'country',
-        onCountrySelect,
-        countryCode,
       },
       {
         label: 'Password',

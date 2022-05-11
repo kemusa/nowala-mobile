@@ -23,9 +23,11 @@ export interface InputFieldProps {
   rules?: any;
   disabled?: boolean;
   list?: SelectListItem[];
-  country?: boolean;
-  type: 'input' | 'select' | 'country';
+  // country?: boolean;
+  type: 'input' | 'select' | 'country' | 'datepicker';
   onCountrySelect?: (country: Country) => void;
+  setDate?: Function;
+  date?: Date;
   countryCode?: CountryCode;
   after?: JSX.Element;
 }

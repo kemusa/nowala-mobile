@@ -14,6 +14,7 @@ const styles = StyleSheet.create({
   },
   container: {
     height: ITEM_HEIGHT,
+    width: '100%',
     overflow: 'hidden',
     borderRadius: 6,
   },

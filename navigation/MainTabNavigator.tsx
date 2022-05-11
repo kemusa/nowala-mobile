@@ -61,7 +61,7 @@ const MainTabNavigator: React.FC<MainTabProps> = ({ user }) => {
               <Ionicons name="home" size={size} color={color} />
             ),
           }}>
-          {props => <AccountPendingScreen {...props} />}
+          {props => <AccountPendingScreen {...props} user={user} />}
         </Screen>
       )}
       <Screen

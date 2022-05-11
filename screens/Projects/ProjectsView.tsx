@@ -7,6 +7,8 @@ import {
   Image,
   Text,
   ScrollView,
+  Platform,
+  StatusBar,
 } from 'react-native';
 import styles from './styles';
 import { spec } from './specs';
@@ -35,7 +37,15 @@ const ProjectsCardView: React.FC = () => {
     <NowalaBrandingCard />,
   ];
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView
+      style={[
+        styles.container,
+        {
+          paddingTop:
+            user && Platform.OS === 'android' ? StatusBar.currentHeight : 0, // handle status bar padding height differently for android depending
+          // on if viewing projects card as logged in user or not
+        },
+      ]}>
       <ScrollView style={styles.contentContainer}>
         {cards.map((card, idx) => (
           <View

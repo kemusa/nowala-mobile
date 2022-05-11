@@ -11,11 +11,12 @@
       "backgroundColor": "#ffffff"
     },
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/de37d4c5-42a3-407a-a92a-1dde34c33ecf"
     },
     "assetBundlePatterns": ["**/*", "assets/images/*"],
     "ios": {
-      "buildNumber": "19",
+      "buildNumber": "21",
       "supportsTablet": false,
       "bundleIdentifier": "io.nowala.sponsors"
     },
@@ -25,10 +26,13 @@
         "backgroundColor": "#475972"
       },
       "package": "io.nowala.sponsors",
-      "versionCode": 5
+      "versionCode": 8
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "runtimeVersion": {
+      "policy": "sdkVersion"
     }
   }
 }

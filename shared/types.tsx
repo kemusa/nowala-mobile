@@ -3,6 +3,7 @@ interface NowalaUserProfile {
   lastName: string;
   onboarded: boolean;
   hasOrdered: boolean;
+  country: string;
 }
 
 interface NowalaUserData {
@@ -11,5 +12,6 @@ interface NowalaUserData {
   firstName: string;
   onboarded: boolean;
   hasOrdered: boolean;
+  country: string;
   updateHasOrdered: () => void; // todo: remove and fix issues with firestore listener
 }

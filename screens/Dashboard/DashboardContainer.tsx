@@ -18,6 +18,7 @@ import {
   analyticsEvents,
   analyticsScreens,
 } from '../../utils/consts/ANALYTICS';
+import * as Updates from 'expo-updates';
 
 const { BACKGROUND } = colors;
 interface DashboardProps extends MainTabScreenProps<'Dashboard'> {
@@ -60,6 +61,29 @@ const DashboardContainer: React.FC<DashboardProps> = ({
       },
     });
   }, [navigation]);
+
+  // useEffect(() => {
+  //   updateApp();
+  // }, []);
+
+  // const updateApp = async () => {
+  //   // const update = await Updates.checkForUpdateAsync();
+  //   // if (update.isAvailable) {
+  //   //   alert('hey');
+  //   //   await Updates.fetchUpdateAsync();
+  //   //   // ... notify user of update ...
+  //   //   await Updates.reloadAsync();
+  //   // }
+  //   alert('start');
+  //   Updates.addListener(event => {
+  //     alert('foo');
+  //     if (event.type === Updates.UpdateEventType.UPDATE_AVAILABLE) {
+  //       alert('bar');
+  //       Updates.reloadAsync();
+  //     }
+  //     alert('baz');
+  //   });
+  // };
 
   const x = () => {};
 
