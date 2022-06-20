@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react';
-// import NowalaLogo from 'src/components/atoms/icons/NowalaLogo';
 import ServicesContext, { Services } from '../../services';
 import { _getLoginError } from '../../utils/errors';
 import LoginView from './LoginView';
@@ -9,7 +8,7 @@ import { useForm } from 'react-hook-form';
 import LoginContext from './LoginContext';
 import { LoginFormData } from './types';
 import { InputFormConfig } from '../../components/organisms/InputForm/types';
-import NowalaLogo from '../../components/atoms/icons/NowalaLogo';
+import NowalaLogoSmall from '../../components/atoms/icons/NowalaLogoSmall';
 import { NoAuthStackScreenProps } from '../../navigation/types';
 import NowalaText from '../../components/atoms/text';
 import {
@@ -52,7 +51,7 @@ const LoginContainer: React.FC<NoAuthStackScreenProps<'Login'>> = ({
   // Place Nowala logo in header on component init
   useEffect(() => {
     navigation.setOptions({
-      headerTitle: () => <NowalaLogo />,
+      headerTitle: () => <NowalaLogoSmall />,
       headerTitleAlign: 'center',
       headerStyle: {
         elevation: 0, // remove header border for android

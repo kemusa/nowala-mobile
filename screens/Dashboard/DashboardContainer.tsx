@@ -36,6 +36,7 @@ const DashboardContainer: React.FC<DashboardProps> = ({
   const [viewProgress, setViewProgress] = useState(false);
   const [viewOptions, setViewOptions] = useState(false);
   const [viewOrders, setViewOrders] = useState(false);
+  const [viewWithdrawlGuide, setViewWithdrawlGuide] = useState(false);
   const [menuModalOpen, setMenuModalOpen] = useState(false);
   const [unsubscribeList, setUnsubscribe] = useState([] as any);
   // variable to store unsubscription for dashboard data listener
@@ -85,8 +86,6 @@ const DashboardContainer: React.FC<DashboardProps> = ({
   //   });
   // };
 
-  const x = () => {};
-
   // Get services
   const { auth, db, analytics } = useContext(ServicesContext) as Services;
 
@@ -98,7 +97,7 @@ const DashboardContainer: React.FC<DashboardProps> = ({
   const [summary, setSummary] = useState({
     investment: 0,
     collected: 0,
-    totalReturn: 0,
+    // totalReturn: 0,
     currency: 'SLL',
     assetTitle: '',
     returnPercent: 0,
@@ -107,11 +106,27 @@ const DashboardContainer: React.FC<DashboardProps> = ({
     impactMetrics: undefined,
   } as DashboardSummary);
 
+  const [financialSummary, setFinancialSummary] = useState({
+    totalCollected: 0,
+    totalInvested: 0,
+    currency: '£',
+    percent: 0,
+  } as FinancialSummaryCard);
+
   // Listener for dashboard data
   useEffect(() => {
     const unsubscribe = db.subscribe(
       `users/${userId}/sponsorships`,
       handleDashboardData,
+    );
+    dashboardUnsub = unsubscribe;
+  }, [userId]);
+
+  // Listener for financial data
+  useEffect(() => {
+    const unsubscribe = db.subscribe(
+      `users/${userId}/financialSummary`,
+      handleFinancialSummary,
     );
     dashboardUnsub = unsubscribe;
   }, [userId]);
@@ -159,9 +174,28 @@ const DashboardContainer: React.FC<DashboardProps> = ({
 
   const openOptionsModal = () => setViewOptions(true);
   const closeOptionsModal = () => setViewOptions(false);
+
+  const openWithdrawlModal = () => setViewWithdrawlGuide(true);
+  const closeWithdrawlModal = () => setViewWithdrawlGuide(false);
+
   const openMenuModal = () => setMenuModalOpen(true);
   const closeMenuModal = () => setMenuModalOpen(false);
+
   const closeOrdersModal = () => setViewOrders(false);
+
+  const handleFinancialSummary = (data: SnapshotData[]) => {
+    if (data.length > 0) {
+      console.log(data[0].data);
+      const summary = data[0].data as FinancialSummary;
+      const { totalCollected, totalInvested, currency } = summary;
+      setFinancialSummary({
+        totalCollected,
+        totalInvested,
+        currency,
+        percent: Math.round((totalCollected / totalInvested) * 100),
+      });
+    }
+  };
 
   const handleDashboardData = (data: SnapshotData[]) => {
     if (data.length > 0) {
@@ -197,7 +231,7 @@ const DashboardContainer: React.FC<DashboardProps> = ({
         setSummary({
           investment,
           collected,
-          totalReturn,
+          // totalReturn,
           currency,
           assetTitle,
           returnPercent,
@@ -216,10 +250,14 @@ const DashboardContainer: React.FC<DashboardProps> = ({
     <DashboardContext.Provider
       value={{
         dashboardSummary: summary,
+        financialSummary,
         viewProgress,
         viewOptions,
         viewOrders,
+        viewWithdrawlGuide,
         menuModalOpen,
+        openWithdrawlModal,
+        closeWithdrawlModal,
         openMenuModal,
         closeMenuModal,
         openProgressModal,

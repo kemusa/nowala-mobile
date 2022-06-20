@@ -2,7 +2,7 @@
   "expo": {
     "name": "Nowala",
     "slug": "NowalaApp",
-    "version": "1.0.4",
+    "version": "1.0.6",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -16,7 +16,7 @@
     },
     "assetBundlePatterns": ["**/*", "assets/images/*"],
     "ios": {
-      "buildNumber": "21",
+      "buildNumber": "23",
       "supportsTablet": false,
       "bundleIdentifier": "io.nowala.sponsors"
     },
@@ -26,7 +26,7 @@
         "backgroundColor": "#475972"
       },
       "package": "io.nowala.sponsors",
-      "versionCode": 8
+      "versionCode": 10
     },
     "web": {
       "favicon": "./assets/favicon.png"

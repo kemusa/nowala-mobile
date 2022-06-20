@@ -1,12 +1,16 @@
 interface DashboardContext {
   dashboardSummary: DashboardSummary;
+  financialSummary: FinancialSummaryCard;
   viewProgress: boolean;
   viewOptions: boolean;
   viewOrders: boolean;
+  viewWithdrawlGuide: boolean;
   menuModalOpen: boolean;
   openMenuModal: () => void;
   closeMenuModal: () => void;
+  closeWithdrawlModal: () => void;
   openProgressModal: () => void;
+  openWithdrawlModal: () => void;
   closeProgressModal: () => void;
   closeOptionsModal: () => void;
   closeOrdersModal: () => void;
@@ -41,7 +45,7 @@ interface ImpactMetrics {
 interface DashboardSummary {
   investment: number;
   collected: number;
-  totalReturn: number;
+  // totalReturn: number;
   returnPercent: number;
   assetTitle: string;
   currency: string;
@@ -49,6 +53,16 @@ interface DashboardSummary {
   progress: SponsorStatus;
   impactMetrics?: ImpactMetrics;
   openOptionsModal: () => void;
+}
+
+interface FinancialSummary {
+  totalCollected: number;
+  totalInvested: number;
+  currency: string;
+}
+
+interface FinancialSummaryCard extends FinancialSummary {
+  percent: number;
 }
 
 interface OrderData {

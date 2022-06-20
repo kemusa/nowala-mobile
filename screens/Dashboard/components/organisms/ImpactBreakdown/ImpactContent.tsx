@@ -1,9 +1,9 @@
 const impactContent: ImpactContent = {
   carbonOffset: {
-    metricTitle: 'Kilograms of C02 offset',
-    backgroundColor: '#81B2FC',
+    metricTitle: 'Kilograms of CO2 offset',
+    backgroundColor: '#9EC3F9',
     contextText: 'Each solar panel kit in Sierra Leone provides',
-    title: 'Reduced C02 from kerosene lamps',
+    title: 'Reduced CO2 from kerosene lamps',
     imagePath: 'https://storage.googleapis.com/nowala-public/lantern.png',
     impactExamplesHeading: 'Reducing kerosene means...',
     impactExamples: [
@@ -17,7 +17,7 @@ const impactContent: ImpactContent = {
   },
   lightHours: {
     metricTitle: 'Additional light hours provided',
-    backgroundColor: '#FC8181',
+    backgroundColor: '#F8A1A1',
     contextText: 'Each solar panel kit in Sierra Leone provides an estimated',
     title: '480 hours of extra light',
     timePeriodText: 'per year',
@@ -34,7 +34,7 @@ const impactContent: ImpactContent = {
   },
   moneySaved: {
     metricTitle: '£ saved in kerosine fuel',
-    backgroundColor: '#BA61E4',
+    backgroundColor: '#C799DD',
     contextText: 'Each solar panel kit in Sierra Leone provides an estimated',
     title: '£70 of savings on kerosene costs',
     timePeriodText: 'per year',
@@ -50,7 +50,7 @@ const impactContent: ImpactContent = {
   },
   peopleImpacted: {
     metricTitle: 'Est. number of people impacted',
-    backgroundColor: '#4EB4CA',
+    backgroundColor: '#7ECADB',
     contextText: 'Each solar panel kit in Sierra Leone provides an estimated',
     title: '5  people with affordable electricity',
     imagePath: 'https://storage.googleapis.com/nowala-public/village_home.png',

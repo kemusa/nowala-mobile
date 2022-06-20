@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form';
 import SignUpContext from './SignUpContext';
 import { SignUpFormData } from './types';
 import { InputFormConfig } from '../../components/organisms/InputForm/types';
-import NowalaLogo from '../../components/atoms/icons/NowalaLogo';
+import NowalaLogoSmall from '../../components/atoms/icons/NowalaLogoSmall';
 import { Country, CountryCode } from 'react-native-country-picker-modal';
 import { NoAuthStackScreenProps } from '../../navigation/types';
 import {
@@ -89,7 +89,7 @@ const SignUpContainer: React.FC<NoAuthStackScreenProps<'SignUp'>> = ({
   // Place Nowala logo in header on component init
   useEffect(() => {
     navigation.setOptions({
-      headerTitle: () => <NowalaLogo />,
+      headerTitle: () => <NowalaLogoSmall />,
       headerTitleAlign: 'center',
       headerStyle: {
         elevation: 0, // remove header border for android

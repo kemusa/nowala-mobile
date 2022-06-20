@@ -46,7 +46,9 @@ const MainTabNavigator: React.FC<MainTabProps> = ({ user }) => {
         <Screen
           name="WaitList"
           options={{
-            headerShown: false,
+            headerShown: true,
+            headerTransparent: true,
+            headerTitle: '',
             title: 'Orders',
             tabBarIcon: ({ color, size }) => (
               <Ionicons name="hourglass-outline" size={size} color={color} />

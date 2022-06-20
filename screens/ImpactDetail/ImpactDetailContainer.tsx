@@ -3,10 +3,7 @@ import { ImpactDetailContext } from './ImpactDetailContext';
 import ImpactDetailView from './ImpactDetailView';
 import ServicesContext, { Services } from '../../services';
 import { PROJECT_ID } from '../../utils/consts/FIRST_PROJECT';
-import {
-  AuthStackScreenProps,
-  RootStackScreenProps,
-} from '../../navigation/types';
+import { AuthStackScreenProps } from '../../navigation/types';
 import { analyticsScreens } from '../../utils/consts/ANALYTICS';
 
 const ImpactDetailContainer: React.FC<AuthStackScreenProps<'ImpactDetail'>> = ({

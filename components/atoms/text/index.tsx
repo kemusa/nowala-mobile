@@ -2,6 +2,7 @@ import ErrorMessage from './ErrorMessage';
 import ButtonText from './ButtonText';
 import Body2 from './Body2';
 import Body1 from './Body1';
+import BoldBody1 from './BoldBody1';
 import BigDataText from './BigDataText';
 import Subtitle1 from './Subtitle1';
 import Subtitle2 from './Subtitle2';
@@ -21,6 +22,7 @@ import WarningText from './WarningText';
 const NowalaText = {
   BigDataText,
   Body1,
+  BoldBody1,
   Body2,
   ButtonText,
   ErrorMessage,

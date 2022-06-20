@@ -16,7 +16,7 @@
     },
     "assetBundlePatterns": ["**/*", "assets/images/*"],
     "ios": {
-      "buildNumber": "7",
+      "buildNumber": "11",
       "supportsTablet": false,
       "bundleIdentifier": "io.nowala.sponsors-staging"
     },
@@ -26,7 +26,7 @@
         "backgroundColor": "#475972"
       },
       "package": "io.nowala.sponsors.staging",
-      "versionCode": 4
+      "versionCode": 7
     },
     "web": {
       "favicon": "./assets/favicon.png"

@@ -5,14 +5,19 @@ const { WHITE } = colors;
 const { height } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
-  container: { flex: 1, flexDirection: 'column', backgroundColor: WHITE },
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    backgroundColor: WHITE,
+    paddingTop: 20,
+  },
   image: {
     position: 'absolute',
     width: '100%',
     height: '50%',
     resizeMode: 'cover',
     top: 0,
-    zIndex: 10,
+    zIndex: 9,
   },
   bodyText: { textAlign: 'center' },
   listItem: { flexDirection: 'row', marginTop: 20 },

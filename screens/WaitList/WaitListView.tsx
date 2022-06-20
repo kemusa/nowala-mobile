@@ -1,16 +1,10 @@
-import {
-  View,
-  Text,
-  Image,
-  SafeAreaView,
-  Dimensions,
-  ScrollView,
-} from 'react-native';
+import { View, Image, SafeAreaView, ScrollView } from 'react-native';
 import React from 'react';
 import styles from './styles';
 import NowalaText from '../../components/atoms/text';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import colors from '../../theme/colors';
+import MenuModal from './components/MenuModal';
 
 const WaitListView = () => {
   const { TRETIARY } = colors;
@@ -49,6 +43,7 @@ const WaitListView = () => {
         </View>
         <View style={{ width: '100%', height: 100 }}></View>
       </ScrollView>
+      <MenuModal />
     </SafeAreaView>
   );
 };

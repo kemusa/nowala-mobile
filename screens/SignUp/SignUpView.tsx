@@ -33,7 +33,7 @@ const SignUpView: React.FC = () => {
               </NowalaText.Body1>
               <InputForm {...inputFormConfig} />
               <AuthConfirmText {...authConfirmTextProps} />
-              {/* <View style={{ width: '100%', height: 100 }}></View> */}
+              <View style={{ width: '100%', height: 100 }}></View>
             </>
           </TouchableWithoutFeedback>
         </KeyboardAvoidingView>

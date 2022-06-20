@@ -8,7 +8,7 @@ import {
   sendPasswordResetEmail,
   updateProfile,
 } from 'firebase/auth';
-import { projectsInit } from '../utils/consts/DATA';
+import { financialSummary, projectsInit } from '../utils/consts/DATA';
 import DbService from './db';
 // import { LoginManager, AccessToken, Settings } from 'react-native-fbsdk-next';
 // import BackendService from '../services/backend';
@@ -70,6 +70,14 @@ export default class AuthService {
       country,
       dob,
     });
+    // Init user financial summary
+    await this.dbService.writeDocumentWithId(
+      `users/${user.uid}/financialSummary`,
+      'main',
+      {
+        ...financialSummary,
+      },
+    );
     // Init user sponsorship
     await this.dbService.writeDocument(`users/${user.uid}/sponsorships`, {
       ...projectsInit,

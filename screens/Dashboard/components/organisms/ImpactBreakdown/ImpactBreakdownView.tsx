@@ -1,11 +1,6 @@
 import React from 'react';
-import { Dimensions, View } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { backgroundColor, flexDirection } from 'styled-system';
-import Icons from '../../../../../components/atoms/icons';
+import { View } from 'react-native';
 import NowalaText from '../../../../../components/atoms/text';
-import CardWrapper from '../../../../../components/templates/CardWrapper';
-import colors from '../../../../../theme/colors';
 import ImpactComing from '../../molecules/ImpactComing';
 import { impactContent } from './ImpactContent';
 import ImpactMetricCard from './ImpactMetricCard';

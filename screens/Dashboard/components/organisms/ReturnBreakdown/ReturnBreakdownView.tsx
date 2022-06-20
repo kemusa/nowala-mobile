@@ -7,22 +7,29 @@ import { DashboardContext } from '../../../DashboardContext';
 import ReturnDetail from '../../molecules/ReturnDetail';
 import CardDetailsButton from '../../../../../components/molecules/CardDetailsButton';
 import CardWrapper from '../../../../../components/templates/CardWrapper';
+import WithdrawlModal from '../WithdrawlModal';
 
 const ReturnBreakdownView: React.FC<ReturnBreakdownProps> = () => {
-  const { dashboardSummary } = useContext(DashboardContext);
+  const { dashboardSummary, financialSummary, openWithdrawlModal } =
+    useContext(DashboardContext);
   const {
     investment,
     collected,
-    totalReturn,
-    currency,
+    // totalReturn,
+    // currency,
     returnPercent,
     assetTitle,
     openOptionsModal,
   } = dashboardSummary;
+
+  const { totalCollected, totalInvested, currency, percent } = financialSummary;
+  // console.log('FOO', returnPercent);
+  // console.log('BAR', Math.round((totalCollected / totalInvested) * 100));
+  // const percent = Math.round((totalCollected / totalInvested) * 100);
   return (
     <>
       <NowalaText.Headline2Light style={styles.title}>
-        {assetTitle ? assetTitle : ''}
+        {'Solar panel kits'}
       </NowalaText.Headline2Light>
       <CardWrapper hasDetail={true} detailOnPress={openOptionsModal}>
         <View style={styles.columnContainer}>
@@ -30,39 +37,32 @@ const ReturnBreakdownView: React.FC<ReturnBreakdownProps> = () => {
             <View style={styles.returnDetailContainer}>
               <ReturnDetail
                 currency={currency}
-                number={investment}
+                number={totalInvested}
                 description={'Your investment'}
               />
             </View>
-            <View style={styles.returnDetailContainer}>
+            {/* <View style={styles.returnDetailContainer}>
               <ReturnDetail
                 currency={currency}
-                number={collected}
+                number={totalReturn}
+                description={'Expected payback'}
+              />
+            </View> */}
+            <View>
+              <ReturnDetail
+                currency={'£'}
+                number={totalCollected}
                 description={'Return collected'}
               />
             </View>
-            <View>
-              <View>
-                <ReturnDetail
-                  currency={currency}
-                  number={totalReturn}
-                  description={'Expected payback'}
-                />
-              </View>
-            </View>
           </View>
-          <View
-            style={{
-              width: '50%',
-              flexDirection: 'column',
-              justifyContent: 'center',
-            }}>
+          <View style={styles.col2}>
             <View style={{ width: '100%', justifyContent: 'center' }}>
               <AnimatedCircularProgress
                 size={120}
                 width={15}
                 backgroundWidth={7}
-                fill={returnPercent}
+                fill={percent}
                 // Math.roud on value (again) to handle infitite decimals issue
                 children={value => (
                   <>
@@ -83,6 +83,14 @@ const ReturnBreakdownView: React.FC<ReturnBreakdownProps> = () => {
             </View>
           </View>
         </View>
+        {totalCollected > 0 && (
+          <View style={{ marginTop: 10 }}>
+            <NowalaText.LinkText2 onPress={openWithdrawlModal}>
+              How do I withdraw my return?
+            </NowalaText.LinkText2>
+          </View>
+        )}
+        <WithdrawlModal />
       </CardWrapper>
     </>
   );

@@ -30,5 +30,18 @@ const projectsInit: SponsorshipData = {
   status: statusInit,
   orderDate: Timestamp.fromDate(new Date(timestamp)),
   paid: { currency: '£', unitCost: 61 },
+  impactMetrics: {
+    carbonOffset: 0,
+    lightHours: 0,
+    moneySaved: 0,
+    peopleImpacted: 0,
+  },
 };
-export { projectsInit, statusText, statusInit };
+
+const financialSummary: FinancialSummary = {
+  currency: '£',
+  totalCollected: 0,
+  totalInvested: 0,
+};
+
+export { financialSummary, projectsInit, statusText, statusInit };
