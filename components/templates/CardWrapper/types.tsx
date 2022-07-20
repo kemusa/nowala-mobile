@@ -1,4 +1,4 @@
 interface CardProps {
-  hasDetail?: boolean;
+  // hasDetail?: boolean;
   detailOnPress?: () => void;
 }

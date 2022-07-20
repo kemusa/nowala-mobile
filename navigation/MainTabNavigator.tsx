@@ -7,6 +7,11 @@ import { AuthStackScreenProps, MainTabParamList } from './types';
 import colors from '../theme/colors';
 import AccountPendingScreen from '../screens/AccountPending';
 import WaitListScreen from '../screens/WaitList';
+import BankTransferScreen from '../screens/BankTransfer';
+import WalletTabIcon from '../components/atoms/icons/WalletTabIcon';
+import ImpactScreen from '../screens/Impact';
+import ImpactTabIcon from '../components/atoms/icons/ImpactTabIcon';
+import ProjectsTabIcon from '../components/atoms/icons/ProjectsTabIcon';
 
 const Tab = createBottomTabNavigator<MainTabParamList>();
 const { TRETIARY } = colors;
@@ -25,54 +30,39 @@ const MainTabNavigator: React.FC<MainTabProps> = ({ user }) => {
         tabBarActiveTintColor: TRETIARY,
         tabBarInactiveTintColor: '#ABABAB',
       })}>
-      {onboarded ? (
-        <Screen
-          name="Dashboard"
-          options={{
-            tabBarIcon: ({ color, size }) => (
-              <Ionicons name="home" size={size} color={color} />
-            ),
-          }}>
-          {props => (
-            <DashboardScreen
-              {...props}
-              email={email}
-              userId={userId}
-              firstName={firstName}
-            />
-          )}
-        </Screen>
-      ) : hasOrdered && !onboarded ? (
-        <Screen
-          name="WaitList"
-          options={{
-            headerShown: true,
-            headerTransparent: true,
-            headerTitle: '',
-            title: 'Orders',
-            tabBarIcon: ({ color, size }) => (
-              <Ionicons name="hourglass-outline" size={size} color={color} />
-            ),
-          }}
-          component={WaitListScreen}></Screen>
-      ) : (
-        <Screen
-          name="Account"
-          options={{
-            tabBarIcon: ({ color, size }) => (
-              <Ionicons name="home" size={size} color={color} />
-            ),
-          }}>
-          {props => <AccountPendingScreen {...props} user={user} />}
-        </Screen>
-      )}
+      <Screen
+        name="Wallet"
+        options={{
+          tabBarIcon: ({ color, size }) => <WalletTabIcon color={color} />,
+        }}>
+        {props => (
+          <DashboardScreen
+            {...props}
+            email={email}
+            userId={userId}
+            firstName={firstName}
+          />
+        )}
+      </Screen>
+      <Screen
+        name="Impact"
+        options={{
+          tabBarIcon: ({ color, size }) => <ImpactTabIcon color={color} />,
+        }}>
+        {props => (
+          <ImpactScreen
+            {...props}
+            email={email}
+            userId={userId}
+            firstName={firstName}
+          />
+        )}
+      </Screen>
       <Screen
         name="Projects"
         options={{
           headerShown: false,
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="apps" size={size} color={color} />
-          ),
+          tabBarIcon: ({ color, size }) => <ProjectsTabIcon color={color} />,
         }}>
         {props => <ProjectsScreen {...props} user={user} />}
       </Screen>

@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
   scrollView: {
     backgroundColor: BACKGROUND,
     height: '100%',
-    padding: 18,
+    padding: screenPadding,
     flex: 1,
   },
   spacer: { width: '100%', height: 100 },

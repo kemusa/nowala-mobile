@@ -1,6 +1,6 @@
 import { ViewStyle } from 'react-native';
 
-const screenPadding = 20;
+const screenPadding = 18;
 const buttonHeight = 42;
 const doubleButtonHeight = buttonHeight * 3 + 30;
 

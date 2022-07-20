@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "Nowala",
-    "slug": "NowalaApp",
+    "name": "Nowala Dev",
+    "slug": "NowalaAppDev",
     "version": "1.0.1",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/icon-dev.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -17,7 +17,7 @@
     "ios": {
       "buildNumber": "17",
       "supportsTablet": false,
-      "bundleIdentifier": "io.nowala.sponsors"
+      "bundleIdentifier": "io.nowala.dev"
     },
     "android": {
       "adaptiveIcon": {

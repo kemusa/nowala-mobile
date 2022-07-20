@@ -6,7 +6,7 @@ import styles from './styles';
 
 const CardWrapperContainer: React.FC<CardProps> = ({
   children,
-  hasDetail,
+  // hasDetail,
   detailOnPress,
 }) => {
   return (
@@ -20,9 +20,7 @@ const CardWrapperContainer: React.FC<CardProps> = ({
         <View
           style={[
             {
-              padding: hasDetail ? 0 : 10,
-              paddingLeft: hasDetail ? 10 : undefined,
-              paddingBottom: hasDetail ? 10 : undefined,
+              padding: 10,
             },
           ]}>
           {detailOnPress && (

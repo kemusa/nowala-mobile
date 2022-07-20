@@ -7,6 +7,7 @@ import ProgressModal from './components/organisms/ProgressModal';
 import OptionsModal from './components/organisms/OptionsModal';
 import colors from '../../theme/colors';
 import MenuModal from './components/organisms/MenuModal';
+import AssetsList from './components/organisms/AssetsList';
 
 const { BACKGROUND } = colors;
 
@@ -15,7 +16,7 @@ const DashboardView: React.FC = () => {
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
         <ReturnBreakdown />
-        <ImpactBreakdown />
+        <AssetsList />
         <ProgressModal />
         <OptionsModal />
         <MenuModal />

@@ -30,10 +30,12 @@ export type AuthStackParamList = {
 };
 
 export type MainTabParamList = {
-  WaitList: undefined;
-  Dashboard: undefined;
+  Wallet: undefined;
+  Impact: undefined;
+  WaitList: undefined; // todo: remove
   Projects: undefined;
-  Account: undefined;
+  Account: undefined; // todo: remove
+  BankTransfer: undefined; // todo: relocate
 };
 
 export type NoAuthStackParamList = {

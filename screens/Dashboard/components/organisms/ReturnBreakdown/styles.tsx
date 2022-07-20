@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   breakdownContainer: { backgroundColor: '#fff', borderRadius: 6, padding: 20 },
-  columnContainer: { flexDirection: 'row' },
+  container: {},
   col1: { width: '50%' },
   col2: {
     width: '50%',

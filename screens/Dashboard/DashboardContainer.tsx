@@ -21,7 +21,7 @@ import {
 import * as Updates from 'expo-updates';
 
 const { BACKGROUND } = colors;
-interface DashboardProps extends MainTabScreenProps<'Dashboard'> {
+interface DashboardProps extends MainTabScreenProps<'Wallet'> {
   email: string;
   userId: string;
   firstName: string;

@@ -8,6 +8,10 @@ import ReturnDetail from '../../molecules/ReturnDetail';
 import CardDetailsButton from '../../../../../components/molecules/CardDetailsButton';
 import CardWrapper from '../../../../../components/templates/CardWrapper';
 import WithdrawlModal from '../WithdrawlModal';
+import ImpactCardIcon from '../../../../../components/atoms/icons/ImpactCardIcon';
+import WalletCardIcon from '../../../../../components/atoms/icons/WalletCardIcon';
+import ProfitCardIcon from '../../../../../components/atoms/icons/ProfitCardIcon';
+import CardListItem from '../../../../../components/molecules/CardListItem';
 
 const ReturnBreakdownView: React.FC<ReturnBreakdownProps> = () => {
   const { dashboardSummary, financialSummary, openWithdrawlModal } =
@@ -29,68 +33,38 @@ const ReturnBreakdownView: React.FC<ReturnBreakdownProps> = () => {
   return (
     <>
       <NowalaText.Headline2Light style={styles.title}>
-        {'Solar panel kits'}
+        {'Your money'}
       </NowalaText.Headline2Light>
-      <CardWrapper hasDetail={true} detailOnPress={openOptionsModal}>
-        <View style={styles.columnContainer}>
-          <View style={styles.col1}>
-            <View style={styles.returnDetailContainer}>
-              <ReturnDetail
-                currency={currency}
-                number={totalInvested}
-                description={'Your investment'}
-              />
-            </View>
-            {/* <View style={styles.returnDetailContainer}>
-              <ReturnDetail
-                currency={currency}
-                number={totalReturn}
-                description={'Expected payback'}
-              />
-            </View> */}
-            <View>
-              <ReturnDetail
-                currency={'£'}
-                number={totalCollected}
-                description={'Return collected'}
-              />
-            </View>
+      <CardWrapper>
+        <View style={styles.container}>
+          <View>
+            <NowalaText.Headline2>£2054</NowalaText.Headline2>
+            <NowalaText.Subtitle1>Total</NowalaText.Subtitle1>
           </View>
-          <View style={styles.col2}>
-            <View style={{ width: '100%', justifyContent: 'center' }}>
-              <AnimatedCircularProgress
-                size={120}
-                width={15}
-                backgroundWidth={7}
-                fill={percent}
-                // Math.roud on value (again) to handle infitite decimals issue
-                children={value => (
-                  <>
-                    <NowalaText.Headline4 style={{ color: '#5E8497' }}>
-                      {Math.round(value) || 0}
-                      {'%'}
-                    </NowalaText.Headline4>
-                    <NowalaText.Body1 style={{ color: '#5E8497' }}>
-                      repaid
-                    </NowalaText.Body1>
-                  </>
-                )}
-                tintColor="#FFBF00"
-                rotation={0}
-                duration={2000}
-                backgroundColor="#BAD8E2"
-              />
-            </View>
-          </View>
+          <CardListItem
+            icon={<ImpactCardIcon />}
+            title="Making an impact"
+            subtitle="Your money at work changing lives"
+            value="£1090"
+            subvalue="53%"
+          />
+          <CardListItem
+            icon={<WalletCardIcon />}
+            title="Buying power"
+            subtitle="You can withdraw anytime"
+            value="£964"
+            subvalue="47%"
+          />
         </View>
-        {totalCollected > 0 && (
-          <View style={{ marginTop: 10 }}>
-            <NowalaText.LinkText2 onPress={openWithdrawlModal}>
-              How do I withdraw my return?
-            </NowalaText.LinkText2>
-          </View>
-        )}
-        <WithdrawlModal />
+      </CardWrapper>
+      <CardWrapper>
+        <CardListItem
+          icon={<ProfitCardIcon />}
+          title="Total profit"
+          subtitle="Interest earned on all investments"
+          value="£30"
+          subvalue="47%"
+        />
       </CardWrapper>
     </>
   );
