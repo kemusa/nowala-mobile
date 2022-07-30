@@ -1,3 +1,3 @@
-import ReturnBreakdownContainer from './ReturnBreakdownContainer';
+import ImpactSummary from './ImpactSummaryContainer';
 
-export default ReturnBreakdownContainer;
+export default ImpactSummary;

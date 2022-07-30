@@ -1,3 +1,3 @@
-interface ItemLongList {
+interface CardList {
   list: JSX.Element[];
 }

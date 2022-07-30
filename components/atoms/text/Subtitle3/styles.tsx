@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     fontSize: 11,
     lineHeight: 24,
     letterSpacing: 0.1,
-    color: NW_GREY_3,
+    color: '#5E8497',
   },
 });
 

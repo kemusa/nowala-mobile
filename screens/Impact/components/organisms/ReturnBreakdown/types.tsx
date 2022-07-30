@@ -1,1 +1,1 @@
-interface ReturnBreakdownProps {}
+interface ImpactSummaryProps {}

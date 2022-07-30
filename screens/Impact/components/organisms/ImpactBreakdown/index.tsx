@@ -1,3 +1,3 @@
-import ImpactBreakdownContainer from './ImpactBreakdownContainer';
+import PeopleStatsContainer from './PeopleStatsContainer';
 
-export default ImpactBreakdownContainer;
+export default PeopleStatsContainer;

@@ -1,18 +1,18 @@
 import React from 'react';
 import { Image, View } from 'react-native';
-import ImpactCardIcon from '../../../../../components/atoms/icons/ImpactCardIcon';
 import NowalaText from '../../../../../components/atoms/text';
 import CardWrapper from '../../../../../components/templates/CardWrapper';
-import ItemLongList from '../../../../../components/templates/CardWrapper/ItemLongList';
+import CardLongList from '../../../../../components/templates/CardLongList';
 import AssetItem from './AssetItem';
 import styles from './styles';
 
 const AssetListView: React.FC = ({}) => {
+  const iconSize = 45;
   const list = [
     <AssetItem
       icon={
         <Image
-          style={{ height: 45, width: 45 }}
+          style={{ height: iconSize, width: iconSize }}
           source={{
             uri: 'https://storage.googleapis.com/nowala-public/spk_icon.png',
           }}
@@ -20,13 +20,13 @@ const AssetListView: React.FC = ({}) => {
       }
       title={'Solar panel kits'}
       repaid={17}
-      value={'£1090'}
-      iconWidth={45}
+      units={10}
+      iconWidth={iconSize}
     />,
     <AssetItem
       icon={
         <Image
-          style={{ height: 45, width: 45 }}
+          style={{ height: iconSize, width: iconSize }}
           source={{
             uri: 'https://storage.googleapis.com/nowala-public/spk_icon.png',
           }}
@@ -34,13 +34,13 @@ const AssetListView: React.FC = ({}) => {
       }
       title={'Solar panel kits'}
       repaid={19}
-      value={'£1090'}
-      iconWidth={45}
+      units={4}
+      iconWidth={iconSize}
     />,
     <AssetItem
       icon={
         <Image
-          style={{ height: 45, width: 45 }}
+          style={{ height: iconSize, width: iconSize }}
           source={{
             uri: 'https://storage.googleapis.com/nowala-public/spk_icon.png',
           }}
@@ -48,8 +48,8 @@ const AssetListView: React.FC = ({}) => {
       }
       title={'Solar panel kits'}
       repaid={48}
-      value={'£1090'}
-      iconWidth={45}
+      units={1}
+      iconWidth={iconSize}
     />,
   ];
   return (
@@ -58,7 +58,7 @@ const AssetListView: React.FC = ({}) => {
         Assets
       </NowalaText.Headline2Light>
       <CardWrapper>
-        <ItemLongList list={list} />
+        <CardLongList list={list} />
       </CardWrapper>
     </>
   );

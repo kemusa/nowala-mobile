@@ -7,8 +7,11 @@ const colors = {
   ERROR_RED: '#960000',
   LINK_TEXT: '#0057FF',
   NW_GREY_1: '#ABABAB',
+  NW_GREY_2: '#DED8D8',
+  NW_GREY_3: '#696969',
   BACKGROUND: '#F9F9FE',
   SUCCESS: '#1BB55C',
   TRANSPARENT_BACKGROUND: 'rgba(255, 255, 255, 0.8)',
+  PROFIT_GREEN: '#65B947',
 };
 export default colors;

@@ -1,11 +1,12 @@
 import ErrorMessage from './ErrorMessage';
 import ButtonText from './ButtonText';
-import Body2 from './Body2';
 import Body1 from './Body1';
+import Body2 from './Body2';
 import BoldBody1 from './BoldBody1';
 import BigDataText from './BigDataText';
 import Subtitle1 from './Subtitle1';
 import Subtitle2 from './Subtitle2';
+import Subtitle3 from './Subtitle3';
 import LinkText from './LinkText';
 import LinkText2 from './LinkText2';
 import Headline1 from './Headline1';
@@ -22,8 +23,8 @@ import WarningText from './WarningText';
 const NowalaText = {
   BigDataText,
   Body1,
-  BoldBody1,
   Body2,
+  BoldBody1,
   ButtonText,
   ErrorMessage,
   Headline1,
@@ -38,6 +39,7 @@ const NowalaText = {
   LinkText2,
   Subtitle1,
   Subtitle2,
+  Subtitle3,
   TertiaryButtonText,
   WarningText,
 };

@@ -19,7 +19,7 @@ const CardListItem: React.FC<CardListItemProps> = ({
       style={{
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginTop: 20,
+        // marginTop: 20,
       }}>
       <View style={{ flexDirection: 'row' }}>
         {icon}
@@ -32,9 +32,9 @@ const CardListItem: React.FC<CardListItemProps> = ({
       </View>
       <View style={{ alignItems: 'flex-end' }}>
         <NowalaText.Body1>{value}</NowalaText.Body1>
-        <NowalaText.Subtitle2 style={{ fontSize: 11 }}>
+        <NowalaText.Subtitle3 style={{ fontSize: 11 }}>
           {subvalue}
-        </NowalaText.Subtitle2>
+        </NowalaText.Subtitle3>
       </View>
     </View>
   );

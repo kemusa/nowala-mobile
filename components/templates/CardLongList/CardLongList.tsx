@@ -1,7 +1,10 @@
 import { View, Text } from 'react-native';
 import React from 'react';
+import colors from '../../../theme/colors';
+import styles from './styles';
 
-const ItemLongList: React.FC<ItemLongList> = ({ list }) => {
+const CardLongList: React.FC<CardLongList> = ({ list }) => {
+  const { NW_GREY_2 } = colors;
   return (
     <>
       {list.map((item, idx) => (
@@ -10,12 +13,7 @@ const ItemLongList: React.FC<ItemLongList> = ({ list }) => {
           {list.length != idx + 1 && (
             <>
               <View style={{ marginBottom: 10 }}></View>
-              <View
-                style={{
-                  borderBottomColor: '#DED8D8',
-                  width: '100%',
-                  borderBottomWidth: 1,
-                }}></View>
+              <View style={styles.border}></View>
               <View style={{ marginBottom: 10 }}></View>
             </>
           )}
@@ -25,4 +23,4 @@ const ItemLongList: React.FC<ItemLongList> = ({ list }) => {
   );
 };
 
-export default ItemLongList;
+export default CardLongList;
