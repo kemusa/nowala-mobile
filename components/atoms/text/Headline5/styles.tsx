@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 16,
     letterSpacing: 0,
+    color: '#5A5959',
   },
 });
 

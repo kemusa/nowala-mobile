@@ -1,7 +1,6 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Ionicons from '@expo/vector-icons/Ionicons';
-import DashboardScreen from '../screens/Dashboard';
+import WalletScreen from '../screens/Wallet';
 import ProjectsScreen from '../screens/Projects';
 import { AuthStackScreenProps, MainTabParamList } from './types';
 import colors from '../theme/colors';
@@ -36,7 +35,7 @@ const MainTabNavigator: React.FC<MainTabProps> = ({ user }) => {
           tabBarIcon: ({ color, size }) => <WalletTabIcon color={color} />,
         }}>
         {props => (
-          <DashboardScreen
+          <WalletScreen
             {...props}
             email={email}
             userId={userId}

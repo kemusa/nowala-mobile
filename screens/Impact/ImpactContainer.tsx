@@ -10,8 +10,6 @@ import { numberWithCommas } from '../../utils/helpers';
 import moment from 'moment';
 import { SnapshotData } from '../../services/types';
 import colors from '../../theme/colors';
-import { SponsorshipData } from './typesImport';
-import { statusInit } from '../../utils/consts/DATA';
 import { MainTabScreenProps } from '../../navigation/types';
 import MenuButton from '../../components/atoms/buttons/MenuButton';
 import {
@@ -26,7 +24,7 @@ interface DashboardProps extends MainTabScreenProps<'Impact'> {
   firstName: string;
 }
 
-const DashboardContainer: React.FC<DashboardProps> = ({
+const ImpactContainer: React.FC<DashboardProps> = ({
   navigation,
   userId,
   email,
@@ -90,27 +88,23 @@ const DashboardContainer: React.FC<DashboardProps> = ({
 
   // track screen
   useEffect(() => {
-    analytics.screen(analyticsScreens.DASHBOARD);
+    analytics.screen(analyticsScreens.IMPACT);
   }, []);
 
   const [summary, setSummary] = useState({
-    investment: 0,
-    collected: 0,
-    // totalReturn: 0,
-    currency: 'SLL',
-    assetTitle: '',
-    returnPercent: 0,
-    units: 0,
-    progress: statusInit,
-    impactMetrics: undefined,
-  } as DashboardSummary);
+    total: 0,
+    activeMoney: 0,
+    activePercent: 0,
+    inactiveMoney: 0,
+    inactivePercent: 0,
+  } as WalletSummaryCard);
 
-  const [financialSummary, setFinancialSummary] = useState({
-    totalCollected: 0,
-    totalInvested: 0,
-    currency: '£',
-    percent: 0,
-  } as FinancialSummaryCard);
+  // const [financialSummary, setFinancialSummary] = useState({
+  //   totalCollected: 0,
+  //   totalInvested: 0,
+  //   currency: '£',
+  //   percent: 0,
+  // } as FinancialSummaryCard);
 
   // Listener for dashboard data
   useEffect(() => {
@@ -185,92 +179,62 @@ const DashboardContainer: React.FC<DashboardProps> = ({
   const handleFinancialSummary = (data: SnapshotData[]) => {
     if (data.length > 0) {
       console.log(data[0].data);
-      const summary = data[0].data as FinancialSummary;
-      const { totalCollected, totalInvested, currency } = summary;
-      setFinancialSummary({
-        totalCollected,
-        totalInvested,
-        currency,
-        percent: Math.round((totalCollected / totalInvested) * 100),
-      });
+      // const summary = data[0].data as FinancialSummary;
+      // const { totalCollected, totalInvested, currency } = summary;
+      // setFinancialSummary({
+      //   totalCollected,
+      //   totalInvested,
+      //   currency,
+      //   percent: Math.round((totalCollected / totalInvested) * 100),
+      // });
     }
   };
 
   const handleDashboardData = (data: SnapshotData[]) => {
     if (data.length > 0) {
       try {
-        const sponsorship = data[0].data as SponsorshipData;
-        const {
-          asset,
-          interest,
-          collected,
-          unitCost,
-          units,
-          currency,
-          status,
-          orderDate,
-          paid,
-          impactMetrics,
-        } = sponsorship;
-        // if (!status.paid) goToAccountPending();
-        const investment = unitCost * units;
-        const totalReturn = parseInt((investment * (1 + interest)).toFixed());
-        const returnPercent = Math.round((collected / totalReturn) * 100);
-        const assetTitle =
-          asset.charAt(0).toUpperCase() + asset.substring(1).toLowerCase();
-        const order: OrderData = {
-          date: moment(orderDate.toDate()).format('MMM Do YYYY'),
-          units,
-          investment: numberWithCommas(investment),
-          paid,
-          currency,
-          assetTitle,
-        };
-        setOrders([order]);
-        setSummary({
-          investment,
-          collected,
-          // totalReturn,
-          currency,
-          assetTitle,
-          returnPercent,
-          units,
-          progress: status,
-          impactMetrics,
-          openOptionsModal,
-        });
+        // const sponsorship = data[0].data as SponsorshipData;
+        // const {
+        //   asset,
+        //   interest,
+        //   collected,
+        //   unitCost,
+        //   units,
+        //   currency,
+        //   status,
+        //   orderDate,
+        //   paid,
+        //   impactMetrics,
+        // } = sponsorship;
+        // // if (!status.paid) goToAccountPending();
+        // const investment = unitCost * units;
+        // const totalReturn = parseInt((investment * (1 + interest)).toFixed());
+        // const returnPercent = Math.round((collected / totalReturn) * 100);
+        // const assetTitle =
+        //   asset.charAt(0).toUpperCase() + asset.substring(1).toLowerCase();
+        // const order: OrderData = {
+        //   date: moment(orderDate.toDate()).format('MMM Do YYYY'),
+        //   units,
+        //   investment: numberWithCommas(investment),
+        //   paid,
+        //   currency,
+        //   assetTitle,
+        // };
+        // setOrders([order]);
+        // setSummary({
+        //   total: 0,
+        //   activeMoney: 0,
+        //   activePercent: 0,
+        //   inactiveMoney: 0,
+        //   inactivePercent: 0, // investment,
+        // });
       } catch (error) {
         console.error(error);
       }
     }
   };
 
-  return (
-    <DashboardContext.Provider
-      value={{
-        dashboardSummary: summary,
-        financialSummary,
-        viewProgress,
-        viewOptions,
-        viewOrders,
-        viewWithdrawlGuide,
-        menuModalOpen,
-        openWithdrawlModal,
-        closeWithdrawlModal,
-        openMenuModal,
-        closeMenuModal,
-        openProgressModal,
-        closeProgressModal,
-        closeOptionsModal,
-        closeOrdersModal,
-        goToProject,
-        goToYourOrders,
-        goToImpactDetail,
-        signOut,
-      }}>
-      <HomeView />
-    </DashboardContext.Provider>
-  );
+  return <HomeView />;
 };
 
-export default DashboardContainer;
+export default ImpactContainer;

@@ -1,20 +1,19 @@
 import React from 'react';
 import { SafeAreaView, ScrollView, View } from 'react-native';
 import styles from './styles';
-import ImpactSummary from './components/organisms/ImpactSummary';
+import ReturnBreakdown from './components/organisms/ReturnBreakdown';
+import ProgressModal from './components/organisms/ProgressModal';
 import OptionsModal from './components/organisms/OptionsModal';
-import colors from '../../theme/colors';
 import MenuModal from './components/organisms/MenuModal';
-import PeopleList from './components/organisms/PeopleList';
+import AssetsList from './components/organisms/AssetsList';
 
-const { BACKGROUND } = colors;
-
-const ImpactView: React.FC = () => {
+const WalletView: React.FC = () => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
-        <ImpactSummary />
-        <PeopleList />
+        <ReturnBreakdown />
+        <AssetsList />
+        {/* <ProgressModal /> */}
         <OptionsModal />
         <MenuModal />
         <View style={styles.spacer}></View>
@@ -23,4 +22,4 @@ const ImpactView: React.FC = () => {
   );
 };
 
-export default ImpactView;
+export default WalletView;

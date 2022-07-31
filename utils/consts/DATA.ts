@@ -1,5 +1,5 @@
 import { Timestamp } from 'firebase/firestore';
-import { SponsorshipData } from '../../screens/Dashboard/typesImport';
+import { SponsorshipData } from '../../screens/Wallet/typesImport';
 
 const statusText: StatusText = {
   registered: 'Sign up for first project 😀',

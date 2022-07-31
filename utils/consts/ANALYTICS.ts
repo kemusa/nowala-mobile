@@ -6,7 +6,8 @@ const analyticsScreens = {
   SIGN_UP: 'Sign Up',
   LOGIN: 'Login',
   FORGOT_PASSWORD: 'Forgot Password',
-  DASHBOARD: 'Dashboard',
+  WALLET: 'Wallet',
+  IMPACT: 'Impact',
   ORDER_DETAILS: 'Order Details',
   IMPACT_DETAIL: 'Impact Detail',
 };
