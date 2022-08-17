@@ -1,54 +1,22 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Image, View } from 'react-native';
 import NowalaText from '../../../../../components/atoms/text';
 import CardWrapper from '../../../../../components/templates/CardWrapper';
 import CardLongList from '../../../../../components/templates/CardLongList';
 import PeopleItem from '../../molecules/PeopleItem';
 import styles from './styles';
+import { ImpactCtx } from '../../../ImpactContext';
 
 const PeopleListView: React.FC = ({}) => {
-  const iconSize = 45;
-  const list = [
+  const { peopleList } = useContext(ImpactCtx);
+  const list = peopleList.map(l => (
     <PeopleItem
-      icon={
-        <Image
-          style={styles.iconImage}
-          source={{
-            uri: 'https://storage.googleapis.com/nowala-public/sl_homes/sl_1.jpg',
-          }}
-        />
-      }
-      title={'Rural home'}
-      location={'Port Loko, Sierra Leone'}
-      iconWidth={iconSize}
-    />,
-    <PeopleItem
-      icon={
-        <Image
-          style={styles.iconImage}
-          source={{
-            uri: 'https://storage.googleapis.com/nowala-public/sl_homes/sl_2.jpg',
-          }}
-        />
-      }
-      title={'Rural home'}
-      location={'Port Loko, Sierra Leone'}
-      iconWidth={iconSize}
-    />,
-    <PeopleItem
-      icon={
-        <Image
-          style={styles.iconImage}
-          source={{
-            uri: 'https://storage.googleapis.com/nowala-public/sl_homes/sl_3.jpg',
-          }}
-        />
-      }
-      title={'Rural home'}
-      location={'Port Loko, Sierra Leone'}
-      iconWidth={iconSize}
-    />,
-  ];
+      iconUrl={l.iconUrl}
+      title={l.title}
+      location={`${l.townCity}, ${l.country}`}
+      numPeople={l.numPeople}
+    />
+  ));
   return (
     <>
       <CardWrapper

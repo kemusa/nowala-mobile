@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { DashboardContext } from './WalletContext';
+import { WalletCtx } from './WalletContext';
 import NowalaText from '../../components/atoms/text';
 import WalletView from './WalletView';
 import ServicesContext, { Services } from '../../services';
@@ -10,8 +10,15 @@ import { numberWithCommas } from '../../utils/helpers';
 import moment from 'moment';
 import { SnapshotData } from '../../services/types';
 import colors from '../../theme/colors';
-import { SponsorshipData } from './typesImport';
-import { statusInit } from '../../utils/consts/DATA';
+import {
+  AssetPreview,
+  AssetPreviewData,
+  SponsorshipData,
+  WalletSummary,
+  WalletSummaryCard,
+  WalletSummaryData,
+} from './typesModule';
+import { statusInit, productMap } from '../../utils/consts/DATA';
 import { MainTabScreenProps } from '../../navigation/types';
 import MenuButton from '../../components/atoms/buttons/MenuButton';
 import {
@@ -39,7 +46,19 @@ const WalletContainer: React.FC<DashboardProps> = ({
   // variable to store unsubscription for dashboard data listener
   let dashboardUnsub = () => {};
 
-  const [orders, setOrders] = useState([] as OrderData[]);
+  const [assets, setAssets] = useState([] as AssetPreview[]);
+
+  const [summary, setSummary] = useState({
+    total: 0,
+    activeMoney: 0,
+    activePercent: 0,
+    inactiveMoney: 0,
+    inactivePercent: 0,
+    profit: 0,
+    profitPercent: 0,
+  } as WalletSummaryCard);
+
+  const [assetPreview, setAssetPreview] = useState([] as AssetPreview[]);
 
   // Place Nowala logo in header on component init
   useEffect(() => {
@@ -91,28 +110,27 @@ const WalletContainer: React.FC<DashboardProps> = ({
     analytics.screen(analyticsScreens.WALLET);
   }, []);
 
-  const [summary, setSummary] = useState({
-    total: 0,
-    activeMoney: 0,
-    activePercent: 0,
-    inactiveMoney: 0,
-    inactivePercent: 0,
-  } as WalletSummaryCard);
+  // Listener for summary data
+  useEffect(() => {
+    const unsubscribe = db.subscribe(
+      `users/${userId}/financialSummary`,
+      handleSummary,
+    );
+    dashboardUnsub = unsubscribe;
+    // handleSummary();
+  }, [userId]);
 
-  // // Listener for dashboard data
-  // useEffect(() => {
-  //   const unsubscribe = db.subscribe(`users/${userId}/sponsorships`, () => {});
-  //   dashboardUnsub = unsubscribe;
-  // }, [userId]);
-
-  // Listener for financial data
-  // useEffect(() => {
-  //   const unsubscribe = db.subscribe(
-  //     `users/${userId}/financialSummary`,
-  //     handleFinancialSummary,
-  //   );
-  //   dashboardUnsub = unsubscribe;
-  // }, [userId]);
+  // Listener for people list data
+  useEffect(() => {
+    const unsubscribe = db.subscribeOrderBy(
+      `users/${userId}/assets`,
+      'orderNum',
+      'desc',
+      handleAssetList,
+      3,
+    );
+    dashboardUnsub = unsubscribe;
+  }, [userId]);
 
   // Sign out
   const signOut = async () => {
@@ -127,74 +145,53 @@ const WalletContainer: React.FC<DashboardProps> = ({
   const openMenuModal = () => setMenuModalOpen(true);
   const closeMenuModal = () => setMenuModalOpen(false);
 
-  const handleFinancialSummary = (data: SnapshotData[]) => {
+  const handleSummary = (data: SnapshotData[]) => {
     if (data.length > 0) {
-      console.log(data[0].data);
-      //   const summary = data[0].data as FinancialSummary;
-      //   const { totalCollected, totalInvested, currency } = summary;
-      //   setFinancialSummary({
-      //     totalCollected,
-      //     totalInvested,
-      //     currency,
-      //     percent: Math.round((totalCollected / totalInvested) * 100),
-      //   });
+      const { total, assets, activeMoney, profit, profitPercent, currency } =
+        data[0].data as WalletSummaryData;
+      const inactiveMoney =
+        Math.round((total - activeMoney + Number.EPSILON) * 100) / 100;
+      const activePercent = Math.round((activeMoney / total) * 100) || 0;
+      const inactivePercent = Math.round((1 - activeMoney / total) * 100) || 0;
       setSummary({
-        total: 0,
-        activeMoney: 0,
-        activePercent: 0,
-        inactiveMoney: 0,
-        inactivePercent: 0,
+        profit,
+        profitPercent,
+        total,
+        activeMoney,
+        activePercent,
+        inactiveMoney,
+        inactivePercent,
+        currency,
       });
     }
   };
 
-  // const handleDashboardData = (data: SnapshotData[]) => {
-  //   if (data.length > 0) {
-  //     try {
-  //       const sponsorship = data[0].data as SponsorshipData;
-  //       const {
-  //         asset,
-  //         interest,
-  //         collected,
-  //         unitCost,
-  //         units,
-  //         currency,
-  //         status,
-  //         orderDate,
-  //         paid,
-  //       } = sponsorship;
-  //       // if (!status.paid) goToAccountPending();
-  //       const investment = unitCost * units;
-  //       const totalReturn = parseInt((investment * (1 + interest)).toFixed());
-  //       const returnPercent = Math.round((collected / totalReturn) * 100);
-  //       const assetTitle =
-  //         asset.charAt(0).toUpperCase() + asset.substring(1).toLowerCase();
-  //       const order: OrderData = {
-  //         date: moment(orderDate.toDate()).format('MMM Do YYYY'),
-  //         units,
-  //         investment: numberWithCommas(investment),
-  //         paid,
-  //         currency,
-  //         assetTitle,
-  //       };
-  //       setOrders([order]);
-  //       setSummary({
-  //         total: 0,
-  //         activeMoney: 0,
-  //         activePercent: 0,
-  //         inactiveMoney: 0,
-  //         inactivePercent: 0,
-  //       });
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   }
-  // };
+  const handleAssetList = (data: SnapshotData[]) => {
+    if (data.length > 0) {
+      try {
+        const assetsList = data.map(d => d.data) as AssetPreviewData[];
+        const assets: AssetPreview[] = assetsList.map(a => {
+          return {
+            units: a.units,
+            unitCost: a.unitCost,
+            maturity: moment(a.maturity.toDate()).format('MMM Do YYYY'),
+            repaid: a.repaid,
+            installed: !!a.repaid,
+            alias: a.alias,
+          };
+        });
+        setAssets(assets);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
 
   return (
-    <DashboardContext.Provider
+    <WalletCtx.Provider
       value={{
         walletSummary: summary,
+        assets,
         viewWithdrawlGuide,
         menuModalOpen,
         openWithdrawlModal,
@@ -204,7 +201,7 @@ const WalletContainer: React.FC<DashboardProps> = ({
         signOut,
       }}>
       <WalletView />
-    </DashboardContext.Provider>
+    </WalletCtx.Provider>
   );
 };
 

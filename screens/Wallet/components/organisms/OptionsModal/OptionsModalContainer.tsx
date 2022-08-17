@@ -1,18 +1,19 @@
 import React, { useContext } from 'react';
 import { View, Text } from 'react-native';
-import { DashboardContext } from '../../../WalletContext';
+import { WalletCtx } from '../../../WalletContext';
 import OptionsModalView from './OptionsModalView';
 
 const OptionsModalContainer: React.FC = () => {
-  const { viewOptions, closeOptionsModal, goToProject, goToYourOrders } =
-    useContext(DashboardContext);
+  // const { viewOptions, closeOptionsModal, goToProject, goToYourOrders } =
+  //   useContext WalletCtx);
   return (
-    <OptionsModalView
-      isOpen={viewOptions}
-      onClose={closeOptionsModal}
-      goToProject={goToProject}
-      openOrdersModal={goToYourOrders}
-    />
+    <></>
+    // <OptionsModalView
+    //   isOpen={viewOptions}
+    //   onClose={closeOptionsModal}
+    //   goToProject={goToProject}
+    //   openOrdersModal={goToYourOrders}
+    // />
   );
 };
 

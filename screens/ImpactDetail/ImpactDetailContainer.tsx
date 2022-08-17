@@ -41,12 +41,12 @@ const ImpactDetailContainer: React.FC<AuthStackScreenProps<'ImpactDetail'>> = ({
   const openNewOrderModal = () => setViewNewOrder(true);
   const closeNewOrderModal = () => setViewNewOrder(false);
 
-  const onOrderSent = (price: number, paymentRef: string) => {
-    navigation.navigate('AuthStack', {
-      screen: 'BankPayment',
-      params: { redirectPage: 'Dashboard', paymentRef, price },
-    });
-  };
+  // const onOrderSent = (price: number, paymentRef: string) => {
+  //   navigation.navigate('AuthStack', {
+  //     screen: 'BankPayment',
+  //     params: { redirectPage: 'Dashboard', paymentRef, price },
+  //   });
+  // };
 
   return (
     <ImpactDetailContext.Provider
@@ -54,7 +54,7 @@ const ImpactDetailContainer: React.FC<AuthStackScreenProps<'ImpactDetail'>> = ({
         impactDetail,
         openNewOrderModal,
         closeNewOrderModal,
-        onOrderSent,
+        // onOrderSent,
         viewNewOrder,
         userId: userId,
         projectId,

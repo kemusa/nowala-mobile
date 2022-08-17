@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { DashboardContext } from '../../../WalletContext';
+import { WalletCtx } from '../../../WalletContext';
 import AssetListView from './AssetListView';
 
 const AssetListContainer = () => {

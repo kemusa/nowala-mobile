@@ -16,7 +16,7 @@ interface ImpactDetailContext {
   impactDetail: ImpactDetail;
   openNewOrderModal: () => void;
   closeNewOrderModal: () => void;
-  onOrderSent: OrderCallback;
+  // onOrderSent: OrderCallback;
   viewNewOrder: boolean;
   userId: string;
   projectId: string;

@@ -1,3 +1,4 @@
 import { createContext } from 'react';
+import { WalletContext } from './typesModule';
 
-export const DashboardContext = createContext({} as DashboardContext);
+export const WalletCtx = createContext({} as WalletContext);

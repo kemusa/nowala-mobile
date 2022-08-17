@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
   text: {
     fontFamily: 'Lato_700Bold',
     fontSize: 16,
-    lineHeight: 22,
+    // lineHeight: 22,
     letterSpacing: 0.5,
   },
 });

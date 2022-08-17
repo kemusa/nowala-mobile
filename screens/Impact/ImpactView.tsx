@@ -2,9 +2,8 @@ import React from 'react';
 import { SafeAreaView, ScrollView, View } from 'react-native';
 import styles from './styles';
 import ImpactSummary from './components/organisms/ImpactSummary';
-import OptionsModal from './components/organisms/OptionsModal';
+// import OptionsModal from './components/organisms/OptionsModal';
 import colors from '../../theme/colors';
-import MenuModal from './components/organisms/MenuModal';
 import PeopleList from './components/organisms/PeopleList';
 
 const { BACKGROUND } = colors;
@@ -14,10 +13,10 @@ const ImpactView: React.FC = () => {
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
         <ImpactSummary />
+        <View style={styles.spacerCards}></View>
         <PeopleList />
-        <OptionsModal />
-        <MenuModal />
-        <View style={styles.spacer}></View>
+        {/* <OptionsModal /> */}
+        <View style={styles.spacerBottom}></View>
       </ScrollView>
     </SafeAreaView>
   );

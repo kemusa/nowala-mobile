@@ -7,7 +7,7 @@ const CardList: React.FC<CardList> = ({ list }) => {
       {list.map((item, idx) => (
         <View key={idx}>
           {item}
-          {list.length != idx + 1 && <View style={{ marginBottom: 10 }}></View>}
+          {list.length != idx + 1 && <View style={{ marginBottom: 15 }}></View>}
         </View>
       ))}
     </>

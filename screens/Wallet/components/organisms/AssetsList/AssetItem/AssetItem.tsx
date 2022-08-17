@@ -12,9 +12,9 @@ const AssetItemView: React.FC<AssetItem> = ({
   repaid,
   icon,
   iconWidth,
+  maturity,
 }) => {
   const { width } = Dimensions.get('window');
-  const { PRIMARY } = colors;
   return (
     <View style={styles.container}>
       {icon}
@@ -38,7 +38,13 @@ const AssetItemView: React.FC<AssetItem> = ({
         <View>
           <Progress size={'xs'} value={repaid} />
         </View>
-        <NowalaText.Subtitle2>{`${repaid}% repaid`}</NowalaText.Subtitle2>
+        <View style={styles.bottomRow}>
+          <NowalaText.Subtitle2>{`${repaid}% repaid`}</NowalaText.Subtitle2>
+          <NowalaText.Subtitle2
+            style={
+              styles.dueDateText
+            }>{`due ${maturity}`}</NowalaText.Subtitle2>
+        </View>
       </View>
     </View>
   );

@@ -6,8 +6,7 @@ const styles = StyleSheet.create({
   container: { alignSelf: 'flex-end' },
   text: {
     fontFamily: 'Lato_400Regular',
-    fontSize: 11,
-    lineHeight: 24,
+    fontSize: 12,
     letterSpacing: 0.1,
     color: '#5E8497',
   },

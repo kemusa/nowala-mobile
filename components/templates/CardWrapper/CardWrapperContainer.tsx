@@ -54,6 +54,7 @@ const CardWrapperContainer: React.FC<CardProps> = ({
             style={[
               {
                 padding: 10,
+                paddingBottom: 15,
                 backgroundColor: '#fff',
                 borderRadius: 8,
               },

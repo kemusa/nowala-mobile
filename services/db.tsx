@@ -8,9 +8,12 @@ import firestore, {
   setDoc,
   onSnapshot,
   Query,
+  orderBy,
   where,
   doc,
   collection,
+  query,
+  limit,
 } from 'firebase/firestore';
 export default class DbService {
   // private _db = firestore;
@@ -31,6 +34,22 @@ export default class DbService {
   public subscribe(collectionName: string, callback: (data: any) => any) {
     const ref = collection(this.getFireStore, collectionName);
     return onSnapshot(ref, snapshot => {
+      callback(snapshot?.docs.map(doc => ({ id: doc.id, data: doc.data() })));
+    });
+  }
+
+  public subscribeOrderBy(
+    collectionName: string,
+    field: string,
+    directionStr: firestore.OrderByDirection,
+    callback: (data: any) => any,
+    max?: number,
+  ) {
+    const ref = collection(this.getFireStore, collectionName);
+    const q = max
+      ? query(ref, orderBy(field, directionStr), limit(max))
+      : query(ref, orderBy(field, directionStr));
+    return onSnapshot(q, snapshot => {
       callback(snapshot?.docs.map(doc => ({ id: doc.id, data: doc.data() })));
     });
   }

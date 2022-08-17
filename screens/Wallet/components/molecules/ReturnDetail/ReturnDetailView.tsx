@@ -3,7 +3,7 @@ import NowalaText from '../../../../../components/atoms/text';
 import { Text, View } from 'react-native';
 import AnimatedNumber from 'react-native-animated-numbers';
 import Headline4Styles from '../../../../../components/atoms/text/Headline4/styles';
-import { DashboardContext } from '../../../WalletContext';
+import { WalletCtx } from '../../../WalletContext';
 import styles from './styles';
 
 const ReturnDetailView: React.FC<ReturnDetail> = ({

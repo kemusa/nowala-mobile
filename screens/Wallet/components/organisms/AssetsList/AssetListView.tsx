@@ -1,57 +1,35 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Image, View } from 'react-native';
 import NowalaText from '../../../../../components/atoms/text';
 import CardWrapper from '../../../../../components/templates/CardWrapper';
 import CardLongList from '../../../../../components/templates/CardLongList';
 import AssetItem from './AssetItem';
+import { productMap } from '../../../../../utils/consts/DATA';
+import { WalletCtx } from '../../../WalletContext';
 import styles from './styles';
 
 const AssetListView: React.FC = ({}) => {
   const iconSize = 45;
-  const list = [
-    <AssetItem
-      icon={
-        <Image
-          style={{ height: iconSize, width: iconSize }}
-          source={{
-            uri: 'https://storage.googleapis.com/nowala-public/spk_icon.png',
-          }}
+  const { assets } = useContext(WalletCtx);
+  const list = assets
+    ? assets.map(a => (
+        <AssetItem
+          icon={
+            <Image
+              style={{ height: iconSize, width: iconSize }}
+              source={{
+                uri: productMap[a.alias].iconUri,
+              }}
+            />
+          }
+          title={productMap[a.alias].title}
+          repaid={Math.round((a.repaid / (a.units * a.unitCost)) * 100)}
+          units={a.units}
+          iconWidth={iconSize}
+          maturity={a.maturity || 'TBD'} //todo: trasform date to pending if maturity is undefined
         />
-      }
-      title={'Solar panel kits'}
-      repaid={17}
-      units={10}
-      iconWidth={iconSize}
-    />,
-    <AssetItem
-      icon={
-        <Image
-          style={{ height: iconSize, width: iconSize }}
-          source={{
-            uri: 'https://storage.googleapis.com/nowala-public/spk_icon.png',
-          }}
-        />
-      }
-      title={'Solar panel kits'}
-      repaid={19}
-      units={4}
-      iconWidth={iconSize}
-    />,
-    <AssetItem
-      icon={
-        <Image
-          style={{ height: iconSize, width: iconSize }}
-          source={{
-            uri: 'https://storage.googleapis.com/nowala-public/spk_icon.png',
-          }}
-        />
-      }
-      title={'Solar panel kits'}
-      repaid={48}
-      units={1}
-      iconWidth={iconSize}
-    />,
-  ];
+      ))
+    : [];
   return (
     <>
       <CardWrapper

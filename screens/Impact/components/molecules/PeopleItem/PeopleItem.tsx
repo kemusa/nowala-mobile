@@ -1,21 +1,24 @@
 import React from 'react';
-import { Dimensions, View } from 'react-native';
+import { View, Image } from 'react-native';
 import NowalaText from '../../../../../components/atoms/text';
 import styles from './styles';
-import { screenPadding } from '../../../../../utils/consts/STYLES';
 import LocationIcon from '../../../../../components/atoms/icons/LocationIcon';
 
 const AssetItemView: React.FC<PeopleItem> = ({
   title,
   location,
-  icon,
-  iconWidth,
+  iconUrl,
+  numPeople,
 }) => {
-  const { width } = Dimensions.get('window');
   return (
     <View style={styles.container}>
-      <View style={{ flexDirection: 'row' }}>
-        {icon}
+      <View style={styles.columnLeft}>
+        <Image
+          style={styles.image}
+          source={{
+            uri: iconUrl,
+          }}
+        />
         <View style={styles.contentWrapper}>
           <View style={styles.topRow}>
             <NowalaText.Body1
@@ -23,16 +26,16 @@ const AssetItemView: React.FC<PeopleItem> = ({
               {title}
             </NowalaText.Body1>
           </View>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <View style={styles.locationWrapper}>
             <LocationIcon />
-            <NowalaText.Subtitle2 style={{ marginLeft: 5 }}>
+            <NowalaText.Subtitle2 style={styles.locationText}>
               {location}
             </NowalaText.Subtitle2>
           </View>
         </View>
       </View>
-      <View style={{ alignItems: 'flex-end' }}>
-        <NowalaText.Body1>{10}</NowalaText.Body1>
+      <View style={styles.peopleWrapper}>
+        <NowalaText.Body1>{numPeople}</NowalaText.Body1>
         <NowalaText.Subtitle3 style={{ fontSize: 11 }}>
           {'people'}
         </NowalaText.Subtitle3>

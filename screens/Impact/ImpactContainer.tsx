@@ -1,12 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { DashboardContext } from './ImpactContext';
-import NowalaText from '../../components/atoms/text';
-import HomeView from './ImpactView';
+import { ImpactCtx } from './ImpactContext';
+import ImpactView from './ImpactView';
 import ServicesContext, { Services } from '../../services';
 import NowalaIcon from '../../components/atoms/icons/NowalaIcon';
 import { TouchableOpacity } from 'react-native';
 import { firstProject } from '../Projects/Projects';
-import { numberWithCommas } from '../../utils/helpers';
 import moment from 'moment';
 import { SnapshotData } from '../../services/types';
 import colors from '../../theme/colors';
@@ -30,8 +28,6 @@ const ImpactContainer: React.FC<DashboardProps> = ({
   email,
   firstName,
 }) => {
-  const [viewProgress, setViewProgress] = useState(false);
-  const [viewOptions, setViewOptions] = useState(false);
   const [viewOrders, setViewOrders] = useState(false);
   const [viewWithdrawlGuide, setViewWithdrawlGuide] = useState(false);
   const [menuModalOpen, setMenuModalOpen] = useState(false);
@@ -39,7 +35,13 @@ const ImpactContainer: React.FC<DashboardProps> = ({
   // variable to store unsubscription for dashboard data listener
   let dashboardUnsub = () => {};
 
-  const [orders, setOrders] = useState([] as OrderData[]);
+  const [peopleImpacted, setPeopleImpacted] = useState(0);
+  const [peopleImpactedTogether, setPeopleImpactedTogether] = useState(0);
+
+  const [peopleList, setPeopleList] = useState([] as PeopleList[]);
+
+  // Get services
+  const { auth, db, analytics } = useContext(ServicesContext) as Services;
 
   // Place Nowala logo in header on component init
   useEffect(() => {
@@ -60,66 +62,28 @@ const ImpactContainer: React.FC<DashboardProps> = ({
     });
   }, [navigation]);
 
-  // useEffect(() => {
-  //   updateApp();
-  // }, []);
-
-  // const updateApp = async () => {
-  //   // const update = await Updates.checkForUpdateAsync();
-  //   // if (update.isAvailable) {
-  //   //   alert('hey');
-  //   //   await Updates.fetchUpdateAsync();
-  //   //   // ... notify user of update ...
-  //   //   await Updates.reloadAsync();
-  //   // }
-  //   alert('start');
-  //   Updates.addListener(event => {
-  //     alert('foo');
-  //     if (event.type === Updates.UpdateEventType.UPDATE_AVAILABLE) {
-  //       alert('bar');
-  //       Updates.reloadAsync();
-  //     }
-  //     alert('baz');
-  //   });
-  // };
-
-  // Get services
-  const { auth, db, analytics } = useContext(ServicesContext) as Services;
-
   // track screen
   useEffect(() => {
     analytics.screen(analyticsScreens.IMPACT);
   }, []);
 
-  const [summary, setSummary] = useState({
-    total: 0,
-    activeMoney: 0,
-    activePercent: 0,
-    inactiveMoney: 0,
-    inactivePercent: 0,
-  } as WalletSummaryCard);
-
-  // const [financialSummary, setFinancialSummary] = useState({
-  //   totalCollected: 0,
-  //   totalInvested: 0,
-  //   currency: '£',
-  //   percent: 0,
-  // } as FinancialSummaryCard);
-
-  // Listener for dashboard data
+  // Listener for people list data
   useEffect(() => {
-    const unsubscribe = db.subscribe(
-      `users/${userId}/sponsorships`,
-      handleDashboardData,
+    const unsubscribe = db.subscribeOrderBy(
+      `users/${userId}/people`,
+      'dateAdded',
+      'desc',
+      handlePeopleList,
+      3,
     );
     dashboardUnsub = unsubscribe;
   }, [userId]);
 
-  // Listener for financial data
+  // Listener for impact summary data
   useEffect(() => {
     const unsubscribe = db.subscribe(
-      `users/${userId}/financialSummary`,
-      handleFinancialSummary,
+      `users/${userId}/impactSummary`,
+      handleImpactSummary,
     );
     dashboardUnsub = unsubscribe;
   }, [userId]);
@@ -131,110 +95,61 @@ const ImpactContainer: React.FC<DashboardProps> = ({
     analytics.track(analyticsEvents.SIGNED_OUT);
   };
 
-  // Navigate to project details from modal then close modal
-  const goToProject = () => {
-    navigation.navigate('ProjectDetails', {
-      project: firstProject,
-    });
-    closeOptionsModal();
-  };
-
-  const goToYourOrders = () => {
-    navigation.navigate('AuthStack', {
-      screen: 'YourOrders',
-      params: { orders },
-    });
-    closeOptionsModal();
-  };
-
   // const goToAccountPending = () => {
   //   navigation.navigate('Home');
   // };
 
-  const goToImpactDetail = (impactDetail: ImpactDetail) => {
-    navigation.navigate('AuthStack', {
-      screen: 'ImpactDetail',
-      params: { impactDetail, userId, email, firstName },
-    });
-  };
+  // const goToImpactDetail = (impactDetail: ImpactDetail) => {
+  //   navigation.navigate('AuthStack', {
+  //     screen: 'ImpactDetail',
+  //     params: { impactDetail, userId, email, firstName },
+  //   });
+  // };
 
-  const openProgressModal = () =>
-    setViewProgress(() => {
-      analytics.track(analyticsEvents.VIEWED_PROGRESS);
-      return true;
-    });
-  const closeProgressModal = () => setViewProgress(false);
-
-  const openOptionsModal = () => setViewOptions(true);
-  const closeOptionsModal = () => setViewOptions(false);
-
-  const openWithdrawlModal = () => setViewWithdrawlGuide(true);
-  const closeWithdrawlModal = () => setViewWithdrawlGuide(false);
+  // const openWithdrawlModal = () => setViewWithdrawlGuide(true);
+  // const closeWithdrawlModal = () => setViewWithdrawlGuide(false);
 
   const openMenuModal = () => setMenuModalOpen(true);
   const closeMenuModal = () => setMenuModalOpen(false);
 
-  const closeOrdersModal = () => setViewOrders(false);
+  // const closeOrdersModal = () => setViewOrders(false);
 
-  const handleFinancialSummary = (data: SnapshotData[]) => {
+  const handleImpactSummary = async (data: SnapshotData[]) => {
     if (data.length > 0) {
-      console.log(data[0].data);
-      // const summary = data[0].data as FinancialSummary;
-      // const { totalCollected, totalInvested, currency } = summary;
-      // setFinancialSummary({
-      //   totalCollected,
-      //   totalInvested,
-      //   currency,
-      //   percent: Math.round((totalCollected / totalInvested) * 100),
-      // });
+      const doc = await db.findById('community/main');
+      const totalPeople = doc.data ? doc.data.peopleImpacted : 0;
+      setPeopleImpacted(data[0].data.peopleImpacted);
+      setPeopleImpactedTogether(totalPeople);
     }
   };
 
-  const handleDashboardData = (data: SnapshotData[]) => {
+  const handlePeopleList = (data: SnapshotData[]) => {
     if (data.length > 0) {
       try {
-        // const sponsorship = data[0].data as SponsorshipData;
-        // const {
-        //   asset,
-        //   interest,
-        //   collected,
-        //   unitCost,
-        //   units,
-        //   currency,
-        //   status,
-        //   orderDate,
-        //   paid,
-        //   impactMetrics,
-        // } = sponsorship;
-        // // if (!status.paid) goToAccountPending();
-        // const investment = unitCost * units;
-        // const totalReturn = parseInt((investment * (1 + interest)).toFixed());
-        // const returnPercent = Math.round((collected / totalReturn) * 100);
-        // const assetTitle =
-        //   asset.charAt(0).toUpperCase() + asset.substring(1).toLowerCase();
-        // const order: OrderData = {
-        //   date: moment(orderDate.toDate()).format('MMM Do YYYY'),
-        //   units,
-        //   investment: numberWithCommas(investment),
-        //   paid,
-        //   currency,
-        //   assetTitle,
-        // };
-        // setOrders([order]);
-        // setSummary({
-        //   total: 0,
-        //   activeMoney: 0,
-        //   activePercent: 0,
-        //   inactiveMoney: 0,
-        //   inactivePercent: 0, // investment,
-        // });
+        setPeopleList(
+          data.map(o => {
+            return {
+              beneficiaryOccupation: o.data.beneficiaryOccupation,
+              townCity: o.data.townCity,
+              country: o.data.country,
+              iconUrl: o.data.iconUrl,
+              numPeople: o.data.peopleHelped,
+              title: o.data.title,
+            };
+          }),
+        );
       } catch (error) {
         console.error(error);
       }
     }
   };
 
-  return <HomeView />;
+  return (
+    <ImpactCtx.Provider
+      value={{ peopleImpacted, peopleImpactedTogether, peopleList }}>
+      <ImpactView />
+    </ImpactCtx.Provider>
+  );
 };
 
 export default ImpactContainer;

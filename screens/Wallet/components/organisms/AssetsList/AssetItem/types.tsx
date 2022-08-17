@@ -4,4 +4,5 @@ interface AssetItem {
   repaid: number;
   icon: JSX.Element;
   iconWidth?: number;
+  maturity: string;
 }

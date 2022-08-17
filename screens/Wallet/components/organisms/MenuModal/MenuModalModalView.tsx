@@ -9,7 +9,6 @@ import styles from './styles';
 const ProgressModalView: React.FC<MenuModalViewProps> = ({
   isOpen,
   onClose,
-  openOrdersModal,
   signOut,
 }) => {
   return (

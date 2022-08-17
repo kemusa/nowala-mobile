@@ -1,13 +1,21 @@
 import { Timestamp } from 'firebase/firestore';
-import { SponsorshipData } from '../../screens/Wallet/typesImport';
+import { SponsorshipData } from '../../screens/Wallet/typesModule';
 
-const statusText: StatusText = {
+const statusText = {
   registered: 'Sign up for first project 😀',
   paid: 'Money received',
   transferred: 'Money arrived Sierra Leone',
   installed: 'Solar Panel Kit installation complete',
   collectionStarted: 'Payments started',
 };
+
+// const statusText: StatusText = {
+//   registered: 'Sign up for first project 😀',
+//   paid: 'Money received',
+//   transferred: 'Money arrived Sierra Leone',
+//   installed: 'Solar Panel Kit installation complete',
+//   collectionStarted: 'Payments started',
+// };
 
 const statusInit: SponsorStatus = {
   registered: false,
@@ -30,18 +38,25 @@ const projectsInit: SponsorshipData = {
   status: statusInit,
   orderDate: Timestamp.fromDate(new Date(timestamp)),
   paid: { currency: '£', unitCost: 61 },
-  impactMetrics: {
-    carbonOffset: 0,
-    lightHours: 0,
-    moneySaved: 0,
-    peopleImpacted: 0,
+};
+
+// const financialSummary: FinancialSummary = {
+//   currency: '£',
+//   totalCollected: 0,
+//   totalInvested: 0,
+// };
+
+const productMap = {
+  solar_kits_ignite_power_sl: {
+    title: 'Solar panel kits',
+    iconUri: 'https://storage.googleapis.com/nowala-public/spk_icon.png',
   },
 };
 
-const financialSummary: FinancialSummary = {
+const financialSummary = {
   currency: '£',
   totalCollected: 0,
   totalInvested: 0,
 };
 
-export { financialSummary, projectsInit, statusText, statusInit };
+export { financialSummary, projectsInit, statusText, statusInit, productMap };

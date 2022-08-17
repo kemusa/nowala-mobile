@@ -1,11 +1,10 @@
 import React, { useContext } from 'react';
 import { View, Text } from 'react-native';
-import { DashboardContext } from '../../../WalletContext';
+import { WalletCtx } from '../../../WalletContext';
 import WithdrawlModalView from './WithdrawlModalModalView';
 
 const WithdrawlModalContainer: React.FC = () => {
-  const { viewWithdrawlGuide, closeWithdrawlModal } =
-    useContext(DashboardContext);
+  const { viewWithdrawlGuide, closeWithdrawlModal } = useContext(WalletCtx);
   return (
     <WithdrawlModalView
       isOpen={viewWithdrawlGuide}

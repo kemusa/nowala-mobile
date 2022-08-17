@@ -1,17 +1,13 @@
 import React, { useContext } from 'react';
-import { DashboardContext } from '../../../WalletContext';
+import { WalletCtx } from '../../../WalletContext';
 import ImpactComingView from './ImpactComingView';
 
 const ImpactComingContainer = () => {
-  const { dashboardSummary, openProgressModal } = useContext(DashboardContext);
-  const { units, progress } = dashboardSummary;
-  const { installed } = progress;
+  const {} = useContext(WalletCtx);
+  // const { units, progress } = dashboardSummary;
+  // const { installed } = progress;
   return (
-    <ImpactComingView
-      units={units}
-      installed={installed}
-      openProgressModal={openProgressModal}
-    />
+    <ImpactComingView units={0} installed={true} openProgressModal={() => {}} />
   );
 };
 
