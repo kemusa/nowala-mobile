@@ -1,8 +1,7 @@
 import React from 'react';
-import { Dimensions, View } from 'react-native';
+import { Dimensions, TouchableOpacity, View } from 'react-native';
 import { Progress } from 'native-base';
 import NowalaText from '../../../../../../components/atoms/text';
-import colors from '../../../../../../theme/colors';
 import styles from './styles';
 import { screenPadding } from '../../../../../../utils/consts/STYLES';
 
@@ -16,7 +15,7 @@ const AssetItemView: React.FC<AssetItem> = ({
 }) => {
   const { width } = Dimensions.get('window');
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container}>
       {icon}
       <View
         style={[
@@ -46,7 +45,7 @@ const AssetItemView: React.FC<AssetItem> = ({
             }>{`due ${maturity}`}</NowalaText.Subtitle2>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

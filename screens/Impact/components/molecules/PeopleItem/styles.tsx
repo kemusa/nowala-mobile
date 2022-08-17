@@ -4,7 +4,7 @@ const { PRIMARY } = colors;
 const iconSize = 45;
 const styles = StyleSheet.create({
   assetTitle: {
-    color: PRIMARY,
+    // color: PRIMARY,
     lineHeight: 0,
     alignSelf: 'flex-end',
     marginBottom: 5,
@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
   },
   columnLeft: { flexDirection: 'row' },
   contentWrapper: {
-    marginLeft: 10,
+    marginLeft: 15,
   },
   image: { height: iconSize, width: iconSize, borderRadius: 50 },
   locationWrapper: { flexDirection: 'row', alignItems: 'center' },

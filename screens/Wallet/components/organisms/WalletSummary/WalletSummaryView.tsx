@@ -59,7 +59,7 @@ const WalletSummaryView: React.FC<WalletSummaryProps> = () => {
         <CardListItem
           icon={<ProfitCardIcon />}
           title="Total profit"
-          subtitle="Interest earned on all investments"
+          subtitle="Past year"
           value={`£${profit}`}
           subvalue={
             <View

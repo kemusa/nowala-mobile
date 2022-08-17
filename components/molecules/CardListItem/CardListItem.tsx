@@ -1,11 +1,7 @@
 import React from 'react';
-import { Input } from 'native-base';
-import { useController } from 'react-hook-form';
 import NowalaText from '../../atoms/text';
 import styles from './styles';
-import { InputFieldProps } from '../../organisms/InputForm/types';
-import { View } from 'react-native';
-import ImpactCardIcon from '../../atoms/icons/ImpactCardIcon';
+import { TouchableOpacity, View } from 'react-native';
 
 const CardListItem: React.FC<CardListItemProps> = ({
   title,
@@ -15,10 +11,12 @@ const CardListItem: React.FC<CardListItemProps> = ({
   icon,
 }) => {
   return (
-    <View
+    <TouchableOpacity
       style={{
         flexDirection: 'row',
         justifyContent: 'space-between',
+        marginTop: 5,
+        marginBottom: 5,
       }}>
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
         {icon}
@@ -33,7 +31,7 @@ const CardListItem: React.FC<CardListItemProps> = ({
         <NowalaText.Body1 style={{ marginBottom: 5 }}>{value}</NowalaText.Body1>
         <NowalaText.Subtitle3>{subvalue}</NowalaText.Subtitle3>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

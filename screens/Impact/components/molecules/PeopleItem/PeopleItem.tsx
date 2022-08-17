@@ -1,17 +1,17 @@
 import React from 'react';
-import { View, Image } from 'react-native';
+import { View, Image, TouchableOpacity } from 'react-native';
 import NowalaText from '../../../../../components/atoms/text';
 import styles from './styles';
 import LocationIcon from '../../../../../components/atoms/icons/LocationIcon';
 
-const AssetItemView: React.FC<PeopleItem> = ({
+const PeopleItemView: React.FC<PeopleItem> = ({
   title,
   location,
   iconUrl,
   numPeople,
 }) => {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container}>
       <View style={styles.columnLeft}>
         <Image
           style={styles.image}
@@ -21,10 +21,10 @@ const AssetItemView: React.FC<PeopleItem> = ({
         />
         <View style={styles.contentWrapper}>
           <View style={styles.topRow}>
-            <NowalaText.Body1
+            <NowalaText.Body2
               style={{ ...styles.topRowText, ...styles.assetTitle }}>
               {title}
-            </NowalaText.Body1>
+            </NowalaText.Body2>
           </View>
           <View style={styles.locationWrapper}>
             <LocationIcon />
@@ -35,13 +35,13 @@ const AssetItemView: React.FC<PeopleItem> = ({
         </View>
       </View>
       <View style={styles.peopleWrapper}>
-        <NowalaText.Body1>{numPeople}</NowalaText.Body1>
-        <NowalaText.Subtitle3 style={{ fontSize: 11 }}>
-          {'people'}
-        </NowalaText.Subtitle3>
+        <NowalaText.Headline3 style={{ color: '#326493' }}>
+          {numPeople}
+        </NowalaText.Headline3>
+        <NowalaText.Subtitle3>{'people'}</NowalaText.Subtitle3>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
-export default AssetItemView;
+export default PeopleItemView;
