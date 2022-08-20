@@ -7,10 +7,13 @@ import AssetItem from './AssetItem';
 import { productMap } from '../../../../../utils/consts/DATA';
 import { WalletCtx } from '../../../WalletContext';
 import styles from './styles';
+import TopUpCard from '../TopUpCard';
+import WaitListCard from '../WaitListCard';
 
 const AssetListView: React.FC = ({}) => {
   const iconSize = 45;
-  const { assets } = useContext(WalletCtx);
+  const { assets, walletSummary } = useContext(WalletCtx);
+  const { total } = walletSummary;
   const list = assets
     ? assets.map(a => (
         <AssetItem
@@ -32,13 +35,21 @@ const AssetListView: React.FC = ({}) => {
     : [];
   return (
     <>
-      <CardWrapper
-        type="primary"
-        title="Assets"
-        cta={() => {}}
-        ctaText={'See all'}>
-        <CardLongList list={list} />
-      </CardWrapper>
+      {total > 0 ? (
+        assets.length > 0 ? (
+          <CardWrapper
+            type="primary"
+            title="Assets"
+            cta={() => {}}
+            ctaText={'See all'}>
+            <CardLongList list={list} />
+          </CardWrapper>
+        ) : (
+          <WaitListCard />
+        )
+      ) : (
+        <TopUpCard />
+      )}
     </>
   );
 };

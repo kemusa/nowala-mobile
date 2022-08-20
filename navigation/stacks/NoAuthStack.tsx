@@ -14,8 +14,8 @@ const { WHITE } = colors;
 const NoAuthStack: React.FC = () => {
   const { Navigator, Screen } = Stack;
   return (
-    <Navigator initialRouteName="Projects">
-      <Screen name="Projects" component={ProjectsScreen}></Screen>
+    <Navigator initialRouteName="Login">
+      {/* <Screen name="Projects" component={ProjectsScreen}></Screen> */}
       <Screen name="SignUp" component={SignUpScreen}></Screen>
       <Screen name="Login" component={LoginScreen}></Screen>
       <Screen name="ForgotPassword" component={ForgotPasswordScreen}></Screen>

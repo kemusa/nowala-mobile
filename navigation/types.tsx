@@ -39,7 +39,7 @@ export type MainTabParamList = {
 };
 
 export type NoAuthStackParamList = {
-  Projects: undefined;
+  // Projects: undefined;
   SignUp: undefined;
   Login: undefined;
   ForgotPassword: undefined;

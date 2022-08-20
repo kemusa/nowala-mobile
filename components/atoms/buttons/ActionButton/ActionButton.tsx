@@ -16,7 +16,7 @@ const ActionButton: React.FC<ActionButtonProps> = ({
         style={styles.button}
         disabled={disabled}
         isLoading={loading}
-        colorScheme="tertiary"
+        // colorScheme="tertiary"
         onPress={onPress}
         _loading={{
           bg: '#2C4953',
@@ -24,7 +24,9 @@ const ActionButton: React.FC<ActionButtonProps> = ({
             color: '#E4F6FD',
           },
         }}>
-        <NowalaText.TertiaryButtonText>{text}</NowalaText.TertiaryButtonText>
+        <NowalaText.TertiaryButtonText style={styles.text}>
+          {text}
+        </NowalaText.TertiaryButtonText>
       </Button>
     </View>
   );

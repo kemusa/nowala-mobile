@@ -16,11 +16,10 @@ const Tab = createBottomTabNavigator<MainTabParamList>();
 const { TRETIARY } = colors;
 
 interface MainTabProps extends AuthStackScreenProps<'Main'> {
-  user: NowalaUserData;
+  user: NowalaUserProfile;
 }
 
 const MainTabNavigator: React.FC<MainTabProps> = ({ user }) => {
-  const { onboarded, hasOrdered, email, userId, firstName } = user;
   const { Navigator, Screen } = Tab;
   return (
     <Navigator
@@ -34,28 +33,14 @@ const MainTabNavigator: React.FC<MainTabProps> = ({ user }) => {
         options={{
           tabBarIcon: ({ color, size }) => <WalletTabIcon color={color} />,
         }}>
-        {props => (
-          <WalletScreen
-            {...props}
-            email={email}
-            userId={userId}
-            firstName={firstName}
-          />
-        )}
+        {props => <WalletScreen {...props} user={user} />}
       </Screen>
       <Screen
         name="Impact"
         options={{
           tabBarIcon: ({ color, size }) => <ImpactTabIcon color={color} />,
         }}>
-        {props => (
-          <ImpactScreen
-            {...props}
-            email={email}
-            userId={userId}
-            firstName={firstName}
-          />
-        )}
+        {props => <ImpactScreen {...props} user={user} />}
       </Screen>
       <Screen
         name="Projects"

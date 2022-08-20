@@ -1,4 +1,4 @@
-import 'react';
+import React from 'react';
 import { StackNavigationOptions } from '@react-navigation/stack';
 import NowalaIcon from '../components/atoms/icons/NowalaIcon';
 

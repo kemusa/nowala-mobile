@@ -73,6 +73,6 @@ interface ProjectContext {
   goToProjectDetails: (projectData: Project) => void;
   goToSignUp: () => void;
   goToLogin: () => void;
-  user: NowalaUserData;
+  user: NowalaUserProfile;
   data: Project[];
 }

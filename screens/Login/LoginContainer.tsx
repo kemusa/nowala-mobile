@@ -119,7 +119,7 @@ const LoginContainer: React.FC<NoAuthStackScreenProps<'Login'>> = ({
   const inputFormConfig: InputFormConfig = {
     fields: [
       {
-        placeholder: 'e.g. jane.doe@gmail.com',
+        placeholder: 'e.g. jane.jackson@gmail.com',
         label: 'Email',
         autoCompleteType: 'email',
         control,

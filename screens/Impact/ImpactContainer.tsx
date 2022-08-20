@@ -17,19 +17,10 @@ import {
 
 const { BACKGROUND } = colors;
 interface DashboardProps extends MainTabScreenProps<'Impact'> {
-  email: string;
-  userId: string;
-  firstName: string;
+  user: NowalaUserProfile;
 }
 
-const ImpactContainer: React.FC<DashboardProps> = ({
-  navigation,
-  userId,
-  email,
-  firstName,
-}) => {
-  const [viewOrders, setViewOrders] = useState(false);
-  const [viewWithdrawlGuide, setViewWithdrawlGuide] = useState(false);
+const ImpactContainer: React.FC<DashboardProps> = ({ navigation, user }) => {
   const [menuModalOpen, setMenuModalOpen] = useState(false);
   const [unsubscribeList, setUnsubscribe] = useState([] as any);
   // variable to store unsubscription for dashboard data listener
@@ -37,7 +28,11 @@ const ImpactContainer: React.FC<DashboardProps> = ({
 
   const [peopleImpacted, setPeopleImpacted] = useState(0);
   const [peopleImpactedTogether, setPeopleImpactedTogether] = useState(0);
-
+  const [accountFunded, setAccountFunded] = useState(true);
+  const [investmentStatus, setInvestmentStatus] = useState({
+    activeMoney: 0,
+    inactiveMoney: 0,
+  } as InvestmentStatus);
   const [peopleList, setPeopleList] = useState([] as PeopleList[]);
 
   // Get services
@@ -70,23 +65,34 @@ const ImpactContainer: React.FC<DashboardProps> = ({
   // Listener for people list data
   useEffect(() => {
     const unsubscribe = db.subscribeOrderBy(
-      `users/${userId}/people`,
+      `users/${user.userId}/people`,
       'dateAdded',
       'desc',
       handlePeopleList,
       3,
     );
     dashboardUnsub = unsubscribe;
-  }, [userId]);
+  }, [user]);
 
   // Listener for impact summary data
   useEffect(() => {
-    const unsubscribe = db.subscribe(
-      `users/${userId}/impactSummary`,
-      handleImpactSummary,
-    );
-    dashboardUnsub = unsubscribe;
-  }, [userId]);
+    user.impactSummary && setPeopleImpacted(user.impactSummary.peopleImpacted);
+  }, [user]);
+
+  // API call for impact summary data
+  useEffect(() => {
+    if (!user.moneySummary) {
+      setAccountFunded(false);
+    }
+    if (user.moneySummary && user.moneySummary.total > 0) {
+      setAccountFunded(true);
+    }
+  }, [user]);
+
+  // API call for community impact data
+  useEffect(() => {
+    handleCommunityImpact();
+  }, [user]);
 
   // Sign out
   const signOut = async () => {
@@ -114,11 +120,29 @@ const ImpactContainer: React.FC<DashboardProps> = ({
 
   // const closeOrdersModal = () => setViewOrders(false);
 
-  const handleImpactSummary = async (data: SnapshotData[]) => {
-    if (data.length > 0) {
+  // const handleImpactSummary = async () => {
+  //   const impactData = await db.findById(`users/${user.userId}/impactSummary/main`);
+  //   console.log('RES', impactData);
+  //   if (!impactData.data || impactData.data.peopleImpacted === 0) {
+  //     console.log('FOO');
+  //     const out = await db.findById(`users/${user.userId}/financialSummary/main`);
+  //     console.log('OUT', out);
+  //   }
+  //   // const p = res ? res.data?.peopleImpacted : 0 || 0;
+  //   // console.log('P', p);
+  //   // setPeopleImpacted(p);
+  // };
+
+  // const handleImpactSummary = async (data: SnapshotData[]) => {
+  //   if (data.length > 0) {
+  //     setPeopleImpacted(data[0].data.peopleImpacted || 0);
+  //   }
+  // };
+
+  const handleCommunityImpact = async () => {
+    if (user.impactSummary) {
       const doc = await db.findById('community/main');
       const totalPeople = doc.data ? doc.data.peopleImpacted : 0;
-      setPeopleImpacted(data[0].data.peopleImpacted);
       setPeopleImpactedTogether(totalPeople);
     }
   };
@@ -146,7 +170,12 @@ const ImpactContainer: React.FC<DashboardProps> = ({
 
   return (
     <ImpactCtx.Provider
-      value={{ peopleImpacted, peopleImpactedTogether, peopleList }}>
+      value={{
+        peopleImpacted,
+        peopleImpactedTogether,
+        peopleList,
+        accountFunded,
+      }}>
       <ImpactView />
     </ImpactCtx.Provider>
   );

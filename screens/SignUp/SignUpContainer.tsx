@@ -166,7 +166,7 @@ const SignUpContainer: React.FC<NoAuthStackScreenProps<'SignUp'>> = ({
   const inputFormConfig: InputFormConfig = {
     fields: [
       {
-        placeholder: 'e.g. Jane Doe',
+        placeholder: 'e.g. Jane',
         label: 'First Name',
         autoCompleteType: 'name',
         control,
@@ -175,7 +175,7 @@ const SignUpContainer: React.FC<NoAuthStackScreenProps<'SignUp'>> = ({
         type: 'input',
       },
       {
-        placeholder: 'e.g. Jane Doe',
+        placeholder: 'e.g. Jackson',
         label: 'Last Name',
         autoCompleteType: 'name',
         control,
@@ -204,7 +204,7 @@ const SignUpContainer: React.FC<NoAuthStackScreenProps<'SignUp'>> = ({
         countryCode,
       },
       {
-        placeholder: 'e.g. jane.doe@gmail.com',
+        placeholder: 'e.g. jane.jackson@gmail.com',
         label: 'Email',
         autoCompleteType: 'email',
         control,

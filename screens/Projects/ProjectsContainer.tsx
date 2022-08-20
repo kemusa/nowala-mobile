@@ -16,7 +16,7 @@ import { analyticsScreens } from '../../utils/consts/ANALYTICS';
 const { ITEM_HEIGHT } = spec;
 
 interface ProjectProps extends MainTabScreenProps<'Projects'> {
-  user: NowalaUserData;
+  user: NowalaUserProfile;
 }
 
 const ProjectsContainer: React.FC<ProjectProps> = ({ navigation, user }) => {

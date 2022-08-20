@@ -70,18 +70,18 @@ export default class AuthService {
       country,
       dob,
     });
-    // Init user financial summary
-    await this.dbService.writeDocumentWithId(
-      `users/${user.uid}/financialSummary`,
-      'main',
-      {
-        ...financialSummary,
-      },
-    );
-    // Init user sponsorship
-    await this.dbService.writeDocument(`users/${user.uid}/sponsorships`, {
-      ...projectsInit,
-    });
+    // // Init user financial summary
+    // await this.dbService.writeDocumentWithId(
+    //   `users/${user.uid}/financialSummary`,
+    //   'main',
+    //   {
+    //     ...financialSummary,
+    //   },
+    // );
+    // // Init user sponsorship
+    // await this.dbService.writeDocument(`users/${user.uid}/sponsorships`, {
+    //   ...projectsInit,
+    // });
     return user;
   }
 

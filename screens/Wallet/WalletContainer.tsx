@@ -14,7 +14,6 @@ import {
   AssetPreview,
   AssetPreviewData,
   SponsorshipData,
-  WalletSummary,
   WalletSummaryCard,
   WalletSummaryData,
 } from './typesModule';
@@ -29,17 +28,10 @@ import {
 
 const { BACKGROUND } = colors;
 interface DashboardProps extends MainTabScreenProps<'Wallet'> {
-  email: string;
-  userId: string;
-  firstName: string;
+  user: NowalaUserProfile;
 }
 
-const WalletContainer: React.FC<DashboardProps> = ({
-  navigation,
-  userId,
-  email,
-  firstName,
-}) => {
+const WalletContainer: React.FC<DashboardProps> = ({ navigation, user }) => {
   const [viewWithdrawlGuide, setViewWithdrawlGuide] = useState(false);
   const [menuModalOpen, setMenuModalOpen] = useState(false);
   const [unsubscribeList, setUnsubscribe] = useState([] as any);
@@ -47,8 +39,7 @@ const WalletContainer: React.FC<DashboardProps> = ({
   let dashboardUnsub = () => {};
 
   const [assets, setAssets] = useState([] as AssetPreview[]);
-
-  const [summary, setSummary] = useState({
+  const summaryInit: WalletSummaryCard = {
     total: 0,
     activeMoney: 0,
     activePercent: 0,
@@ -56,6 +47,10 @@ const WalletContainer: React.FC<DashboardProps> = ({
     inactivePercent: 0,
     profit: 0,
     profitPercent: 0,
+    currency: '£',
+  };
+  const [summary, setSummary] = useState({
+    ...summaryInit,
   } as WalletSummaryCard);
 
   const [assetPreview, setAssetPreview] = useState([] as AssetPreview[]);
@@ -110,27 +105,31 @@ const WalletContainer: React.FC<DashboardProps> = ({
     analytics.screen(analyticsScreens.WALLET);
   }, []);
 
+  // // Listener for summary data
+  // useEffect(() => {
+  //   const unsubscribe = db.subscribe(
+  //     `users/${user.userId}/financialSummary`,
+  //     handleSummary,
+  //   );
+  //   dashboardUnsub = unsubscribe;
+  // }, [user]);
+
   // Listener for summary data
   useEffect(() => {
-    const unsubscribe = db.subscribe(
-      `users/${userId}/financialSummary`,
-      handleSummary,
-    );
-    dashboardUnsub = unsubscribe;
-    // handleSummary();
-  }, [userId]);
+    handleSummary();
+  }, [user]);
 
   // Listener for people list data
   useEffect(() => {
     const unsubscribe = db.subscribeOrderBy(
-      `users/${userId}/assets`,
+      `users/${user.userId}/assets`,
       'orderNum',
       'desc',
       handleAssetList,
       3,
     );
     dashboardUnsub = unsubscribe;
-  }, [userId]);
+  }, [user]);
 
   // Sign out
   const signOut = async () => {
@@ -145,10 +144,31 @@ const WalletContainer: React.FC<DashboardProps> = ({
   const openMenuModal = () => setMenuModalOpen(true);
   const closeMenuModal = () => setMenuModalOpen(false);
 
-  const handleSummary = (data: SnapshotData[]) => {
-    if (data.length > 0) {
-      const { total, assets, activeMoney, profit, profitPercent, currency } =
-        data[0].data as WalletSummaryData;
+  // const handleSummary = (data: SnapshotData[]) => {
+  //   if (data.length > 0) {
+  //     const { total, assets, activeMoney, profit, profitPercent, currency } =
+  //       data[0].data as WalletSummaryData;
+  //     const inactiveMoney =
+  //       Math.round((total - activeMoney + Number.EPSILON) * 100) / 100;
+  //     const activePercent = Math.round((activeMoney / total) * 100) || 0;
+  //     const inactivePercent = Math.round((1 - activeMoney / total) * 100) || 0;
+  //     setSummary({
+  //       profit,
+  //       profitPercent,
+  //       total,
+  //       activeMoney,
+  //       activePercent,
+  //       inactiveMoney,
+  //       inactivePercent,
+  //       currency,
+  //     });
+  //   }
+  // };
+
+  const handleSummary = () => {
+    if (user.userId && user.moneySummary) {
+      const { total, activeMoney, profit, profitPercent, currency } =
+        user.moneySummary as WalletSummaryData;
       const inactiveMoney =
         Math.round((total - activeMoney + Number.EPSILON) * 100) / 100;
       const activePercent = Math.round((activeMoney / total) * 100) || 0;
@@ -163,6 +183,8 @@ const WalletContainer: React.FC<DashboardProps> = ({
         inactivePercent,
         currency,
       });
+    } else {
+      setSummary({ ...summaryInit });
     }
   };
 

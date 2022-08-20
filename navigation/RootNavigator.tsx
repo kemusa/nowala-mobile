@@ -22,7 +22,7 @@ const RootNavigator = () => {
   const [email, setEmail] = useState(null as any);
   const [firstName, setFirstName] = useState(null as any);
   const [onboarded, setOnboarded] = useState(true);
-  const [user, setUser] = useState({} as NowalaUserData);
+  const [user, setUser] = useState({} as NowalaUserProfile);
 
   // Initialize event handler for user auth changes
   useEffect(() => {
@@ -59,38 +59,40 @@ const RootNavigator = () => {
   const setUserData = async (uid: string, email: string | null) => {
     try {
       const doc = await db.findById(`users/${uid}`);
-      const profile = doc.data as NowalaUserProfile;
-      const { hasOrdered, onboarded, firstName, country } = profile;
+      console.log('DOC', user);
+      const profile = doc.data as NowalaUserData;
       // If the profile hasn't been generated yet, set to false
       profile ? setOnboarded(onboarded) : setOnboarded(false);
-      setUid(uid);
-      setEmail(email);
-      setFirstName(firstName);
-      setUser({
+      const userProfile: NowalaUserProfile = {
         userId: uid,
         email: email || '',
-        firstName,
-        onboarded,
-        hasOrdered,
-        country,
-        updateHasOrdered,
+        firstName: profile.firstName,
+        onboarded: profile.onboarded,
+        country: profile.country,
+        moneySummary: profile.moneySummary,
+        impactSummary: profile.impactSummary,
+      };
+      setUid(uid);
+      setEmail(email);
+      setFirstName(profile.firstName);
+      setUser({
+        ...userProfile,
       });
     } catch (error) {
       console.error(error);
     }
   };
 
-  const updateHasOrdered = () => {
-    setUser({
-      ...user,
-      userId: user.userId,
-      email: user.email,
-      firstName: user.firstName,
-      onboarded: user.onboarded,
-      hasOrdered: true,
-      updateHasOrdered,
-    });
-  };
+  // const updateHasOrdered = () => {
+  //   setUser({
+  //     ...user,
+  //     userId: user.userId,
+  //     email: user.email,
+  //     firstName: user.firstName,
+  //     onboarded: user.onboarded,
+  //     hasOrdered: true,
+  //   });
+  // };
 
   // Event handler for use auth changes
   const handleAuthChange = async (user: User | null) => {

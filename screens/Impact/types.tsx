@@ -1,4 +1,4 @@
-interface ImpactSummaryCard {
+interface ImpactSummary {
   peopleImpacted: number;
   peopleImpactedTogether: number;
 }
@@ -16,4 +16,10 @@ interface ImpactContext {
   peopleImpacted: number;
   peopleImpactedTogether: number;
   peopleList: PeopleList[];
+  accountFunded: boolean;
+}
+
+interface InvestmentStatus {
+  activeMoney: number;
+  inactiveMoney: number;
 }

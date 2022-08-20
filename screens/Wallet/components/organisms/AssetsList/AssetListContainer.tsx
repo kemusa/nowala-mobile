@@ -1,5 +1,4 @@
-import React, { useContext } from 'react';
-import { WalletCtx } from '../../../WalletContext';
+import React from 'react';
 import AssetListView from './AssetListView';
 
 const AssetListContainer = () => {

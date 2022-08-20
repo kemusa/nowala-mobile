@@ -4,11 +4,12 @@ import NowalaText from '../../../../../components/atoms/text';
 import CardWrapper from '../../../../../components/templates/CardWrapper';
 import CardLongList from '../../../../../components/templates/CardLongList';
 import PeopleItem from '../../molecules/PeopleItem';
-import styles from './styles';
 import { ImpactCtx } from '../../../ImpactContext';
+import TopUpCard from '../../../../Wallet/components/organisms/TopUpCard';
 
 const PeopleListView: React.FC = ({}) => {
-  const { peopleList } = useContext(ImpactCtx);
+  const { peopleList, accountFunded } = useContext(ImpactCtx);
+
   const list = peopleList.map(l => (
     <PeopleItem
       iconUrl={l.iconUrl}
@@ -19,13 +20,19 @@ const PeopleListView: React.FC = ({}) => {
   ));
   return (
     <>
-      <CardWrapper
-        type={'primary'}
-        title={"People you've helped"}
-        cta={() => {}}
-        ctaText={'See all'}>
-        <CardLongList list={list} />
-      </CardWrapper>
+      {peopleList.length > 0 ? (
+        <CardWrapper
+          type={'primary'}
+          title={"People you've helped"}
+          cta={() => {}}
+          ctaText={'See all'}>
+          <CardLongList list={list} />
+        </CardWrapper>
+      ) : accountFunded ? (
+        <></>
+      ) : (
+        <TopUpCard />
+      )}
     </>
   );
 };

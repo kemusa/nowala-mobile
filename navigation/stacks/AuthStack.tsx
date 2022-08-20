@@ -11,7 +11,7 @@ const Stack = createStackNavigator<AuthStackParamList>();
 const { WHITE, BACKGROUND } = colors;
 
 interface AuthStackProps extends RootStackScreenProps<'AuthStack'> {
-  user: NowalaUserData;
+  user: NowalaUserProfile;
 }
 
 const AuthStack: React.FC<AuthStackProps> = ({ user }) => {

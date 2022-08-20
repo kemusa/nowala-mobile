@@ -21,3 +21,11 @@ interface OrderData {
   paid: PaidData;
   assetTitle: string;
 }
+
+interface WalletSummary {
+  total: number;
+  activeMoney: number;
+  profit: number;
+  profitPercent: number;
+  currency: '£';
+}

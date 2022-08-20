@@ -23,15 +23,6 @@ export interface WalletSummaryData {
   currency: '£';
 }
 
-export interface WalletSummary {
-  total: number;
-  activeMoney: number;
-  profit: number;
-  profitPercent: number;
-  // assets: AssetPreview[];
-  currency: '£';
-}
-
 export interface WalletSummaryCard extends WalletSummary {
   inactiveMoney: number;
   activePercent: number;
