@@ -6,7 +6,7 @@ const { NW_GREY_1 } = colors;
 const styles = StyleSheet.create({
   contentContainer: { width: '100%', padding: 10 },
   startContainer: { width: '100%', alignItems: 'flex-start' },
-  title: { marginBottom: 15 },
+  title: { marginBottom: 5 },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   confirmImage: { height: 110, width: 110, marginTop: 80, marginBottom: 15 },
-  infoText: { marginBottom: 40 },
+  // infoText: { marginBottom: 40 },
   orderContainer: {
     flexDirection: 'row',
     alignItems: 'center',

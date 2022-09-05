@@ -12,7 +12,7 @@ import { ProjectDetailsContext } from './ProjectDetailsContext';
 import ProjectDetailsView from './ProjectDetailsView';
 
 interface ProjectDetailsProps extends RootStackScreenProps<'ProjectDetails'> {
-  user: NowalaUserData;
+  user: NowalaUserProfile;
 }
 
 const ProjectDetailsContainer: React.FC<ProjectDetailsProps> = ({
@@ -23,7 +23,7 @@ const ProjectDetailsContainer: React.FC<ProjectDetailsProps> = ({
   const { project } = route.params;
   const { analytics } = useContext(ServicesContext) as Services;
 
-  const { userId, email, firstName, updateHasOrdered, hasOrdered } = user;
+  const { userId, email, firstName } = user;
 
   const isUK = user.country === UNITED_KINGDOM;
 
@@ -71,18 +71,18 @@ const ProjectDetailsContainer: React.FC<ProjectDetailsProps> = ({
   const openNewOrderModal = () => setCanViewOrderModal(true);
   const closeNewOrderModal = () => setCanViewOrderModal(false);
 
-  const onOrderSent: OrderCallback = (price: number, paymentRef: string) => {
-    // temporarily remove bank payment redirect for waitlist functionality
-    // navigation.navigate('AuthStack', {
-    //   screen: 'BankPayment',
-    //   params: { redirectPage: 'Projects', paymentRef, price },
-    // });
-    updateHasOrdered(); // todo: replace this by fixing document subscription
-    navigation.navigate('AuthStack', {
-      screen: 'Main',
-      params: { screen: 'WaitList' },
-    });
-  };
+  // const onOrderSent: OrderCallback = (price: number, paymentRef: string) => {
+  //   // temporarily remove bank payment redirect for waitlist functionality
+  //   // navigation.navigate('AuthStack', {
+  //   //   screen: 'BankPayment',
+  //   //   params: { redirectPage: 'Projects', paymentRef, price },
+  //   // });
+  //   updateHasOrdered(); // todo: replace this by fixing document subscription
+  //   navigation.navigate('AuthStack', {
+  //     screen: 'Main',
+  //     params: { screen: 'WaitList' },
+  //   });
+  // };
 
   const goToLogin = () => {
     navigation.navigate('NoAuthStack', {
@@ -110,9 +110,9 @@ const ProjectDetailsContainer: React.FC<ProjectDetailsProps> = ({
         canViewOrderModal,
         ctaOnPress,
         closeNewOrderModal,
-        onOrderSent,
+        // onOrderSent,
         firstName,
-        hasOrdered,
+        // hasOrdered,
         isUK,
       }}>
       <ProjectDetailsView />

@@ -29,10 +29,6 @@ const ImpactContainer: React.FC<DashboardProps> = ({ navigation, user }) => {
   const [peopleImpacted, setPeopleImpacted] = useState(0);
   const [peopleImpactedTogether, setPeopleImpactedTogether] = useState(0);
   const [accountFunded, setAccountFunded] = useState(true);
-  const [investmentStatus, setInvestmentStatus] = useState({
-    activeMoney: 0,
-    inactiveMoney: 0,
-  } as InvestmentStatus);
   const [peopleList, setPeopleList] = useState([] as PeopleList[]);
 
   // Get services

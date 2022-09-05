@@ -15,4 +15,5 @@ interface NowalaUserData {
   country: string;
   moneySummary: WalletSummary;
   impactSummary: { peopleImpacted: number };
+  waitlistNum: number;
 }

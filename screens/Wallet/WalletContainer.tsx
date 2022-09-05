@@ -34,6 +34,7 @@ interface DashboardProps extends MainTabScreenProps<'Wallet'> {
 const WalletContainer: React.FC<DashboardProps> = ({ navigation, user }) => {
   const [viewWithdrawlGuide, setViewWithdrawlGuide] = useState(false);
   const [menuModalOpen, setMenuModalOpen] = useState(false);
+  const [topUpModalOpen, setTopUpModalOpen] = useState(false);
   const [unsubscribeList, setUnsubscribe] = useState([] as any);
   // variable to store unsubscription for dashboard data listener
   let dashboardUnsub = () => {};
@@ -48,6 +49,7 @@ const WalletContainer: React.FC<DashboardProps> = ({ navigation, user }) => {
     profit: 0,
     profitPercent: 0,
     currency: '£',
+    waitlistNum: 0,
   };
   const [summary, setSummary] = useState({
     ...summaryInit,
@@ -105,15 +107,6 @@ const WalletContainer: React.FC<DashboardProps> = ({ navigation, user }) => {
     analytics.screen(analyticsScreens.WALLET);
   }, []);
 
-  // // Listener for summary data
-  // useEffect(() => {
-  //   const unsubscribe = db.subscribe(
-  //     `users/${user.userId}/financialSummary`,
-  //     handleSummary,
-  //   );
-  //   dashboardUnsub = unsubscribe;
-  // }, [user]);
-
   // Listener for summary data
   useEffect(() => {
     handleSummary();
@@ -144,26 +137,10 @@ const WalletContainer: React.FC<DashboardProps> = ({ navigation, user }) => {
   const openMenuModal = () => setMenuModalOpen(true);
   const closeMenuModal = () => setMenuModalOpen(false);
 
-  // const handleSummary = (data: SnapshotData[]) => {
-  //   if (data.length > 0) {
-  //     const { total, assets, activeMoney, profit, profitPercent, currency } =
-  //       data[0].data as WalletSummaryData;
-  //     const inactiveMoney =
-  //       Math.round((total - activeMoney + Number.EPSILON) * 100) / 100;
-  //     const activePercent = Math.round((activeMoney / total) * 100) || 0;
-  //     const inactivePercent = Math.round((1 - activeMoney / total) * 100) || 0;
-  //     setSummary({
-  //       profit,
-  //       profitPercent,
-  //       total,
-  //       activeMoney,
-  //       activePercent,
-  //       inactiveMoney,
-  //       inactivePercent,
-  //       currency,
-  //     });
-  //   }
-  // };
+  const openTopUpModal = () => {
+    setTopUpModalOpen(true);
+  };
+  const closeTopUpModal = () => setTopUpModalOpen(false);
 
   const handleSummary = () => {
     if (user.userId && user.moneySummary) {
@@ -182,10 +159,18 @@ const WalletContainer: React.FC<DashboardProps> = ({ navigation, user }) => {
         inactiveMoney,
         inactivePercent,
         currency,
+        waitlistNum: user.moneySummary.waitlistNum || 101,
       });
     } else {
       setSummary({ ...summaryInit });
     }
+  };
+
+  const handleOrder = (price: number, paymentRef: string) => {
+    navigation.navigate('AuthStack', {
+      screen: 'BankPayment',
+      params: { redirectPage: 'Wallet', paymentRef, price },
+    });
   };
 
   const handleAssetList = (data: SnapshotData[]) => {
@@ -216,8 +201,13 @@ const WalletContainer: React.FC<DashboardProps> = ({ navigation, user }) => {
         assets,
         viewWithdrawlGuide,
         menuModalOpen,
+        topUpModalOpen,
+        user,
+        handleOrder,
         openWithdrawlModal,
         closeWithdrawlModal,
+        openTopUpModal,
+        closeTopUpModal,
         openMenuModal,
         closeMenuModal,
         signOut,

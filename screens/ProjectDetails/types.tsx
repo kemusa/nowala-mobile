@@ -9,10 +9,10 @@ interface ProjectDetailsContext {
   ctaOnPress: () => void;
   closeNewOrderModal: () => void;
   canViewOrderModal: boolean;
-  onOrderSent: OrderCallback;
+  // onOrderSent: OrderCallback;
   userId?: string; //todo :remove optional;
   email?: string; //todo :remove optional;
   firstName?: string; //todo :remove optional;
-  hasOrdered: boolean;
+  // hasOrdered: boolean;
   isUK: boolean;
 }

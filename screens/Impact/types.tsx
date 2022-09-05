@@ -18,8 +18,3 @@ interface ImpactContext {
   peopleList: PeopleList[];
   accountFunded: boolean;
 }
-
-interface InvestmentStatus {
-  activeMoney: number;
-  inactiveMoney: number;
-}

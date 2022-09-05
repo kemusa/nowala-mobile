@@ -40,12 +40,6 @@ const projectsInit: SponsorshipData = {
   paid: { currency: '£', unitCost: 61 },
 };
 
-// const financialSummary: FinancialSummary = {
-//   currency: '£',
-//   totalCollected: 0,
-//   totalInvested: 0,
-// };
-
 const productMap = {
   solar_kits_ignite_power_sl: {
     title: 'Solar panel kits',
@@ -53,10 +47,26 @@ const productMap = {
   },
 };
 
-const financialSummary = {
+const moneySummary = {
+  total: 0,
+  activeMoney: 0,
+  activePercent: 0,
+  inactiveMoney: 0,
+  inactivePercent: 0,
+  profit: 0,
+  profitPercent: 0,
   currency: '£',
-  totalCollected: 0,
-  totalInvested: 0,
 };
 
-export { financialSummary, projectsInit, statusText, statusInit, productMap };
+const impactSummary = {
+  peopleImpacted: 0,
+};
+
+export {
+  moneySummary,
+  impactSummary,
+  projectsInit,
+  statusText,
+  statusInit,
+  productMap,
+};

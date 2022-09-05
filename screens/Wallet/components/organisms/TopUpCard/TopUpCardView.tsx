@@ -1,16 +1,10 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Image, View } from 'react-native';
 import NowalaText from '../../../../../components/atoms/text';
-import CardWrapper from '../../../../../components/templates/CardWrapper';
-import CardLongList from '../../../../../components/templates/CardLongList';
-import { productMap } from '../../../../../utils/consts/DATA';
-import { WalletCtx } from '../../../WalletContext';
 import styles from './styles';
-import colors from '../../../../../theme/colors';
 import ActionButton from '../../../../../components/atoms/buttons/ActionButton';
 
 const AssetListView: React.FC = ({}) => {
-  const { PRIMARY } = colors;
   return (
     <>
       <NowalaText.Headline2Light style={styles.title}>

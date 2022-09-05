@@ -28,4 +28,5 @@ interface WalletSummary {
   profit: number;
   profitPercent: number;
   currency: '£';
+  waitlistNum: number;
 }

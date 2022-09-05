@@ -1,78 +1,185 @@
-import { Actionsheet, Alert, Box } from 'native-base';
-import React from 'react';
-import { Image, View } from 'react-native';
+import {
+  Actionsheet,
+  Alert,
+  Box,
+  Input,
+  InputGroup,
+  InputLeftAddon,
+  Stack,
+} from 'native-base';
+import React, { useEffect, useRef, useState } from 'react';
+import {
+  Dimensions,
+  Image,
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  Text,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 import PrimaryButton from '../../atoms/buttons/PrimaryButton';
 import NowalaText from '../../atoms/text';
 import NumberSelect from '../../molecules/NumberSelect';
+import FormTextInputField from '../../molecules/FormTextInputField';
 import styles from './styles';
+import { productMap } from '../../../utils/consts/DATA';
+
+const useKeyboardBottomInset = () => {
+  const [bottom, setBottom] = useState(0);
+  const subscriptions = useRef([]);
+
+  useEffect(() => {
+    subscriptions.current = [
+      Keyboard.addListener('keyboardDidHide', e => setBottom(0)),
+      Keyboard.addListener('keyboardDidShow', e => {
+        if (Platform.OS === 'android') {
+          setBottom(e.endCoordinates.height);
+        } else {
+          if (e && e.startCoordinates) {
+            setBottom(
+              Math.max(
+                e.startCoordinates.height,
+                e.endCoordinates.height,
+              ) as any,
+            );
+          }
+        }
+      }),
+    ] as any;
+
+    return () => {
+      subscriptions.current.forEach((subscription: any) => {
+        subscription.remove();
+      });
+    };
+  }, [setBottom, subscriptions]);
+
+  return bottom;
+};
 
 const NewOrderModalView: React.FC<NewOrdersModalViewProps> = ({
   isOpen,
   onClose,
-  orderCounter,
+  handleValueChange,
+  // orderCounter,
   title,
   orderConfirmBtn,
   orderConfirmed,
-  userTotalPrice,
-  projectCurrency,
-  projectTotalPrice,
+  input,
+  units,
+  inputRef,
 }) => {
+  const bottomInset = useKeyboardBottomInset();
   return (
     <Actionsheet isOpen={isOpen} onClose={onClose}>
       {orderConfirmed ? (
-        <Actionsheet.Content style={styles.confirmedContainer}>
+        <Actionsheet.Content
+        // style={styles.confirmedContainer}
+        >
           <Image
             source={{
               uri: 'https://storage.googleapis.com/nowala-public/confirm_check_mark.png',
             }}
             style={styles.confirmImage}
           />
-          <NowalaText.Headline4 style={styles.title}>
+          {/* <NowalaText.Headline4 style={styles.title}>
             Thank you for your order!
-          </NowalaText.Headline4>
-          {/* <NowalaText.Subtitle1 style={{ marginBottom: 50 }}>
+          </NowalaText.Headline4> */}
+          <NowalaText.Headline4 style={{ marginBottom: 50 }}>
             Just one more step...
-          </NowalaText.Subtitle1> */}
+          </NowalaText.Headline4>
         </Actionsheet.Content>
       ) : (
-        <Actionsheet.Content style={styles.startContainer}>
-          <Box style={styles.contentContainer}>
-            <View style={styles.header}>
-              <Image
+        <Actionsheet.Content style={styles.startContainer} bottom={bottomInset}>
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <Box style={styles.contentContainer}>
+              <View style={styles.header}>
+                {/* <Image
                 source={{
                   uri: 'https://storage.googleapis.com/nowala-public/solar_panel_kit.png',
                 }}
                 style={styles.headerImage}
-              />
-              <NowalaText.Headline1>Solar panel kits</NowalaText.Headline1>
-            </View>
-            <NowalaText.Headline2Light style={styles.title}>
-              {title}
-            </NowalaText.Headline2Light>
-            <NowalaText.Headline4 style={styles.infoText}>
-              Order below to join the waitlist
-            </NowalaText.Headline4>
-            {/* <NowalaText.WarningText style={styles.warning}>
-              Available in limited quantities
-            </NowalaText.WarningText> */}
-            <View style={styles.pricingContainer}>
-              <View>
-                <NowalaText.Headline2>Total</NowalaText.Headline2>
+              /> */}
+                <NowalaText.Headline3>
+                  Top up to impact lives
+                </NowalaText.Headline3>
               </View>
-              <View style={styles.pricingDivider}></View>
-              <View>
-                <NowalaText.Headline2Light>
-                  {`£${userTotalPrice}`}
-                </NowalaText.Headline2Light>
-                <NowalaText.Subtitle1>{`${projectCurrency} ${projectTotalPrice}`}</NowalaText.Subtitle1>
+              <NowalaText.Headline2Light style={styles.title}>
+                {title}
+              </NowalaText.Headline2Light>
+              <View style={{ marginBottom: 25 }}>
+                <NowalaText.Body2>Amount you're investing</NowalaText.Body2>
+                <Stack>
+                  <InputGroup style={{ width: '100%' }}>
+                    <InputLeftAddon children={'£'} />
+                    <Input
+                      style={{ width: '100%' }}
+                      w={{
+                        base: Dimensions.get('window').width - 65,
+                        md: '100%',
+                      }}
+                      keyboardType="numeric"
+                      value={input}
+                      onChangeText={handleValueChange}
+                      ref={inputRef}
+                    />
+                  </InputGroup>
+                </Stack>
               </View>
-            </View>
-            <View style={styles.orderContainer}>
-              <NumberSelect {...orderCounter} />
-            </View>
-            <PrimaryButton {...orderConfirmBtn} />
-            <View style={{ height: 50 }}></View>
-          </Box>
+              <View
+                style={{
+                  width: Dimensions.get('window').width,
+                  height: 60,
+                  backgroundColor: '#E9F1F5',
+                  marginLeft: -20,
+                  alignItems: 'center',
+                  flexDirection: 'row',
+                }}>
+                <Image
+                  style={{
+                    height: 45,
+                    width: 45,
+                    borderWidth: 0.5,
+                    borderColor: '#000',
+                    borderRadius: 50,
+                    marginLeft: 20,
+                    marginRight: 10,
+                  }}
+                  source={{
+                    uri: productMap['solar_kits_ignite_power_sl'].iconUri,
+                  }}
+                />
+                <Text>
+                  <NowalaText.Subtitle1>You’ll get </NowalaText.Subtitle1>
+                  <NowalaText.Body2 style={{ fontWeight: '700' }}>
+                    {units > 1 && `${units} solar panel kits${' '}`}
+                    {units == 0 && `${units} solar panel kits${' '}`}
+                    {units == 1 && `${units} solar panel kit${' '}`}
+                  </NowalaText.Body2>
+                  <NowalaText.Subtitle1>with this amount</NowalaText.Subtitle1>
+                </Text>
+              </View>
+              <View style={{ marginTop: 15 }}>
+                <NowalaText.Body1>
+                  Each solar panel kit goes directly to a home without
+                  electricity and will earn an estimated 4-5% annual return for
+                  2 years
+                </NowalaText.Body1>
+              </View>
+              <View style={{ height: 100 }}></View>
+              <View
+                style={{
+                  position: 'absolute',
+                  bottom: 0,
+                  width: '100%',
+                  alignSelf: 'center',
+                }}>
+                <PrimaryButton {...orderConfirmBtn} />
+              </View>
+              {/* <View style={{ height: 50 }}></View> */}
+            </Box>
+          </TouchableWithoutFeedback>
         </Actionsheet.Content>
       )}
     </Actionsheet>

@@ -21,6 +21,7 @@ export interface WalletSummaryData {
   profitPercent: number;
   assets: AssetPreviewData[];
   currency: '£';
+  waitlistNum: number;
 }
 
 export interface WalletSummaryCard extends WalletSummary {
@@ -52,8 +53,13 @@ export interface WalletContext {
   viewWithdrawlGuide: boolean;
   menuModalOpen: boolean;
   assets: AssetPreview[];
+  topUpModalOpen: boolean;
+  user: NowalaUserProfile;
+  handleOrder: (price: number, paymentRef: string) => void;
   openMenuModal: () => void;
   closeMenuModal: () => void;
+  openTopUpModal: () => void;
+  closeTopUpModal: () => void;
   closeWithdrawlModal: () => void;
   openWithdrawlModal: () => void;
   signOut: () => void;

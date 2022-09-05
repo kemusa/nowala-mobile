@@ -19,8 +19,6 @@ const RootNavigator = () => {
   const { Navigator, Screen } = Stack;
   const { auth, analytics, db } = useContext(ServicesContext) as Services;
   const [uid, setUid] = useState(null as any);
-  const [email, setEmail] = useState(null as any);
-  const [firstName, setFirstName] = useState(null as any);
   const [onboarded, setOnboarded] = useState(true);
   const [user, setUser] = useState({} as NowalaUserProfile);
 
@@ -59,7 +57,6 @@ const RootNavigator = () => {
   const setUserData = async (uid: string, email: string | null) => {
     try {
       const doc = await db.findById(`users/${uid}`);
-      console.log('DOC', user);
       const profile = doc.data as NowalaUserData;
       // If the profile hasn't been generated yet, set to false
       profile ? setOnboarded(onboarded) : setOnboarded(false);
@@ -73,8 +70,6 @@ const RootNavigator = () => {
         impactSummary: profile.impactSummary,
       };
       setUid(uid);
-      setEmail(email);
-      setFirstName(profile.firstName);
       setUser({
         ...userProfile,
       });

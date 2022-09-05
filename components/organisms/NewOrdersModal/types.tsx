@@ -2,21 +2,27 @@ interface NewOrderModalContainerProps {
   title: string;
   pageRef: string;
   isOpen: boolean;
-  userId: string;
+  // userId: string;
   projectId: string;
-  email: string;
-  firstName: string;
+  // email: string;
+  // firstName: string;
+  user: NowalaUserProfile;
   onClose: () => void;
   onOrderSent: OrderCallback;
 }
 interface NewOrdersModalViewProps {
   title: string;
   isOpen: boolean;
+  inputRef: any;
+  input: string;
+  units: number;
   onClose: () => void;
-  orderCounter: NumberSelect;
+  handleValueChange: (value: string) => void;
+  // orderCounter: NumberSelect;
+  unitPrice: number;
   orderConfirmBtn: PrimaryButtonProps;
   orderConfirmed: boolean;
-  userTotalPrice: number;
+  // userTotalPrice: number;
   projectTotalPrice: string;
   projectCurrency: string;
 }

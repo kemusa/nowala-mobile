@@ -35,11 +35,7 @@ const CardWrapperContainer: React.FC<CardProps> = ({
           </NowalaText.Headline5>
         )}
         {cta && (
-          <CardCtaButton
-            onPress={() => {}}
-            text={ctaText || ''}
-            icon={ctaIcon}
-          />
+          <CardCtaButton onPress={cta} text={ctaText || ''} icon={ctaIcon} />
         )}
       </View>
       <View style={{ margin: '1%' }}>
