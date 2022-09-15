@@ -3,4 +3,5 @@ interface PeopleItem {
   location: string;
   numPeople: number;
   iconUrl: string;
+  onPress: () => void;
 }

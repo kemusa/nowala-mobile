@@ -62,5 +62,10 @@ export interface WalletContext {
   closeTopUpModal: () => void;
   closeWithdrawlModal: () => void;
   openWithdrawlModal: () => void;
+  goToActiveCash: () => void;
+  goToBuyingPower: () => void;
+  goToProfit: () => void;
   signOut: () => void;
+  goToUserAccount: () => void;
+  goToAssetDetail: () => void;
 }

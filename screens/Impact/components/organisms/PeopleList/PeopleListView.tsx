@@ -6,9 +6,10 @@ import CardLongList from '../../../../../components/templates/CardLongList';
 import PeopleItem from '../../molecules/PeopleItem';
 import { ImpactCtx } from '../../../ImpactContext';
 import TopUpCard from '../../../../Wallet/components/organisms/TopUpCard';
+import ImpactWaitListCard from '../ImpactWaitListCard';
 
 const PeopleListView: React.FC = ({}) => {
-  const { peopleList, accountFunded } = useContext(ImpactCtx);
+  const { peopleList, accountFunded, goToPeopleDetail } = useContext(ImpactCtx);
 
   const list = peopleList.map(l => (
     <PeopleItem
@@ -16,6 +17,7 @@ const PeopleListView: React.FC = ({}) => {
       title={l.title}
       location={`${l.townCity}, ${l.country}`}
       numPeople={l.numPeople}
+      onPress={goToPeopleDetail}
     />
   ));
   return (
@@ -29,7 +31,7 @@ const PeopleListView: React.FC = ({}) => {
           <CardLongList list={list} />
         </CardWrapper>
       ) : accountFunded ? (
-        <></>
+        <ImpactWaitListCard />
       ) : (
         <TopUpCard />
       )}

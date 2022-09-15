@@ -5,4 +5,5 @@ interface AssetItem {
   icon: JSX.Element;
   iconWidth?: number;
   maturity: string;
+  onPress: () => void;
 }

@@ -17,4 +17,14 @@ interface ImpactContext {
   peopleImpactedTogether: number;
   peopleList: PeopleList[];
   accountFunded: boolean;
+  waitlistNum: number;
+  menuModalOpen: boolean;
+  goToTotalImpact: () => void;
+  goToImpactTogether: () => void;
+  goToProjectDetails: () => void;
+  openMenuModal: () => void;
+  closeMenuModal: () => void;
+  signOut: () => void;
+  goToUserAccount: () => void;
+  goToPeopleDetail: () => void;
 }

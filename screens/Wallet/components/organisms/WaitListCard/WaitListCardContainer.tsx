@@ -1,8 +1,8 @@
 import React from 'react';
-import TopUpCardView from './WaitListCardView';
+import WaitListCardView from './WaitListCardView';
 
-const TopUpCardContainer = () => {
-  return <TopUpCardView />;
+const WaitListCardContainer = () => {
+  return <WaitListCardView />;
 };
 
-export default TopUpCardContainer;
+export default WaitListCardContainer;

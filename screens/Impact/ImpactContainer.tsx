@@ -22,7 +22,7 @@ interface DashboardProps extends MainTabScreenProps<'Impact'> {
 
 const ImpactContainer: React.FC<DashboardProps> = ({ navigation, user }) => {
   const [menuModalOpen, setMenuModalOpen] = useState(false);
-  const [unsubscribeList, setUnsubscribe] = useState([] as any);
+  // const [unsubscribeList, setUnsubscribe] = useState([] as any);
   // variable to store unsubscription for dashboard data listener
   let dashboardUnsub = () => {};
 
@@ -67,7 +67,9 @@ const ImpactContainer: React.FC<DashboardProps> = ({ navigation, user }) => {
       handlePeopleList,
       3,
     );
-    dashboardUnsub = unsubscribe;
+    return () => {
+      unsubscribe();
+    };
   }, [user]);
 
   // Listener for impact summary data
@@ -92,7 +94,6 @@ const ImpactContainer: React.FC<DashboardProps> = ({ navigation, user }) => {
 
   // Sign out
   const signOut = async () => {
-    dashboardUnsub();
     await auth.signOut();
     analytics.track(analyticsEvents.SIGNED_OUT);
   };
@@ -164,6 +165,42 @@ const ImpactContainer: React.FC<DashboardProps> = ({ navigation, user }) => {
     }
   };
 
+  const goToTotalImpact = () => {
+    navigation.navigate('AuthStack', {
+      screen: 'ItemDetail',
+      params: {
+        title: 'Your total impact',
+        description:
+          "The number of people you've directly helped with your investments.",
+      },
+    });
+  };
+
+  const goToImpactTogether = () => {
+    navigation.navigate('AuthStack', {
+      screen: 'ItemDetail',
+      params: {
+        title: 'Our impact together',
+        description:
+          'The number of people helped directly by the Nowala community.',
+      },
+    });
+  };
+
+  const goToProjectDetails = () => {
+    navigation.navigate('ProjectDetails', {
+      project: firstProject,
+    });
+  };
+
+  const goToUserAccount = () => {
+    navigation.navigate('AuthStack', { screen: 'UserAccount' });
+  };
+
+  const goToPeopleDetail = () => {
+    navigation.navigate('AuthStack', {screen: 'PeopleDetail'})
+  };
+
   return (
     <ImpactCtx.Provider
       value={{
@@ -171,6 +208,16 @@ const ImpactContainer: React.FC<DashboardProps> = ({ navigation, user }) => {
         peopleImpactedTogether,
         peopleList,
         accountFunded,
+        waitlistNum: user.moneySummary.waitlistNum || 101,
+        menuModalOpen,
+        goToTotalImpact,
+        goToImpactTogether,
+        goToProjectDetails,
+        openMenuModal,
+        closeMenuModal,
+        signOut,
+        goToUserAccount,
+        goToPeopleDetail,
       }}>
       <ImpactView />
     </ImpactCtx.Provider>

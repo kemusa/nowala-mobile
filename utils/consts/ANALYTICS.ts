@@ -10,6 +10,12 @@ const analyticsScreens = {
   IMPACT: 'Impact',
   ORDER_DETAILS: 'Order Details',
   IMPACT_DETAIL: 'Impact Detail',
+  USER_ACCOUNT: 'User Account',
+  ASSET_ITEM_DETAIL: 'Asset Item Detail',
+  IMPACT_ITEM_DETAIL: 'Impact Item Detail',
+  ACTIVE_CASH_DETAIL: 'Active Cash Detail',
+  INACTIVE_CASH_DETAIL: 'Inactive Cash Detail',
+  PROFIT_DETAIL: 'Profit Detail',
 };
 
 const analyticsEvents = {

@@ -12,10 +12,11 @@ const AssetItemView: React.FC<AssetItem> = ({
   icon,
   iconWidth,
   maturity,
+  onPress,
 }) => {
   const { width } = Dimensions.get('window');
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
       {icon}
       <View
         style={[

@@ -36,8 +36,6 @@ const WalletContainer: React.FC<DashboardProps> = ({ navigation, user }) => {
   const [menuModalOpen, setMenuModalOpen] = useState(false);
   const [topUpModalOpen, setTopUpModalOpen] = useState(false);
   const [unsubscribeList, setUnsubscribe] = useState([] as any);
-  // variable to store unsubscription for dashboard data listener
-  let dashboardUnsub = () => {};
 
   const [assets, setAssets] = useState([] as AssetPreview[]);
   const summaryInit: WalletSummaryCard = {
@@ -77,6 +75,22 @@ const WalletContainer: React.FC<DashboardProps> = ({ navigation, user }) => {
   }, [navigation]);
 
   // useEffect(() => {
+  //   if (user.userId) {
+  //     const unsubscribe = db.subscribeToDoc(
+  //       `users/${user.userId}`,
+  //       handleUserData,
+  //     );
+  //     return () => {
+  //       unsubscribe();
+  //     };
+  //   }
+  // }, []);
+
+  // const handleUserData = (data: any) => {
+  //   console.log('WALLET', data);
+  // };
+
+  // useEffect(() => {
   //   updateApp();
   // }, []);
 
@@ -114,22 +128,19 @@ const WalletContainer: React.FC<DashboardProps> = ({ navigation, user }) => {
 
   // Listener for people list data
   useEffect(() => {
-    const unsubscribe = db.subscribeOrderBy(
-      `users/${user.userId}/assets`,
-      'orderNum',
-      'desc',
-      handleAssetList,
-      3,
-    );
-    dashboardUnsub = unsubscribe;
+    if (user.userId) {
+      const unsubscribe = db.subscribeOrderBy(
+        `users/${user.userId}/assets`,
+        'orderNum',
+        'desc',
+        handleAssetList,
+        3,
+      );
+      return () => {
+        unsubscribe();
+      };
+    }
   }, [user]);
-
-  // Sign out
-  const signOut = async () => {
-    dashboardUnsub();
-    await auth.signOut();
-    analytics.track(analyticsEvents.SIGNED_OUT);
-  };
 
   const openWithdrawlModal = () => setViewWithdrawlGuide(true);
   const closeWithdrawlModal = () => setViewWithdrawlGuide(false);
@@ -194,6 +205,53 @@ const WalletContainer: React.FC<DashboardProps> = ({ navigation, user }) => {
     }
   };
 
+  const goToActiveCash = () => {
+    navigation.navigate('AuthStack', {
+      screen: 'ItemDetail',
+      params: {
+        title: 'Making an Impact',
+        description:
+          "The amount of cash currently invested in projects that are making an impact in people's lives.",
+      },
+    });
+  };
+
+  const goToBuyingPower = () => {
+    navigation.navigate('AuthStack', {
+      screen: 'ItemDetail',
+      params: {
+        title: 'Buying  power',
+        description:
+          "The amount of cash in your wallet that you can withdraw at any time or wait until it's invested on your behalf. We will let you know one week in advanced before it's invested.",
+      },
+    });
+  };
+
+  const goToProfit = () => {
+    navigation.navigate('AuthStack', {
+      screen: 'ItemDetail',
+      params: {
+        title: 'Total profit',
+        description:
+          'The amount of cash earned on your investments over the last year.',
+      },
+    });
+  };
+
+  const goToUserAccount = () => {
+    navigation.navigate('AuthStack', { screen: 'UserAccount' });
+  };
+
+  const goToAssetDetail = () => {
+    navigation.navigate('AuthStack', { screen: 'AssetDetail' });
+  };
+
+  // Sign out
+  const signOut = async () => {
+    await auth.signOut();
+    analytics.track(analyticsEvents.SIGNED_OUT);
+  };
+
   return (
     <WalletCtx.Provider
       value={{
@@ -210,7 +268,12 @@ const WalletContainer: React.FC<DashboardProps> = ({ navigation, user }) => {
         closeTopUpModal,
         openMenuModal,
         closeMenuModal,
+        goToActiveCash,
+        goToBuyingPower,
+        goToProfit,
         signOut,
+        goToUserAccount,
+        goToAssetDetail,
       }}>
       <WalletView />
     </WalletCtx.Provider>

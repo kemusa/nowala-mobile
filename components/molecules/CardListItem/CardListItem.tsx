@@ -9,6 +9,7 @@ const CardListItem: React.FC<CardListItemProps> = ({
   value,
   subvalue,
   icon,
+  onPress,
 }) => {
   return (
     <TouchableOpacity
@@ -17,7 +18,8 @@ const CardListItem: React.FC<CardListItemProps> = ({
         justifyContent: 'space-between',
         marginTop: 5,
         marginBottom: 5,
-      }}>
+      }}
+      onPress={onPress}>
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
         {icon}
         <View style={{ marginLeft: 10 }}>

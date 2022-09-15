@@ -26,20 +26,26 @@ const RootNavigator = () => {
   useEffect(() => {
     try {
       const unsubscribe = auth.onAuthChange(handleAuthChange);
-      return unsubscribe;
+      return () => {
+        unsubscribe && unsubscribe();
+      };
     } catch (error) {
       console.error(error);
     }
   }, []);
 
   // // Listener for dashboard data
-  // useEffect(() => {
-  //   const unsubscribe = db.subscribeToDoc(
-  //     `users/${user.userId}`,
-  //     handleUserData,
-  //   );
-  //   unsubscribe();
-  // }, []);
+  useEffect(() => {
+    if (user.userId) {
+      const unsubscribe = db.subscribeToDoc(
+        `users/${user.userId}`,
+        handleUserData,
+      );
+      return () => {
+        unsubscribe();
+      };
+    }
+  }, []);
 
   // const handleUserData = (data: any) => {
   //   console.log('DATA', data);
@@ -59,11 +65,12 @@ const RootNavigator = () => {
       const doc = await db.findById(`users/${uid}`);
       const profile = doc.data as NowalaUserData;
       // If the profile hasn't been generated yet, set to false
-      profile ? setOnboarded(onboarded) : setOnboarded(false);
+      profile ? setOnboarded(profile.onboarded) : setOnboarded(false);
       const userProfile: NowalaUserProfile = {
         userId: uid,
         email: email || '',
         firstName: profile.firstName,
+        lastName: profile.lastName,
         onboarded: profile.onboarded,
         country: profile.country,
         moneySummary: profile.moneySummary,
@@ -76,6 +83,23 @@ const RootNavigator = () => {
     } catch (error) {
       console.error(error);
     }
+  };
+
+  const handleUserData = (doc: any) => {
+    const profile = doc.data as NowalaUserData;
+    const userProfile: NowalaUserProfile = {
+      userId: uid,
+      email: profile.email || '',
+      firstName: profile.firstName,
+      lastName: profile.lastName,
+      onboarded: profile.onboarded,
+      country: profile.country,
+      moneySummary: profile.moneySummary,
+      impactSummary: profile.impactSummary,
+    };
+    setUser({
+      ...userProfile,
+    });
   };
 
   // const updateHasOrdered = () => {

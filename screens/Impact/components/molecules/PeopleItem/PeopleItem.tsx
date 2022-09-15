@@ -9,9 +9,10 @@ const PeopleItemView: React.FC<PeopleItem> = ({
   location,
   iconUrl,
   numPeople,
+  onPress,
 }) => {
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
       <View style={styles.columnLeft}>
         <Image
           style={styles.image}

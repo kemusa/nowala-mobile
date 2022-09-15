@@ -1,1 +1,1 @@
-
+interface AssetListView {}

@@ -4,4 +4,5 @@ interface CardListItemProps {
   value: string | number;
   subvalue: string | number | JSX.Element;
   icon: JSX.Element;
+  onPress: () => void;
 }

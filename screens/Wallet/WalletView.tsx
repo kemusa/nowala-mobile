@@ -4,14 +4,23 @@ import styles from './styles';
 import WalletSummary from './components/organisms/WalletSummary';
 import ProgressModal from './components/organisms/ProgressModal';
 import OptionsModal from './components/organisms/OptionsModal';
-import MenuModal from './components/organisms/MenuModal';
+import MenuModal from '../../components/molecules/MenuModal';
 import AssetsList from './components/organisms/AssetsList';
 import NewOrderModal from '../../components/organisms/NewOrdersModal';
 import { WalletCtx } from './WalletContext';
 
 const WalletView: React.FC = () => {
-  const { topUpModalOpen, user, closeTopUpModal, handleOrder } =
-    useContext(WalletCtx);
+  const {
+    topUpModalOpen,
+    user,
+    closeTopUpModal,
+    handleOrder,
+    menuModalOpen,
+    closeMenuModal,
+    signOut,
+    goToUserAccount,
+  } = useContext(WalletCtx);
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
@@ -29,7 +38,12 @@ const WalletView: React.FC = () => {
           onOrderSent={handleOrder}
           projectId={'solar_panel_kits_ignite_power_sl'}
         />
-        <MenuModal />
+        <MenuModal
+          isOpen={menuModalOpen}
+          onClose={closeMenuModal}
+          signOut={signOut}
+          goToAccount={goToUserAccount}
+        />
         <View style={styles.spacerBottom}></View>
       </ScrollView>
     </SafeAreaView>

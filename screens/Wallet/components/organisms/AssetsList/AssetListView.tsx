@@ -10,9 +10,9 @@ import styles from './styles';
 import TopUpCard from '../TopUpCard';
 import WaitListCard from '../WaitListCard';
 
-const AssetListView: React.FC = ({}) => {
+const AssetListView: React.FC<AssetListView> = ({}) => {
   const iconSize = 45;
-  const { assets, walletSummary } = useContext(WalletCtx);
+  const { assets, walletSummary, goToAssetDetail } = useContext(WalletCtx);
   const { total } = walletSummary;
   const list = assets
     ? assets.map(a => (
@@ -30,6 +30,7 @@ const AssetListView: React.FC = ({}) => {
           units={a.units}
           iconWidth={iconSize}
           maturity={a.maturity || 'TBD'} //todo: trasform date to pending if maturity is undefined
+          onPress={goToAssetDetail}
         />
       ))
     : [];

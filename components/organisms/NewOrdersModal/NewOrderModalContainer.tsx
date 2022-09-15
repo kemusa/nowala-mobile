@@ -1,7 +1,7 @@
 import { Timestamp } from 'firebase/firestore';
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import ServicesContext, { Services } from '../../../services';
-import { ImpactDetailContext } from '../../../screens/ImpactDetail/ImpactDetailContext';
+import { ImpactDetailContext } from '../../../screens/PeopleDetail/PeopleDetailContext';
 import NewOrdersModalView from './NewOrdersModalView';
 import { NewOrder } from './typesExport';
 import { numberWithCommas } from '../../../utils/helpers';

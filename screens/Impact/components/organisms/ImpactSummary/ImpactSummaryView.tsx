@@ -9,7 +9,12 @@ import ImpactTogetherIcon from '../../../../../components/atoms/icons/ImpactToge
 import { ImpactCtx } from '../../../ImpactContext';
 
 const ImpactSummaryView: React.FC<ImpactSummaryProps> = () => {
-  const { peopleImpacted, peopleImpactedTogether } = useContext(ImpactCtx);
+  const {
+    peopleImpacted,
+    peopleImpactedTogether,
+    goToTotalImpact,
+    goToImpactTogether,
+  } = useContext(ImpactCtx);
   const list = [
     <CardListItem
       icon={<DirectImpactCardIcon />}
@@ -17,6 +22,7 @@ const ImpactSummaryView: React.FC<ImpactSummaryProps> = () => {
       subtitle={"How many people you've helped"}
       value={peopleImpacted}
       subvalue="people"
+      onPress={goToTotalImpact}
     />,
     <CardListItem
       icon={<ImpactTogetherIcon />}
@@ -24,6 +30,7 @@ const ImpactSummaryView: React.FC<ImpactSummaryProps> = () => {
       subtitle={'People helped by Nowala community'}
       value={peopleImpactedTogether}
       subvalue={'people'}
+      onPress={goToImpactTogether}
     />,
   ];
   return (

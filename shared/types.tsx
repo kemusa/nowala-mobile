@@ -2,6 +2,7 @@ interface NowalaUserProfile {
   userId: string;
   email: string;
   firstName: string;
+  lastName: string;
   onboarded: boolean;
   country: string;
   moneySummary: WalletSummary;
@@ -11,6 +12,7 @@ interface NowalaUserProfile {
 interface NowalaUserData {
   email: string;
   firstName: string;
+  lastName: string;
   onboarded: boolean;
   country: string;
   moneySummary: WalletSummary;

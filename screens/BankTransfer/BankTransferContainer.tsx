@@ -9,7 +9,7 @@ import { BankTransferContext } from './BankTransferContext';
 
 const { BACKGROUND } = colors;
 
-const BankTransferContainer: React.FC<MainTabScreenProps<'Account'>> = ({
+const BankTransferContainer: React.FC<MainTabScreenProps<'BankTransfer'>> = ({
   navigation,
 }) => {
   const { auth, analytics } = useContext(ServicesContext) as Services;

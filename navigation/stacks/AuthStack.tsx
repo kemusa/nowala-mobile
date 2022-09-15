@@ -4,8 +4,11 @@ import { AuthStackParamList, RootStackScreenProps } from '../types';
 import MainTabNavigator from '../MainTabNavigator';
 import colors from '../../theme/colors';
 import YourOrdersScreen from '../../screens/YourOrders';
-import ImpactDetailScreen from '../../screens/ImpactDetail';
 import BankPaymentScreen from '../../screens/BankPayment';
+import ItemDetailScreen from '../../screens/ItemDetail';
+import UserAccountScreen from '../../screens/UserAccount';
+import AssetDetailScreen from '../../screens/AssetDetail';
+import PeopleDetailScreen from '../../screens/PeopleDetail';
 
 const Stack = createStackNavigator<AuthStackParamList>();
 const { WHITE, BACKGROUND } = colors;
@@ -30,14 +33,6 @@ const AuthStack: React.FC<AuthStackProps> = ({ user }) => {
         {props => <YourOrdersScreen {...props} />}
       </Screen>
       <Screen
-        name="ImpactDetail"
-        options={() => ({
-          headerTitle: '',
-          headerShown: true,
-          headerTintColor: WHITE,
-        })}
-        component={ImpactDetailScreen}></Screen>
-      <Screen
         name="BankPayment"
         options={() => ({
           headerTitle: '',
@@ -46,6 +41,30 @@ const AuthStack: React.FC<AuthStackProps> = ({ user }) => {
           headerTintColor: WHITE,
         })}
         component={BankPaymentScreen}></Screen>
+      <Screen
+        name="ItemDetail"
+        options={() => ({
+          headerTitle: '',
+          headerShown: true,
+        })}
+        component={ItemDetailScreen}></Screen>
+      <Screen
+        name="AssetDetail"
+        options={() => ({
+          headerTitle: '',
+          headerShown: true,
+        })}
+        component={AssetDetailScreen}></Screen>
+      <Screen
+        name="PeopleDetail"
+        options={() => ({
+          headerTitle: '',
+          headerShown: true,
+        })}
+        component={PeopleDetailScreen}></Screen>
+      <Screen name="UserAccount" options={{ title: '' }}>
+        {props => <UserAccountScreen {...props} user={user} />}
+      </Screen>
     </Navigator>
   );
 };

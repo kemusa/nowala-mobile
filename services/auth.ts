@@ -7,6 +7,7 @@ import {
   signOut,
   sendPasswordResetEmail,
   updateProfile,
+  deleteUser,
 } from 'firebase/auth';
 import {
   moneySummary,
@@ -95,6 +96,12 @@ export default class AuthService {
 
   public async passwordReset(email: string) {
     await sendPasswordResetEmail(this.getAuth, email);
+  }
+
+  public async deleteUser() {
+    if (this.getAuth.currentUser) {
+      await deleteUser(this.getAuth.currentUser);
+    }
   }
 
   // public async signInWithFacebook() {

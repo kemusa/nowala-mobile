@@ -16,17 +16,15 @@ export type RootStackParamList = {
 export type AuthStackParamList = {
   Main: NavigatorScreenParams<MainTabParamList>;
   YourOrders: { orders: OrderData[] };
-  ImpactDetail: {
-    impactDetail: ImpactDetail;
-    userId: string;
-    email: string;
-    firstName: string;
-  };
   BankPayment: {
     redirectPage: keyof MainTabParamList;
     paymentRef: string;
     price: number;
   };
+  ItemDetail: { title: string; description: string };
+  UserAccount: undefined;
+  AssetDetail: undefined;
+  PeopleDetail: undefined;
 };
 
 export type MainTabParamList = {

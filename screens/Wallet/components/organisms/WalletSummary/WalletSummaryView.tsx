@@ -13,7 +13,13 @@ import ProfitArrowIcon from '../../../../../components/atoms/icons/ProfitArrowIc
 import PlusCtaIcon from '../../../../../components/atoms/icons/PlusCtaIcon';
 
 const WalletSummaryView: React.FC<WalletSummaryProps> = () => {
-  const { walletSummary, openTopUpModal } = useContext(WalletCtx);
+  const {
+    walletSummary,
+    openTopUpModal,
+    goToActiveCash,
+    goToBuyingPower,
+    goToProfit,
+  } = useContext(WalletCtx);
   const {
     activeMoney,
     activePercent,
@@ -30,6 +36,7 @@ const WalletSummaryView: React.FC<WalletSummaryProps> = () => {
       subtitle="Your money at work changing lives"
       value={`£${activeMoney.toFixed(2)}`}
       subvalue={`${activePercent}%`}
+      onPress={goToActiveCash}
     />,
     <CardListItem
       icon={<WalletCardIcon />}
@@ -37,6 +44,7 @@ const WalletSummaryView: React.FC<WalletSummaryProps> = () => {
       subtitle="Available cash"
       value={`£${inactiveMoney.toFixed(2)}`}
       subvalue={`${inactivePercent}%`}
+      onPress={goToBuyingPower}
     />,
   ];
   return (
@@ -67,12 +75,18 @@ const WalletSummaryView: React.FC<WalletSummaryProps> = () => {
                 flexDirection: 'row',
                 alignItems: 'center',
               }}>
-              <ProfitArrowIcon />
-              <NowalaText.Subtitle2 style={styles.profitPercentText}>
+              {profit > 0 && <ProfitArrowIcon />}
+              <NowalaText.Subtitle2
+                style={
+                  profit > 0
+                    ? styles.profitPercentText
+                    : styles.zeroProfitPercentText
+                }>
                 {`${profitPercent}%`}
               </NowalaText.Subtitle2>
             </View>
           }
+          onPress={goToProfit}
         />
       </CardWrapper>
     </>
