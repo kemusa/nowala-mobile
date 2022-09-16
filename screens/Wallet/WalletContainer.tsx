@@ -53,8 +53,6 @@ const WalletContainer: React.FC<DashboardProps> = ({ navigation, user }) => {
     ...summaryInit,
   } as WalletSummaryCard);
 
-  const [assetPreview, setAssetPreview] = useState([] as AssetPreview[]);
-
   // Place Nowala logo in header on component init
   useEffect(() => {
     navigation.setOptions({
@@ -246,6 +244,10 @@ const WalletContainer: React.FC<DashboardProps> = ({ navigation, user }) => {
     navigation.navigate('AuthStack', { screen: 'AssetDetail' });
   };
 
+  const goToAssetsList = () => {
+    navigation.navigate('AuthStack', { screen: 'Assets' });
+  };
+
   // Sign out
   const signOut = async () => {
     await auth.signOut();
@@ -274,6 +276,7 @@ const WalletContainer: React.FC<DashboardProps> = ({ navigation, user }) => {
         signOut,
         goToUserAccount,
         goToAssetDetail,
+        goToAssetsList,
       }}>
       <WalletView />
     </WalletCtx.Provider>

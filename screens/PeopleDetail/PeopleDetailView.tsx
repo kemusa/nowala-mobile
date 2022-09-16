@@ -17,7 +17,7 @@ const PeopleDetailView: React.FC = () => {
               {'People details coming soon'}
             </NowalaText.Headline2>
             <NowalaText.Body1 style={styles.impactExamplesHeading}>
-              {`Stay tuned for future app updates to see your details on your assets.`}
+              {`Stay tuned for future app updates`}
             </NowalaText.Body1>
           </View>
         </View>

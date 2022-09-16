@@ -9,6 +9,8 @@ import ItemDetailScreen from '../../screens/ItemDetail';
 import UserAccountScreen from '../../screens/UserAccount';
 import AssetDetailScreen from '../../screens/AssetDetail';
 import PeopleDetailScreen from '../../screens/PeopleDetail';
+import AssetsScreen from '../../screens/AssetsFull';
+import PeopleFullScreen from '../../screens/PeopleFull';
 
 const Stack = createStackNavigator<AuthStackParamList>();
 const { WHITE, BACKGROUND } = colors;
@@ -64,6 +66,12 @@ const AuthStack: React.FC<AuthStackProps> = ({ user }) => {
         component={PeopleDetailScreen}></Screen>
       <Screen name="UserAccount" options={{ title: '' }}>
         {props => <UserAccountScreen {...props} user={user} />}
+      </Screen>
+      <Screen name="Assets" options={{ title: '' }}>
+        {props => <AssetsScreen {...props} user={user} />}
+      </Screen>
+      <Screen name="PeopleHelped" options={{ title: '' }}>
+        {props => <PeopleFullScreen {...props} user={user} />}
       </Screen>
     </Navigator>
   );

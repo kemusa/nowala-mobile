@@ -1,8 +1,20 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
+import ServicesContext, { Services } from '../../../../../services';
+import { WalletCtx } from '../../../WalletContext';
 import AssetListView from './AssetListView';
 
 const AssetListContainer = () => {
-  return <AssetListView />;
+  const { assets, walletSummary, goToAssetDetail, goToAssetsList, user } =
+    useContext(WalletCtx);
+
+  return (
+    <AssetListView
+      assets={assets}
+      walletSummary={walletSummary}
+      goToAssetDetail={goToAssetDetail}
+      goToAssetsList={goToAssetsList}
+    />
+  );
 };
 
 export default AssetListContainer;

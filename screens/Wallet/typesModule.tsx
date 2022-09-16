@@ -68,4 +68,5 @@ export interface WalletContext {
   signOut: () => void;
   goToUserAccount: () => void;
   goToAssetDetail: () => void;
+  goToAssetsList: () => void;
 }

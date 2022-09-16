@@ -9,10 +9,15 @@ import { WalletCtx } from '../../../WalletContext';
 import styles from './styles';
 import TopUpCard from '../TopUpCard';
 import WaitListCard from '../WaitListCard';
+import { AssetsListView } from './typesModule';
 
-const AssetListView: React.FC<AssetListView> = ({}) => {
+const AssetListView: React.FC<AssetsListView> = ({
+  assets,
+  walletSummary,
+  goToAssetDetail,
+  goToAssetsList,
+}) => {
   const iconSize = 45;
-  const { assets, walletSummary, goToAssetDetail } = useContext(WalletCtx);
   const { total } = walletSummary;
   const list = assets
     ? assets.map(a => (
@@ -41,7 +46,7 @@ const AssetListView: React.FC<AssetListView> = ({}) => {
           <CardWrapper
             type="primary"
             title="Assets"
-            cta={() => {}}
+            cta={goToAssetsList}
             ctaText={'See all'}>
             <CardLongList list={list} />
           </CardWrapper>

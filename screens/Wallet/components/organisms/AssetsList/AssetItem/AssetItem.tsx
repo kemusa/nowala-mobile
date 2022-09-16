@@ -16,7 +16,10 @@ const AssetItemView: React.FC<AssetItem> = ({
 }) => {
   const { width } = Dimensions.get('window');
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={onPress}
+      disabled={onPress ? false : true}>
       {icon}
       <View
         style={[

@@ -39,7 +39,7 @@ const ImpactDetailView: React.FC = () => {
               {'Details coming soon'}
             </NowalaText.Headline2>
             <NowalaText.Body1 style={styles.impactExamplesHeading}>
-              {`Stay tuned for future app updates to more details on this stat.`}
+              {`Stay tuned for future app updates`}
             </NowalaText.Body1>
           </View>
         </View>

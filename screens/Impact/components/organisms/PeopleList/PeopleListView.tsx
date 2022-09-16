@@ -9,7 +9,8 @@ import TopUpCard from '../../../../Wallet/components/organisms/TopUpCard';
 import ImpactWaitListCard from '../ImpactWaitListCard';
 
 const PeopleListView: React.FC = ({}) => {
-  const { peopleList, accountFunded, goToPeopleDetail } = useContext(ImpactCtx);
+  const { peopleList, accountFunded, goToPeopleDetail, goToAllPeopleHelped } =
+    useContext(ImpactCtx);
 
   const list = peopleList.map(l => (
     <PeopleItem
@@ -26,7 +27,7 @@ const PeopleListView: React.FC = ({}) => {
         <CardWrapper
           type={'primary'}
           title={"People you've helped"}
-          cta={() => {}}
+          cta={goToAllPeopleHelped}
           ctaText={'See all'}>
           <CardLongList list={list} />
         </CardWrapper>

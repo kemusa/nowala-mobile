@@ -27,4 +27,5 @@ interface ImpactContext {
   signOut: () => void;
   goToUserAccount: () => void;
   goToPeopleDetail: () => void;
+  goToAllPeopleHelped: () => void;
 }

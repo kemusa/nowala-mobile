@@ -198,7 +198,11 @@ const ImpactContainer: React.FC<DashboardProps> = ({ navigation, user }) => {
   };
 
   const goToPeopleDetail = () => {
-    navigation.navigate('AuthStack', {screen: 'PeopleDetail'})
+    navigation.navigate('AuthStack', { screen: 'PeopleDetail' });
+  };
+
+  const goToAllPeopleHelped = () => {
+    navigation.navigate('AuthStack', { screen: 'PeopleHelped' });
   };
 
   return (
@@ -218,6 +222,7 @@ const ImpactContainer: React.FC<DashboardProps> = ({ navigation, user }) => {
         signOut,
         goToUserAccount,
         goToPeopleDetail,
+        goToAllPeopleHelped,
       }}>
       <ImpactView />
     </ImpactCtx.Provider>

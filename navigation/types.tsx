@@ -25,6 +25,8 @@ export type AuthStackParamList = {
   UserAccount: undefined;
   AssetDetail: undefined;
   PeopleDetail: undefined;
+  Assets: undefined;
+  PeopleHelped: undefined;
 };
 
 export type MainTabParamList = {
