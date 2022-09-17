@@ -19,3 +19,7 @@ interface NowalaUserData {
   impactSummary: { peopleImpacted: number };
   waitlistNum: number;
 }
+
+interface MinAppVersionObj {
+  minAppVersion: string;
+}

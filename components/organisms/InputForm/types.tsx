@@ -1,6 +1,9 @@
 import { Control } from 'react-hook-form';
 import { Country, CountryCode } from 'react-native-country-picker-modal';
-import { TextAutoCompleteType } from '../../molecules/FormTextInputField/types';
+import {
+  TextAutoCompleteType,
+  TextContentType,
+} from '../../molecules/FormTextInputField/types';
 // import { LightLinkTextProps } from '../../atoms/text/LightLinkText/types';
 
 export interface InputFormConfig {
@@ -17,6 +20,7 @@ export interface InputFieldProps {
   placeholder?: string;
   label: string;
   autoCompleteType?: TextAutoCompleteType;
+  textInputType?: TextContentType;
   secureTextEntry?: boolean;
   control: Control<any, object>;
   name: string;

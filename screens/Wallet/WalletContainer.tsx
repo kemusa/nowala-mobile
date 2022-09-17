@@ -4,7 +4,7 @@ import NowalaText from '../../components/atoms/text';
 import WalletView from './WalletView';
 import ServicesContext, { Services } from '../../services';
 import NowalaIcon from '../../components/atoms/icons/NowalaIcon';
-import { TouchableOpacity } from 'react-native';
+import { Alert, TouchableOpacity } from 'react-native';
 import { firstProject } from '../Projects/Projects';
 import { numberWithCommas } from '../../utils/helpers';
 import moment from 'moment';
@@ -24,7 +24,8 @@ import {
   analyticsEvents,
   analyticsScreens,
 } from '../../utils/consts/ANALYTICS';
-// import * as Updates from 'expo-updates';
+import Constants from 'expo-constants';
+import * as Updates from 'expo-updates';
 
 const { BACKGROUND } = colors;
 interface DashboardProps extends MainTabScreenProps<'Wallet'> {
@@ -72,21 +73,19 @@ const WalletContainer: React.FC<DashboardProps> = ({ navigation, user }) => {
     });
   }, [navigation]);
 
+  useEffect(() => {
+    checkAppRequiredVersion();
+  }, []);
+
+  // Listener for people list data
   // useEffect(() => {
   //   if (user.userId) {
-  //     const unsubscribe = db.subscribeToDoc(
-  //       `users/${user.userId}`,
-  //       handleUserData,
-  //     );
+  //     const unsubscribe = db.subscribe('app/main', checkAppRequiredVersion);
   //     return () => {
   //       unsubscribe();
   //     };
   //   }
-  // }, []);
-
-  // const handleUserData = (data: any) => {
-  //   console.log('WALLET', data);
-  // };
+  // }, [user]);
 
   // useEffect(() => {
   //   updateApp();
@@ -100,11 +99,24 @@ const WalletContainer: React.FC<DashboardProps> = ({ navigation, user }) => {
   //   //   // ... notify user of update ...
   //   //   await Updates.reloadAsync();
   //   // }
-  //   alert('start');
   //   Updates.addListener(event => {
-  //     alert('foo');
+  //     Alert.alert('Mic check', 'one, two, one, two', [
+  //       {
+  //         text: 'Cancel',
+  //         onPress: () => {},
+  //         style: 'cancel',
+  //       },
+  //       { text: 'Nowala!', onPress: () => {} },
+  //     ]);
   //     if (event.type === Updates.UpdateEventType.UPDATE_AVAILABLE) {
-  //       alert('bar');
+  //       Alert.alert('Update now', 'This is just a test. Nothing will happen', [
+  //         {
+  //           text: 'Cancel',
+  //           onPress: () => {},
+  //           style: 'cancel',
+  //         },
+  //         { text: 'Update!', onPress: () => {} },
+  //       ]);
   //       Updates.reloadAsync();
   //     }
   //     alert('baz');
@@ -150,6 +162,23 @@ const WalletContainer: React.FC<DashboardProps> = ({ navigation, user }) => {
     setTopUpModalOpen(true);
   };
   const closeTopUpModal = () => setTopUpModalOpen(false);
+
+  const checkAppRequiredVersion = async () => {
+    if (Constants.manifest?.version) {
+      // Get local version
+      const version = Constants.manifest.version;
+      // Get required version from database
+      const res = (await (
+        await db.findById('app/main')
+      ).data) as MinAppVersionObj;
+      res.minAppVersion.localeCompare(version, undefined, {
+        numeric: true,
+        sensitivity: 'base',
+      }) === 1
+        ? goToAppUpdate()
+        : null;
+    }
+  };
 
   const handleSummary = () => {
     if (user.userId && user.moneySummary) {
@@ -246,6 +275,10 @@ const WalletContainer: React.FC<DashboardProps> = ({ navigation, user }) => {
 
   const goToAssetsList = () => {
     navigation.navigate('AuthStack', { screen: 'Assets' });
+  };
+
+  const goToAppUpdate = () => {
+    navigation.navigate('AuthStack', { screen: 'UpdateApp' });
   };
 
   // Sign out

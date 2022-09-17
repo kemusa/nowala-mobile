@@ -14,10 +14,10 @@ const ProjectCardView: React.FC<ProjectCardProps> = ({ project, onPress }) => {
       activeOpacity={0.5}
       onPress={onPress}>
       <Shadow
-        distance={5}
+        distance={3}
         startColor={'#00000020'}
         viewStyle={{ width: '100%' }}
-        // containerViewStyle={{ marginVertical: 20 }}
+        offset={[0, 1]}
         radius={8}>
         <View style={styles.container}>
           <Image style={styles.image} source={{ uri: project.image }} />

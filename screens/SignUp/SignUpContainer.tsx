@@ -75,7 +75,6 @@ const SignUpContainer: React.FC<NoAuthStackScreenProps<'SignUp'>> = ({
         'Your password must have 6-16 characters, at least one number, and special character',
     },
   };
-
   // todo: add confirmation rule
   const confirmPasssRules = {
     required: { value: true, message: 'Confirm password required' },
@@ -214,7 +213,8 @@ const SignUpContainer: React.FC<NoAuthStackScreenProps<'SignUp'>> = ({
       },
       {
         label: 'Password',
-        autoCompleteType: 'password',
+        autoCompleteType: 'password-new',
+        textInputType: 'newPassword',
         secureTextEntry: true,
         control,
         name: 'password',

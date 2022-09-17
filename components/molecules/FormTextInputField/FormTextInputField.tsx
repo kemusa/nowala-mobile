@@ -10,6 +10,7 @@ const FormTextInputField: React.FC<InputFieldProps> = ({
   placeholder,
   label,
   autoCompleteType,
+  textInputType,
   secureTextEntry,
   control,
   name,
@@ -30,9 +31,11 @@ const FormTextInputField: React.FC<InputFieldProps> = ({
       <Input
         style={styles.textInput}
         placeholder={placeholder}
-        value={value}
-        autoCompleteType={autoCompleteType}
-        onChangeText={onChange}
+        value={value.trim()}
+        autoComplete={autoCompleteType}
+        textContentType={textInputType}
+        onChangeText={t => onChange(t.trim())}
+        onBlur={e => (e.nativeEvent.text = e.nativeEvent.text.trim())}
         secureTextEntry={secureTextEntry}
         autoCapitalize="none"
         isDisabled={disabled}

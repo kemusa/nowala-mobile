@@ -130,6 +130,7 @@ const LoginContainer: React.FC<NoAuthStackScreenProps<'Login'>> = ({
       {
         label: 'Password',
         autoCompleteType: 'password',
+        textInputType: 'password',
         secureTextEntry: true,
         control,
         name: 'password',
