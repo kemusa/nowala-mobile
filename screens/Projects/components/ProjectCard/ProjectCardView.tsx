@@ -1,9 +1,6 @@
 import { View, Image, TouchableOpacity } from 'react-native';
 import React from 'react';
 import NowalaText from '../../../../components/atoms/text';
-import colors from '../../../../theme/colors';
-import { spec } from '../../specs';
-import Ionicons from '@expo/vector-icons/Ionicons';
 import { Shadow } from 'react-native-shadow-2';
 import styles from './styles';
 

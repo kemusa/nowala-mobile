@@ -61,12 +61,15 @@ export default class AuthService {
     country: string,
     dob: string,
   ) {
+    console.log('FOO')
     const { user } = await createUserWithEmailAndPassword(
       this.getAuth,
       email,
       password,
     );
+    console.log('BAR')
     await updateProfile(user, { displayName: firstName });
+    console.log('BAZ')
     // Create user document
     await this.dbService.writeDocumentWithId('users', user.uid, {
       firstName,
@@ -77,6 +80,7 @@ export default class AuthService {
       moneySummary,
       impactSummary,
     });
+    console.log('BAK')
     return user;
   }
 

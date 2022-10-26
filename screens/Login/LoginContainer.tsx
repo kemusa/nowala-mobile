@@ -82,6 +82,7 @@ const LoginContainer: React.FC<NoAuthStackScreenProps<'Login'>> = ({
       await auth.signInWithEmailAndPassword(email, password);
       analytics.track(analyticsEvents.SIGNED_IN);
     } catch (error: any) {
+      console.error('ERROR', error);
       setEmailAuthLoading(false);
       displayFormError(error.code);
     }

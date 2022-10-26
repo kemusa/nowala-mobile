@@ -13,13 +13,15 @@
     "staging": {
       "releaseChannel": "staging",
       "env": {
-        "APP_ENV": "staging"
+        "APP_ENV": "staging",
+        "ANDROID_SDK_ROOT": "/Users/Kekura/Library/Android/sdk"
       }
     },
     "prod": {
       "releaseChannel": "prod",
       "env": {
-        "APP_ENV": "prod"
+        "APP_ENV": "prod",
+        "ANDROID_SDK_ROOT": "/Users/Kekura/Library/Android/sdk"
       }
     }
   },

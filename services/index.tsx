@@ -15,6 +15,15 @@ const loadServices = (): Services => {
   };
 };
 
+// const loadServices = () => {
+//   const _db = {new DbService()};
+//   return {
+//     db: {},
+//     auth: new AuthService(_db),
+//     analytics: new AnalyticsService(),
+//   };
+// };
+
 export default ServicesContext;
 
 export { loadServices };

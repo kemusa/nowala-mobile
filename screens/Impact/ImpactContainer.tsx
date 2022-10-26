@@ -5,7 +5,6 @@ import ServicesContext, { Services } from '../../services';
 import NowalaIcon from '../../components/atoms/icons/NowalaIcon';
 import { TouchableOpacity } from 'react-native';
 import { firstProject } from '../Projects/Projects';
-import moment from 'moment';
 import { SnapshotData } from '../../services/types';
 import colors from '../../theme/colors';
 import { MainTabScreenProps } from '../../navigation/types';
@@ -16,11 +15,11 @@ import {
 } from '../../utils/consts/ANALYTICS';
 
 const { BACKGROUND } = colors;
-interface DashboardProps extends MainTabScreenProps<'Impact'> {
+interface ImpactProps extends MainTabScreenProps<'Impact'> {
   user: NowalaUserProfile;
 }
 
-const ImpactContainer: React.FC<DashboardProps> = ({ navigation, user }) => {
+const ImpactContainer: React.FC<ImpactProps> = ({ navigation, user }) => {
   const [menuModalOpen, setMenuModalOpen] = useState(false);
   // const [unsubscribeList, setUnsubscribe] = useState([] as any);
   // variable to store unsubscription for dashboard data listener
@@ -30,6 +29,7 @@ const ImpactContainer: React.FC<DashboardProps> = ({ navigation, user }) => {
   const [peopleImpactedTogether, setPeopleImpactedTogether] = useState(0);
   const [accountFunded, setAccountFunded] = useState(true);
   const [peopleList, setPeopleList] = useState([] as PeopleList[]);
+  const [topUpModalOpen, setTopUpModalOpen] = useState(false);
 
   // Get services
   const { auth, db, analytics } = useContext(ServicesContext) as Services;
@@ -58,18 +58,22 @@ const ImpactContainer: React.FC<DashboardProps> = ({ navigation, user }) => {
     analytics.screen(analyticsScreens.IMPACT);
   }, []);
 
+  console.log('TEST', user);
+
   // Listener for people list data
   useEffect(() => {
-    const unsubscribe = db.subscribeOrderBy(
-      `users/${user.userId}/people`,
-      'dateAdded',
-      'desc',
-      handlePeopleList,
-      3,
-    );
-    return () => {
-      unsubscribe();
-    };
+    if (user.userId) {
+      const unsubscribe = db.subscribeOrderBy(
+        `users/${user.userId}/people`,
+        'dateAdded',
+        'desc',
+        handlePeopleList,
+        3,
+      );
+      return () => {
+        unsubscribe();
+      };
+    }
   }, [user]);
 
   // Listener for impact summary data
@@ -81,13 +85,14 @@ const ImpactContainer: React.FC<DashboardProps> = ({ navigation, user }) => {
   useEffect(() => {
     if (!user.moneySummary) {
       setAccountFunded(false);
-    }
-    if (user.moneySummary && user.moneySummary.total > 0) {
+    } else if (user.moneySummary && user.moneySummary.total > 0) {
       setAccountFunded(true);
+    } else {
+      setAccountFunded(false);
     }
   }, [user]);
 
-  // API call for community impact data
+  // // API call for community impact data
   useEffect(() => {
     handleCommunityImpact();
   }, [user]);
@@ -109,13 +114,13 @@ const ImpactContainer: React.FC<DashboardProps> = ({ navigation, user }) => {
   //   });
   // };
 
-  // const openWithdrawlModal = () => setViewWithdrawlGuide(true);
-  // const closeWithdrawlModal = () => setViewWithdrawlGuide(false);
-
   const openMenuModal = () => setMenuModalOpen(true);
   const closeMenuModal = () => setMenuModalOpen(false);
 
-  // const closeOrdersModal = () => setViewOrders(false);
+  const openTopUpModal = () => {
+    setTopUpModalOpen(true);
+  };
+  const closeTopUpModal = () => setTopUpModalOpen(false);
 
   // const handleImpactSummary = async () => {
   //   const impactData = await db.findById(`users/${user.userId}/impactSummary/main`);
@@ -165,6 +170,13 @@ const ImpactContainer: React.FC<DashboardProps> = ({ navigation, user }) => {
     }
   };
 
+  const handleOrder = (price: number, paymentRef: string) => {
+    navigation.navigate('AuthStack', {
+      screen: 'BankPayment',
+      params: { redirectPage: 'Wallet', paymentRef, price },
+    });
+  };
+
   const goToTotalImpact = () => {
     navigation.navigate('AuthStack', {
       screen: 'ItemDetail',
@@ -172,6 +184,7 @@ const ImpactContainer: React.FC<DashboardProps> = ({ navigation, user }) => {
         title: 'Your total impact',
         description:
           "The number of people you've directly helped with your investments.",
+        withdrawal: false,
       },
     });
   };
@@ -183,6 +196,7 @@ const ImpactContainer: React.FC<DashboardProps> = ({ navigation, user }) => {
         title: 'Our impact together',
         description:
           'The number of people helped directly by the Nowala community.',
+        withdrawal: false,
       },
     });
   };
@@ -212,17 +226,23 @@ const ImpactContainer: React.FC<DashboardProps> = ({ navigation, user }) => {
         peopleImpactedTogether,
         peopleList,
         accountFunded,
-        waitlistNum: user.moneySummary.waitlistNum || 101,
+        waitlistNum: 101,
+        user,
+        // waitlistNum: user.moneySummary.waitlistNum || 101,
         menuModalOpen,
+        topUpModalOpen,
         goToTotalImpact,
         goToImpactTogether,
         goToProjectDetails,
         openMenuModal,
         closeMenuModal,
+        openTopUpModal,
+        closeTopUpModal,
         signOut,
         goToUserAccount,
         goToPeopleDetail,
         goToAllPeopleHelped,
+        handleOrder,
       }}>
       <ImpactView />
     </ImpactCtx.Provider>

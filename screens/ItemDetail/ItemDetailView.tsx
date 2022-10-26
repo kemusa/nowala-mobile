@@ -1,26 +1,19 @@
-import { View, Image, ScrollView } from 'react-native';
+import { View, Image, ScrollView, Linking } from 'react-native';
 import React, { useContext } from 'react';
 import { ItemDetailContext } from './ItemDetailContext';
 import NowalaText from '../../components/atoms/text';
 import { SafeAreaView } from 'react-native';
 import styles from './styles';
-import SecondaryButton from '../../components/atoms/buttons/SecondaryButton';
-import NewOrderModal from '../../components/organisms/NewOrdersModal';
+import LinkText2 from '../../components/atoms/text/LinkText2';
 
 const ImpactDetailView: React.FC = () => {
-  const { title, description } = useContext(ItemDetailContext);
+  const { title, description, withdrawal } = useContext(ItemDetailContext);
 
-  // const {
-  //   backgroundColor,
-  //   title,
-  //   contextText,
-  //   impactExamplesHeading,
-  //   impactExamples,
-  //   imagePath,
-  //   timePeriodText,
-  //   ctaText,
-  //   impact_metric,
-  // } = impactDetail;
+  const openWithdrawlRequestForm = () => {
+    Linking.openURL(
+      'https://docs.google.com/forms/d/e/1FAIpQLSe-RnmhYuvvq-VH4VUW1X8On-UhtNYUrJhs2brzasTQNoXznA/viewform?edit_requested=true',
+    );
+  };
 
   return (
     <SafeAreaView style={[styles.safeAreaView, { backgroundColor: '#fff' }]}>
@@ -44,6 +37,13 @@ const ImpactDetailView: React.FC = () => {
           </View>
         </View>
       </ScrollView>
+      {withdrawal && (
+        <View style={{ padding: 20, alignItems: 'center' }}>
+          <LinkText2 onPress={openWithdrawlRequestForm}>
+            Withdraw some cash
+          </LinkText2>
+        </View>
+      )}
     </SafeAreaView>
   );
 };

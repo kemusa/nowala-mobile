@@ -20,8 +20,8 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   totalMoneyValue: { marginRight: 4 },
-  profitPercentText: { color: PROFIT_GREEN, lineHeight: 0, marginLeft: 3 },
-  zeroProfitPercentText: { lineHeight: 0, marginLeft: 3 },
+  profitPercentText: { color: PROFIT_GREEN, marginLeft: 3 },
+  zeroProfitPercentText: { marginLeft: 3 },
 });
 
 export default styles;

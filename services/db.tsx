@@ -15,6 +15,7 @@ import firestore, {
   query,
   limit,
 } from 'firebase/firestore';
+
 export default class DbService {
   // private _db = firestore;
   private getFireStore = getFirestore();

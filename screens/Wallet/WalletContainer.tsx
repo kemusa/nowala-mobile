@@ -25,7 +25,7 @@ import {
   analyticsScreens,
 } from '../../utils/consts/ANALYTICS';
 import Constants from 'expo-constants';
-import * as Updates from 'expo-updates';
+// import * as Updates from 'expo-updates';
 
 const { BACKGROUND } = colors;
 interface DashboardProps extends MainTabScreenProps<'Wallet'> {
@@ -141,7 +141,7 @@ const WalletContainer: React.FC<DashboardProps> = ({ navigation, user }) => {
     if (user.userId) {
       const unsubscribe = db.subscribeOrderBy(
         `users/${user.userId}/assets`,
-        'orderNum',
+        'maturity',
         'desc',
         handleAssetList,
         3,
@@ -166,12 +166,16 @@ const WalletContainer: React.FC<DashboardProps> = ({ navigation, user }) => {
   const checkAppRequiredVersion = async () => {
     if (Constants.manifest?.version) {
       // Get local version
-      const version = Constants.manifest.version;
+      const userVersion = Constants.manifest.version;
       // Get required version from database
       const res = (await (
         await db.findById('app/main')
       ).data) as MinAppVersionObj;
-      res.minAppVersion.localeCompare(version, undefined, {
+      // Compaer user version to min app version
+      // Value of 1 means min app version is greater than user version and the app needs to be updated
+      // Value of 0 means min app version is equal to the user version and nothing needs to be done
+      // Value of -1 means min app version is less than the user version and nothing needs to be done
+      res.minAppVersion.localeCompare(userVersion, undefined, {
         numeric: true,
         sensitivity: 'base',
       }) === 1
@@ -239,6 +243,7 @@ const WalletContainer: React.FC<DashboardProps> = ({ navigation, user }) => {
         title: 'Making an Impact',
         description:
           "The amount of cash currently invested in projects that are making an impact in people's lives.",
+        withdrawal: false,
       },
     });
   };
@@ -250,6 +255,7 @@ const WalletContainer: React.FC<DashboardProps> = ({ navigation, user }) => {
         title: 'Buying  power',
         description:
           "The amount of cash in your wallet that you can withdraw at any time or wait until it's invested on your behalf. We will let you know one week in advanced before it's invested.",
+        withdrawal: true,
       },
     });
   };
@@ -261,6 +267,7 @@ const WalletContainer: React.FC<DashboardProps> = ({ navigation, user }) => {
         title: 'Total profit',
         description:
           'The amount of cash earned on your investments over the last year.',
+        withdrawal: false,
       },
     });
   };

@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Image, View } from 'react-native';
 import NowalaText from '../../../../../components/atoms/text';
 import styles from './styles';
 import ActionButton from '../../../../../components/atoms/buttons/ActionButton';
+import { WalletCtx } from '../../../WalletContext';
 
-const AssetListView: React.FC = ({}) => {
+const TopUpCardView: React.FC<TopUpCardProps> = ({ openTopUpModal }) => {
+  // const { openTopUpModal } = useContext(WalletCtx);
   return (
     <>
       <NowalaText.Headline2Light style={styles.title}>
@@ -27,7 +29,7 @@ const AssetListView: React.FC = ({}) => {
             Once you load your cash we’ll start matching it to people in need
           </NowalaText.Body2>
           <View style={styles.buttonContainer}>
-            <ActionButton onPress={() => {}} text="Start" />
+            <ActionButton onPress={openTopUpModal} text="Start" />
           </View>
         </View>
       </View>
@@ -35,4 +37,4 @@ const AssetListView: React.FC = ({}) => {
   );
 };
 
-export default AssetListView;
+export default TopUpCardView;

@@ -1,6 +1,4 @@
 import React, { useContext } from 'react';
-import NowalaText from '../../../../../components/atoms/text';
-import styles from './styles';
 import CardWrapper from '../../../../../components/templates/CardWrapper';
 import CardList from '../../../../../components/templates/CardList';
 import CardListItem from '../../../../../components/molecules/CardListItem';

@@ -1,6 +1,4 @@
 import React, { useContext } from 'react';
-import { Image, View } from 'react-native';
-import NowalaText from '../../../../../components/atoms/text';
 import CardWrapper from '../../../../../components/templates/CardWrapper';
 import CardLongList from '../../../../../components/templates/CardLongList';
 import PeopleItem from '../../molecules/PeopleItem';
@@ -9,8 +7,13 @@ import TopUpCard from '../../../../Wallet/components/organisms/TopUpCard';
 import ImpactWaitListCard from '../ImpactWaitListCard';
 
 const PeopleListView: React.FC = ({}) => {
-  const { peopleList, accountFunded, goToPeopleDetail, goToAllPeopleHelped } =
-    useContext(ImpactCtx);
+  const {
+    peopleList,
+    accountFunded,
+    goToPeopleDetail,
+    goToAllPeopleHelped,
+    openTopUpModal,
+  } = useContext(ImpactCtx);
 
   const list = peopleList.map(l => (
     <PeopleItem
@@ -26,7 +29,7 @@ const PeopleListView: React.FC = ({}) => {
       {peopleList.length > 0 ? (
         <CardWrapper
           type={'primary'}
-          title={"People you've helped"}
+          title={'People you helped'}
           cta={goToAllPeopleHelped}
           ctaText={'See all'}>
           <CardLongList list={list} />
@@ -34,7 +37,7 @@ const PeopleListView: React.FC = ({}) => {
       ) : accountFunded ? (
         <ImpactWaitListCard />
       ) : (
-        <TopUpCard />
+        <TopUpCard openTopUpModal={openTopUpModal} />
       )}
     </>
   );

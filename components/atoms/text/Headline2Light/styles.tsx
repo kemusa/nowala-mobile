@@ -4,7 +4,7 @@ const styles = StyleSheet.create({
   container: { alignSelf: 'flex-end' },
   text: {
     fontFamily: 'Lato_300Light',
-    fontSize: 24,
+    fontSize: 22,
     letterSpacing: 0.5,
     lineHeight: 26,
   },

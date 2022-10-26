@@ -1,1 +1,3 @@
-
+interface TopUpCardProps {
+  openTopUpModal: () => void;
+}

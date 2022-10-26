@@ -8,10 +8,19 @@ import PeopleList from './components/organisms/PeopleList';
 import { ImpactCtx } from './ImpactContext';
 import YourInitiatives from './components/organisms/YourInitiatives';
 import MenuModal from '../../components/molecules/MenuModal';
+import NewOrderModal from '../../components/organisms/NewOrdersModal';
 
 const ImpactView: React.FC = () => {
-  const { closeMenuModal, signOut, menuModalOpen, goToUserAccount } =
-    useContext(ImpactCtx);
+  const {
+    closeMenuModal,
+    signOut,
+    menuModalOpen,
+    goToUserAccount,
+    topUpModalOpen,
+    closeTopUpModal,
+    handleOrder,
+    user,
+  } = useContext(ImpactCtx);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -30,6 +39,15 @@ const ImpactView: React.FC = () => {
           onClose={closeMenuModal}
           signOut={signOut}
           goToAccount={goToUserAccount}
+        />
+        <NewOrderModal
+          isOpen={topUpModalOpen}
+          title={''}
+          pageRef={''}
+          user={user}
+          onClose={closeTopUpModal}
+          onOrderSent={handleOrder}
+          projectId={'solar_panel_kits_ignite_power_sl'}
         />
         <View style={styles.spacerBottom}></View>
       </ScrollView>

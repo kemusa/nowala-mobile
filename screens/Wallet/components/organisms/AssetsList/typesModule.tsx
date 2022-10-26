@@ -5,4 +5,5 @@ export interface AssetsListView {
   walletSummary: WalletSummaryCard;
   goToAssetDetail: () => void;
   goToAssetsList: () => void;
+  openTopUpModal: () => void;
 }

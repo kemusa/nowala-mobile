@@ -34,8 +34,14 @@ const FormTextInputField: React.FC<InputFieldProps> = ({
         value={value.trim()}
         autoComplete={autoCompleteType}
         textContentType={textInputType}
-        onChangeText={t => onChange(t.trim())}
-        onBlur={e => (e.nativeEvent.text = e.nativeEvent.text.trim())}
+        onChangeText={t => {
+          // console.log(t);
+          return onChange(t.trim());
+        }}
+        // onBlur={e => (e.nativeEvent.text = e.nativeEvent.text.trim())}
+        onBlur={e =>
+          e.nativeEvent.text && (e.nativeEvent.text = e.nativeEvent.text.trim())
+        }
         secureTextEntry={secureTextEntry}
         autoCapitalize="none"
         isDisabled={disabled}

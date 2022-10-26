@@ -71,18 +71,18 @@ const ProjectDetailsContainer: React.FC<ProjectDetailsProps> = ({
   const openNewOrderModal = () => setCanViewOrderModal(true);
   const closeNewOrderModal = () => setCanViewOrderModal(false);
 
-  // const onOrderSent: OrderCallback = (price: number, paymentRef: string) => {
-  //   // temporarily remove bank payment redirect for waitlist functionality
-  //   // navigation.navigate('AuthStack', {
-  //   //   screen: 'BankPayment',
-  //   //   params: { redirectPage: 'Projects', paymentRef, price },
-  //   // });
-  //   updateHasOrdered(); // todo: replace this by fixing document subscription
-  //   navigation.navigate('AuthStack', {
-  //     screen: 'Main',
-  //     params: { screen: 'WaitList' },
-  //   });
-  // };
+  const onOrderSent: OrderCallback = (price: number, paymentRef: string) => {
+    // temporarily remove bank payment redirect for waitlist functionality
+    navigation.navigate('AuthStack', {
+      screen: 'BankPayment',
+      params: { redirectPage: 'Projects', paymentRef, price },
+    });
+    // updateHasOrdered(); // todo: replace this by fixing document subscription
+    // navigation.navigate('AuthStack', {
+    //   screen: 'Main',
+    //   params: { screen: 'WaitList' },
+    // });
+  };
 
   const goToLogin = () => {
     navigation.navigate('NoAuthStack', {
@@ -104,15 +104,12 @@ const ProjectDetailsContainer: React.FC<ProjectDetailsProps> = ({
       value={{
         project,
         getStatIcon,
-        userId,
-        email,
+        user,
         projectId,
         canViewOrderModal,
         ctaOnPress,
         closeNewOrderModal,
-        // onOrderSent,
-        firstName,
-        // hasOrdered,
+        onOrderSent,
         isUK,
       }}>
       <ProjectDetailsView />

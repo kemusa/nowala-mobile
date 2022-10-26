@@ -21,7 +21,7 @@ export type AuthStackParamList = {
     paymentRef: string;
     price: number;
   };
-  ItemDetail: { title: string; description: string };
+  ItemDetail: { title: string; description: string; withdrawal: boolean };
   UserAccount: undefined;
   AssetDetail: undefined;
   PeopleDetail: undefined;

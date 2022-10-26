@@ -1,7 +1,6 @@
 import { Timestamp } from 'firebase/firestore';
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import ServicesContext, { Services } from '../../../services';
-import { ImpactDetailContext } from '../../../screens/PeopleDetail/PeopleDetailContext';
 import NewOrdersModalView from './NewOrdersModalView';
 import { NewOrder } from './typesExport';
 import { numberWithCommas } from '../../../utils/helpers';
@@ -54,7 +53,7 @@ const NewOrderModalContainer: React.FC<NewOrderModalContainerProps> = ({
       const randNum = Math.floor(1000 + Math.random() * 9000);
       setOrderRef(`${userSub}-${randNum}`);
     }
-  }, []);
+  }, [user]);
 
   // get latest price
   useEffect(() => {

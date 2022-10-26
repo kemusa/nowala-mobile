@@ -19,13 +19,18 @@ interface ImpactContext {
   accountFunded: boolean;
   waitlistNum: number;
   menuModalOpen: boolean;
+  topUpModalOpen: boolean;
+  user: NowalaUserProfile;
   goToTotalImpact: () => void;
   goToImpactTogether: () => void;
   goToProjectDetails: () => void;
   openMenuModal: () => void;
   closeMenuModal: () => void;
+  openTopUpModal: () => void;
+  closeTopUpModal: () => void;
   signOut: () => void;
   goToUserAccount: () => void;
   goToPeopleDetail: () => void;
   goToAllPeopleHelped: () => void;
+  handleOrder: (price: number, paymentRef: string) => void;
 }

@@ -1,9 +1,9 @@
 {
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
+    "start": "react-native start",
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
     "web": "expo start --web",
     "eject": "expo eject",
     "build:staging:ios": "APP_ENV=staging expo build:ios --release-channel staging",
@@ -15,6 +15,8 @@
   },
   "dependencies": {
     "@expo-google-fonts/lato": "^0.2.0",
+    "@react-native-async-storage/async-storage": "~1.17.3",
+    "@react-native-community/cli-debugger-ui": "^9.0.0",
     "@react-native-community/datetimepicker": "6.1.2",
     "@react-native-community/masked-view": "0.1.11",
     "@react-navigation/bottom-tabs": "^6.2.0",
@@ -28,9 +30,9 @@
     "expo-dev-client": "~1.0.0",
     "expo-font": "~10.1.0",
     "expo-linking": "~3.1.0",
+    "expo-splash-screen": "~0.15.1",
     "expo-status-bar": "~1.3.0",
-    "expo-updates": "~0.13.2",
-    "firebase": "^9.6.11",
+    "firebase": "9.7.0",
     "moment": "^2.29.1",
     "native-base": "^3.4.1",
     "react": "17.0.2",
@@ -52,8 +54,7 @@
     "react-native-webview": "^11.22.3",
     "react-navigation-shared-element": "^3.1.3",
     "styled-components": "^5.3.1",
-    "styled-system": "^5.1.5",
-    "@react-native-async-storage/async-storage": "~1.17.3"
+    "styled-system": "^5.1.5"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
@@ -64,5 +65,7 @@
     "babel-plugin-transform-inline-environment-variables": "^0.4.4",
     "typescript": "~4.3.5"
   },
-  "private": true
+  "private": true,
+  "name": "NowalaApp",
+  "version": "1.0.0"
 }

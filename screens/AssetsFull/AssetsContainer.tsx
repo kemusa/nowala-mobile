@@ -41,11 +41,26 @@ const AssetsContainer: React.FC<AssetsProps> = ({ navigation, user }) => {
     });
   }, []);
 
+  // // Listener for people list data
+  // useEffect(() => {
+  //   if (user.userId) {
+  //     const unsubscribe = db.subscribe(
+  //       `users/${user.userId}/assets`,
+  //       handleAssetList,
+  //     );
+  //     return () => {
+  //       unsubscribe();
+  //     };
+  //   }
+  // }, [user]);
+
   // Listener for people list data
   useEffect(() => {
     if (user.userId) {
-      const unsubscribe = db.subscribe(
+      const unsubscribe = db.subscribeOrderBy(
         `users/${user.userId}/assets`,
+        'maturity',
+        'desc',
         handleAssetList,
       );
       return () => {

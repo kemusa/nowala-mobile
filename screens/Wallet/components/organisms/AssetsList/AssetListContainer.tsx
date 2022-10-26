@@ -4,8 +4,14 @@ import { WalletCtx } from '../../../WalletContext';
 import AssetListView from './AssetListView';
 
 const AssetListContainer = () => {
-  const { assets, walletSummary, goToAssetDetail, goToAssetsList, user } =
-    useContext(WalletCtx);
+  const {
+    assets,
+    walletSummary,
+    goToAssetDetail,
+    goToAssetsList,
+    user,
+    openTopUpModal,
+  } = useContext(WalletCtx);
 
   return (
     <AssetListView
@@ -13,6 +19,7 @@ const AssetListContainer = () => {
       walletSummary={walletSummary}
       goToAssetDetail={goToAssetDetail}
       goToAssetsList={goToAssetsList}
+      openTopUpModal={openTopUpModal}
     />
   );
 };

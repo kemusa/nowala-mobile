@@ -12,7 +12,7 @@ const ImpactDetailContainer: React.FC<AuthStackScreenProps<'ItemDetail'>> = ({
   route,
 }) => {
   const { params } = route;
-  const { title, description } = params;
+  const { title, description, withdrawal } = params;
   const projectId = PROJECT_ID; // todo: make dynamic and environment based
 
   const { analytics } = useContext(ServicesContext) as Services;
@@ -46,7 +46,7 @@ const ImpactDetailContainer: React.FC<AuthStackScreenProps<'ItemDetail'>> = ({
   // };
 
   return (
-    <ItemDetailContext.Provider value={{ title, description }}>
+    <ItemDetailContext.Provider value={{ title, description, withdrawal }}>
       <ImpactDetailView />
     </ItemDetailContext.Provider>
   );

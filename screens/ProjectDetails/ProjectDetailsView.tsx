@@ -11,15 +11,12 @@ const ProjectDetailsView = () => {
   const {
     project,
     getStatIcon,
-    userId,
-    email,
+    user,
     projectId,
     ctaOnPress,
     closeNewOrderModal,
     canViewOrderModal,
     onOrderSent,
-    firstName,
-    hasOrdered,
     isUK,
   } = useContext(ProjectDetailsContext);
 
@@ -62,20 +59,16 @@ const ProjectDetailsView = () => {
         <NewOrderModal
           title="Provide affordable solar power"
           pageRef="project_detail_page"
-          userId={userId || ''}
+          user={user}
           projectId={projectId}
-          email={email || ''}
           isOpen={canViewOrderModal}
           onOrderSent={onOrderSent}
           onClose={closeNewOrderModal}
-          firstName={firstName || ''}
         />
       </View>
-      {!hasOrdered && isUK && (
-        <View style={styles.buttonContainer}>
-          <PrimaryButton text="Order now" onPress={ctaOnPress} />
-        </View>
-      )}
+      <View style={styles.buttonContainer}>
+        <PrimaryButton text="Order now" onPress={ctaOnPress} />
+      </View>
     </SafeAreaView>
   );
 };

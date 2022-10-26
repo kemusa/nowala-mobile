@@ -43,15 +43,15 @@ const PeopleFullContainer: React.FC<PeopleFullProps> = ({
 
   // Listener for people list data
   useEffect(() => {
-    if (user.userId) {
-      const unsubscribe = db.subscribe(
-        `users/${user.userId}/people`,
-        handlePeopleList,
-      );
-      return () => {
-        unsubscribe();
-      };
-    }
+    const unsubscribe = db.subscribeOrderBy(
+      `users/${user.userId}/people`,
+      'dateAdded',
+      'desc',
+      handlePeopleList,
+    );
+    return () => {
+      unsubscribe();
+    };
   }, [user]);
 
   const handlePeopleList = (data: SnapshotData[]) => {

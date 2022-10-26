@@ -14,6 +14,7 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   Platform,
+  ScrollView,
   Text,
   TouchableWithoutFeedback,
   View,
@@ -93,92 +94,94 @@ const NewOrderModalView: React.FC<NewOrdersModalViewProps> = ({
       ) : (
         <Actionsheet.Content style={styles.startContainer} bottom={bottomInset}>
           <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-            <Box style={styles.contentContainer}>
-              <View style={styles.header}>
-                {/* <Image
-                source={{
-                  uri: 'https://storage.googleapis.com/nowala-public/solar_panel_kit.png',
-                }}
-                style={styles.headerImage}
-              /> */}
-                <NowalaText.Headline3>
-                  Top up to impact lives
-                </NowalaText.Headline3>
-              </View>
-              <NowalaText.Headline2Light style={styles.title}>
-                {title}
-              </NowalaText.Headline2Light>
-              <View style={{ marginBottom: 25 }}>
-                <NowalaText.Body2>Amount you're investing</NowalaText.Body2>
-                <Stack>
-                  <InputGroup style={{ width: '100%' }}>
-                    <InputLeftAddon children={'£'} />
-                    <Input
-                      style={{ width: '100%' }}
-                      w={{
-                        base: Dimensions.get('window').width - 65,
-                        md: '100%',
-                      }}
-                      keyboardType="numeric"
-                      value={input}
-                      onChangeText={handleValueChange}
-                      ref={inputRef}
-                    />
-                  </InputGroup>
-                </Stack>
-              </View>
-              <View
-                style={{
-                  width: Dimensions.get('window').width,
-                  height: 60,
-                  backgroundColor: '#E9F1F5',
-                  marginLeft: -20,
-                  alignItems: 'center',
-                  flexDirection: 'row',
-                }}>
-                <Image
+            <>
+              <ScrollView>
+                <Box style={styles.contentContainer}>
+                  <View style={styles.header}>
+                    <NowalaText.Headline3>
+                      Top up to impact lives
+                    </NowalaText.Headline3>
+                  </View>
+                  <NowalaText.Headline2Light style={styles.title}>
+                    {title}
+                  </NowalaText.Headline2Light>
+                  <View style={{ marginBottom: 25 }}>
+                    <NowalaText.Body2>Amount you're investing</NowalaText.Body2>
+                    <Stack>
+                      <InputGroup style={{ width: '100%' }}>
+                        <InputLeftAddon children={'£'} />
+                        <Input
+                          style={{ width: '100%' }}
+                          w={{
+                            base: Dimensions.get('window').width - 65,
+                            md: '100%',
+                          }}
+                          keyboardType="numeric"
+                          value={input}
+                          onChangeText={handleValueChange}
+                          ref={inputRef}
+                        />
+                      </InputGroup>
+                    </Stack>
+                  </View>
+                </Box>
+                <View
                   style={{
-                    height: 45,
-                    width: 45,
-                    borderWidth: 0.5,
-                    borderColor: '#000',
-                    borderRadius: 50,
-                    marginLeft: 20,
-                    marginRight: 10,
-                  }}
-                  source={{
-                    uri: productMap['solar_kits_ignite_power_sl'].iconUri,
-                  }}
-                />
-                <Text>
-                  <NowalaText.Subtitle1>You’ll get </NowalaText.Subtitle1>
-                  <NowalaText.Body2 style={{ fontWeight: '700' }}>
-                    {units > 1 && `${units} solar panel kits${' '}`}
-                    {units == 0 && `${units} solar panel kits${' '}`}
-                    {units == 1 && `${units} solar panel kit${' '}`}
-                  </NowalaText.Body2>
-                  <NowalaText.Subtitle1>with this amount</NowalaText.Subtitle1>
-                </Text>
-              </View>
-              <View style={{ marginTop: 15 }}>
-                <NowalaText.Body1>
-                  Each solar panel kit goes directly to a home without
-                  electricity and will earn an estimated 4-5% annual return for
-                  2 years
-                </NowalaText.Body1>
-              </View>
-              <View style={{ height: 100 }}></View>
-              <View
+                    width: '100%',
+                    height: 60,
+                    backgroundColor: '#E9F1F5',
+                    // marginLeft: -20,
+                    alignItems: 'center',
+                    flexDirection: 'row',
+                  }}>
+                  <Image
+                    style={{
+                      height: 45,
+                      width: 45,
+                      borderWidth: 0.5,
+                      borderColor: '#000',
+                      borderRadius: 50,
+                      marginLeft: 20,
+                      marginRight: 10,
+                    }}
+                    source={{
+                      uri: productMap['solar_kits_ignite_power_sl'].iconUri,
+                    }}
+                  />
+                  <Text>
+                    <NowalaText.Subtitle1>You get </NowalaText.Subtitle1>
+                    <NowalaText.Body2 style={{ fontWeight: '700' }}>
+                      {units > 1 && `${units} solar panel kits${' '}`}
+                      {units == 0 && `${units} solar panel kits${' '}`}
+                      {units == 1 && `${units} solar panel kit${' '}`}
+                    </NowalaText.Body2>
+                    <NowalaText.Subtitle1>
+                      with this amount
+                    </NowalaText.Subtitle1>
+                  </Text>
+                </View>
+                <Box style={styles.contentContainer}>
+                  <View style={{ marginTop: 15 }}>
+                    <NowalaText.Body1>
+                      Each solar panel kit goes directly to a home without
+                      electricity and will earn an estimated 4-5% annual return
+                      for 2 years
+                    </NowalaText.Body1>
+                  </View>
+                  <View style={{ height: 100 }}></View>
+                  {/* <View
                 style={{
                   position: 'absolute',
                   bottom: 0,
                   width: '100%',
                   alignSelf: 'center',
-                }}>
-                <PrimaryButton {...orderConfirmBtn} />
-              </View>
-              {/* <View style={{ height: 50 }}></View> */}
-            </Box>
+                }}> */}
+                  {/* </View> */}
+                  {/* <View style={{ height: 50 }}></View> */}
+                </Box>
+              </ScrollView>
+              <PrimaryButton {...orderConfirmBtn} />
+            </>
           </TouchableWithoutFeedback>
         </Actionsheet.Content>
       )}

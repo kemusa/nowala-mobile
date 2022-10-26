@@ -16,6 +16,7 @@ const AssetListView: React.FC<AssetsListView> = ({
   walletSummary,
   goToAssetDetail,
   goToAssetsList,
+  openTopUpModal,
 }) => {
   const iconSize = 45;
   const { total } = walletSummary;
@@ -54,7 +55,7 @@ const AssetListView: React.FC<AssetsListView> = ({
           <WaitListCard />
         )
       ) : (
-        <TopUpCard />
+        <TopUpCard openTopUpModal={openTopUpModal} />
       )}
     </>
   );
