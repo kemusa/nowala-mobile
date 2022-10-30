@@ -28,6 +28,7 @@ export type AuthStackParamList = {
   Assets: undefined;
   PeopleHelped: undefined;
   UpdateApp: undefined;
+  ManageAccount: undefined;
 };
 
 export type MainTabParamList = {

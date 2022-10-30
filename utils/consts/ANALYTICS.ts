@@ -1,6 +1,7 @@
 const analyticsScreens = {
   ACCOUNT_PENDING: 'Account Pending',
   BANK_PAYMENT: 'Bank Payment',
+  BANK_TRANSFER: 'Bank Transfer',
   PROJECTS: 'Projects',
   PROJECT_DETAILS: 'Project Details',
   SIGN_UP: 'Sign Up',
@@ -16,6 +17,10 @@ const analyticsScreens = {
   ACTIVE_CASH_DETAIL: 'Active Cash Detail',
   INACTIVE_CASH_DETAIL: 'Inactive Cash Detail',
   PROFIT_DETAIL: 'Profit Detail',
+  UPDATE_APP: 'Update App',
+  PEOPLE_LIST: 'People List',
+  PEOPLE_DETAIL: 'People Detail',
+  ITEM_DETAIL: 'Item Detail',
 };
 
 const analyticsEvents = {

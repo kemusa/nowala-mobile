@@ -1,29 +1,17 @@
 import React, { useContext, useEffect, useState } from 'react';
 import ServicesContext, { Services } from '../../services';
 import { _getLoginError } from '../../utils/errors';
-import LoginView from './ManageUserAccountView';
-import regex from '../../utils/consts/REGEX';
-import { useForm } from 'react-hook-form';
-import { InputFormConfig } from '../../components/organisms/InputForm/types';
-import NowalaLogoSmall from '../../components/atoms/icons/NowalaLogoSmall';
-import {
-  AuthStackParamList,
-  AuthStackScreenProps,
-  NoAuthStackScreenProps,
-} from '../../navigation/types';
-import NowalaText from '../../components/atoms/text';
-import {
-  analyticsEvents,
-  analyticsScreens,
-} from '../../utils/consts/ANALYTICS';
-import { UserAccountContext } from './ManageUserAccountContext';
+import LoginView from './ManageAccountView';
+import { AuthStackScreenProps } from '../../navigation/types';
+import { analyticsScreens } from '../../utils/consts/ANALYTICS';
+import { ManageAccountContext } from './ManageAccountContext';
 import { Alert } from 'react-native';
 
-interface UserAccountProps extends AuthStackScreenProps<'UserAccount'> {
+interface ManageAccountProps extends AuthStackScreenProps<'ManageAccount'> {
   user: NowalaUserProfile;
 }
 
-const ManageUserAccountContainer: React.FC<UserAccountProps> = ({
+const ManageAccountContainer: React.FC<ManageAccountProps> = ({
   navigation,
   user,
 }) => {
@@ -33,7 +21,7 @@ const ManageUserAccountContainer: React.FC<UserAccountProps> = ({
   // Place Nowala logo in header on component init
   useEffect(() => {
     navigation.setOptions({
-      headerTitle: 'Account',
+      headerTitle: 'Manage account',
       headerTitleAlign: 'center',
       headerStyle: {
         elevation: 0, // remove header border for android
@@ -65,17 +53,13 @@ const ManageUserAccountContainer: React.FC<UserAccountProps> = ({
   };
 
   return (
-    <UserAccountContext.Provider
+    <ManageAccountContext.Provider
       value={{
-        email: user.email,
         deleteAccount,
-        initials: `${user.firstName.charAt(0)}${user.lastName.charAt(
-          0,
-        )}`.toUpperCase(),
       }}>
       <LoginView />
-    </UserAccountContext.Provider>
+    </ManageAccountContext.Provider>
   );
 };
 
-export default ManageUserAccountContainer;
+export default ManageAccountContainer;

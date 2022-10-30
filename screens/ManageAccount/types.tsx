@@ -1,0 +1,3 @@
+interface ManageAccountCtx {
+  deleteAccount: () => void;
+}

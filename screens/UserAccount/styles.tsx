@@ -5,7 +5,11 @@ import { screenPadding } from '../../utils/consts/STYLES';
 const { WHITE } = colors;
 const styles = StyleSheet.create({
   safeAreaView: { flex: 1, backgroundColor: WHITE },
-  buttonContainer: { padding: screenPadding, width: '100%' },
+  buttonContainer: {
+    padding: screenPadding,
+    width: '100%',
+    alignItems: 'center',
+  },
   container: {
     padding: screenPadding,
     paddingTop: 40,

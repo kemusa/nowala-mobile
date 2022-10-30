@@ -31,9 +31,7 @@ const UpdateAppContainer: React.FC<AuthStackScreenProps<'UpdateApp'>> = ({
 
   // track screen
   useEffect(() => {
-    analytics.screenWithProperties(analyticsScreens.ASSET_ITEM_DETAIL, {
-      project_alias: projectId,
-    });
+    analytics.screen(analyticsScreens.UPDATE_APP);
   }, []);
 
   const goToAppStore = () => {

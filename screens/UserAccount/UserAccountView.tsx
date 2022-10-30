@@ -1,16 +1,15 @@
 import React, { useContext } from 'react';
 import { View, SafeAreaView } from 'react-native';
-import AuthConfirmText from '../../components/molecules/AuthConfirmText';
 import NowalaText from '../../components/atoms/text';
 import styles from './styles';
 import { ScrollView } from 'react-native-gesture-handler';
 import { UserAccountContext } from './UserAccountContext';
-import SecondaryButton from '../../components/atoms/buttons/SecondaryButton';
-import WarningButton from '../../components/atoms/buttons/WarningButton';
 import { Avatar } from 'native-base';
+import LinkText2 from '../../components/atoms/text/LinkText2';
 
 const UserAccountView: React.FC = () => {
-  const { email, initials, deleteAccount } = useContext(UserAccountContext);
+  const { email, initials, deleteAccount, goToManageAccount } =
+    useContext(UserAccountContext);
   return (
     <SafeAreaView style={styles.safeAreaView}>
       <ScrollView style={styles.container}>
@@ -43,7 +42,7 @@ const UserAccountView: React.FC = () => {
         </View>
       </ScrollView>
       <View style={styles.buttonContainer}>
-        <WarningButton text="Delete Account" onPress={deleteAccount} />
+        <LinkText2 onPress={goToManageAccount}>Manage account</LinkText2>
       </View>
     </SafeAreaView>
   );

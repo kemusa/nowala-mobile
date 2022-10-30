@@ -64,6 +64,10 @@ const UserAccountContainer: React.FC<UserAccountProps> = ({
     // await auth.deleteUser();
   };
 
+  const goToManageAccount = () => {
+    navigation.navigate('ManageAccount');
+  };
+
   return (
     <UserAccountContext.Provider
       value={{
@@ -72,6 +76,7 @@ const UserAccountContainer: React.FC<UserAccountProps> = ({
         initials: `${user.firstName.charAt(0)}${user.lastName.charAt(
           0,
         )}`.toUpperCase(),
+        goToManageAccount,
       }}>
       <LoginView />
     </UserAccountContext.Provider>

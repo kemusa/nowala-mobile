@@ -1,7 +1,10 @@
 import 'react-native-gesture-handler';
 import 'expo-dev-client';
-import React, { useEffect, useState } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import React, { useEffect, useRef, useState } from 'react';
+import {
+  NavigationContainer,
+  useNavigationContainerRef,
+} from '@react-navigation/native';
 import RootNavigator from './navigation/RootNavigator';
 import { NativeBaseProvider } from 'native-base';
 import AppLoading from 'expo-app-loading';
@@ -16,6 +19,9 @@ export default function App() {
   const [loaded, setLoaded] = useState(false);
   const [updated, setUpdated] = useState(false);
   const fontsLoaded = fonts();
+
+  const navigationRef = useNavigationContainerRef();
+  const routeNameRef = useRef() as any;
 
   // Firebase Init
   firbaseInit();
@@ -60,7 +66,25 @@ export default function App() {
     <NativeBaseProvider theme={theme}>
       <ServicesContext.Provider value={{ ...loadServices() }}>
         {/* {fontsLoaded && ( */}
-        <NavigationContainer>
+        <NavigationContainer
+          ref={navigationRef}
+          onReady={() => {
+            routeNameRef.current = navigationRef.getCurrentRoute()?.name;
+          }}
+          onStateChange={async () => {
+            const previousRouteName = routeNameRef.current;
+            const currentRouteName = navigationRef.getCurrentRoute()?.name;
+            if (previousRouteName !== currentRouteName) {
+              // console.log('ROUTE NAME: ', currentRouteName);
+              // The line below uses the expo-firebase-analytics tracker
+              // https://docs.expo.io/versions/latest/sdk/firebase-analytics/
+              // Change this line to use another Mobile analytics SDK
+              // await Analytics.setCurrentScreen(currentRouteName);
+            }
+
+            // Save the current route name for later comparison
+            routeNameRef.current = currentRouteName;
+          }}>
           <RootNavigator></RootNavigator>
         </NavigationContainer>
         {/* )} */}

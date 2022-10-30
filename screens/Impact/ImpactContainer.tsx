@@ -58,8 +58,6 @@ const ImpactContainer: React.FC<ImpactProps> = ({ navigation, user }) => {
     analytics.screen(analyticsScreens.IMPACT);
   }, []);
 
-  console.log('TEST', user);
-
   // Listener for people list data
   useEffect(() => {
     if (user.userId) {

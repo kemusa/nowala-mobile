@@ -29,7 +29,7 @@ const BankTransferContainer: React.FC<MainTabScreenProps<'BankTransfer'>> = ({
 
   // track screen
   useEffect(() => {
-    analytics.screen(analyticsScreens.ACCOUNT_PENDING);
+    analytics.screen(analyticsScreens.BANK_TRANSFER);
   }, []);
 
   return (

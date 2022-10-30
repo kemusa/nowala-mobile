@@ -36,9 +36,7 @@ const AssetsContainer: React.FC<AssetsProps> = ({ navigation, user }) => {
 
   // track screen
   useEffect(() => {
-    analytics.screenWithProperties(analyticsScreens.ASSET_ITEM_DETAIL, {
-      project_alias: projectId,
-    });
+    analytics.screen(analyticsScreens.ASSET_ITEM_DETAIL);
   }, []);
 
   // // Listener for people list data

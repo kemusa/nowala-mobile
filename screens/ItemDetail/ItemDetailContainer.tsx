@@ -32,10 +32,7 @@ const ImpactDetailContainer: React.FC<AuthStackScreenProps<'ItemDetail'>> = ({
 
   // track screen
   useEffect(() => {
-    analytics.screenWithProperties(analyticsScreens.IMPACT_DETAIL, {
-      // impact_metric,
-      project_alias: projectId,
-    });
+    analytics.screen(analyticsScreens.ITEM_DETAIL);
   }, []);
 
   // const onOrderSent = (price: number, paymentRef: string) => {

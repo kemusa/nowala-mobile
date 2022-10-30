@@ -12,6 +12,7 @@ import PeopleDetailScreen from '../../screens/PeopleDetail';
 import AssetsScreen from '../../screens/AssetsFull';
 import PeopleFullScreen from '../../screens/PeopleFull';
 import UpdateAppScreen from '../../screens/UpdateApp';
+import ManageAccountScreen from '../../screens/ManageAccount';
 
 const Stack = createStackNavigator<AuthStackParamList>();
 const { WHITE, BACKGROUND } = colors;
@@ -67,6 +68,9 @@ const AuthStack: React.FC<AuthStackProps> = ({ user }) => {
         component={PeopleDetailScreen}></Screen>
       <Screen name="UserAccount" options={{ title: '' }}>
         {props => <UserAccountScreen {...props} user={user} />}
+      </Screen>
+      <Screen name="ManageAccount" options={{ title: '' }}>
+        {props => <ManageAccountScreen {...props} user={user} />}
       </Screen>
       <Screen name="Assets" options={{ title: '' }}>
         {props => <AssetsScreen {...props} user={user} />}

@@ -1,4 +1,6 @@
 import * as Segment from 'expo-analytics-segment';
+import { createClient } from '@segment/analytics-react-native';
+
 import environment from '../environments';
 const { segmentWriteKey } = environment();
 // todo: dynamically swap via env vars
@@ -7,26 +9,30 @@ const analyticsInit = async () => {
   Segment.initialize({ iosWriteKey: writeKey, androidWriteKey: writeKey });
 };
 
+const segmentClient = createClient({
+  writeKey
+});
+
 export { analyticsInit };
 
 export default class AnalyticsService {
   public identify(userId: string) {
-    Segment.identify(userId);
+    segmentClient.identify(userId);
   }
 
-  public track(event: string) {
-    Segment.track(event);
+  public track(event: string, properties?: object) {
+    properties ? segmentClient.track(event, properties as any): segmentClient.track(event);
   }
 
-  public trackWithProperties(event: string, properties: object) {
-    Segment.trackWithProperties(event, properties);
+  // public trackWithProperties(event: string, properties: object) {
+  //   Segment.trackWithProperties(event, properties);
+  // }
+
+  public screen(screenName: string, properties?: object) {
+    properties ? segmentClient.screen(screenName, properties as any): segmentClient.screen(screenName);
   }
 
-  public screen(screenName: string) {
-    Segment.screen(screenName);
-  }
-
-  public screenWithProperties(screenName: string, properties: object) {
-    Segment.screenWithProperties(screenName, properties);
-  }
+  // public screenWithProperties(screenName: string, properties: object) {
+  //   Segment.screenWithProperties(screenName, properties);
+  // }
 }

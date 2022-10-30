@@ -7,7 +7,7 @@ import { AuthStackScreenProps } from '../../navigation/types';
 import { analyticsScreens } from '../../utils/consts/ANALYTICS';
 import NowalaLogoSmall from '../../components/atoms/icons/NowalaLogoSmall';
 
-const PeopleDetailContainer: React.FC<AuthStackScreenProps<'ItemDetail'>> = ({
+const PeopleDetailContainer: React.FC<AuthStackScreenProps<'PeopleDetail'>> = ({
   navigation,
   route,
 }) => {
@@ -30,9 +30,7 @@ const PeopleDetailContainer: React.FC<AuthStackScreenProps<'ItemDetail'>> = ({
 
   // track screen
   useEffect(() => {
-    analytics.screenWithProperties(analyticsScreens.ASSET_ITEM_DETAIL, {
-      project_alias: projectId,
-    });
+    analytics.screen(analyticsScreens.PEOPLE_DETAIL);
   }, []);
 
   return (
